@@ -1489,3 +1489,201 @@ section.hero.hero-modern .hero-visual svg {
     transition: none;
   }
 }
+
+/* =================================
+   INDUSTRYAI – RECRUITING CHECK
+================================= */
+
+.ia-check {
+  padding: 110px 7%;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(0, 145, 190, .12), transparent 55%),
+    #071321;
+}
+
+.ia-check-heading {
+  max-width: 850px;
+  margin: 0 auto 55px;
+  text-align: center;
+}
+
+.ia-check .ia-eyebrow {
+  color: #42d8ed;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  margin-bottom: 22px;
+}
+
+.ia-check-heading h2 {
+  color: #f2f7fb;
+  font-size: clamp(32px, 4vw, 50px);
+  line-height: 1.15;
+  margin: 0 0 22px;
+}
+
+.ia-check-heading p {
+  color: #a9bac9;
+  line-height: 1.8;
+  font-size: 16px;
+}
+
+.ia-check-meta {
+  display: inline-block;
+  margin-top: 18px;
+  padding: 10px 16px;
+  border: 1px solid #28516b;
+  border-radius: 30px;
+  color: #42d8ed;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+}
+
+#recruitingForm {
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+.ia-question {
+  padding: 30px;
+  margin-bottom: 20px;
+  border: 1px solid #25445b;
+  border-radius: 12px;
+  background: linear-gradient(145deg, #11283c, #0b1c2c);
+}
+
+.ia-question-number {
+  color: #42d8ed;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.ia-question h3 {
+  color: #f2f7fb;
+  font-size: 20px;
+  line-height: 1.4;
+  margin: 15px 0 22px;
+}
+
+.ia-question label {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 14px 16px;
+  margin-top: 9px;
+  border: 1px solid #25445b;
+  border-radius: 7px;
+  color: #c5d3df;
+  font-size: 14px;
+  line-height: 1.5;
+  cursor: pointer;
+  transition: .2s ease;
+}
+
+.ia-question label:hover {
+  border-color: #42d8ed;
+  background: rgba(66, 216, 237, .06);
+}
+
+.ia-question input[type="radio"] {
+  flex-shrink: 0;
+  width: 17px;
+  height: 17px;
+  accent-color: #42d8ed;
+}
+
+.ia-question label:has(input:checked) {
+  border-color: #42d8ed;
+  background: rgba(66, 216, 237, .10);
+  color: #ffffff;
+}
+
+.ia-check-submit,
+.ia-check-restart {
+  display: block;
+  width: 100%;
+  max-width: 850px;
+  padding: 18px 24px;
+  border: none;
+  border-radius: 7px;
+  background: #42d8ed;
+  color: #061421;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: .2s ease;
+}
+
+.ia-check-submit:hover,
+.ia-check-restart:hover {
+  background: #a1f4ff;
+  transform: translateY(-2px);
+}
+
+.ia-check-result {
+  max-width: 850px;
+  margin: 45px auto 0;
+  padding: 38px;
+  border: 1px solid #42d8ed;
+  border-radius: 14px;
+  background: linear-gradient(145deg, #11283c, #071321);
+}
+
+.ia-check-result h3 {
+  color: #f2f7fb;
+  font-size: 28px;
+  margin: 18px 0;
+}
+
+.ia-result-score {
+  color: #42d8ed;
+  font-size: 48px;
+  font-weight: 700;
+  margin: 15px 0;
+}
+
+.ia-check-result p,
+#ia-result-tips {
+  color: #a9bac9;
+  line-height: 1.8;
+}
+
+#ia-result-tips {
+  margin: 22px 0;
+}
+
+#ia-result-tips ul {
+  padding-left: 22px;
+}
+
+#ia-result-tips li {
+  margin: 9px 0;
+}
+
+.ia-check-restart {
+  margin-top: 25px;
+}
+
+@media (max-width: 600px) {
+  .ia-check {
+    padding: 75px 18px;
+  }
+
+  .ia-question {
+    padding: 22px 17px;
+  }
+
+  .ia-question h3 {
+    font-size: 18px;
+  }
+
+  .ia-question label {
+    font-size: 13px;
+    padding: 12px;
+  }
+
+  .ia-check-result {
+    padding: 25px 20px;
+  }
+}
