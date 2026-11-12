@@ -950,3 +950,127 @@ section.hero.hero-modern .hero-visual svg {
     transition: none;
   }
 }
+/* =================================
+   INDUSTRYAI – VISION SECTION
+================================= */
+
+.ia-vision {
+  position: relative;
+  padding: 110px 7%;
+  background: #0a1928;
+  overflow: hidden;
+}
+
+.ia-vision-heading {
+  max-width: 780px;
+  margin: 0 auto 65px;
+  text-align: center;
+}
+
+.ia-vision .ia-eyebrow {
+  color: #42d8ed;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  margin-bottom: 22px;
+}
+
+.ia-vision h2 {
+  color: #f2f7fb;
+  font-size: clamp(32px, 4vw, 52px);
+  line-height: 1.15;
+  margin: 0 0 25px;
+}
+
+.ia-vision h2 span {
+  color: #42d8ed;
+}
+
+.ia-vision-heading p {
+  color: #a9bac9;
+  font-size: 16px;
+  line-height: 1.8;
+  margin: 12px auto;
+  max-width: 680px;
+}
+
+.ia-vision-cards {
+  max-width: 1250px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.ia-vision-card {
+  position: relative;
+  min-height: 290px;
+  padding: 35px 30px;
+  box-sizing: border-box;
+  background: linear-gradient(145deg, #11283c, #0b1c2c);
+  border: 1px solid #25445b;
+  border-radius: 12px;
+  transition: transform 0.3s ease, border-color 0.3s ease,
+              box-shadow 0.3s ease;
+}
+
+.ia-vision-card:hover {
+  transform: translateY(-8px);
+  border-color: #42d8ed;
+  box-shadow: 0 15px 40px rgba(0, 180, 220, 0.12);
+}
+
+.ia-card-number {
+  color: #42d8ed;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.ia-card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  margin: 28px 0 22px;
+  border: 1px solid rgba(66, 216, 237, 0.5);
+  border-radius: 10px;
+  color: #42d8ed;
+  font-size: 27px;
+  background: rgba(66, 216, 237, 0.08);
+}
+
+.ia-vision-card h3 {
+  color: #f2f7fb;
+  font-size: 21px;
+  margin: 0 0 14px;
+}
+
+.ia-vision-card p {
+  color: #a9bac9;
+  font-size: 14px;
+  line-height: 1.8;
+  margin: 0;
+}
+
+@media (max-width: 850px) {
+  .ia-vision {
+    padding: 80px 22px;
+  }
+
+  .ia-vision-cards {
+    grid-template-columns: 1fr;
+    max-width: 520px;
+  }
+
+  .ia-vision-heading {
+    margin-bottom: 45px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ia-vision-card {
+    transition: none;
+  }
+}
