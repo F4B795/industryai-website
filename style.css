@@ -663,6 +663,119 @@ header .logo-wordmark span {
     }
 }
 
+
+/* =====================================
+   INDUSTRYAI – HERO LAYOUT KORREKTUR
+===================================== */
+
+/* Äußerer Hero-Bereich */
+.hero {
+    display: block !important;
+    min-height: auto !important;
+    padding: 55px 0 !important;
+    overflow: hidden;
+}
+
+/* DAS IST UNSER WICHTIGSTER CONTAINER */
+.hero-layout {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    align-items: center !important;
+    gap: 45px !important;
+
+    width: min(1200px, 88%) !important;
+    margin: 0 auto !important;
+}
+
+/* Linke Textseite */
+.hero-copy {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+
+    width: 100% !important;
+    max-width: 620px !important;
+    min-width: 0 !important;
+}
+
+.hero-copy h1 {
+    font-size: clamp(40px, 4.5vw, 66px) !important;
+    line-height: 1.08 !important;
+    margin: 22px 0 !important;
+    letter-spacing: -2px;
+}
+
+.hero-copy p {
+    width: 100% !important;
+    max-width: 540px !important;
+    font-size: 17px !important;
+    line-height: 1.75 !important;
+    margin: 0 !important;
+}
+
+.hero-actions {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 14px !important;
+    margin-top: 28px !important;
+}
+
+.hero-label {
+    margin-top: 30px !important;
+}
+
+/* Rechte CNC-Visualisierung */
+.hero-visual {
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    width: 100% !important;
+    max-width: 560px !important;
+    margin: 0 auto !important;
+}
+
+.hero-visual svg {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    max-height: 550px;
+}
+
+/* Tablet und Smartphone */
+@media (max-width: 850px) {
+    .hero-layout {
+        grid-template-columns: 1fr !important;
+        gap: 30px !important;
+    }
+
+    .hero-copy {
+        max-width: 100% !important;
+    }
+
+    .hero-visual {
+        max-width: 520px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-layout {
+        width: 90% !important;
+    }
+
+    .hero-actions {
+        flex-direction: column !important;
+        width: 100%;
+    }
+
+    .hero-actions a {
+        width: 100%;
+        text-align: center;
+    }
+}
+  
+  
   
 }
 
