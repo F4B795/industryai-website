@@ -774,5 +774,53 @@ header .logo-wordmark span {
         text-align: center;
     }
 }
+
+/* INDUSTRYAI – ERZWUNGENES ZWEISPALTEN-LAYOUT */
+
+.hero-layout {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 45px !important;
+
+    width: 88% !important;
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+}
+
+.hero-layout > .hero-copy {
+    flex: 1 1 50% !important;
+    width: 50% !important;
+    max-width: 620px !important;
+    min-width: 0 !important;
+}
+
+.hero-layout > .hero-visual {
+    flex: 1 1 50% !important;
+    width: 50% !important;
+    max-width: 560px !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+}
+
+.hero-layout > .hero-visual svg {
+    width: 100% !important;
+    height: auto !important;
+}
+
+/* Smartphone */
+@media (max-width: 650px) {
+    .hero-layout {
+        flex-direction: column !important;
+    }
+
+    .hero-layout > .hero-copy,
+    .hero-layout > .hero-visual {
+        width: 100% !important;
+        flex-basis: 100% !important;
+    }
+}
+
   
   
