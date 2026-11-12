@@ -476,3 +476,47 @@ footer .logo-wordmark {
     align-items: flex-start;
   }
 }
+
+/* INDUSTRYAI – FINAL LOGO FIX */
+
+header {
+  min-height: 85px !important;
+  height: 85px !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+}
+
+header .logo {
+  display: inline-flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 12px !important;
+  height: 48px !important;
+  width: auto !important;
+  flex: 0 0 auto !important;
+}
+
+header svg.logo-mark {
+  display: block !important;
+  width: 43px !important;
+  height: 43px !important;
+  min-width: 43px !important;
+  max-width: 43px !important;
+  flex: 0 0 43px !important;
+}
+
+header .logo-wordmark {
+  display: inline-block !important;
+  font-size: 19px !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+  margin: 0 !important;
+}
+
+header .logo-wordmark span {
+  color: #42d8ed !important;
+}
+
+
