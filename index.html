@@ -47,192 +47,69 @@
 
 <main>
   
-<section class="hero hero-modern">
-  <div class="hero-layout">
+<section class="ia-hero-v2">
+  <div class="ia-hero-inner">
 
-    <div class="hero-copy">
-      <div class="eyebrow">INDUSTRIAL INTELLIGENCE</div>
+    <div class="ia-hero-copy">
+      <div class="ia-eyebrow">DIE ZUKUNFT DER ARBEIT BEGINNT HIER</div>
 
       <h1>
-        Die Zukunft der
-        Nachwuchsgewinnung
-        <span>beginnt hier.</span>
+        Talente entdecken.<br>
+        Zukunft gestalten.
       </h1>
 
       <p>
-        Wir verbinden Unternehmen mit den Menschen von morgen.
-        Mit digitalen Einblicken, neuen Begegnungen und einem
-        besseren Verständnis für berufliche Möglichkeiten.
+        INDUSTRYAI verbindet Unternehmen mit den Talenten von morgen.
+        Wir machen Berufe erlebbar und Nachwuchsgewinnung einfacher,
+        digitaler und persönlicher.
       </p>
 
-      <div class="hero-actions">
-        <a href="#check" class="primary-button">
-          Recruiting-Check starten <span>↗</span>
-        </a>
-
-        <a href="#vision" class="secondary-button">
-          Unsere Vision kennenlernen
-        </a>
-      </div>
-
-      <div class="hero-label">
-        Für Unternehmen. Für Nachwuchskräfte.
-        Für neue Perspektiven.
+      <div class="ia-hero-buttons">
+        <a href="#check" class="ia-button-primary">Recruiting-Check starten</a>
+        <a href="#vision" class="ia-button-secondary">Unsere Vision entdecken</a>
       </div>
     </div>
 
-    <div class="hero-visual" aria-hidden="true">
-      <div class="visual-glow"></div>
-
-      <svg viewBox="0 0 620 560"
-           xmlns="http://www.w3.org/2000/svg">
-
+    <div class="ia-hero-art">
+      <div class="ia-art-glow"></div>
+      <svg viewBox="0 0 600 460" role="img" aria-label="Abstrakte industrielle Zukunftstechnologie">
         <defs>
-          <linearGradient id="machineMetal" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#d9faff"/>
-            <stop offset=".3" stop-color="#527b91"/>
-            <stop offset=".6" stop-color="#102d43"/>
-            <stop offset="1" stop-color="#8cecff"/>
+          <linearGradient id="iaMetal" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#d9e5ef"/>
+            <stop offset="0.5" stop-color="#60788d"/>
+            <stop offset="1" stop-color="#172d43"/>
           </linearGradient>
-
-          <linearGradient id="cyanLight" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#42d8ed"/>
-            <stop offset="1" stop-color="#087bba"/>
+          <linearGradient id="iaBlue" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#55f2ff"/>
+            <stop offset="1" stop-color="#087bcb"/>
           </linearGradient>
-
-          <radialGradient id="machineGlow">
-            <stop offset="0" stop-color="#087fba" stop-opacity=".55"/>
-            <stop offset="1" stop-color="#071321" stop-opacity="0"/>
-          </radialGradient>
-
-          <filter id="neon">
-            <feGaussianBlur stdDeviation="5" result="blur"/>
-            <feMerge>
-              <feMergeNode in="blur"/>
-              <feMergeNode in="SourceGraphic"/>
-            </feMerge>
-          </filter>
         </defs>
 
-        <!-- Digitaler Hintergrund -->
-        <circle cx="330" cy="270" r="245"
-                fill="url(#machineGlow)"/>
+        <circle cx="310" cy="220" r="175" fill="none" stroke="#123b55" stroke-width="1"/>
+        <circle cx="310" cy="220" r="135" fill="none" stroke="#087bcb" stroke-opacity=".35" stroke-dasharray="5 9"/>
 
-        <circle cx="330" cy="270" r="210"
-                fill="none" stroke="#42d8ed"
-                stroke-opacity=".45" stroke-width="1.5"
-                stroke-dasharray="5 12"/>
+        <path d="M210 105 H390 L420 140 V300 L390 335 H210 L180 300 V140 Z"
+          fill="#10283d" stroke="#3c647f" stroke-width="3"/>
 
-        <circle cx="330" cy="270" r="175"
-                fill="none" stroke="#42d8ed"
-                stroke-opacity=".2"/>
+        <rect x="245" y="55" width="130" height="65" rx="10"
+          fill="url(#iaMetal)" stroke="#9bb6c9" stroke-width="2"/>
+        <rect x="285" y="115" width="50" height="115" rx="7"
+          fill="url(#iaMetal)" stroke="#b7d1e2" stroke-width="2"/>
 
-        <!-- Netzwerk -->
-        <g stroke="#42d8ed" stroke-width="1.5"
-           stroke-opacity=".55" fill="none">
-          <path d="M105 145 L220 85 L330 125 L450 80"/>
-          <path d="M105 145 L155 290 L330 125"/>
-          <path d="M330 125 L490 250 L450 80"/>
-          <path d="M155 290 L290 420 L490 250"/>
-          <path d="M290 420 L450 80"/>
-        </g>
+        <path d="M310 230 L270 300 H350 Z" fill="url(#iaBlue)"/>
+        <rect x="220" y="300" width="180" height="28" rx="5"
+          fill="url(#iaMetal)" stroke="#9bb6c9" stroke-width="2"/>
 
-        <g fill="#42d8ed" filter="url(#neon)">
-          <circle cx="105" cy="145" r="5"/>
-          <circle cx="220" cy="85" r="4"/>
-          <circle cx="330" cy="125" r="5"/>
-          <circle cx="450" cy="80" r="4"/>
-          <circle cx="155" cy="290" r="5"/>
-          <circle cx="490" cy="250" r="5"/>
-          <circle cx="290" cy="420" r="5"/>
-        </g>
+        <path d="M90 220 H180 M420 220 H510 M310 25 V55 M310 335 V400"
+          stroke="#31dff4" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="90" cy="220" r="7" fill="#31dff4"/>
+        <circle cx="510" cy="220" r="7" fill="#31dff4"/>
+        <circle cx="310" cy="400" r="7" fill="#31dff4"/>
 
-        <!-- Maschinengehäuse -->
-        <path d="M180 115 L415 115 L455 155 L455 390
-                 L180 390 Z"
-              fill="#0a1c2d"
-              stroke="#42d8ed" stroke-opacity=".65"
-              stroke-width="2"/>
-
-        <path d="M195 135 L400 135 L400 365 L195 365 Z"
-              fill="#102a40"
-              stroke="#527d91" stroke-width="2"/>
-
-        <path d="M205 145 L390 145 L390 345 L205 345 Z"
-              fill="#071321" opacity=".9"/>
-
-        <!-- CNC-Spindel -->
-        <path d="M265 115 L330 115 L330 185
-                 L315 205 L280 205 L265 185 Z"
-              fill="url(#machineMetal)"
-              stroke="#9beeff" stroke-width="2"/>
-
-        <path d="M280 205 L315 205 L308 280 L287 280 Z"
-              fill="url(#machineMetal)"/>
-
-        <path d="M287 280 L308 280 L302 325 L293 325 Z"
-              fill="#a9e9f4"/>
-
-        <path d="M293 325 L302 325 L298 350 Z"
-              fill="#42d8ed"/>
-
-        <!-- Werkstück / Drehteil -->
-        <ellipse cx="300" cy="390" rx="112" ry="28"
-                 fill="#173c53"
-                 stroke="#42d8ed" stroke-width="2"/>
-
-        <path d="M188 390 L188 420
-                 Q300 465 412 420 L412 390"
-              fill="url(#machineMetal)"
-              stroke="#42d8ed" stroke-width="2"/>
-
-        <ellipse cx="300" cy="420" rx="112" ry="28"
-                 fill="#173c53"
-                 stroke="#9beeff" stroke-width="2"/>
-
-        <ellipse cx="300" cy="390" rx="72" ry="16"
-                 fill="#071321"
-                 stroke="#9beeff" stroke-width="2"/>
-
-        <ellipse cx="300" cy="390" rx="39" ry="9"
-                 fill="#527b91"/>
-
-        <!-- Lichtreflexionen und Funken -->
-        <g fill="#42d8ed" filter="url(#neon)">
-          <circle cx="280" cy="342" r="3"/>
-          <circle cx="315" cy="351" r="2"/>
-          <circle cx="333" cy="365" r="3"/>
-          <circle cx="265" cy="370" r="2"/>
-        </g>
-
-        <g stroke="#42d8ed" stroke-width="2"
-           stroke-linecap="round">
-          <path d="M298 355 L278 340"/>
-          <path d="M302 357 L320 336"/>
-          <path d="M300 360 L302 333"/>
-          <path d="M305 358 L340 350"/>
-        </g>
-
-        <!-- Digitales Statuspanel -->
-        <rect x="35" y="350" width="115" height="75"
-              rx="12" fill="#0b2338"
-              stroke="#42d8ed" stroke-opacity=".7"/>
-
-        <path d="M55 398 L75 380 L92 389 L125 365"
-              fill="none" stroke="#42d8ed"
-              stroke-width="3" stroke-linecap="round"/>
-
-        <circle cx="125" cy="365" r="4" fill="#42d8ed"/>
-
-        <path d="M48 443 H500"
-              stroke="#42d8ed" stroke-opacity=".5"
-              stroke-width="2"/>
+        <path d="M120 110 L170 145 M450 115 L410 150 M125 330 L175 300 M455 330 L410 300"
+          stroke="#31dff4" stroke-opacity=".6" stroke-width="2"/>
       </svg>
-
-      <div class="visual-caption">
-        <span class="status-dot"></span>
-        INDUSTRY · TECHNOLOGY · PEOPLE
-      </div>
+      <div class="ia-art-caption">INDUSTRIE · TECHNOLOGIE · MENSCHEN</div>
     </div>
 
   </div>
