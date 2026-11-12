@@ -906,3 +906,47 @@ section.hero.hero-modern .hero-visual svg {
     max-width: 420px;
   }
 }
+/* =================================
+   INDUSTRYAI – HERO VISUAL EFFECTS
+================================= */
+
+.ia-hero-v2 .ia-hero-art svg {
+  max-width: 640px;
+  transform: scale(1.08);
+  filter: drop-shadow(0 0 18px rgba(66, 216, 237, 0.16));
+  transition: filter 0.4s ease, transform 0.4s ease;
+}
+
+.ia-hero-v2 .ia-hero-art:hover svg {
+  transform: scale(1.12);
+  filter: drop-shadow(0 0 28px rgba(66, 216, 237, 0.3));
+}
+
+.ia-hero-v2 .ia-art-glow {
+  width: 90%;
+  opacity: 0.25;
+  filter: blur(90px);
+  animation: iaGlowPulse 6s ease-in-out infinite;
+}
+
+@keyframes iaGlowPulse {
+  0%, 100% {
+    opacity: 0.18;
+    transform: scale(0.9);
+  }
+
+  50% {
+    opacity: 0.32;
+    transform: scale(1.08);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ia-hero-v2 .ia-art-glow {
+    animation: none;
+  }
+
+  .ia-hero-v2 .ia-hero-art svg {
+    transition: none;
+  }
+}
