@@ -338,6 +338,61 @@ footer p {
     text-align: center;
   }
 
+  
+/* INDUSTRYAI – Feinschliff Runde 1 */
+
+/* Verhindert, dass die Navigation Inhalte verdeckt */
+html {
+  scroll-padding-top: 110px;
+}
+
+section {
+  scroll-margin-top: 110px;
+}
+
+/* Bessere Lesbarkeit und Textdarstellung */
+h1, h2, h3 {
+  text-wrap: balance;
+}
+
+/* Elegante Übergänge */
+a, button {
+  transition: all 0.25s ease;
+}
+
+/* Navigation etwas hochwertiger gestalten */
+header {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* Abschnitte optisch klarer trennen */
+.intro,
+.business,
+.campus {
+  border-bottom: 1px solid rgba(66, 216, 237, 0.08);
+}
+
+/* Bessere Darstellung auf Smartphones */
+@media (max-width: 600px) {
+  header {
+    position: relative;
+  }
+
+  nav {
+    justify-content: center;
+  }
+
+  .hero h1 {
+    letter-spacing: -1.5px;
+  }
+
+  .section {
+    padding-left: 6%;
+    padding-right: 6%;
+  }
+}
+
   footer {
     flex-direction: column;
     align-items: flex-start;
