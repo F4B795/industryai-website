@@ -393,6 +393,44 @@ header {
   }
 }
 
+
+/* INDUSTRYAI – Eigenständiges Markenlogo */
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: white;
+}
+
+.logo-mark {
+  width: 43px;
+  height: 43px;
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 9px rgba(66,216,237,.18));
+}
+
+.logo-wordmark {
+  font-family: Manrope, sans-serif;
+  font-size: 21px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: #ffffff;
+  margin-left: 0 !important;
+}
+
+.logo-wordmark span {
+  color: #42d8ed;
+  margin-left: 0;
+}
+
+footer .logo-mark {
+  width: 38px;
+  height: 38px;
+}
+
+
   footer {
     flex-direction: column;
     align-items: flex-start;
