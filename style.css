@@ -758,10 +758,151 @@ section.hero.hero-modern .hero-visual svg {
         width: 100% !important;
         text-align: center !important;
     }
+}/* =================================
+   INDUSTRYAI – NEUER HERO-BEREICH
+================================= */
+
+.ia-hero-v2 {
+  width: 100%;
+  padding: 90px 6%;
+  box-sizing: border-box;
+  background:
+    radial-gradient(ellipse at 75% 50%, rgba(0, 145, 190, 0.13), transparent 45%),
+    #071321;
+  overflow: hidden;
 }
 
+.ia-hero-v2 .ia-hero-inner {
+  width: 100%;
+  max-width: 1250px;
+  margin: 0 auto;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 55px;
+}
 
+.ia-hero-v2 .ia-hero-copy {
+  min-width: 0;
+  position: relative;
+  z-index: 2;
+}
 
+.ia-hero-v2 .ia-eyebrow {
+  color: #42d8ed;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  margin-bottom: 24px;
+}
 
-  
-  
+.ia-hero-v2 h1 {
+  color: #f2f7fb;
+  font-size: clamp(38px, 4.5vw, 66px);
+  line-height: 1.08;
+  letter-spacing: -2px;
+  margin: 0 0 25px;
+}
+
+.ia-hero-v2 p {
+  color: #a9bac9;
+  font-size: 17px;
+  line-height: 1.8;
+  max-width: 540px;
+  margin: 0 0 32px;
+}
+
+.ia-hero-v2 .ia-hero-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+}
+
+.ia-hero-v2 .ia-button-primary,
+.ia-hero-v2 .ia-button-secondary {
+  display: inline-block;
+  padding: 15px 22px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 700;
+  transition: 0.2s ease;
+}
+
+.ia-hero-v2 .ia-button-primary {
+  color: #061421;
+  background: #42d8ed;
+}
+
+.ia-hero-v2 .ia-button-primary:hover {
+  background: #a1f4ff;
+  transform: translateY(-2px);
+}
+
+.ia-hero-v2 .ia-button-secondary {
+  color: #dceaf3;
+  border: 1px solid #34536a;
+}
+
+.ia-hero-v2 .ia-button-secondary:hover {
+  border-color: #42d8ed;
+  color: #42d8ed;
+}
+
+.ia-hero-v2 .ia-hero-art {
+  position: relative;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.ia-hero-v2 .ia-art-glow {
+  position: absolute;
+  width: 75%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #087fba;
+  filter: blur(100px);
+  opacity: 0.18;
+}
+
+.ia-hero-v2 .ia-hero-art svg {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  max-width: 570px;
+  height: auto;
+}
+
+.ia-hero-v2 .ia-art-caption {
+  position: relative;
+  z-index: 1;
+  margin-top: 8px;
+  color: #42d8ed;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-align: center;
+}
+
+@media (max-width: 700px) {
+  .ia-hero-v2 {
+    padding: 65px 22px;
+  }
+
+  .ia-hero-v2 .ia-hero-inner {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 35px;
+  }
+
+  .ia-hero-v2 h1 {
+    font-size: clamp(38px, 10vw, 52px);
+  }
+
+  .ia-hero-v2 .ia-hero-art svg {
+    max-width: 420px;
+  }
+}
