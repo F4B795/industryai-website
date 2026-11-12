@@ -1074,3 +1074,141 @@ section.hero.hero-modern .hero-visual svg {
     transition: none;
   }
 }
+/* =================================
+   INDUSTRYAI – BUSINESS SECTION
+================================= */
+
+.ia-business {
+  position: relative;
+  padding: 110px 7%;
+  background:
+    radial-gradient(ellipse at 15% 50%, rgba(0, 145, 190, 0.10), transparent 45%),
+    #071321;
+  overflow: hidden;
+}
+
+.ia-business-inner {
+  max-width: 1250px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  gap: 85px;
+}
+
+.ia-business-copy {
+  max-width: 620px;
+}
+
+.ia-business .ia-eyebrow {
+  color: #42d8ed;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  margin-bottom: 24px;
+}
+
+.ia-business h2 {
+  color: #f2f7fb;
+  font-size: clamp(34px, 4vw, 54px);
+  line-height: 1.13;
+  margin: 0 0 28px;
+}
+
+.ia-business h2 span {
+  color: #42d8ed;
+}
+
+.ia-business-copy p {
+  color: #a9bac9;
+  font-size: 15px;
+  line-height: 1.9;
+  margin: 0 0 18px;
+}
+
+.ia-business-copy .ia-button-primary {
+  display: inline-block;
+  margin-top: 18px;
+  padding: 16px 23px;
+  border-radius: 6px;
+  color: #061421;
+  background: #42d8ed;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 700;
+  transition: 0.25s ease;
+}
+
+.ia-business-copy .ia-button-primary:hover {
+  background: #a1f4ff;
+  transform: translateY(-3px);
+}
+
+.ia-business-benefits {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.ia-business-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 23px;
+  padding: 27px;
+  background: linear-gradient(145deg, #11283c, #0b1c2c);
+  border: 1px solid #25445b;
+  border-radius: 12px;
+  transition: 0.3s ease;
+}
+
+.ia-business-item:hover {
+  transform: translateX(7px);
+  border-color: #42d8ed;
+  box-shadow: 0 10px 30px rgba(0, 180, 220, 0.10);
+}
+
+.ia-business-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border: 1px solid rgba(66, 216, 237, 0.5);
+  border-radius: 10px;
+  color: #42d8ed;
+  background: rgba(66, 216, 237, 0.08);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.ia-business-item h3 {
+  color: #f2f7fb;
+  font-size: 19px;
+  margin: 0 0 9px;
+}
+
+.ia-business-item p {
+  color: #a9bac9;
+  font-size: 14px;
+  line-height: 1.7;
+  margin: 0;
+}
+
+@media (max-width: 850px) {
+  .ia-business {
+    padding: 80px 22px;
+  }
+
+  .ia-business-inner {
+    grid-template-columns: 1fr;
+    gap: 45px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ia-business-item,
+  .ia-business-copy .ia-button-primary {
+    transition: none;
+  }
+}
