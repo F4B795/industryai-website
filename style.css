@@ -821,6 +821,11 @@ header .logo-wordmark span {
         flex-basis: 100% !important;
     }
 }
+/* TEST – CSS-KONTROLLE */
+.hero-visual {
+    outline: 8px solid red !important;
+}
+
 
   
   
