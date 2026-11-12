@@ -340,17 +340,85 @@
 
 </section>
 
-  <section class="check" id="check">
-    <div class="eyebrow">DER ERSTE SCHRITT</div>
-    <h2>Wie gut ist Ihr Unternehmen auf die
-      Nachwuchsgewinnung vorbereitet?
-    </h2>
+  
+<section class="ia-check" id="check">
+
+  <div class="ia-check-heading">
+    <div class="ia-eyebrow">INDUSTRYAI RECRUITING-CHECK</div>
+    <h2>Wie gut ist Ihr Unternehmen auf die Nachwuchsgewinnung vorbereitet?</h2>
     <p>
-      Entdecken Sie mit unserem Recruiting-Check neue
-      Möglichkeiten für Ihre Personalgewinnung.
+      Beantworten Sie fünf kurze Fragen und erfahren Sie direkt,
+      wo Ihr Unternehmen bei der Gewinnung junger Talente steht.
     </p>
-    <span class="coming-soon">RECRUITING-CHECK · IN VORBEREITUNG</span>
-  </section>
+    <div class="ia-check-meta">5 FRAGEN · CA. 2 MINUTEN · KOSTENLOSE AUSWERTUNG</div>
+  </div>
+
+  <form id="recruitingForm">
+
+    <div class="ia-question">
+      <span class="ia-question-number">FRAGE 01 / 05</span>
+      <h3>Wie sichtbar ist Ihr Unternehmen für junge Menschen?</h3>
+      <label><input type="radio" name="q1" value="0" required> Kaum – wir sind online nur schwer zu finden.</label>
+      <label><input type="radio" name="q1" value="1"> Wir haben eine Website, aber wenig gezielte Ansprache.</label>
+      <label><input type="radio" name="q1" value="2"> Wir sind auf mehreren Kanälen präsent.</label>
+      <label><input type="radio" name="q1" value="3"> Wir sprechen junge Menschen aktiv und regelmäßig an.</label>
+    </div>
+
+    <div class="ia-question">
+      <span class="ia-question-number">FRAGE 02 / 05</span>
+      <h3>Wie präsentieren Sie Ihre Ausbildungsberufe?</h3>
+      <label><input type="radio" name="q2" value="0" required> Hauptsächlich über klassische Stellenanzeigen.</label>
+      <label><input type="radio" name="q2" value="1"> Mit kurzen Texten auf unserer Website.</label>
+      <label><input type="radio" name="q2" value="2"> Mit Bildern, Videos oder Mitarbeiterberichten.</label>
+      <label><input type="radio" name="q2" value="3"> Mit authentischen und vielfältigen Einblicken in den Berufsalltag.</label>
+    </div>
+
+    <div class="ia-question">
+      <span class="ia-question-number">FRAGE 03 / 05</span>
+      <h3>Wie früh erreichen Sie potenzielle Nachwuchskräfte?</h3>
+      <label><input type="radio" name="q3" value="0" required> Erst, wenn sie aktiv eine Ausbildung suchen.</label>
+      <label><input type="radio" name="q3" value="1"> Gelegentlich über Stellenanzeigen und Jobportale.</label>
+      <label><input type="radio" name="q3" value="2"> Bereits über Schulen, Praktika oder Veranstaltungen.</label>
+      <label><input type="radio" name="q3" value="3"> Kontinuierlich und lange vor der Bewerbungsphase.</label>
+    </div>
+
+    <div class="ia-question">
+      <span class="ia-question-number">FRAGE 04 / 05</span>
+      <h3>Wie einfach ist Ihr Bewerbungsprozess?</h3>
+      <label><input type="radio" name="q4" value="0" required> Aufwendig und überwiegend papierbasiert.</label>
+      <label><input type="radio" name="q4" value="1"> Über klassische Bewerbungen per E-Mail.</label>
+      <label><input type="radio" name="q4" value="2"> Digital und relativ unkompliziert.</label>
+      <label><input type="radio" name="q4" value="3"> Mobilfreundlich, einfach und mit wenigen Schritten.</label>
+    </div>
+
+    <div class="ia-question">
+      <span class="ia-question-number">FRAGE 05 / 05</span>
+      <h3>Wie schnell reagieren Sie auf Bewerbungen?</h3>
+      <label><input type="radio" name="q5" value="0" required> Häufig erst nach mehreren Wochen.</label>
+      <label><input type="radio" name="q5" value="1"> Meist innerhalb von zwei Wochen.</label>
+      <label><input type="radio" name="q5" value="2"> Innerhalb weniger Tage.</label>
+      <label><input type="radio" name="q5" value="3"> Möglichst innerhalb von 1–2 Werktagen.</label>
+    </div>
+
+    <button type="submit" class="ia-check-submit">
+      Meine Auswertung anzeigen ↗
+    </button>
+
+  </form>
+
+  <div id="ia-check-result" class="ia-check-result" hidden>
+    <div class="ia-eyebrow">IHRE PERSÖNLICHE AUSWERTUNG</div>
+    <h3 id="ia-result-title"></h3>
+    <div class="ia-result-score" id="ia-result-score"></div>
+    <p id="ia-result-text"></p>
+    <div id="ia-result-tips"></div>
+    <button type="button" id="ia-check-restart" class="ia-check-restart">
+      Check erneut starten
+    </button>
+  </div>
+
+</section>
+
 </main>
 
 <footer>
