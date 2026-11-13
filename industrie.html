@@ -216,23 +216,44 @@
   <div class="eyebrow">PROBIERE ES AUS</div>
   <h2 class="section-title">Erlebe eine CNC-Maschine</h2>
 
-  <div class="machine">
-    <div class="machine-visual">⚙️</div>
+  
+<div class="machine" id="cnc-demo">
+  <div class="machine-visual">
+    ⚙️
+  </div>
 
-    <div>
-      <h2>Dein erster Einblick in die Fertigung</h2>
-      <p class="muted">
-        Eine CNC-Maschine fertigt Werkstücke mit höchster Präzision.
-        Doch wie funktioniert das eigentlich?
-      </p>
+  <div class="machine-content">
+    <h2>Dein erstes CNC-Erlebnis</h2>
 
-      <button onclick="showDemo()">Maschine entdecken</button>
+    <p class="muted">
+      Entdecke, wie aus einem Stück Metall ein präzises Werkstück entsteht.
+      Wähle dein Material und dein Werkzeug und starte die Bearbeitung.
+    </p>
 
-      <div id="demo-result">
-        Starte die kleine Demo und entdecke die ersten Arbeitsschritte.
-      </div>
+    <label for="cnc-material">1. Werkstück auswählen</label>
+    <select id="cnc-material">
+      <option value="Aluminium">Aluminium</option>
+      <option value="Stahl">Stahl</option>
+      <option value="Messing">Messing</option>
+    </select>
+
+    <label for="cnc-tool">2. Werkzeug auswählen</label>
+    <select id="cnc-tool">
+      <option value="Drehmeißel">Drehmeißel</option>
+      <option value="Bohrer">Bohrer</option>
+      <option value="Fräser">Fräser</option>
+    </select>
+
+    <button type="button" id="cnc-start">
+      Bearbeitung starten
+    </button>
+
+    <div id="cnc-result" aria-live="polite">
+      Deine Maschine wartet auf den Start.
     </div>
   </div>
+</div>
+
 </section>
 
 <footer>
@@ -251,6 +272,46 @@
       "4. Die Maschine bearbeitet das Werkstück präzise.<br><br>" +
       "Das war dein erster Einblick in die CNC-Fertigung!";
   }
+  
+const cncButton = document.getElementById("cnc-start");
+const cncResult = document.getElementById("cnc-result");
+
+if (cncButton && cncResult) {
+  cncButton.addEventListener("click", function () {
+    const material = document.getElementById("cnc-material").value;
+    const tool = document.getElementById("cnc-tool").value;
+
+    cncButton.disabled = true;
+
+    const steps = [
+      "1/4 – Werkstück aus " + material + " wird eingespannt ...",
+      "2/4 – " + tool + " wird ausgewählt und positioniert ...",
+      "3/4 – CNC-Bearbeitung läuft ...",
+      "4/4 – Bearbeitung abgeschlossen!"
+    ];
+
+    let step = 0;
+
+    cncResult.textContent = steps[step];
+
+    const timer = setInterval(function () {
+      step++;
+
+      if (step < steps.length) {
+        cncResult.textContent = steps[step];
+      } else {
+        clearInterval(timer);
+        cncResult.textContent =
+          "Fertig! Dein Werkstück aus " + material +
+          " wurde mit dem " + tool +
+          " bearbeitet. Du hast den CNC-Ablauf kennengelernt!";
+        cncButton.disabled = false;
+        cncButton.textContent = "Erneut bearbeiten";
+      }
+    }, 1800);
+  });
+}
+
 </script>
 
 </body>
