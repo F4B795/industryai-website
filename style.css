@@ -1883,4 +1883,18 @@ section.hero.hero-modern .hero-visual svg {
   line-height: 1.7;
   margin-top: 8px;
 }
+/* CNC-Spindel dreht sich */
+.cnc-spindle-rotor {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: cnc-spin 2s linear infinite;
+}
 
+@keyframes cnc-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
