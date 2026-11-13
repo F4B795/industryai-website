@@ -1,0 +1,257 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Handwerk & Industrie | INDUSTRYAI</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: #071524;
+      color: #f2f7fc;
+      font-family: Arial, sans-serif;
+    }
+
+    header {
+      padding: 22px 8%;
+      border-bottom: 1px solid #20394e;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-weight: bold;
+      letter-spacing: 2px;
+      font-size: 19px;
+    }
+
+    .logo span { color: #35d5e8; }
+
+    a { color: inherit; text-decoration: none; }
+
+    .back {
+      color: #35d5e8;
+      font-size: 14px;
+    }
+
+    .hero {
+      max-width: 1100px;
+      margin: auto;
+      padding: 85px 25px 65px;
+      text-align: center;
+    }
+
+    .eyebrow {
+      color: #35d5e8;
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 3px;
+    }
+
+    h1 {
+      font-size: clamp(36px, 6vw, 64px);
+      line-height: 1.1;
+      margin: 22px 0;
+    }
+
+    h1 span { color: #35d5e8; }
+
+    .intro {
+      max-width: 720px;
+      margin: auto;
+      color: #b7c8d8;
+      line-height: 1.8;
+    }
+
+    .section {
+      max-width: 1100px;
+      margin: auto;
+      padding: 35px 25px 75px;
+    }
+
+    .section-title {
+      font-size: 30px;
+      margin-bottom: 12px;
+    }
+
+    .muted {
+      color: #aebfd0;
+      line-height: 1.7;
+    }
+
+    .jobs {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+      margin-top: 30px;
+    }
+
+    .job, .machine {
+      background: linear-gradient(145deg, #122b40, #0b1d2e);
+      border: 1px solid #294960;
+      border-radius: 13px;
+      padding: 25px;
+    }
+
+    .job-number {
+      color: #35d5e8;
+      font-size: 12px;
+      letter-spacing: 2px;
+    }
+
+    .job h3 { margin-bottom: 10px; }
+
+    .machine {
+      margin-top: 35px;
+      padding: 35px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 35px;
+      align-items: center;
+    }
+
+    .machine-visual {
+      min-height: 260px;
+      border: 1px solid #28617a;
+      border-radius: 12px;
+      background: radial-gradient(circle, #16435b, #091b2b 70%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 100px;
+    }
+
+    button {
+      background: #35d5e8;
+      color: #061522;
+      border: 0;
+      border-radius: 7px;
+      padding: 14px 20px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+
+    button:hover { background: #75e7f2; }
+
+    #demo-result {
+      color: #35d5e8;
+      line-height: 1.7;
+      margin-top: 18px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      border-top: 1px solid #20394e;
+      color: #91a7ba;
+      font-size: 13px;
+    }
+
+    @media(max-width: 700px) {
+      .machine { grid-template-columns: 1fr; }
+      header { padding: 18px 5%; }
+      .machine-visual { min-height: 190px; }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">INDUSTRY <span>AI</span></div>
+  <a class="back" href="index.html">← Zurück zum Campus</a>
+</header>
+
+<section class="hero">
+  <div class="eyebrow">INDUSTRYAI CAMPUS · WELT 01</div>
+  <h1>Handwerk & <span>Industrie.</span></h1>
+  <p class="intro">
+    Entdecke die Welt der Maschinen, Technik und modernen Produktion.
+    Lerne spannende Ausbildungsberufe kennen und finde heraus,
+    welche Möglichkeiten in der Industrie auf dich warten.
+  </p>
+</section>
+
+<section class="section">
+  <div class="eyebrow">DEINE MÖGLICHKEITEN</div>
+  <h2 class="section-title">Entdecke technische Berufe</h2>
+  <p class="muted">
+    Vom ersten Werkstück bis zur automatisierten Produktionsanlage:
+    In der Industrie entstehen jeden Tag neue Ideen und Technologien.
+  </p>
+
+  <div class="jobs">
+    <article class="job">
+      <div class="job-number">BERUF 01</div>
+      <h3>CNC-Zerspanungsmechaniker</h3>
+      <p class="muted">Programmiere und bediene moderne Dreh- und Fräsmaschinen. Fertige präzise Bauteile für unterschiedlichste Anwendungen.</p>
+    </article>
+
+    <article class="job">
+      <div class="job-number">BERUF 02</div>
+      <h3>Industriemechaniker</h3>
+      <p class="muted">Baue Maschinen und Anlagen, montiere Baugruppen und sorge dafür, dass technische Systeme funktionieren.</p>
+    </article>
+
+    <article class="job">
+      <div class="job-number">BERUF 03</div>
+      <h3>Mechatroniker</h3>
+      <p class="muted">Verbinde Mechanik, Elektronik und Steuerungstechnik zu modernen technischen Systemen.</p>
+    </article>
+
+    <article class="job">
+      <div class="job-number">BERUF 04</div>
+      <h3>Elektroniker</h3>
+      <p class="muted">Arbeite mit elektrischen Anlagen, Steuerungen und innovativer Automatisierungstechnik.</p>
+    </article>
+  </div>
+</section>
+
+<section class="section">
+  <div class="eyebrow">PROBIERE ES AUS</div>
+  <h2 class="section-title">Erlebe eine CNC-Maschine</h2>
+
+  <div class="machine">
+    <div class="machine-visual">⚙️</div>
+
+    <div>
+      <h2>Dein erster Einblick in die Fertigung</h2>
+      <p class="muted">
+        Eine CNC-Maschine fertigt Werkstücke mit höchster Präzision.
+        Doch wie funktioniert das eigentlich?
+      </p>
+
+      <button onclick="showDemo()">Maschine entdecken</button>
+
+      <div id="demo-result">
+        Starte die kleine Demo und entdecke die ersten Arbeitsschritte.
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  INDUSTRYAI · Die Zukunft der Berufsorientierung
+  <br><br>
+  <a href="index.html">Zurück zur Startseite</a>
+</footer>
+
+<script>
+  function showDemo() {
+    document.getElementById("demo-result").innerHTML =
+      "<strong>So funktioniert es:</strong><br><br>" +
+      "1. Das Werkstück wird sicher eingespannt.<br>" +
+      "2. Das passende Werkzeug wird ausgewählt.<br>" +
+      "3. Das CNC-Programm steuert die Maschine.<br>" +
+      "4. Die Maschine bearbeitet das Werkstück präzise.<br><br>" +
+      "Das war dein erster Einblick in die CNC-Fertigung!";
+  }
+</script>
+
+</body>
+</html>
