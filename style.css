@@ -1898,3 +1898,18 @@ section.hero.hero-modern .hero-visual svg {
     transform: rotate(360deg);
   }
 }
+/* CNC-Werkzeug fährt zum Werkstück */
+.cnc-tool {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: cnc-tool-move 3s ease-in-out infinite alternate;
+}
+
+@keyframes cnc-tool-move {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-18px);
+  }
+}
