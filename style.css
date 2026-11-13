@@ -1796,3 +1796,32 @@ section.hero.hero-modern .hero-visual svg {
     font-size: 21px;
   }
 }
+
+/* INDUSTRYAI – PRIVACY CHECKBOX */
+
+.ia-contact-privacy {
+  margin: 22px 0;
+}
+
+.ia-contact-privacy label {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  color: #a9bac9;
+  font-size: 13px;
+  line-height: 1.7;
+  cursor: pointer;
+}
+
+.ia-contact-privacy input {
+  flex-shrink: 0;
+  width: 17px;
+  height: 17px;
+  margin-top: 2px;
+  accent-color: #42d8ed;
+}
+
+.ia-contact-privacy a {
+  color: #42d8ed;
+  text-decoration: underline;
+}
