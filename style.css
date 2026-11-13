@@ -1825,3 +1825,62 @@ section.hero.hero-modern .hero-visual svg {
   color: #42d8ed;
   text-decoration: underline;
 }
+
+/* INDUSTRYAI – CNC-Demo Gestaltung */
+
+#cnc-demo .machine-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+#cnc-demo label {
+  display: block;
+  color: #35d5e8;
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+#cnc-demo select {
+  width: 100%;
+  max-width: 340px;
+  padding: 12px;
+  border: 1px solid #28718a;
+  border-radius: 7px;
+  background: #0b2031;
+  color: #f2f7fc;
+  font-size: 15px;
+}
+
+#cnc-demo button {
+  padding: 13px 22px;
+  border: none;
+  border-radius: 7px;
+  background: #35d5e8;
+  color: #071724;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+#cnc-demo button:hover {
+  background: #70eafa;
+}
+
+#cnc-demo button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+#cnc-result {
+  width: 100%;
+  padding: 16px;
+  border: 1px solid #28718a;
+  border-radius: 8px;
+  background: #0b2031;
+  color: #d7e9f5;
+  line-height: 1.7;
+  margin-top: 8px;
+}
+
