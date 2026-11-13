@@ -338,6 +338,8 @@
   
 const cncButton = document.getElementById("cnc-start");
 const cncResult = document.getElementById("cnc-result");
+  const cncProgressBar = document.getElementById("cnc-progress-bar");
+  const cncPercent = document.getElementById("cnc-percent");
 
 if (cncButton && cncResult) {
   cncButton.addEventListener("click", function () {
@@ -354,6 +356,8 @@ if (cncButton && cncResult) {
     ];
 
     let step = 0;
+    if (cncProgressBar) cncProgressBar.style.width = "0%";
+if (cncPercent) cncPercent.textContent = "0 %";
 
     cncResult.textContent = steps[step];
 
@@ -362,8 +366,13 @@ if (cncButton && cncResult) {
 
       if (step < steps.length) {
         cncResult.textContent = steps[step];
+        const progress = Math.round((step / (steps.length - 1)) * 100);
+if (cncProgressBar) cncProgressBar.style.width = progress + "%";
+if (cncPercent) cncPercent.textContent = progress + " %";
       } else {
         clearInterval(timer);
+        if (cncProgressBar) cncProgressBar.style.width = "100%";
+if (cncPercent) cncPercent.textContent = "100 %";
         cncResult.textContent =
           "Fertig! Dein Werkstück aus " + material +
           " wurde mit dem " + tool +
