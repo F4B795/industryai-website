@@ -130,6 +130,25 @@ document.addEventListener("DOMContentLoaded", () => {
           "</p>";
       }
 
+// Recruiting-Ergebnis für das Kontaktformular vorbereiten
+const contactScore = document.getElementById("ia-contact-score");
+const contactRating = document.getElementById("ia-contact-rating");
+const contactAnalysis = document.getElementById("ia-contact-analysis");
+
+if (contactScore) {
+  contactScore.value = total + " / 15 Punkte";
+}
+
+if (contactRating) {
+  contactRating.value = resultTitle.textContent;
+}
+
+if (contactAnalysis) {
+  contactAnalysis.value =
+    resultText.textContent + "\n\n" +
+    resultTips.innerText;
+}
+
       form.hidden = true;
       result.hidden = false;
 
