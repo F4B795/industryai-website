@@ -121,6 +121,11 @@
       padding-left: 22px;
     }
 
+    .content-panel li {
+      padding-left: 4px;
+      margin-bottom: 5px;
+    }
+
     .campus-cta {
       text-align: center;
       padding: 55px 25px;
@@ -208,6 +213,29 @@
     <div class="info-grid" id="career-conditions"></div>
   </section>
 
+  <section class="section" id="career-prerequisites-section" hidden>
+    <div class="eyebrow">DEINE STÄRKEN</div>
+    <h2>Was solltest du mitbringen?</h2>
+    <div class="content-panel">
+      <p class="muted">
+        Diese Fähigkeiten und Interessen sind für den Beruf hilfreich.
+        Sie sind Orientierungshilfen und keine pauschalen Zugangsvoraussetzungen.
+      </p>
+      <ul id="career-prerequisites"></ul>
+    </div>
+  </section>
+
+  <section class="section" id="career-learning-section" hidden>
+    <div class="eyebrow">DAS LERNST DU</div>
+    <h2>Inhalte deiner Ausbildung</h2>
+    <div class="content-panel">
+      <p class="muted">
+        Während der Ausbildung lernst du unter anderem folgende Inhalte kennen:
+      </p>
+      <ul id="career-learning"></ul>
+    </div>
+  </section>
+
   <section class="section">
     <div class="eyebrow">DEINE ENTWICKLUNG</div>
     <h2>Ausbildung und Perspektiven</h2>
@@ -217,6 +245,26 @@
         Je nach Betrieb, persönlicher Entwicklung und Weiterbildung
         können sich unterschiedliche berufliche Wege eröffnen.
       </p>
+    </div>
+  </section>
+
+  <section class="section" id="career-further-training-section" hidden>
+    <div class="eyebrow">WEITERBILDUNG</div>
+    <h2>Wie kannst du dich weiterentwickeln?</h2>
+    <div class="content-panel">
+      <p class="muted">
+        Nach der Ausbildung sind – abhängig von Voraussetzungen und Bildungsweg –
+        verschiedene Fortbildungen und Spezialisierungen möglich.
+      </p>
+      <ul id="career-further-training"></ul>
+    </div>
+  </section>
+
+  <section class="section" id="career-paths-section" hidden>
+    <div class="eyebrow">BERUFLICHE ZUKUNFT</div>
+    <h2>Welche Karrierewege gibt es?</h2>
+    <div class="content-panel">
+      <ul id="career-paths"></ul>
     </div>
   </section>
 
@@ -246,6 +294,7 @@
 </footer>
 
 <script src="berufe.js"></script>
+<script src="berufe-details.js"></script>
 <script src="beruf-campus.js"></script>
 
 </body>
