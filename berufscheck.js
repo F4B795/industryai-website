@@ -70,14 +70,18 @@
   }
 
   function normalizedProfile(profile) {
-    const result = {};
+    
+      const rawValue = profile ? profile[key] : null;
 
-    DIMENSIONS.forEach((key) => {
-      const value = Number(profile && profile[key]);
+      result[key] =
+        rawValue === null ||
+        rawValue === undefined ||
+        rawValue === ""
+          ? null
+          : Number.isFinite(Number(rawValue))
+            ? clamp(Number(rawValue), 0, 100)
+            : null;
 
-      result[key] = Number.isFinite(value)
-        ? clamp(value, 0, 100)
-        : null;
     });
 
     return result;
