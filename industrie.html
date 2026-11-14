@@ -89,6 +89,23 @@
       margin-top: 30px;
     }
 
+    .job-link {
+      display: block;
+      border-radius: 13px;
+      outline-offset: 4px;
+    }
+
+    .job-link .job {
+      height: 100%;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .job-link:hover .job,
+    .job-link:focus-visible .job {
+      border-color: #35d5e8;
+      transform: translateY(-4px);
+    }
+
     .job, .machine {
       background: linear-gradient(145deg, #122b40, #0b1d2e);
       border: 1px solid #294960;
@@ -223,29 +240,39 @@
   </p>
 
   <div class="jobs">
-    <article class="job">
-      <div class="job-number">BERUF 01</div>
-      <h3>CNC-Zerspanungsmechaniker</h3>
-      <p class="muted">Programmiere und bediene moderne Dreh- und Fräsmaschinen. Fertige präzise Bauteile für unterschiedlichste Anwendungen.</p>
-    </article>
 
-    <article class="job">
-      <div class="job-number">BERUF 02</div>
-      <h3>Industriemechaniker</h3>
-      <p class="muted">Baue Maschinen und Anlagen, montiere Baugruppen und sorge dafür, dass technische Systeme funktionieren.</p>
-    </article>
+    <a class="job-link" href="beruf.html?id=zerspanungsmechaniker" aria-label="Berufsprofil CNC-Zerspanungsmechaniker öffnen">
+      <article class="job">
+        <div class="job-number">BERUF 01</div>
+        <h3>CNC-Zerspanungsmechaniker</h3>
+        <p class="muted">Programmiere und bediene moderne Dreh- und Fräsmaschinen. Fertige präzise Bauteile für unterschiedlichste Anwendungen.</p>
+      </article>
+    </a>
 
-    <article class="job">
-      <div class="job-number">BERUF 03</div>
-      <h3>Mechatroniker</h3>
-      <p class="muted">Verbinde Mechanik, Elektronik und Steuerungstechnik zu modernen technischen Systemen.</p>
-    </article>
+    <a class="job-link" href="beruf.html?id=industriemechaniker" aria-label="Berufsprofil Industriemechaniker öffnen">
+      <article class="job">
+        <div class="job-number">BERUF 02</div>
+        <h3>Industriemechaniker</h3>
+        <p class="muted">Baue Maschinen und Anlagen, montiere Baugruppen und sorge dafür, dass technische Systeme funktionieren.</p>
+      </article>
+    </a>
 
-    <article class="job">
-      <div class="job-number">BERUF 04</div>
-      <h3>Elektroniker</h3>
-      <p class="muted">Arbeite mit elektrischen Anlagen, Steuerungen und innovativer Automatisierungstechnik.</p>
-    </article>
+    <a class="job-link" href="beruf.html?id=mechatroniker" aria-label="Berufsprofil Mechatroniker öffnen">
+      <article class="job">
+        <div class="job-number">BERUF 03</div>
+        <h3>Mechatroniker</h3>
+        <p class="muted">Verbinde Mechanik, Elektronik und Steuerungstechnik zu modernen technischen Systemen.</p>
+      </article>
+    </a>
+
+    <a class="job-link" href="beruf.html?id=elektroniker-automatisierung" aria-label="Berufsprofil Elektroniker für Automatisierungstechnik öffnen">
+      <article class="job">
+        <div class="job-number">BERUF 04</div>
+        <h3>Elektroniker</h3>
+        <p class="muted">Arbeite mit elektrischen Anlagen, Steuerungen und innovativer Automatisierungstechnik.</p>
+      </article>
+    </a>
+
   </div>
 </section>
 
@@ -372,16 +399,6 @@
 </footer>
 
 <script>
-  function showDemo() {
-    document.getElementById("demo-result").innerHTML =
-      "<strong>So funktioniert es:</strong><br><br>" +
-      "1. Das Werkstück wird sicher eingespannt.<br>" +
-      "2. Das passende Werkzeug wird ausgewählt.<br>" +
-      "3. Das CNC-Programm steuert die Maschine.<br>" +
-      "4. Die Maschine bearbeitet das Werkstück präzise.<br><br>" +
-      "Das war dein erster Einblick in die CNC-Fertigung!";
-  }
-
   const cncButton = document.getElementById("cnc-start");
   const cncResult = document.getElementById("cnc-result");
   const cncProgressBar = document.getElementById("cnc-progress-bar");
