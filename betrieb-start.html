@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Erstellen Sie einen unverbindlichen Entwurf für Ihr Unternehmensprofil auf INDUSTRYAI.">
+<title>Unternehmensprofil vorbereiten – INDUSTRYAI</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.onboard-hero{padding:54px 7% 42px;text-align:center;background:radial-gradient(ellipse at 80% 20%,rgba(20,150,190,.18),transparent 42%),linear-gradient(120deg,#071321,#0c2034)}
+.onboard-hero>div{max-width:850px;margin:auto}
+.onboard-hero .eyebrow,.onboard-label{color:#42d8ed;font-size:11px;font-weight:700;letter-spacing:2px}
+.onboard-hero h1{font:800 clamp(32px,4vw,50px)/1.15 Manrope,sans-serif;margin:14px 0}
+.onboard-hero p{color:#b6c7d6;line-height:1.8}
+.onboard-wrap{max-width:1160px;margin:0 auto;padding:42px 6% 70px;display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:start}
+.onboard-panel{padding:27px;background:#0d2234;border:1px solid rgba(66,216,237,.2);border-radius:14px}
+.onboard-panel h2{font-size:24px;margin:8px 0 10px}
+.onboard-panel>p{color:#a9bacb;font-size:13px;line-height:1.7;margin-bottom:22px}
+.onboard-field{margin:17px 0}
+.onboard-field label{display:block;color:#dce8f2;font-size:13px;font-weight:600;margin-bottom:7px}
+.onboard-field input,.onboard-field select,.onboard-field textarea{width:100%;padding:13px 14px;border:1px solid #34536a;border-radius:7px;background:#071321;color:#f4f8fc;font:14px 'DM Sans',sans-serif}
+.onboard-field textarea{min-height:105px;resize:vertical}
+.onboard-field input:focus,.onboard-field select:focus,.onboard-field textarea:focus{outline:2px solid rgba(66,216,237,.35);border-color:#42d8ed}
+.onboard-hint{display:block;color:#8299ad;font-size:11px;margin-top:5px}
+.onboard-preview{position:sticky;top:105px}
+.preview-box{padding:22px;border:1px dashed rgba(66,216,237,.4);border-radius:10px;background:rgba(66,216,237,.04);min-height:300px}
+.preview-box h3{font:700 23px Manrope,sans-serif;margin:0 0 6px}
+.preview-box .preview-meta{color:#42d8ed;font-size:12px;margin-bottom:18px}
+.preview-box p,.preview-box li{color:#c1cfda;font-size:13px;line-height:1.7}
+.preview-box ul{padding-left:20px;margin-top:10px}
+.onboard-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.onboard-button{border:0;border-radius:7px;padding:13px 17px;background:#42d8ed;color:#071321;font-weight:700;cursor:pointer}
+.onboard-button.secondary{background:transparent;border:1px solid #42d8ed;color:#42d8ed}
+.onboard-notice{margin-top:18px;padding:13px 15px;border-left:3px solid #42d8ed;background:rgba(66,216,237,.07);color:#a9bacb;font-size:12px;line-height:1.7}
+#copy-status{color:#42d8ed;font-size:12px;margin-top:10px;min-height:18px}
+@media(max-width:800px){.onboard-wrap{grid-template-columns:1fr;padding:28px 5% 55px}.onboard-preview{position:static}.onboard-panel{padding:21px}}
+</style>
+</head>
+<body>
+<header>
+<a href="index.html" class="logo">INDUSTRY<span>AI</span></a>
+<nav>
+<a href="index.html">Startseite</a><a href="berufscheck.html">Berufscheck</a><a href="berufe-entdecken.html">Berufe entdecken</a><a href="recruiting-check.html" class="nav-button">Recruiting-Check ↗</a><a href="unternehmen.html" aria-current="page">Unternehmen</a>
+</nav>
+</header>
+<main>
+<section class="onboard-hero"><div>
+<div class="eyebrow">IN 3 SCHRITTEN ZUM PROFILENTWURF</div>
+<h1>Bereiten Sie Ihren <span style="color:#42d8ed">Unternehmensauftritt</span> vor.</h1>
+<p>Tragen Sie die wichtigsten Informationen ein und sehen Sie direkt, wie Ihr Betrieb auf INDUSTRYAI dargestellt werden könnte. Der Entwurf lässt sich kopieren und intern weitergeben.</p>
+</div></section>
+<div class="onboard-wrap">
+<section class="onboard-panel">
+<div class="onboard-label">SCHRITT 1 · BETRIEB</div>
+<h2>Die wichtigsten Unternehmensdaten</h2>
+<p>Beginnen Sie mit den Basisinformationen. Pflichtfelder sind bewusst auf das Nötigste begrenzt.</p>
+<div class="onboard-field"><label for="company-name">Name des Unternehmens *</label><input id="company-name" type="text" placeholder="z. B. Mustertechnik GmbH" required></div>
+<div class="onboard-field"><label for="company-location">Standort</label><input id="company-location" type="text" placeholder="Ort oder Region"></div>
+<div class="onboard-field"><label for="company-sector">Branche</label><select id="company-sector"><option value="">Bitte auswählen</option><option>Industrie und Technik</option><option>Handwerk und Bau</option><option>Gesundheit und Pflege</option><option>IT und Digitalisierung</option><option>Gastronomie und Hotellerie</option><option>Handel und Dienstleistungen</option><option>Andere Branche</option></select></div>
+<div class="onboard-field"><label for="company-website">Website (optional)</label><input id="company-website" type="url" placeholder="https://www.beispiel.de"></div>
+<div class="onboard-field"><label for="company-description">Was zeichnet Ihren Betrieb aus?</label><textarea id="company-description" placeholder="Beschreiben Sie kurz Ihr Unternehmen, Ihre Arbeitsweise und was Auszubildende bei Ihnen erwartet."></textarea></div>
+<div class="onboard-label" style="margin-top:28px">SCHRITT 2 · AUSBILDUNG</div>
+<div class="onboard-field"><label for="company-apprenticeships">Welche Ausbildungsberufe bieten Sie an?</label><textarea id="company-apprenticeships" placeholder="Ein Beruf pro Zeile, z. B.&#10;Mechatroniker/in&#10;Zerspanungsmechaniker/in&#10;Fachinformatiker/in"></textarea><span class="onboard-hint">Sie können auch geplante oder künftig angebotene Ausbildungsberufe eintragen.</span></div>
+<div class="onboard-label" style="margin-top:28px">SCHRITT 3 · EINBLICKE</div>
+<div class="onboard-field"><label for="company-media">Welche Einblicke könnten Sie zeigen?</label><textarea id="company-media" placeholder="z. B. kurze Videos, Teamvorstellung, Maschinen, Werkstatt, Projekte, Azubi-Alltag"></textarea></div>
+<div class="onboard-notice"><strong>Wichtiger Hinweis:</strong> Dies ist ein unverbindlicher Profil-Entwurf. Die Angaben werden nicht an INDUSTRYAI übertragen oder gespeichert. Bitte tragen Sie hier keine vertraulichen oder personenbezogenen Daten ein.</div>
+</section>
+<aside class="onboard-panel onboard-preview">
+<div class="onboard-label">LIVE-VORSCHAU</div>
+<h2>So könnte Ihr Profil aussehen</h2>
+<p>Die Vorschau aktualisiert sich während der Eingabe. Fehlende Angaben bleiben als Platzhalter erkennbar.</p>
+<div class="preview-box" aria-live="polite">
+<h3 id="preview-name">Ihr Unternehmensname</h3>
+<div class="preview-meta" id="preview-meta">Standort · Branche</div>
+<p id="preview-description">Hier erscheint eine kurze Vorstellung Ihres Betriebs und dessen Besonderheiten.</p>
+<h3 style="font-size:17px;margin-top:22px">Ausbildungsberufe</h3>
+<ul id="preview-apprenticeships"><li>Ihre Ausbildungsberufe werden hier angezeigt.</li></ul>
+<h3 style="font-size:17px;margin-top:22px">Einblicke in den Betrieb</h3>
+<p id="preview-media">Hier können später Videos, Bilder und Einblicke in den Arbeitsalltag eingebunden werden.</p>
+<p id="preview-website" style="margin-top:14px"></p>
+</div>
+<div class="onboard-actions">
+<button class="onboard-button" type="button" id="copy-draft">Entwurf kopieren</button>
+<button class="onboard-button secondary" type="button" id="reset-draft">Eingaben zurücksetzen</button>
+</div>
+<div id="copy-status" role="status"></div>
+<div class="onboard-notice">Nächster Schritt nach der Abstimmung: Wir richten einen echten Anfrage- und Freigabeprozess ein. Erst dann können Betriebe ihre Daten verbindlich übermitteln.</div>
+</aside>
+</div>
+</main>
+<footer><a href="index.html" class="logo">INDUSTRY<span>AI</span></a><p>Deine Zukunft. Deine Möglichkeiten.</p><p>© 2026 INDUSTRYAI</p><div class="ia-footer-links"><a href="index.html">Startseite</a><a href="berufe-entdecken.html">Berufe entdecken</a><a href="unternehmen.html">Unternehmen</a><a href="datenschutz.html">Datenschutz</a></div></footer>
+<script>
+(function(){
+ const ids=["company-name","company-location","company-sector","company-website","company-description","company-apprenticeships","company-media"];
+ const get=id=>document.getElementById(id).value.trim();
+ const text=(id,value)=>document.getElementById(id).textContent=value;
+ function update(){
+  const name=get("company-name"),location=get("company-location"),sector=get("company-sector"),website=get("company-website"),description=get("company-description"),jobs=get("company-apprenticeships"),media=get("company-media");
+  text("preview-name",name||"Ihr Unternehmensname");
+  text("preview-meta",[location||"Standort offen",sector||"Branche offen"].join(" · "));
+  text("preview-description",description||"Hier erscheint eine kurze Vorstellung Ihres Betriebs und dessen Besonderheiten.");
+  const list=document.getElementById("preview-apprenticeships");list.replaceChildren();
+  const entries=jobs.split(/\n|,/).map(x=>x.trim()).filter(Boolean);
+  (entries.length?entries:["Ihre Ausbildungsberufe werden hier angezeigt."]).forEach(job=>{const li=document.createElement("li");li.textContent=job;list.appendChild(li);});
+  text("preview-media",media||"Hier können später Videos, Bilder und Einblicke in den Arbeitsalltag eingebunden werden.");
+  const link=document.getElementById("preview-website");link.textContent=website?"Website: "+website:"";
+ }
+ ids.forEach(id=>document.getElementById(id).addEventListener("input",update));
+ document.getElementById("copy-draft").addEventListener("click",async()=>{
+  const draft=["UNTERNEHMENSPROFIL – ENTWURF","Unternehmen: "+(get("company-name")||"Nicht angegeben"),"Standort: "+(get("company-location")||"Nicht angegeben"),"Branche: "+(get("company-sector")||"Nicht angegeben"),"Website: "+(get("company-website")||"Nicht angegeben"),"Beschreibung: "+(get("company-description")||"Nicht angegeben"),"Ausbildungsberufe:\n"+(get("company-apprenticeships")||"Nicht angegeben"),"Mögliche Einblicke: "+(get("company-media")||"Nicht angegeben"),"","Unverbindlicher Entwurf – noch nicht an INDUSTRYAI übermittelt."].join("\n");
+  const status=document.getElementById("copy-status");
+  try{await navigator.clipboard.writeText(draft);status.textContent="Der Entwurf wurde in die Zwischenablage kopiert.";}
+  catch(e){status.textContent="Kopieren nicht möglich. Bitte markieren Sie die Vorschau und kopieren Sie den Text manuell.";}
+ });
+ document.getElementById("reset-draft").addEventListener("click",()=>{ids.forEach(id=>document.getElementById(id).value="");document.getElementById("copy-status").textContent="";update();});
+ update();
+})();
+</script>
+</body>
+</html>
