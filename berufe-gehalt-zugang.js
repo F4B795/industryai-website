@@ -7,7 +7,7 @@
   "use strict";
   window.IndustryAICompensation = {
     accessNote: "Bei dualen betrieblichen Ausbildungen ist rechtlich grundsätzlich kein bestimmter Schulabschluss vorgeschrieben. Ausbildungsbetriebe legen ihre Auswahlkriterien fest. Bei schulischen Ausbildungen können formale Zugangsvoraussetzungen gelten. Prüfe deshalb immer die konkrete Ausbildungsstelle und die Angaben im BERUFENET.",
-    salaryNote: "Der Einstieg nach der Ausbildung liegt häufig unter dem Median aller beschäftigten Fachkräfte. Die Bundesagentur für Arbeit veröffentlicht im Entgeltatlas vor allem Medianwerte für sozialversicherungspflichtige Vollzeitbeschäftigte, keine einheitlichen Einstiegsgehälter. Die Spanne zwischen unterem und oberem Quartil zeigt die Verteilung, nicht eine garantierte Gehaltsspanne.",
+    salaryNote: "Der Entgeltatlas zeigt Medianwerte der sozialversicherungspflichtigen Vollzeitbeschäftigten, keine Einstiegsgehälter. Das untere und obere Quartil beschreiben die statistische Verteilung und sind keine garantierte Gehaltsspanne. Die BA ordnet einzelne Berufe teils Berufsgattungen mit verwandten Tätigkeiten zu. BIBB-Ausbildungsvergütungen sind geschätzte tarifliche Durchschnittswerte; tatsächliche Beträge können je nach Branche, Region und Betrieb deutlich abweichen.",
     trainingSource: "https://www.bibb.de/de/12209.php",
     trainingSourceLabel: "BIBB – Tarifliche Ausbildungsvergütungen 2025",
     salarySource: "https://web.arbeitsagentur.de/entgeltatlas/",
