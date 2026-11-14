@@ -785,6 +785,8 @@
     const physicalActivity = selectedValue(26);
     const peopleContact = selectedValue(27);
     const routine = selectedValue(29);
+    const responsibility = selectedValue(30);
+    const shiftWork = selectedValue(31);
 
     // Werte und persönliche Wünsche.
     [35].forEach(id => {
@@ -820,14 +822,16 @@
       values,
       desiredCareers,
       avoidances,
-      preferences: {
-        locations,
-        teamwork,
-        physicalActivity,
-        peopleContact,
-        routine,
-        values
-      }
+     preferences: {
+  locations,
+  teamwork,
+  physicalActivity,
+  peopleContact,
+  routine,
+  responsibility,
+  shiftWork,
+  values
+}
     };
 
     const database = window.IndustryAICareers;
