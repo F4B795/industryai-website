@@ -23,7 +23,7 @@
       "fachkraft-metalltechnik-zerspanung": {},
       "elektroniker-betriebstechnik": { training: 1335, median: 4767, q1: 4026, q3: 5528, region: "Deutschland", source: "https://web.arbeitsagentur.de/entgeltatlas/beruf/15624", trainingSource: "https://www.bibb.de/dienst/publikationen/download/20846" },
       "pflegefachfrau": { median: 4587, q1: 4111, q3: 5116, region: "Deutschland", source: "https://web.arbeitsagentur.de/entgeltatlas/beruf/132173" },
-      "medizinische-fachangestellte": { training: 1217, median: 3329, q1: 2824, q3: 3868, region: "Deutschland", source: "https://web.arbeitsagentur.de/entgeltatlas/beruf/33213", trainingSource: "https://www.bibb.de/dienst/publikationen/download/20846", trainingNote: "Der BIBB-Bericht nennt rund 1.217 € als Durchschnitt; die Zahl ist aus der dort beschriebenen Erhöhung abgeleitet und daher nur als Näherungswert zu verstehen." },
+      "medizinische-fachangestellte": { training: 1117, median: 3329, q1: 2824, q3: 3868, region: "Deutschland", source: "https://web.arbeitsagentur.de/entgeltatlas/beruf/33213", trainingSource: "https://www.bibb.de/dienst/publikationen/download/20846",  },
       "tiermedizinische-fachangestellte": { training: 1014, region: "Deutschland", trainingSource: "https://www.bibb.de/dienst/publikationen/download/20846" },
       "erzieher": { median: 4314, q1: null, q3: null, region: "Deutschland", source: "https://web.arbeitsagentur.de/entgeltatlas/beruf/9162" },
       "fachinformatiker-anwendungsentwicklung": { training: 1281, region: "Deutschland", trainingSource: "https://www.bibb.de/dienst/publikationen/download/20846" },
