@@ -176,18 +176,19 @@
       title: "Welche Tätigkeiten würdest du gerne ausprobieren?",
       description: "Wähle bis zu drei Antworten.",
       type: "multiple", maxSelections: 3,
-      options: [
-        { text: "Maschinen und technische Geräte bedienen", tags: ["maschinen", "technik"] },
-        { text: "Computerprogramme entwickeln", tags: ["software", "programmieren"] },
-        { text: "Menschen beraten oder unterstützen", tags: ["menschen", "helfen"] },
-        { text: "Dinge gestalten oder kreativ arbeiten", tags: ["design", "kreativ"] },
-        { text: "Lebensmittel zubereiten und neue Rezepte ausprobieren", tags: ["kochen", "lebensmittel", "gastronomie", "backen", "kreativ"] },
-        { text: "Gäste bedienen und Menschen beraten", tags: ["menschen", "service", "kommunikation", "gastronomie", "verkauf"] },
-        { text: "Abläufe planen und organisieren", tags: ["organisation", "planung"] },
-        { text: "Mit Tieren oder Pflanzen arbeiten", tags: ["tiere", "natur"] },
-        { text: "Fahrzeuge warten oder reparieren", tags: ["fahrzeuge", "reparieren"] },
-        { text: "Untersuchen, messen und analysieren", tags: ["forschung", "logik"] }
-      ]
+     options: [
+  { text: "Maschinen und technische Geräte bedienen", tags: ["maschinen", "technik"] },
+  { text: "Computerprogramme entwickeln", tags: ["software", "programmieren"] },
+  { text: "Menschen beraten oder unterstützen", tags: ["menschen", "helfen"] },
+  { text: "Dinge gestalten oder kreativ arbeiten", tags: ["design", "kreativ"] },
+  { text: "Abläufe planen und organisieren", tags: ["organisation", "planung"] },
+  { text: "Mit Tieren oder Pflanzen arbeiten", tags: ["tiere", "natur"] },
+  { text: "Fahrzeuge warten oder reparieren", tags: ["fahrzeuge", "reparieren"] },
+  { text: "Untersuchen, messen und analysieren", tags: ["forschung", "logik"] },
+  { text: "Speisen zubereiten und neue Rezepte ausprobieren", tags: ["kochen", "lebensmittel", "gastronomie", "kreativ"] },
+  { text: "Brot, Kuchen und andere Backwaren herstellen", tags: ["backen", "lebensmittel", "handwerk"] },
+  { text: "Gäste bedienen, beraten und betreuen", tags: ["service", "menschen", "kommunikation", "gastronomie"] }
+] ]
     },
     {
       id: 24, category: "arbeitsbedingungen",
@@ -239,20 +240,20 @@
       title: "Welche Themen interessieren dich besonders?",
       description: "Wähle bis zu fünf Themen aus.",
       type: "multiple", maxSelections: 5,
-      options: [
-        { text: "Maschinen, Technik und Fahrzeuge", tags: ["maschinen", "technik", "fahrzeuge"] },
-        { text: "Computer, Software und Digitalisierung", tags: ["computer", "software", "digital"] },
-        { text: "Naturwissenschaften und Forschung", tags: ["logik", "forschung", "technik"] },
-        { text: "Menschen, Gesundheit und Medizin", tags: ["menschen", "gesundheit", "medizin"] },
-        { text: "Sprachen und Kommunikation", tags: ["kommunikation", "menschen"] },
-        { text: "Kunst, Medien und Design", tags: ["kreativ", "design", "fotografie"] },
-        { text: "Kochen, Backen, Ernährung und Lebensmittel", tags: ["kochen", "backen", "lebensmittel", "gastronomie", "ernaehrung"] },
-        { text: "Restaurants, Hotels und Gästeservice", tags: ["gastronomie", "service", "menschen", "kommunikation", "veranstaltungen"] },
-        { text: "Wirtschaft und Organisation", tags: ["wirtschaft", "organisation"] },
-        { text: "Tiere, Pflanzen und Umwelt", tags: ["tiere", "pflanzen", "natur"] },
-        { text: "Sport und Bewegung", tags: ["bewegung", "menschen"] },
-        { text: "Erfindungen und Zukunftstechnologien", tags: ["technik", "digital", "entwicklung"] }
-      ]
+    options: [
+  { text: "Maschinen, Technik und Fahrzeuge", tags: ["maschinen", "technik", "fahrzeuge"] },
+  { text: "Computer, Software und Digitalisierung", tags: ["computer", "software", "digital"] },
+  { text: "Naturwissenschaften und Forschung", tags: ["logik", "forschung", "technik"] },
+  { text: "Menschen, Gesundheit und Medizin", tags: ["menschen", "gesundheit", "medizin"] },
+  { text: "Sprachen und Kommunikation", tags: ["kommunikation", "menschen"] },
+  { text: "Kunst, Medien und Design", tags: ["kreativ", "design", "fotografie"] },
+  { text: "Wirtschaft und Organisation", tags: ["wirtschaft", "organisation"] },
+  { text: "Tiere, Pflanzen und Umwelt", tags: ["tiere", "pflanzen", "natur"] },
+  { text: "Sport und Bewegung", tags: ["bewegung", "menschen"] },
+  { text: "Erfindungen und Zukunftstechnologien", tags: ["technik", "digital", "entwicklung"] },
+  { text: "Kochen, Backen und Ernährung", tags: ["kochen", "backen", "lebensmittel", "zutaten"] },
+  { text: "Restaurants, Hotels und Service", tags: ["gastronomie", "service", "menschen", "kommunikation"] }
+]
     },
     {
       id: 29, category: "arbeitsbedingungen",
@@ -289,47 +290,48 @@
       title: "Was motiviert dich besonders?",
       description: "Wähle bis zu drei Antworten.",
       type: "multiple", maxSelections: 3,
-      options: [
-        { text: "Etwas mit den eigenen Händen erschaffen", tags: ["handwerk", "technik"] },
-        { text: "Schwierige Probleme lösen", tags: ["probleme_loesen", "logik"] },
-        { text: "Anderen Menschen helfen", tags: ["helfen", "menschen"] },
-        { text: "Menschen beraten oder überzeugen", tags: ["kommunikation", "menschen"] },
-        { text: "Eigene Ideen verwirklichen", tags: ["kreativ", "design"] },
-        { text: "Neue Gerichte und Lebensmittelkreationen entwickeln", tags: ["kochen", "lebensmittel", "kreativ", "backen", "gastronomie"] },
-        { text: "Gäste betreuen und für ein gutes Erlebnis sorgen", tags: ["service", "menschen", "kommunikation", "gastronomie"] },
-        { text: "Dinge planen und organisieren", tags: ["organisation", "planung"] },
-        { text: "Mit Tieren oder Natur arbeiten", tags: ["tiere", "natur"] },
-        { text: "Direkt handeln und Ergebnisse sehen", tags: ["handwerk", "probleme_loesen"] },
-        { text: "Immer wieder etwas Neues lernen", tags: ["lernen", "entwicklung"] }
-      ]
+     options: [
+  { text: "Etwas mit den eigenen Händen erschaffen", tags: ["handwerk", "technik"] },
+  { text: "Schwierige Probleme lösen", tags: ["probleme_loesen", "logik"] },
+  { text: "Anderen Menschen helfen", tags: ["helfen", "menschen"] },
+  { text: "Menschen beraten oder überzeugen", tags: ["kommunikation", "menschen"] },
+  { text: "Eigene Ideen verwirklichen", tags: ["kreativ", "design"] },
+  { text: "Dinge planen und organisieren", tags: ["organisation", "planung"] },
+  { text: "Mit Tieren oder Natur arbeiten", tags: ["tiere", "natur"] },
+  { text: "Direkt handeln und Ergebnisse sehen", tags: ["handwerk", "probleme_loesen"] },
+  { text: "Immer wieder etwas Neues lernen", tags: ["lernen", "entwicklung"] },
+  { text: "Neue Gerichte und Rezepte entwickeln", tags: ["kochen", "kreativ", "lebensmittel"] },
+  { text: "Gästen ein gutes Erlebnis bieten", tags: ["service", "menschen", "gastronomie"] }
+]
     },
     {
       id: 33, category: "interessen",
       title: "Welche Arbeitsweise spricht dich am meisten an?",
       type: "single",
-      options: [
-        { text: "Praktisch arbeiten und etwas herstellen.", tags: ["handwerk", "fertigung"] },
-        { text: "Mit Lebensmitteln arbeiten und Speisen herstellen.", tags: ["kochen", "lebensmittel", "backen", "gastronomie"] },
-        { text: "Gäste betreuen und Serviceabläufe gestalten.", tags: ["service", "menschen", "kommunikation", "gastronomie", "organisation"] },
-        { text: "Analysieren, planen und Lösungen finden.", tags: ["logik", "planung"] },
-        { text: "Mit Menschen arbeiten und sie unterstützen.", tags: ["menschen", "helfen"] },
-        { text: "Gestalten, entwickeln und neue Ideen umsetzen.", tags: ["kreativ", "entwicklung"] },
-        { text: "Organisieren, koordinieren und verwalten.", tags: ["organisation", "planung"] }
-      ]
+     options: [
+  { text: "Praktisch arbeiten und etwas herstellen.", tags: ["handwerk", "fertigung"] },
+  { text: "Analysieren, planen und Lösungen finden.", tags: ["logik", "planung"] },
+  { text: "Mit Menschen arbeiten und sie unterstützen.", tags: ["menschen", "helfen"] },
+  { text: "Gestalten, entwickeln und neue Ideen umsetzen.", tags: ["kreativ", "entwicklung"] },
+  { text: "Organisieren, koordinieren und verwalten.", tags: ["organisation", "planung"] },
+  { text: "Mit Lebensmitteln arbeiten und Speisen zubereiten.", tags: ["kochen", "lebensmittel", "gastronomie"] },
+  { text: "Backen, dekorieren und eigene Kreationen herstellen.", tags: ["backen", "lebensmittel", "kreativ"] },
+  { text: "Gäste bedienen, beraten und betreuen.", tags: ["service", "menschen", "kommunikation"] }
+]
     },
     {
       id: 34, category: "interessen",
       title: "In welcher Umgebung fühlst du dich am ehesten wohl?",
       type: "single",
       options: [
-        { text: "In einer technischen oder handwerklichen Umgebung.", tags: ["technik", "handwerk"] },
-        { text: "In einer digitalen oder modernen Büroumgebung.", tags: ["computer", "digital"] },
-        { text: "In einer sozialen oder medizinischen Umgebung.", tags: ["menschen", "gesundheit"] },
-        { text: "In einer kreativen Umgebung.", tags: ["kreativ", "design"] },
-        { text: "In einer Küche, Bäckerei oder Konditorei.", tags: ["kochen", "backen", "lebensmittel", "gastronomie"] },
-        { text: "In einem Restaurant, Hotel oder Café.", tags: ["gastronomie", "service", "menschen", "kommunikation"] },
-        { text: "Draußen oder in der Natur.", tags: ["natur", "tiere"] }
-      ]
+  { text: "In einer technischen oder handwerklichen Umgebung.", tags: ["technik", "handwerk"] },
+  { text: "In einer digitalen oder modernen Büroumgebung.", tags: ["computer", "digital"] },
+  { text: "In einer sozialen oder medizinischen Umgebung.", tags: ["menschen", "gesundheit"] },
+  { text: "In einer kreativen Umgebung.", tags: ["kreativ", "design"] },
+  { text: "Draußen oder in der Natur.", tags: ["natur", "tiere"] },
+  { text: "In einer Küche, Bäckerei oder Konditorei.", tags: ["kochen", "backen", "lebensmittel", "gastronomie"] },
+  { text: "In einem Restaurant, Hotel oder Café.", tags: ["gastronomie", "service", "menschen"] }
+]
     },
 
     // --------------------------------------------------
