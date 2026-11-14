@@ -2454,3 +2454,28 @@ main .career-page-intro h1 {
   margin-right: auto;
   text-align: center !important;
 }
+
+/* BERUFE ENTDECKEN – einheitliche Größe und echte Zentrierung der letzten Abschnittsüberschriften */
+.ia-campus-pathways .ia-campus-section-title,
+.ia-campus-final .ia-campus-section-title {
+  display: block;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto 22px !important;
+  padding: 0;
+  text-align: center !important;
+  font-family: Manrope, sans-serif;
+  font-size: clamp(30px, 3.8vw, 44px) !important;
+  font-weight: 800;
+  line-height: 1.2 !important;
+  letter-spacing: -1px;
+  text-wrap: balance;
+}
+@media (max-width: 600px) {
+  .ia-campus-pathways .ia-campus-section-title,
+  .ia-campus-final .ia-campus-section-title {
+    font-size: clamp(27px, 7vw, 32px) !important;
+    line-height: 1.2 !important;
+  }
+}
+
