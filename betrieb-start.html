@@ -60,8 +60,10 @@
 <div class="onboard-field"><label for="company-website">Website (optional)</label><input id="company-website" type="url" placeholder="https://www.beispiel.de"></div>
 <div class="onboard-field"><label for="company-description">Was zeichnet Ihren Betrieb aus?</label><textarea id="company-description" placeholder="Beschreiben Sie kurz Ihr Unternehmen, Ihre Arbeitsweise und was Auszubildende bei Ihnen erwartet."></textarea></div>
 <div class="onboard-label" style="margin-top:28px">SCHRITT 2 · AUSBILDUNG</div>
-<div class="onboard-field"><label for="company-apprenticeships">Welche Ausbildungsberufe bieten Sie an?</label><textarea id="company-apprenticeships" placeholder="Ein Beruf pro Zeile, z. B.&#10;Mechatroniker/in&#10;Zerspanungsmechaniker/in&#10;Fachinformatiker/in"></textarea><span class="onboard-hint">Sie können auch geplante oder künftig angebotene Ausbildungsberufe eintragen.</span></div>
-<div class="onboard-label" style="margin-top:28px">SCHRITT 3 · EINBLICKE</div>
+<div class="onboard-field"><label for="company-apprenticeships">Welche Ausbildungsberufe oder Praktika bieten Sie an?</label><textarea id="company-apprenticeships" placeholder="Ein Beruf pro Zeile, z. B.&#10;Mechatroniker/in&#10;Zerspanungsmechaniker/in&#10;Fachinformatiker/in"></textarea><span class="onboard-hint">Sie können auch geplante oder künftig angebotene Ausbildungsberufe eintragen.</span></div>
+<div class="onboard-label" style="margin-top:28px">SCHRITT 3 · OFFENE STELLEN</div>
+<div class="onboard-field"><label for="company-jobs">Welche offenen Stellen möchten Sie besetzen?</label><textarea id="company-jobs" placeholder="Ein Job pro Zeile, z. B.\nCNC-Dreher/in (Vollzeit)\nMechatroniker/in (Vollzeit)\nMitarbeiter/in im Kundenservice (Teilzeit)"></textarea><span class="onboard-hint">Gern mit Jobtitel, Arbeitszeitmodell, Standort oder gewünschtem Starttermin.</span></div>
+<div class="onboard-label" style="margin-top:28px">SCHRITT 4 · EINBLICKE</div>
 <div class="onboard-field"><label for="company-media">Welche Einblicke könnten Sie zeigen?</label><textarea id="company-media" placeholder="z. B. kurze Videos, Teamvorstellung, Maschinen, Werkstatt, Projekte, Azubi-Alltag"></textarea></div>
 <div class="onboard-notice"><strong>Wichtiger Hinweis:</strong> Dies ist ein unverbindlicher Profil-Entwurf. Die Angaben werden nicht an INDUSTRYAI übertragen oder gespeichert. Bitte tragen Sie hier keine vertraulichen oder personenbezogenen Daten ein.</div>
 </section>
@@ -74,7 +76,9 @@
 <div class="preview-meta" id="preview-meta">Standort · Branche</div>
 <p id="preview-description">Hier erscheint eine kurze Vorstellung Ihres Betriebs und dessen Besonderheiten.</p>
 <h3 style="font-size:17px;margin-top:22px">Ausbildungsberufe</h3>
-<ul id="preview-apprenticeships"><li>Ihre Ausbildungsberufe werden hier angezeigt.</li></ul>
+<ul id="preview-apprenticeships"><li>Ihre Ausbildungs- und Praktikumsangebote werden hier angezeigt.</li></ul>
+<h3 style="font-size:17px;margin-top:22px">Offene Stellen</h3>
+<ul id="preview-jobs"><li>Hier erscheinen Ihre offenen Stellen.</li></ul>
 <h3 style="font-size:17px;margin-top:22px">Einblicke in den Betrieb</h3>
 <p id="preview-media">Hier können später Videos, Bilder und Einblicke in den Arbeitsalltag eingebunden werden.</p>
 <p id="preview-website" style="margin-top:14px"></p>
@@ -91,18 +95,18 @@
 <footer><a href="index.html" class="logo">INDUSTRY<span>AI</span></a><p>Deine Zukunft. Deine Möglichkeiten.</p><p>© 2026 INDUSTRYAI</p><div class="ia-footer-links"><a href="index.html">Startseite</a><a href="berufe-entdecken.html">Berufe entdecken</a><a href="unternehmen.html">Unternehmen</a><a href="datenschutz.html">Datenschutz</a></div></footer>
 <script>
 (function(){
- const ids=["company-name","company-location","company-sector","company-website","company-description","company-apprenticeships","company-media"];
+ const ids=["company-name","company-location","company-sector","company-website","company-description","company-apprenticeships","company-jobs","company-media"];
  const get=id=>document.getElementById(id).value.trim();
  const text=(id,value)=>document.getElementById(id).textContent=value;
  function update(){
-  const name=get("company-name"),location=get("company-location"),sector=get("company-sector"),website=get("company-website"),description=get("company-description"),jobs=get("company-apprenticeships"),media=get("company-media");
+  const name=get("company-name"),location=get("company-location"),sector=get("company-sector"),website=get("company-website"),description=get("company-description"),jobs=get("company-apprenticeships"),openJobs=get("company-jobs"),media=get("company-media");
   text("preview-name",name||"Ihr Unternehmensname");
   text("preview-meta",[location||"Standort offen",sector||"Branche offen"].join(" · "));
   text("preview-description",description||"Hier erscheint eine kurze Vorstellung Ihres Betriebs und dessen Besonderheiten.");
   const list=document.getElementById("preview-apprenticeships");list.replaceChildren();
   const entries=jobs.split(/\n|,/).map(x=>x.trim()).filter(Boolean);
   (entries.length?entries:["Ihre Ausbildungsberufe werden hier angezeigt."]).forEach(job=>{const li=document.createElement("li");li.textContent=job;list.appendChild(li);});
-  text("preview-media",media||"Hier können später Videos, Bilder und Einblicke in den Arbeitsalltag eingebunden werden.");
+  const jobList=document.getElementById("preview-jobs");jobList.replaceChildren();\n  const vacancies=openJobs.split(/\\n|,/).map(x=>x.trim()).filter(Boolean);\n  (vacancies.length?vacancies:["Hier erscheinen Ihre offenen Stellen."]).forEach(job=>{const li=document.createElement("li");li.textContent=job;jobList.appendChild(li);});\n  text("preview-media",media||"Hier können später Videos, Bilder und Einblicke in den Arbeitsalltag eingebunden werden.");
   const link=document.getElementById("preview-website");link.textContent=website?"Website: "+website:"";
  }
  ids.forEach(id=>document.getElementById(id).addEventListener("input",update));
