@@ -670,12 +670,16 @@
   }
 
 
+
   function nextQuestion() {
     if (currentQuestion < questions.length - 1) {
       currentQuestion++;
       renderQuestion();
+    } else {
+      finishQuiz();
     }
   }
+
 
   function previousQuestion() {
     if (currentQuestion > 0) {
@@ -689,5 +693,233 @@
   nextButton.addEventListener("click", nextQuestion);
 
   backButton.addEventListener("click", previousQuestion);
+
+  function finishQuiz() {
+    const dimensions = ["T", "A", "S", "K", "C", "O", "N", "B", "L"];
+    const points = {};
+    const maximum = {};
+
+    dimensions.forEach((dimension) => {
+      points[dimension] = 0;
+      maximum[dimension] = 0;
+    });
+
+    const selectedTags = [];
+    const locations = [];
+    const desiredCareers = [];
+    const values = [];
+    const avoidances = [];
+
+    // Alltagssituationen ergeben das Interessen- und Verhaltensprofil.
+    questions.filter(q => q.category === "alltag").forEach(question => {
+      const selectedIndex = answers[question.id];
+      if (selectedIndex === undefined) return;
+
+      const selected = question.options[selectedIndex];
+
+      question.options.forEach(option => {
+        dimensions.forEach(dimension => {
+          const possible = Number(option.scores?.[dimension] || 0);
+          maximum[dimension] += Math.max(
+            ...question.options.map(o => Number(o.scores?.[dimension] || 0))
+          );
+        });
+      });
+
+      dimensions.forEach(dimension => {
+        points[dimension] += Number(
+          selected.scores?.[dimension] || 0
+        );
+      });
+    });
+
+    const profile = {};
+
+    dimensions.forEach(dimension => {
+      profile[dimension] = maximum[dimension] > 0
+        ? Math.round(points[dimension] / maximum[dimension] * 100)
+        : null;
+    });
+
+    // Interessen aus Mehrfach- und Einzelantworten sammeln.
+    [23, 32, 33, 34, 38].forEach(id => {
+      const question = questions.find(q => q.id === id);
+      if (!question || answers[id] === undefined) return;
+
+      const indexes = Array.isArray(answers[id])
+        ? answers[id]
+        : [answers[id]];
+
+      indexes.forEach(index => {
+        const option = question.options[index];
+        if (option?.tags) selectedTags.push(...option.tags);
+      });
+    });
+
+    // Arbeitsbedingungen übernehmen.
+    const selectedLocations = answers[24] || [];
+    selectedLocations.forEach(index => {
+      const value = questions.find(q => q.id === 24).options[index].value;
+      if (value !== "offen") locations.push(value);
+    });
+
+    function selectedValue(id) {
+      const question = questions.find(q => q.id === id);
+      const answer = answers[id];
+
+      return question && answer !== undefined
+        ? question.options[answer]?.value
+        : null;
+    }
+
+    const teamwork = selectedValue(25);
+    const physicalActivity = selectedValue(26);
+    const peopleContact = selectedValue(27);
+    const routine = selectedValue(29);
+
+    // Werte und persönliche Wünsche.
+    [35].forEach(id => {
+      const question = questions.find(q => q.id === id);
+      (answers[id] || []).forEach(index => {
+        const value = question.options[index].value;
+        if (value) values.push(value);
+      });
+    });
+
+    const avoidQuestion = questions.find(q => q.id === 36);
+    (answers[36] || []).forEach(index => {
+      const value = avoidQuestion.options[index].value;
+      if (value && value !== "keine") avoidances.push(value);
+    });
+
+    const desiredQuestion = questions.find(q => q.id === 40);
+    (answers[40] || []).forEach(index => {
+      const value = desiredQuestion.options[index].value;
+
+      if (
+        value &&
+        value !== "offen" &&
+        value !== "anderer-beruf"
+      ) {
+        desiredCareers.push(value);
+      }
+    });
+
+    const evaluationInput = {
+      profile,
+      interests: selectedTags,
+      values,
+      desiredCareers,
+      avoidances,
+      preferences: {
+        locations,
+        teamwork,
+        physicalActivity,
+        peopleContact,
+        routine,
+        values
+      }
+    };
+
+    const database = window.IndustryAICareers;
+    const evaluator = window.IndustryAICareerCheck;
+
+    if (!database || !evaluator) {
+      resultsContainer.textContent =
+        "Die Auswertung konnte nicht geladen werden. Bitte lade die Seite neu.";
+      resultsContainer.hidden = false;
+      app.hidden = true;
+      return;
+    }
+
+    const result = evaluator.evaluate(
+      evaluationInput,
+      database,
+      { limit: 5 }
+    );
+
+    showResults(result);
+  }
+
+  function showResults(result) {
+    app.hidden = true;
+    resultsContainer.hidden = false;
+    resultsContainer.innerHTML = "";
+
+    const heading = document.createElement("h2");
+    heading.textContent = "Deine möglichen Berufswege";
+    resultsContainer.appendChild(heading);
+
+    const introduction = document.createElement("p");
+    introduction.textContent =
+      "Diese Berufe passen nach deinen Antworten zu deinen Interessen und Vorstellungen. " +
+      "Sie sind Vorschläge zum Entdecken – keine endgültige Entscheidung.";
+    resultsContainer.appendChild(introduction);
+
+    result.results.forEach((career, index) => {
+      const card = document.createElement("article");
+      card.className = "career-result-card";
+
+      const title = document.createElement("h3");
+      title.textContent = (index + 1) + ". " + career.name;
+      card.appendChild(title);
+
+      const match = document.createElement("p");
+      match.textContent = career.match === null
+        ? "Noch keine ausreichenden Angaben für einen Vergleich."
+        : "Profil-Übereinstimmung: " + career.match + " %";
+      card.appendChild(match);
+
+      if (career.requestedByUser) {
+        const desired = document.createElement("p");
+        desired.textContent = "Diesen Beruf hast du selbst ausgewählt.";
+        card.appendChild(desired);
+      }
+
+      if (career.dayToDay) {
+        const day = document.createElement("p");
+        day.textContent = career.dayToDay;
+        card.appendChild(day);
+      }
+
+      if (career.activities.length) {
+        const list = document.createElement("ul");
+
+        career.activities.forEach(activity => {
+          const item = document.createElement("li");
+          item.textContent = activity;
+          list.appendChild(item);
+        });
+
+        card.appendChild(list);
+      }
+
+      career.conflictNotes.forEach(note => {
+        const warning = document.createElement("p");
+        warning.textContent = note;
+        card.appendChild(warning);
+      });
+
+      resultsContainer.appendChild(card);
+    });
+
+    const disclaimer = document.createElement("p");
+    disclaimer.textContent = result.disclaimer;
+    resultsContainer.appendChild(disclaimer);
+
+    const restart = document.createElement("button");
+    restart.type = "button";
+    restart.textContent = "Berufscheck erneut starten";
+
+    restart.addEventListener("click", () => {
+      Object.keys(answers).forEach(key => delete answers[key]);
+      currentQuestion = 0;
+      resultsContainer.hidden = true;
+      app.hidden = false;
+      renderQuestion();
+    });
+
+    resultsContainer.appendChild(restart);
+  }
 
 })();
