@@ -30,10 +30,12 @@ button.secondary{background:#294960;color:white;margin-left:5px}
 #cncTool{transform-box:fill-box;transform-origin:center;transform:translate(0,0);transition:transform 1.15s cubic-bezier(.2,.7,.2,1)}
 #workpiece{transform-box:fill-box;transform-origin:center;transition:transform 1.25s ease,fill 1.25s ease}
 #chips{opacity:0;transition:opacity .35s ease}
-#visual.cutting #chips{opacity:1}
-#visual.cutting #workpiece{transform:scaleY(.62);fill:#a9c5d4}
+#visual.facing #faceChips{opacity:1}
+#visual.side-cut #sideChips{opacity:1}
+#visual.side-cut #workpiece{transform:scaleY(.62);fill:#a9c5d4}
 #visual.spinning .spindle-rotor{animation:spin .7s linear infinite}
-#visual.retracting #chips{opacity:0}
+#faceChips,#sideChips{opacity:0;transition:opacity .3s ease}
+#visual.retracting #faceChips,#visual.retracting #sideChips{opacity:0}
 @keyframes spin{to{transform:rotate(360deg)}}
 .progress{height:9px;background:#071524;border-radius:20px;overflow:hidden;margin-top:17px}
 #bar{height:100%;width:0;background:#42d8ed;transition:width .65s ease}
@@ -93,14 +95,18 @@ footer{text-align:center;padding:30px;border-top:1px solid #294960;color:#91a7ba
             <path d="M150 125 L170 139 L170 155 L150 169 L130 155 L130 139 Z" fill="#91aaba"/>
           </g>
           <rect id="workpiece" x="180" y="135" width="150" height="25" rx="5" fill="#d4e3eb" stroke="#42d8ed" stroke-width="2"/>
-          <g id="chips">
-            <path d="M290 132 q8 -12 15 0 t15 0" fill="none" stroke="#42d8ed" stroke-width="3" stroke-linecap="round"/>
-            <path d="M270 130 q7 -10 13 0" fill="none" stroke="#d4e3eb" stroke-width="2" stroke-linecap="round"/>
-            <path d="M305 126 q6 -9 12 0" fill="none" stroke="#42d8ed" stroke-width="2" stroke-linecap="round"/>
+          <g id="faceChips">
+            <path d="M320 139 q-12 -9 -20 0 t-15 0" fill="none" stroke="#42d8ed" stroke-width="3" stroke-linecap="round"/>
+            <path d="M318 151 q-10 -7 -18 0" fill="none" stroke="#d4e3eb" stroke-width="2" stroke-linecap="round"/>
+          </g>
+          <g id="sideChips">
+            <path d="M295 130 q-9 -12 -17 0 t-16 0" fill="none" stroke="#42d8ed" stroke-width="3" stroke-linecap="round"/>
+            <path d="M265 128 q-8 -10 -14 0" fill="none" stroke="#d4e3eb" stroke-width="2" stroke-linecap="round"/>
           </g>
           <g id="cncTool">
-            <rect x="330" y="190" width="65" height="22" rx="4" fill="#8299a8"/>
-            <path d="M350 190 L370 160 L382 160 L370 190 Z" fill="#d8e6ee" stroke="#42d8ed" stroke-width="2"/>
+            <rect x="330" y="188" width="72" height="20" rx="4" fill="#8299a8"/>
+            <path d="M330 150 L346 166 L346 188 L330 188 Z" fill="#d8e6ee" stroke="#42d8ed" stroke-width="2"/>
+            <path d="M330 150 L338 158" stroke="#ffffff" stroke-width="2"/>
           </g>
           <rect x="370" y="65" width="55" height="50" rx="5" fill="#071724" stroke="#42d8ed"/>
           <text x="397" y="94" fill="#42d8ed" font-size="12" text-anchor="middle">CNC</text>
@@ -153,15 +159,15 @@ footer{text-align:center;padding:30px;border-top:1px solid #294960;color:#91a7ba
   [material,toolSelect,speed,feed].forEach(control=>control.addEventListener("input",updateValues));
 
   function resetVisual(){
-    visual.classList.remove("spinning","cutting","retracting");
+    visual.classList.remove("spinning","facing","side-cut","retracting");
     toolGraphic.style.transform="translate(0,0)";
     workpiece.style.transform="scaleY(1)";
     workpiece.setAttribute("fill","#d4e3eb");
   }
   function finish(){
-    visual.classList.remove("spinning","cutting","retracting");
+    visual.classList.remove("spinning","facing","side-cut","retracting");
     status.textContent="Simulation abgeschlossen. Das Werkstück wurde in der vereinfachten Darstellung bearbeitet.";
-    learning.textContent="Du hast den Ablauf erlebt: Werkstück spannen, Werkzeug positionieren, entlang der Bearbeitungsbahn Material abtragen und das Werkzeug zurückziehen. In der Praxis folgen je nach Auftrag Maßkontrolle und Oberflächenprüfung. Die Animation ist ein Lernmodell und keine reale CNC-Steuerung.";
+    learning.textContent="Du hast zwei grundlegende Drehoperationen gesehen: Plandrehen an der Stirnseite und Längsdrehen an der Außenseite. Danach folgen in der Praxis je nach Auftrag Maßkontrolle und Oberflächenprüfung. Die Animation ist ein vereinfachtes Lernmodell und keine reale CNC-Steuerung.";
     bar.style.width="100%";
     start.disabled=false;
     start.textContent="Erneut simulieren";
@@ -178,30 +184,46 @@ footer{text-align:center;padding:30px;border-top:1px solid #294960;color:#91a7ba
     visual.classList.add("spinning");
 
     later(()=>{
-      status.textContent="Schritt 2: Das Werkzeug fährt an das Werkstück heran.";
-      learning.textContent="Die Maschine positioniert das ausgewählte Werkzeug nahe an der Oberfläche. Der Abstand wird kontrolliert angefahren.";
-      bar.style.width="28%";
-      toolGraphic.style.transform="translate(-8px,-23px)";
-    },1100);
+      status.textContent="Schritt 2: Das Werkzeug fährt an die Stirnseite des Werkstücks.";
+      learning.textContent="Beim Plandrehen bearbeitet der Drehmeißel die Stirnfläche. Er fährt von außen zur Mitte des rotierenden Werkstücks.";
+      bar.style.width="25%";
+      toolGraphic.style.transform="translate(0,-15px)";
+    },1000);
 
     later(()=>{
-      status.textContent="Schritt 3: Das Werkzeug fährt die Bearbeitungsbahn ab.";
-      learning.textContent="Während des Vorschubs bewegt sich das Werkzeug entlang des Werkstücks. In dieser vereinfachten Darstellung wird dabei sichtbar Material abgetragen.";
-      bar.style.width="68%";
-      visual.classList.add("cutting");
-      toolGraphic.style.transform="translate(-145px,-23px)";
-    },2600);
+      status.textContent="Schritt 3: Plandrehen – die Stirnfläche wird bearbeitet.";
+      learning.textContent="Der Drehmeißel fährt quer über die Stirnseite nach innen. So wird die Werkstückstirn plan und eben.";
+      bar.style.width="48%";
+      visual.classList.add("facing");
+      toolGraphic.style.transform="translate(0,10px)";
+    },2300);
 
     later(()=>{
-      status.textContent="Schritt 4: Das Werkzeug zieht sich zurück.";
-      learning.textContent="Nach dem Materialabtrag fährt das Werkzeug aus dem Arbeitsbereich. Die Spindel kommt zum Stillstand.";
-      bar.style.width="88%";
-      visual.classList.remove("cutting","spinning");
+      status.textContent="Schritt 4: Längsdrehen – Material wird an der Außenseite abgetragen.";
+      learning.textContent="Nach dem Plandrehen fährt das Werkzeug an den Außendurchmesser. Anschließend bewegt es sich längs an der Oberfläche entlang und reduziert den Durchmesser.";
+      bar.style.width="78%";
+      visual.classList.remove("facing");
+      visual.classList.add("side-cut");
+      toolGraphic.style.transform="translate(0,-15px)";
+    },3900);
+
+    later(()=>{
+      status.textContent="Schritt 5: Der Drehmeißel fährt längs an der Werkstückseite entlang.";
+      learning.textContent="Der Werkzeugvorschub verläuft parallel zur Werkstückachse. Die Animation zeigt den Materialabtrag an der Außenseite und ein kleiner werdendes Werkstück.";
+      bar.style.width="90%";
+      toolGraphic.style.transform="translate(-115px,-15px)";
+    },5100);
+
+    later(()=>{
+      status.textContent="Schritt 6: Das Werkzeug zieht sich zurück.";
+      learning.textContent="Der Drehmeißel verlässt den Arbeitsbereich. Danach kann das Werkstück kontrolliert und vermessen werden.";
+      visual.classList.remove("side-cut","spinning");
       visual.classList.add("retracting");
-      toolGraphic.style.transform="translate(-145px,-62px)";
-    },4400);
+      toolGraphic.style.transform="translate(-115px,-58px)";
+      bar.style.width="96%";
+    },6500);
 
-    later(finish,5700);
+    later(finish,7700);
   });
   reset.addEventListener("click",function(){
     clearTimers();
