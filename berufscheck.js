@@ -39,27 +39,42 @@
     technik: ["technik", "maschinen", "elektronik"],
     handwerk: ["handwerk", "fertigung", "holz", "metall"],
     reparieren: ["reparieren", "probleme_loesen", "technik"],
+
     software: ["software", "programmieren", "computer", "digital"],
     programmieren: ["programmieren", "software", "digital"],
     computer: ["computer", "software", "digital"],
     digital: ["digital", "computer", "software"],
+
     menschen: ["menschen", "helfen", "kommunikation"],
     helfen: ["helfen", "menschen", "gesundheit"],
     gesundheit: ["gesundheit", "medizin", "helfen"],
     medizin: ["medizin", "gesundheit", "menschen"],
+
     design: ["design", "kreativ", "gestaltung", "grafik"],
     kreativ: ["kreativ", "design", "gestaltung"],
     fotografie: ["fotografie", "design", "medien"],
+
     natur: ["natur", "umwelt", "pflanzen", "tiere"],
     tiere: ["tiere", "natur"],
     pflanzen: ["pflanzen", "natur", "umwelt"],
+
     organisation: ["organisation", "planung", "struktur"],
     planung: ["planung", "organisation", "logik"],
     logik: ["logik", "probleme_loesen", "forschung"],
     forschung: ["forschung", "logik", "technik"],
     kommunikation: ["kommunikation", "menschen", "beratung"],
     entwicklung: ["entwicklung", "lernen", "digital", "technik"],
-    fahrzeuge: ["fahrzeuge", "technik", "reparieren"]
+    fahrzeuge: ["fahrzeuge", "technik", "reparieren"],
+
+    kochen: ["kochen", "lebensmittel", "gastronomie", "zutaten"],
+    backen: ["backen", "lebensmittel", "zutaten", "handwerk"],
+    lebensmittel: ["lebensmittel", "kochen", "backen", "zutaten"],
+    gastronomie: ["gastronomie", "service", "lebensmittel"],
+    zutaten: ["zutaten", "lebensmittel", "kochen", "backen"],
+    service: ["service", "gastronomie", "menschen", "kommunikation"],
+    verkauf: ["verkauf", "beratung", "kommunikation", "menschen"],
+    beratung: ["beratung", "verkauf", "kommunikation", "menschen"],
+    veranstaltungen: ["veranstaltungen", "organisation", "service", "gastronomie"]
   };
 
   const VALUE_ALIASES = {
