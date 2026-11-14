@@ -488,6 +488,7 @@
     elements.training.textContent = formatTraining(career.training);
 
     renderExtendedDetails(careerDetails);
+    renderAccessAndSalary(career, careerDetails);
     renderAdjacentCareers(career);
   }
 
