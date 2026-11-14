@@ -106,12 +106,15 @@
   const list=document.getElementById("preview-apprenticeships");list.replaceChildren();
   const entries=jobs.split(/\n|,/).map(x=>x.trim()).filter(Boolean);
   (entries.length?entries:["Ihre Ausbildungsberufe werden hier angezeigt."]).forEach(job=>{const li=document.createElement("li");li.textContent=job;list.appendChild(li);});
-  const jobList=document.getElementById("preview-jobs");jobList.replaceChildren();\n  const vacancies=openJobs.split(/\\n|,/).map(x=>x.trim()).filter(Boolean);\n  (vacancies.length?vacancies:["Hier erscheinen Ihre offenen Stellen."]).forEach(job=>{const li=document.createElement("li");li.textContent=job;jobList.appendChild(li);});\n  text("preview-media",media||"Hier können später Videos, Bilder und Einblicke in den Arbeitsalltag eingebunden werden.");
+  const jobList=document.getElementById("preview-jobs");jobList.replaceChildren();
+  const vacancies=openJobs.split(/\n|,/).map(x=>x.trim()).filter(Boolean);
+  (vacancies.length?vacancies:["Hier erscheinen Ihre offenen Stellen."]).forEach(job=>{const li=document.createElement("li");li.textContent=job;jobList.appendChild(li);});
+  text("preview-media",media||"Hier können später Videos, Bilder und Einblicke in den Arbeitsalltag eingebunden werden.");
   const link=document.getElementById("preview-website");link.textContent=website?"Website: "+website:"";
  }
  ids.forEach(id=>document.getElementById(id).addEventListener("input",update));
  document.getElementById("copy-draft").addEventListener("click",async()=>{
-  const draft=["UNTERNEHMENSPROFIL – ENTWURF","Unternehmen: "+(get("company-name")||"Nicht angegeben"),"Standort: "+(get("company-location")||"Nicht angegeben"),"Branche: "+(get("company-sector")||"Nicht angegeben"),"Website: "+(get("company-website")||"Nicht angegeben"),"Beschreibung: "+(get("company-description")||"Nicht angegeben"),"Ausbildungsberufe:\n"+(get("company-apprenticeships")||"Nicht angegeben"),"Mögliche Einblicke: "+(get("company-media")||"Nicht angegeben"),"","Unverbindlicher Entwurf – noch nicht an INDUSTRYAI übermittelt."].join("\n");
+  const draft=["UNTERNEHMENSPROFIL – ENTWURF","Unternehmen: "+(get("company-name")||"Nicht angegeben"),"Standort: "+(get("company-location")||"Nicht angegeben"),"Branche: "+(get("company-sector")||"Nicht angegeben"),"Website: "+(get("company-website")||"Nicht angegeben"),"Beschreibung: "+(get("company-description")||"Nicht angegeben"),"Ausbildungsberufe / Praktika:\n"+(get("company-apprenticeships")||"Nicht angegeben"),"Offene Stellen:\n"+(get("company-jobs")||"Nicht angegeben"),"Mögliche Einblicke: "+(get("company-media")||"Nicht angegeben"),"","Unverbindlicher Entwurf – noch nicht an INDUSTRYAI übermittelt."].join("\n");
   const status=document.getElementById("copy-status");
   try{await navigator.clipboard.writeText(draft);status.textContent="Der Entwurf wurde in die Zwischenablage kopiert.";}
   catch(e){status.textContent="Kopieren nicht möglich. Bitte markieren Sie die Vorschau und kopieren Sie den Text manuell.";}
