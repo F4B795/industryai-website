@@ -168,9 +168,13 @@
     }
 
     @media(max-width: 650px) {
-      header { padding: 18px 5%; }
-      .hero { padding-top: 55px; }
+      header { padding: 18px 5%; flex-wrap: wrap; gap: 12px; }
+      .back { white-space: nowrap; }
+      .hero { padding: 55px 20px 45px; }
+      .section { padding: 28px 20px 48px; }
       .content-panel { padding: 21px; }
+      .section h2 { font-size: clamp(23px, 6vw, 29px); }
+      .info-card { min-width: 0; overflow-wrap: anywhere; }
     }
   </style>
 </head>
