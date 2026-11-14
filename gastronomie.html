@@ -311,6 +311,94 @@
         padding-right: 18px;
       }
     }
+  
+    /* Einheitliches Farb- und Kartenkonzept der vier Campus-Welten */
+    :root {
+      --sector-accent: #f4a261;
+      --sector-soft: rgba(244,162,97,.13);
+      --sector-border: rgba(244,162,97,.48);
+      --sector-hover: #ffc18d;
+    }
+
+    .logo span, .back, .eyebrow, h1 span,
+    .job-number, .job-link .job-more, .job-link span.job-more,
+    .info-card h3, footer a, .challenge-tag,
+    .lab-link h3, .lab-link-button {
+      color: var(--sector-accent);
+    }
+
+    .hero-label, .challenge-tag {
+      border-color: var(--sector-border);
+      background: var(--sector-soft);
+    }
+
+    .job, .info-card {
+      border-color: var(--sector-border);
+      background: linear-gradient(145deg, var(--sector-soft), #0b1d2e 78%);
+    }
+
+    .job-icon, .info-icon {
+      color: var(--sector-accent);
+      border-color: var(--sector-border);
+      background: var(--sector-soft);
+    }
+
+    .job-link:hover .job,
+    .job-link:focus-visible .job {
+      border-color: var(--sector-accent);
+      box-shadow: 0 12px 30px var(--sector-soft);
+    }
+
+    .feature, .experience, .lab-link {
+      border-color: var(--sector-border);
+      background: linear-gradient(145deg, var(--sector-soft), #0b1d2e 78%);
+    }
+
+    .feature-visual {
+      border-color: var(--sector-border);
+      background: radial-gradient(circle, var(--sector-soft), #091b2b 72%);
+    }
+
+    .health-symbol {
+      color: var(--sector-accent);
+      border-color: var(--sector-accent);
+      box-shadow: 0 0 45px var(--sector-soft);
+    }
+
+    .screen {
+      border-color: var(--sector-accent);
+    }
+
+    .screen-dot, .code-line.highlight {
+      background: var(--sector-accent);
+    }
+
+    .scenario h3, #challenge-result, #scenario-result {
+      color: var(--sector-accent);
+    }
+
+    .answer:hover:not(:disabled), .answer-button:hover:not(:disabled) {
+      border-color: var(--sector-accent);
+      background: var(--sector-soft);
+    }
+
+    .reset-button, .restart-button, .lab-link-button {
+      background: var(--sector-accent);
+      color: #071524;
+    }
+
+    .reset-button:hover, .restart-button:hover, .lab-link-button:hover {
+      background: var(--sector-hover);
+    }
+
+    footer a:hover, .job-more:hover {
+      color: var(--sector-hover);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .job, .job-link .job { transition: none; }
+    }
+
   </style>
 </head>
 
