@@ -329,7 +329,7 @@
     payGrid.appendChild(entryCard);
 
     const experiencedCard = createElement("article", "info-card");
-    experiencedCard.appendChild(createElement("small", "", "FACHKRÄFTE – MEDIAN"));
+    experiencedCard.appendChild(createElement("small", "", "VOLLZEIT-FACHKRÄFTE – MEDIAN"));
     experiencedCard.appendChild(createElement("h3", "", pay.median ? formatEuro(pay.median) + " / Monat" : "Kein belastbarer Wert verfügbar"));
     experiencedCard.appendChild(createElement("p", "", pay.median
       ? "Median des monatlichen Bruttoentgelts bei Vollzeit in Deutschland. Das ist kein reines Gehalt von Berufserfahrenen, sondern der Median aller erfassten Altersgruppen."
