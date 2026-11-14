@@ -124,6 +124,62 @@
       border-color: #35d5e8;
     }
 
+
+    .job-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 54px;
+      height: 54px;
+      margin: 20px 0 16px;
+      border: 1px solid #a78bfa80;
+      border-radius: 12px;
+      color: #a78bfa;
+      background: rgba(167,139,250,.13);
+      font-size: 29px;
+      line-height: 1;
+    }
+
+    .job {
+      background: linear-gradient(145deg, rgba(167,139,250,.13), #0b1d2e 76%);
+      border-color: #a78bfa55;
+    }
+
+    .job-link:hover .job,
+    .job-link:focus-visible .job {
+      border-color: #a78bfa;
+      box-shadow: 0 12px 30px rgba(167,139,250,.13);
+    }
+
+    .job-number { color: #a78bfa; }
+
+    .job-more, .job-link { --sector-accent: #a78bfa; }
+    .job-more { color: #a78bfa; }
+
+    .info-card {
+      background: linear-gradient(145deg, rgba(167,139,250,.13), #0b1d2e 78%);
+      border-color: #a78bfa55;
+    }
+
+    .info-icon {
+      display: inline-flex;
+      width: 38px;
+      height: 38px;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 13px;
+      border: 1px solid #a78bfa80;
+      border-radius: 9px;
+      background: rgba(167,139,250,.13);
+      font-size: 21px;
+    }
+
+    .info-card h3 { color: #a78bfa; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .job, .job-link .job { transition: none; }
+    }
+
     .job-number {
       color: #35d5e8;
       font-size: 12px;
@@ -400,6 +456,7 @@
     <a class="job-link" href="beruf.html?id=fachinformatiker-anwendungsentwicklung">
       <article class="job">
         <div class="job-number">BERUF 01</div>
+        <div class="job-icon" aria-hidden="true">💻</div>
         <h3>Fachinformatiker für Anwendungsentwicklung</h3>
         <p class="muted">
           Entwickle Software, programmiere Anwendungen und verwandle
@@ -412,6 +469,7 @@
     <a class="job-link" href="beruf.html?id=fachinformatiker-systemintegration">
       <article class="job">
         <div class="job-number">BERUF 02</div>
+        <div class="job-icon" aria-hidden="true">🌐</div>
         <h3>Fachinformatiker für Systemintegration</h3>
         <p class="muted">
           Plane Netzwerke, richte Computersysteme ein und sorge dafür,
@@ -424,6 +482,7 @@
     <a class="job-link" href="beruf.html?id=mediengestalter">
       <article class="job">
         <div class="job-number">BERUF 03</div>
+        <div class="job-icon" aria-hidden="true">🎨</div>
         <h3>Mediengestalter</h3>
         <p class="muted">
           Gestalte digitale und gedruckte Medien, entwickle visuelle
@@ -436,6 +495,7 @@
     <a class="job-link" href="beruf.html?id=bauzeichner">
       <article class="job">
         <div class="job-number">BERUF 04</div>
+        <div class="job-icon" aria-hidden="true">📐</div>
         <h3>Bauzeichner</h3>
         <p class="muted">
           Erstelle technische Zeichnungen und digitale Baupläne
@@ -448,6 +508,7 @@
     <a class="job-link" href="beruf.html?id=gestalter-visuelles-marketing">
       <article class="job">
         <div class="job-number">BERUF 05</div>
+        <div class="job-icon" aria-hidden="true">🛍️</div>
         <h3>Gestalter für visuelles Marketing</h3>
         <p class="muted">
           Entwickle visuelle Präsentationen, gestalte Verkaufsflächen
@@ -553,6 +614,7 @@
   <div class="info-grid">
 
     <article class="info-card">
+      <div class="info-icon" aria-hidden="true">⌨️</div>
       <h3>Softwareentwicklung</h3>
       <p>
         Programme, Apps und Webseiten entwickeln.
@@ -561,6 +623,7 @@
     </article>
 
     <article class="info-card">
+      <div class="info-icon" aria-hidden="true">🔗</div>
       <h3>Netzwerke & Systeme</h3>
       <p>
         Computer verbinden, Server verwalten und IT-Systeme
@@ -569,6 +632,7 @@
     </article>
 
     <article class="info-card">
+      <div class="info-icon" aria-hidden="true">🖌️</div>
       <h3>Digitale Gestaltung</h3>
       <p>
         Bilder, Videos, Webseiten und visuelle Konzepte
@@ -577,6 +641,7 @@
     </article>
 
     <article class="info-card">
+      <div class="info-icon" aria-hidden="true">📐</div>
       <h3>Technische Planung</h3>
       <p>
         Digitale Zeichnungen, technische Modelle und
