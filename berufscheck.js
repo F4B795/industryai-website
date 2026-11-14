@@ -1,10 +1,16 @@
 
 /*
  * INDUSTRYAI – Berufscheck
- * Auswertungslogik Version 2.0
+ * Auswertungslogik Version 3.0
  *
- * Die Ergebnisse dienen der Berufsorientierung,
- * nicht der wissenschaftlichen Eignungsdiagnostik.
+ * Bewertungsgewichtung:
+ * Profil:             40 %
+ * Interessen:         30 %
+ * Arbeitsbedingungen: 20 %
+ * Werte:              10 %
+ *
+ * Die Ergebnisse dienen der Berufsorientierung.
+ * Sie sind keine wissenschaftliche Eignungsdiagnostik.
  */
 
 (function (global) {
@@ -17,6 +23,130 @@
     interests: 0.30,
     conditions: 0.20,
     values: 0.10
+  };
+
+  const DIMENSION_NAMES = {
+    T: "Technik und praktisches Arbeiten",
+    A: "Analytisches Denken",
+    S: "Soziale Fähigkeiten",
+    K: "Kommunikation",
+    C: "Kreativität",
+    O: "Organisation",
+    N: "Natur und Umwelt",
+    B: "Handeln und Situationen bewältigen",
+    L: "Lernen und Entwicklung"
+  };
+
+  const TAG_NAMES = {
+    maschinen: "Maschinen",
+    technik: "Technik",
+    fahrzeuge: "Fahrzeuge",
+    fahren: "Fahren",
+    software: "Software",
+    computer: "Computer",
+    digital: "Digitalisierung",
+    programmieren: "Programmieren",
+    design: "Design",
+    grafik: "Grafik",
+    gestaltung: "Gestaltung",
+    kreativ: "Kreativität",
+    fotografie: "Fotografie",
+    tiere: "Tiere",
+    natur: "Natur",
+    umwelt: "Umwelt",
+    pflanzen: "Pflanzen",
+    helfen: "Menschen helfen",
+    menschen: "Menschen",
+    gesundheit: "Gesundheit",
+    medizin: "Medizin",
+    organisation: "Organisation",
+    planung: "Planung",
+    logistik: "Logistik",
+    probleme_loesen: "Problemlösung",
+    logik: "Logik",
+    handwerk: "Handwerk",
+    fertigung: "Fertigung",
+    lernen: "Lernen",
+    entwicklung: "Entwicklung",
+    kommunikation: "Kommunikation",
+    veranstaltungen: "Veranstaltungen",
+    bewegung: "Bewegung",
+    forschung: "Forschung",
+    metall: "Metallbearbeitung",
+    praezision: "Präzision",
+    elektronik: "Elektronik",
+    automatisierung: "Automatisierung",
+    energie: "Energie",
+    klima: "Klimatechnik",
+    holz: "Holzbearbeitung",
+    netzwerke: "Netzwerke",
+    grafik: "Grafik",
+    medien: "Medien",
+    team: "Teamarbeit",
+    wirtschaft: "Wirtschaft",
+    zahlen: "Zahlen",
+    handel: "Handel",
+    beratung: "Beratung",
+    kinder: "Kinder",
+    pflege: "Pflege",
+    chemie: "Chemie",
+    analyse: "Analyse",
+    kochen: "Kochen",
+    lebensmittel: "Lebensmittel",
+    gastronomie: "Gastronomie",
+    musik: "Musik",
+    licht: "Lichttechnik",
+    ton: "Tontechnik",
+    waren: "Waren",
+    unterwegs: "Unterwegs sein",
+    dekoration: "Dekoration"
+  };
+
+  const TAG_ALIASES = {
+    maschinen: ["maschinen", "technik"],
+    technik: ["technik", "maschinen"],
+    fahrzeuge: ["fahrzeuge", "fahren"],
+    software: ["software", "computer", "digital"],
+    computer: ["computer", "software", "digital"],
+    digital: ["digital", "computer", "software"],
+    programmieren: ["programmieren", "software", "digital"],
+    design: ["design", "grafik", "gestaltung", "kreativ"],
+    kreativ: ["kreativ", "design", "gestaltung"],
+    fotografie: ["fotografie", "design", "medien"],
+    natur: ["natur", "umwelt", "landwirtschaft"],
+    pflanzen: ["pflanzen", "natur", "umwelt"],
+    helfen: ["helfen", "gesundheit", "menschen"],
+    menschen: ["menschen", "helfen"],
+    gesundheit: ["gesundheit", "medizin"],
+    medizin: ["medizin", "gesundheit"],
+    organisation: ["organisation", "planung", "logistik"],
+    planung: ["planung", "organisation"],
+    probleme_loesen: ["probleme_loesen", "logik"],
+    logik: ["logik", "probleme_loesen"],
+    handwerk: ["handwerk", "fertigung"],
+    lernen: ["lernen", "entwicklung"],
+    entwicklung: ["entwicklung", "lernen"],
+    kommunikation: ["kommunikation", "menschen"],
+    veranstaltungen: ["veranstaltungen", "team"]
+  };
+
+  const VALUE_NAMES = {
+    sicherheit: "Sicherheit",
+    einkommen: "Einkommen",
+    helfen: "Anderen helfen",
+    kreativitaet: "Kreativität",
+    selbststaendigkeit: "Selbstständigkeit",
+    teamwork: "Teamarbeit",
+    technik: "Technik",
+    nachhaltigkeit: "Nachhaltigkeit",
+    entwicklung: "Weiterentwicklung",
+    abwechslung: "Abwechslung",
+    qualitaet: "Qualität",
+    verantwortung: "Verantwortung",
+    struktur: "Struktur",
+    natur: "Natur",
+    tiere: "Tiere",
+    handwerk: "Handwerk"
   };
 
   const ACTIVITY_LEVEL = {
@@ -39,71 +169,28 @@
     high: 3
   };
 
-  // Synonyme gleichen unterschiedliche Begriffe
-  // zwischen Quiz und Berufedatenbank an.
-  const TAG_ALIASES = {
-    maschinen: ["maschinen", "technik"],
-    technik: ["technik", "maschinen"],
-    fahrzeuge: ["fahrzeuge", "fahren"],
-    software: ["software", "computer", "digital"],
-    computer: ["computer", "software", "digital"],
-    digital: ["digital", "computer", "software"],
-    programmieren: ["programmieren", "software", "digital"],
-    design: ["design", "grafik", "gestaltung", "kreativ"],
-    kreativ: ["kreativ", "design", "gestaltung"],
-    fotografie: ["fotografie", "design", "medien"],
-    tiere: ["tiere"],
-    natur: ["natur", "umwelt", "landwirtschaft"],
-    pflanzen: ["pflanzen", "natur", "umwelt"],
-    helfen: ["helfen", "gesundheit", "menschen"],
-    menschen: ["menschen", "helfen"],
-    gesundheit: ["gesundheit", "medizin"],
-    medizin: ["medizin", "gesundheit"],
-    organisation: ["organisation", "planung", "logistik"],
-    planung: ["planung", "organisation"],
-    probleme_loesen: ["probleme_loesen", "logik", "technik"],
-    logik: ["logik", "probleme_loesen"],
-    handwerk: ["handwerk", "fertigung", "technik"],
-    lernen: ["lernen", "entwicklung"],
-    entwicklung: ["entwicklung", "lernen"],
-    kommunikation: ["kommunikation", "menschen"],
-    veranstaltungen: ["veranstaltungen", "team"],
-    bewegung: ["bewegung", "sport"],
-    forschung: ["forschung", "logik", "technik"]
+  const RESPONSIBILITY_LEVEL = {
+    low: 1,
+    medium: 2,
+    high: 3
   };
 
-  const VALUE_ALIASES = {
-    technik: ["technik"],
-    qualitaet: ["qualitaet"],
-    entwicklung: ["entwicklung"],
-    teamwork: ["teamwork"],
-    team: ["teamwork"],
-    kreativitaet: ["kreativitaet"],
-    natur: ["natur"],
-    nachhaltigkeit: ["nachhaltigkeit"],
-    helfen: ["helfen"],
-    verantwortung: ["verantwortung"],
-    selbststaendigkeit: ["selbststaendigkeit"],
-    sicherheit: ["sicherheit"],
-    struktur: ["struktur"],
-    abwechslung: ["abwechslung"],
-    flexibilitaet: ["flexibilitaet"],
-    handwerk: ["handwerk"],
-    tiere: ["tiere"]
+  const PRECISION_LEVEL = {
+    low: 1,
+    medium: 2,
+    high: 3
   };
 
   function clamp(value, min, max) {
     return Math.max(min, Math.min(max, value));
   }
 
-  function asArray(value) {
-    return Array.isArray(value) ? value : [];
-  }
-
   function unique(values) {
     return [...new Set(
-      asArray(values).filter(
-        value => value !== null && value !== undefined && value !== ""
+      (Array.isArray(values) ? values : []).filter(
+        value => value !== null &&
+          value !== undefined &&
+          value !== ""
       )
     )];
   }
@@ -112,29 +199,19 @@
     const result = {};
 
     DIMENSIONS.forEach(key => {
-      const rawValue = profile ? profile[key] : null;
+      const value = profile ? profile[key] : null;
+      const numeric = Number(value);
 
-      if (
-        rawValue === null ||
-        rawValue === undefined ||
-        rawValue === ""
-      ) {
-        result[key] = null;
-        return;
-      }
-
-      const numericValue = Number(rawValue);
-
-      result[key] = Number.isFinite(numericValue)
-        ? clamp(numericValue, 0, 100)
-        : null;
+      result[key] =
+        value === null || value === undefined || value === "" ||
+        !Number.isFinite(numeric)
+          ? null
+          : clamp(numeric, 0, 100);
     });
 
     return result;
   }
 
-  // Vergleicht das persönliche Profil mit dem Berufsprofil.
-  // Die Berufsdatenbank verwendet Werte von 0 bis 4.
   function profileSimilarity(userProfile, careerProfile) {
     let difference = 0;
     let used = 0;
@@ -142,41 +219,34 @@
     DIMENSIONS.forEach(key => {
       const userValue = userProfile[key];
       const careerValue = careerProfile
-        ? careerProfile[key]
-        : null;
+        ? Number(careerProfile[key])
+        : NaN;
 
       if (
         userValue === null ||
-        careerValue === null ||
-        careerValue === undefined ||
-        careerValue === ""
+        !Number.isFinite(careerValue)
       ) {
         return;
       }
 
-      const numericCareerValue = Number(careerValue);
+      const normalizedCareer = clamp(careerValue, 0, 4) * 25;
 
-      if (!Number.isFinite(numericCareerValue)) return;
-
-      const normalizedCareerValue =
-        clamp(numericCareerValue, 0, 4) * 25;
-
-      difference += Math.abs(userValue - normalizedCareerValue);
+      difference += Math.abs(userValue - normalizedCareer);
       used++;
     });
 
-    return used > 0
+    return used
       ? clamp(100 - difference / used, 0, 100)
       : null;
   }
 
-  function expandTags(tags, aliases) {
+  function expandTags(tags) {
     const expanded = new Set();
 
     unique(tags).forEach(tag => {
       expanded.add(tag);
 
-      (aliases[tag] || []).forEach(alias => {
+      (TAG_ALIASES[tag] || []).forEach(alias => {
         expanded.add(alias);
       });
     });
@@ -184,22 +254,26 @@
     return expanded;
   }
 
-  // Vergleicht direkt die ausgewählten Interessen
-  // mit den Interessen-Tags eines Berufs.
   function interestSimilarity(selectedTags, career) {
-    const userTags = expandTags(selectedTags, TAG_ALIASES);
+    const userTags = expandTags(selectedTags);
     const careerTags = new Set(unique(career.interestTags));
 
-    if (!userTags.size) return null;
-    if (!careerTags.size) return null;
+    if (!userTags.size || !careerTags.size) {
+      return { score: null, matches: [] };
+    }
 
-    let matches = 0;
+    const matches = [...userTags].filter(
+      tag => careerTags.has(tag)
+    );
 
-    userTags.forEach(tag => {
-      if (careerTags.has(tag)) matches++;
-    });
-
-    return clamp((matches / userTags.size) * 100, 0, 100);
+    return {
+      score: clamp(
+        (matches.length / userTags.size) * 100,
+        0,
+        100
+      ),
+      matches
+    };
   }
 
   function levelSimilarity(userValue, careerValue, scale) {
@@ -216,8 +290,16 @@
       (Math.abs(userLevel - careerLevel) / (maxLevel - 1)) * 100;
   }
 
-  function normalizeLocation(value) {
-    const location = String(value).trim().toLowerCase();
+  function locationSimilarity(userLocations, careerLocations) {
+    const user = unique(userLocations).map(value =>
+      String(value).toLowerCase()
+    );
+
+    const career = unique(careerLocations).map(value =>
+      String(value).toLowerCase()
+    );
+
+    if (!user.length || !career.length) return null;
 
     const aliases = {
       "werkstatt": ["werkstatt", "produktion", "baustelle"],
@@ -229,105 +311,154 @@
       "küche": ["küche", "gastronomie", "gemeinschaftsverpflegung"]
     };
 
-    return aliases[location] || [location];
-  }
-
-  function locationSimilarity(userLocations, careerLocations) {
-    const user = unique(userLocations);
-    const career = unique(careerLocations).map(value =>
-      String(value).trim().toLowerCase()
-    );
-
-    if (!user.length) return null;
-    if (!career.length) return null;
-
     let matches = 0;
 
     user.forEach(value => {
-      const possibleMatches = normalizeLocation(value);
+      const possibilities = aliases[value] || [value];
 
-      if (possibleMatches.some(item => career.includes(item))) {
+      if (possibilities.some(item => career.includes(item))) {
         matches++;
       }
     });
 
-    return (matches / user.length) * 100;
+    return matches / user.length * 100;
   }
 
-  function conditionSimilarity(preferences, working) {
-    const checks = [];
+  function shiftSimilarity(userValue, careerValue) {
+    if (!userValue || !careerValue) return null;
 
-    const location = locationSimilarity(
-      preferences.locations,
-      working.locations
+    const compatibility = {
+      regular: {
+        rare: 100,
+        possible: 65,
+        common: 25
+      },
+      early: {
+        rare: null,
+        possible: null,
+        common: null
+      },
+      okay: {
+        rare: 80,
+        possible: 100,
+        common: 100
+      },
+      prefer: {
+        rare: 65,
+        possible: 85,
+        common: 100
+      }
+    };
+
+    return compatibility[userValue]?.[careerValue] ?? null;
+  }
+
+  function conditionDetails(preferences, working) {
+    const details = [];
+
+    function add(label, score) {
+      if (score !== null && Number.isFinite(score)) {
+        details.push({
+          label,
+          score: Math.round(clamp(score, 0, 100))
+        });
+      }
+    }
+
+    add(
+      "Arbeitsort",
+      locationSimilarity(preferences.locations, working.locations)
     );
 
-    if (location !== null) checks.push(location);
-
-    const physical = levelSimilarity(
-      preferences.physicalActivity,
-      working.physicalActivity,
-      ACTIVITY_LEVEL
+    add(
+      "Körperliche Aktivität",
+      levelSimilarity(
+        preferences.physicalActivity,
+        working.physicalActivity,
+        ACTIVITY_LEVEL
+      )
     );
 
-    if (physical !== null) checks.push(physical);
-
-    const people = levelSimilarity(
-      preferences.peopleContact,
-      working.peopleContact,
-      ACTIVITY_LEVEL
+    add(
+      "Kontakt mit Menschen",
+      levelSimilarity(
+        preferences.peopleContact,
+        working.peopleContact,
+        ACTIVITY_LEVEL
+      )
     );
 
-    if (people !== null) checks.push(people);
-
-    const team = levelSimilarity(
-      preferences.teamwork,
-      working.teamwork,
-      TEAM_LEVEL
+    add(
+      "Teamarbeit",
+      levelSimilarity(
+        preferences.teamwork,
+        working.teamwork,
+        TEAM_LEVEL
+      )
     );
 
-    if (team !== null) checks.push(team);
-
-    const routine = levelSimilarity(
-      preferences.routine,
-      working.routine,
-      ROUTINE_LEVEL
+    add(
+      "Routine und Abwechslung",
+      levelSimilarity(
+        preferences.routine,
+        working.routine,
+        ROUTINE_LEVEL
+      )
     );
 
-    if (routine !== null) checks.push(routine);
+    add(
+      "Genauigkeit und Präzision",
+      levelSimilarity(
+        preferences.precision,
+        working.precision,
+        PRECISION_LEVEL
+      )
+    );
 
-    return checks.length
-      ? checks.reduce((sum, value) => sum + value, 0) / checks.length
+    add(
+      "Verantwortung",
+      levelSimilarity(
+        preferences.responsibility,
+        working.responsibility,
+        RESPONSIBILITY_LEVEL
+      )
+    );
+
+    add(
+      "Arbeitszeiten",
+      shiftSimilarity(
+        preferences.shiftWork,
+        working.shiftWork
+      )
+    );
+
+    return details;
+  }
+
+  function average(values) {
+    return values.length
+      ? values.reduce((sum, value) => sum + value, 0) / values.length
       : null;
   }
 
   function valueSimilarity(selectedValues, career) {
-    const values = unique(selectedValues);
+    const selected = unique(selectedValues);
+    const careerValues = new Set(unique(career.valuesTags));
 
-    if (!values.length) return null;
+    if (!selected.length || !careerValues.size) {
+      return { score: null, matches: [] };
+    }
 
-    const careerValues = unique(career.valuesTags);
-
-    if (!careerValues.length) return null;
-
-    const expanded = expandTags(values, VALUE_ALIASES);
-
-    let matches = 0;
-
-    expanded.forEach(value => {
-      if (careerValues.includes(value)) matches++;
-    });
-
-    return clamp(
-      (matches / expanded.size) * 100,
-      0,
-      100
+    const matches = selected.filter(value =>
+      careerValues.has(value)
     );
+
+    return {
+      score: matches.length / selected.length * 100,
+      matches
+    };
   }
 
-  // Fehlende Angaben werden nicht als null Prozent gewertet.
-  // Die übrigen verfügbaren Bereiche behalten ihre Gewichtung
-  // und werden auf 100 Prozent hochgerechnet.
   function weightedTotal(parts) {
     let numerator = 0;
     let denominator = 0;
@@ -341,7 +472,7 @@
       }
     });
 
-    return denominator > 0
+    return denominator
       ? Math.round(numerator / denominator)
       : null;
   }
@@ -354,7 +485,7 @@
     if (avoid.has("schichtarbeit")) {
       if (work.shiftWork === "common") {
         notes.push(
-          "In diesem Beruf sind Schicht- oder unregelmäßige Arbeitszeiten häufig."
+          "Schicht- oder unregelmäßige Arbeitszeiten sind in diesem Beruf häufig."
         );
       } else if (work.shiftWork === "possible") {
         notes.push(
@@ -399,25 +530,19 @@
       )
     ) {
       notes.push(
-        "In diesem Beruf kann ein großer Teil der Arbeit am Bildschirm stattfinden."
+        "Ein Teil der Arbeit kann am Bildschirm stattfinden."
       );
     }
 
-    if (
-      avoid.has("routine") &&
-      work.routine === "high"
-    ) {
+    if (avoid.has("routine") && work.routine === "high") {
       notes.push(
         "In diesem Beruf gibt es regelmäßig wiederkehrende Arbeitsabläufe."
       );
     }
 
-    if (
-      avoid.has("wechsel") &&
-      work.routine === "low"
-    ) {
+    if (avoid.has("wechsel") && work.routine === "low") {
       notes.push(
-        "Der Arbeitsalltag kann häufig wechselnde Aufgaben und Situationen enthalten."
+        "Der Arbeitsalltag kann häufig wechselnde Aufgaben enthalten."
       );
     }
 
@@ -434,11 +559,81 @@
       );
     }
 
+    if (
+      avoid.has("verantwortung") &&
+      work.responsibility === "high"
+    ) {
+      notes.push(
+        "Der Beruf kann ein hohes Maß an Verantwortung beinhalten."
+      );
+    }
+
+    if (avoid.has("krankheit") && career.category === "Gesundheit & Soziales") {
+      notes.push(
+        "Der Beruf kann Kontakt mit Krankheit, Verletzungen oder Pflegebedürftigkeit beinhalten."
+      );
+    }
+
     return notes;
   }
 
-  function evaluate(answers, database, options) {
-    const input = answers || {};
+  function buildReasons(career, profile, interestResult, valueResult, conditionResult) {
+    const reasons = [];
+
+    const profileMatches = DIMENSIONS
+      .map(key => ({
+        key,
+        user: profile[key],
+        career: Number(career.profile?.[key] ?? 0) * 25
+      }))
+      .filter(item =>
+        item.user !== null &&
+        item.user >= 60 &&
+        item.career >= 60
+      )
+      .sort((a, b) =>
+        (b.user + b.career) - (a.user + a.career)
+      );
+
+    profileMatches.slice(0, 3).forEach(item => {
+      reasons.push(
+        "Deine Antworten zeigen eine Stärke bei " +
+        DIMENSION_NAMES[item.key].toLowerCase() +
+        ", die in diesem Beruf ebenfalls gefragt ist."
+      );
+    });
+
+    interestResult.matches.slice(0, 4).forEach(tag => {
+      reasons.push(
+        "Dein Interesse an " +
+        (TAG_NAMES[tag] || tag.replaceAll("_", " ")) +
+        " passt zu diesem Beruf."
+      );
+    });
+
+    valueResult.matches.slice(0, 2).forEach(value => {
+      reasons.push(
+        "Ein von dir genannter Berufswert ist hier wiederzufinden: " +
+        (VALUE_NAMES[value] || value) + "."
+      );
+    });
+
+    conditionResult
+      .filter(item => item.score >= 75)
+      .slice(0, 2)
+      .forEach(item => {
+        reasons.push(
+          "Deine Vorstellung von " +
+          item.label.toLowerCase() +
+          " passt gut zu den typischen Arbeitsbedingungen."
+        );
+      });
+
+    return [...new Set(reasons)].slice(0, 6);
+  }
+
+  function evaluate(input, database, options) {
+    input = input || {};
 
     const careers = database && Array.isArray(database.careers)
       ? database.careers
@@ -446,17 +641,30 @@
 
     const profile = normalizedProfile(input.profile || {});
     const preferences = input.preferences || {};
-
     const selectedInterests = unique(input.interests);
     const selectedValues = unique(
       preferences.values || input.values
     );
-
     const desired = new Set(unique(input.desiredCareers));
     const avoidances = unique(input.avoidances);
 
     const results = careers.map(career => {
       const working = career.workingConditions || {};
+
+      const interestResult = interestSimilarity(
+        selectedInterests,
+        career
+      );
+
+      const valueResult = valueSimilarity(
+        selectedValues,
+        career
+      );
+
+      const conditionResult = conditionDetails(
+        preferences,
+        working
+      );
 
       const parts = {
         profile: profileSimilarity(
@@ -464,27 +672,24 @@
           career.profile || {}
         ),
 
-        interests: interestSimilarity(
-          selectedInterests,
-          career
+        interests: interestResult.score,
+
+        conditions: average(
+          conditionResult.map(item => item.score)
         ),
 
-        conditions: conditionSimilarity(
-          preferences,
-          working
-        ),
-
-        values: valueSimilarity(
-          selectedValues,
-          career
-        )
+        values: valueResult.score
       };
+
+      const conflictNotes = makeConflictNotes(
+        career,
+        avoidances
+      );
 
       return {
         id: career.id,
         name: career.name,
         category: career.category,
-
         match: weightedTotal(parts),
 
         components: Object.fromEntries(
@@ -494,12 +699,21 @@
           ])
         ),
 
-        requestedByUser: desired.has(career.id),
+        componentDetails: conditionResult,
 
-        conflictNotes: makeConflictNotes(
+        reasons: buildReasons(
           career,
-          avoidances
+          profile,
+          interestResult,
+          valueResult,
+          conditionResult
         ),
+
+        matchedInterests: interestResult.matches,
+        matchedValues: valueResult.matches,
+
+        requestedByUser: desired.has(career.id),
+        conflictNotes,
 
         training: career.training,
         activities: career.activities || [],
@@ -520,17 +734,15 @@
         ? Math.max(1, options.limit)
         : 5;
 
-    return {
-      version: "2.0.0",
+    const output = {
+      version: "3.0.0",
 
       disclaimer:
         "Die Vorschläge dienen der Berufsorientierung. " +
         "Sie sind keine Eignungsdiagnose und sagen nicht voraus, " +
         "ob jemand einen Beruf erfolgreich ausüben wird.",
 
-      completedProfileDimensions: DIMENSIONS.filter(
-        key => profile[key] !== null
-      ),
+      weights: Object.assign({}, WEIGHTS),
 
       selfAssessment: input.selfAssessment || null,
 
@@ -540,6 +752,178 @@
         item => item.requestedByUser
       )
     };
+
+    lastEvaluation = output;
+
+    return output;
+  }
+
+  // ----------------------------------------------------
+  // ERGEBNISDETAILS AUTOMATISCH IN DIE ERGEBNISKARTEN
+  // EINFÜGEN – career-quiz.js MUSS NICHT GEÄNDERT WERDEN.
+  // ----------------------------------------------------
+
+  let lastEvaluation = null;
+
+  function createElement(tag, className, text) {
+    const element = document.createElement(tag);
+
+    if (className) element.className = className;
+    if (text !== undefined) element.textContent = text;
+
+    return element;
+  }
+
+  function addScoreBar(parent, label, score) {
+    if (score === null || score === undefined) return;
+
+    const item = createElement("div", "career-score-detail");
+
+    const line = createElement("div", "career-score-line");
+    const name = createElement("span", "", label);
+    const value = createElement("strong", "", score + " %");
+
+    line.appendChild(name);
+    line.appendChild(value);
+
+    const track = createElement("div", "career-score-track");
+    const fill = createElement("div", "career-score-fill");
+
+    fill.style.width = clamp(score, 0, 100) + "%";
+
+    track.appendChild(fill);
+    item.appendChild(line);
+    item.appendChild(track);
+    parent.appendChild(item);
+  }
+
+  function enrichResultCards() {
+    if (!lastEvaluation || !lastEvaluation.results) return;
+
+    const container = document.getElementById("career-results");
+    if (!container) return;
+
+    const cards = container.querySelectorAll(
+      ".career-result-card"
+    );
+
+    cards.forEach((card, index) => {
+      if (card.dataset.detailsAdded === "true") return;
+
+      const career = lastEvaluation.results[index];
+      if (!career) return;
+
+      card.dataset.detailsAdded = "true";
+
+      const details = createElement(
+        "section",
+        "career-match-details"
+      );
+
+      const heading = createElement(
+        "h4",
+        "",
+        "Warum passt dieser Beruf zu deinen Antworten?"
+      );
+
+      details.appendChild(heading);
+
+      if (career.reasons.length) {
+        const reasonList = createElement("ul", "career-match-reasons");
+
+        career.reasons.forEach(reason => {
+          reasonList.appendChild(
+            createElement("li", "", reason)
+          );
+        });
+
+        details.appendChild(reasonList);
+      } else {
+        details.appendChild(
+          createElement(
+            "p",
+            "",
+            "Für diesen Beruf liegen noch nicht genügend übereinstimmende Angaben für eine konkrete Begründung vor."
+          )
+        );
+      }
+
+      const scoreHeading = createElement(
+        "h4",
+        "",
+        "Zusammensetzung deiner Übereinstimmung"
+      );
+
+      details.appendChild(scoreHeading);
+
+      const labels = {
+        profile: "Persönliches Profil (40 %)",
+        interests: "Interessen (30 %)",
+        conditions: "Arbeitsbedingungen (20 %)",
+        values: "Berufliche Werte (10 %)"
+      };
+
+      Object.entries(labels).forEach(([key, label]) => {
+        addScoreBar(
+          details,
+          label,
+          career.components[key]
+        );
+      });
+
+      if (career.componentDetails.length) {
+        const conditionHeading = createElement(
+          "h4",
+          "",
+          "Einzelne Arbeitsbedingungen"
+        );
+
+        details.appendChild(conditionHeading);
+
+        career.componentDetails.forEach(item => {
+          addScoreBar(details, item.label, item.score);
+        });
+      }
+
+      if (career.conflictNotes.length) {
+        const conflictHeading = createElement(
+          "h4",
+          "",
+          "Das solltest du bei diesem Beruf beachten"
+        );
+
+        details.appendChild(conflictHeading);
+
+        const conflictList = createElement("ul");
+
+        career.conflictNotes.forEach(note => {
+          conflictList.appendChild(
+            createElement("li", "", note)
+          );
+        });
+
+        details.appendChild(conflictList);
+      }
+
+      card.appendChild(details);
+    });
+  }
+
+  function installResultObserver() {
+    const container = document.getElementById("career-results");
+
+    if (!container || typeof MutationObserver === "undefined") {
+      return;
+    }
+
+    const observer = new MutationObserver(() => {
+      enrichResultCards();
+    });
+
+    observer.observe(container, {
+      childList: true,
+      subtree: true
+    });
   }
 
   global.IndustryAICareerCheck = {
@@ -547,5 +931,7 @@
     dimensions: DIMENSIONS.slice(),
     weights: Object.assign({}, WEIGHTS)
   };
+
+  installResultObserver();
 
 })(window);
