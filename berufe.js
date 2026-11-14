@@ -270,7 +270,7 @@ window.IndustryAICareers = {
       dayToDay: "Du sorgst dafür, dass Computer, Netzwerke und IT-Dienste funktionieren.",
       interestTags: ["computer","netzwerke","digital","technik","probleme_loesen"],
       valuesTags: ["technik","verantwortung","teamwork"]
-    }
+    },
 
 
     {
