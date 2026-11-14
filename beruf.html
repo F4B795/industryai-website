@@ -1,0 +1,252 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Entdecke Ausbildungsberufe, Tätigkeiten und berufliche Perspektiven auf dem INDUSTRYAI Campus.">
+  <title>Beruf entdecken | INDUSTRYAI Campus</title>
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: #071524;
+      color: #f2f7fc;
+      font-family: Arial, sans-serif;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    header {
+      padding: 20px 7%;
+      border-bottom: 1px solid #20394e;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-weight: bold;
+      letter-spacing: 2px;
+      font-size: 19px;
+    }
+
+    .logo span, .accent { color: #42d8ed; }
+
+    .back { color: #42d8ed; font-size: 14px; }
+
+    .hero {
+      max-width: 1100px;
+      margin: auto;
+      padding: 85px 25px 65px;
+    }
+
+    .eyebrow {
+      color: #42d8ed;
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 3px;
+    }
+
+    h1 {
+      font-size: clamp(36px, 6vw, 65px);
+      line-height: 1.1;
+      margin: 20px 0;
+    }
+
+    .intro {
+      max-width: 760px;
+      color: #b7c8d8;
+      line-height: 1.8;
+      font-size: 17px;
+    }
+
+    .section {
+      max-width: 1100px;
+      margin: auto;
+      padding: 35px 25px 65px;
+    }
+
+    .section h2 {
+      font-size: 29px;
+      margin-bottom: 14px;
+    }
+
+    .muted {
+      color: #aebfd0;
+      line-height: 1.8;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 16px;
+      margin-top: 25px;
+    }
+
+    .info-card {
+      padding: 23px;
+      border: 1px solid #294960;
+      border-radius: 12px;
+      background: linear-gradient(145deg, #122b40, #0b1d2e);
+    }
+
+    .info-card small {
+      color: #42d8ed;
+      letter-spacing: 1px;
+      font-weight: bold;
+    }
+
+    .info-card h3 { margin: 12px 0; }
+
+    .info-card p {
+      color: #b7c8d8;
+      line-height: 1.6;
+      margin-bottom: 0;
+    }
+
+    .content-panel {
+      padding: 30px;
+      border: 1px solid #294960;
+      border-radius: 13px;
+      background: #10243a;
+      margin-top: 20px;
+    }
+
+    .content-panel ul {
+      color: #c5d5e3;
+      line-height: 2;
+      padding-left: 22px;
+    }
+
+    .campus-cta {
+      text-align: center;
+      padding: 55px 25px;
+      background: linear-gradient(145deg, #102b40, #071524);
+      border-top: 1px solid #20394e;
+    }
+
+    .campus-cta p {
+      color: #b7c8d8;
+      line-height: 1.7;
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 14px 22px;
+      background: #42d8ed;
+      color: #071524;
+      border-radius: 7px;
+      font-weight: bold;
+    }
+
+    .button:hover { background: #ffffff; }
+
+    .error {
+      max-width: 800px;
+      margin: 70px auto;
+      padding: 25px;
+      color: #ffcf8a;
+      border: 1px solid #805c31;
+      border-radius: 10px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      border-top: 1px solid #20394e;
+      color: #91a7ba;
+      font-size: 13px;
+    }
+
+    @media(max-width: 650px) {
+      header { padding: 18px 5%; }
+      .hero { padding-top: 55px; }
+      .content-panel { padding: 21px; }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <a href="index.html" class="logo">INDUSTRY<span>AI</span></a>
+  <a href="index.html#campus" class="back">← Zurück zum Campus</a>
+</header>
+
+<main id="career-campus">
+
+  <section class="hero">
+    <div class="eyebrow">INDUSTRYAI · VIRTUAL CAREER CAMPUS</div>
+    <h1 id="career-title">Beruf wird geladen...</h1>
+    <p class="intro" id="career-intro">
+      Entdecke Tätigkeiten, Arbeitsalltag und Perspektiven.
+    </p>
+  </section>
+
+  <section class="section">
+    <div class="eyebrow">DEIN BERUF IM ÜBERBLICK</div>
+    <h2>Das erwartet dich</h2>
+    <div class="info-grid" id="career-overview"></div>
+  </section>
+
+  <section class="section">
+    <div class="eyebrow">DER ARBEITSALLTAG</div>
+    <h2>Was machst du in diesem Beruf?</h2>
+    <div class="content-panel">
+      <p class="muted" id="career-day"></p>
+      <ul id="career-activities"></ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="eyebrow">DEIN ARBEITSUMFELD</div>
+    <h2>Wie sieht die Arbeit aus?</h2>
+    <div class="info-grid" id="career-conditions"></div>
+  </section>
+
+  <section class="section">
+    <div class="eyebrow">DEINE ENTWICKLUNG</div>
+    <h2>Ausbildung und Perspektiven</h2>
+    <div class="content-panel">
+      <p class="muted" id="career-training"></p>
+      <p class="muted">
+        Je nach Betrieb, persönlicher Entwicklung und Weiterbildung
+        können sich unterschiedliche berufliche Wege eröffnen.
+      </p>
+    </div>
+  </section>
+
+  <section class="campus-cta">
+    <div class="eyebrow">DEIN NÄCHSTER SCHRITT</div>
+    <h2>Passt dieser Beruf zu deinen Interessen?</h2>
+    <p>
+      Finde mit dem INDUSTRYAI Berufscheck heraus,
+      welche Berufsfelder zu deinen Vorstellungen passen könnten.
+    </p>
+    <a href="index.html#berufscheck" class="button">
+      Berufscheck starten
+    </a>
+  </section>
+
+</main>
+
+<div id="career-error" class="error" hidden>
+  Dieser Beruf konnte nicht gefunden werden.
+  Bitte kehre zum Campus zurück und wähle einen Beruf aus.
+</div>
+
+<footer>
+  INDUSTRYAI · Die Zukunft der Berufsorientierung
+  <br><br>
+  <a href="index.html">Zurück zur Startseite</a>
+</footer>
+
+<script src="berufe.js"></script>
+<script src="beruf-campus.js"></script>
+
+</body>
+</html>
