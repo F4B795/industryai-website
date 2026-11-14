@@ -1396,7 +1396,12 @@ section.hero.hero-modern .hero-visual svg {
 
 .ia-campus-rooms-heading h3 {
   color: #f2f7fb;
-  font-size: 28px;
+  font-family: Manrope, sans-serif;
+  font-size: clamp(32px, 3.8vw, 40px);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -1px;
+  text-wrap: balance;
   margin: 0 0 12px;
 }
 
@@ -1477,6 +1482,13 @@ section.hero.hero-modern .hero-visual svg {
 
   .ia-campus-rooms {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .ia-campus-rooms-heading h3 {
+    font-size: clamp(27px, 7vw, 32px);
+    line-height: 1.2;
   }
 }
 
