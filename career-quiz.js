@@ -504,12 +504,11 @@
         { text: "Koch/Köchin", value: "koch" },
         { text: "Einen anderen Beruf", value: "anderer-beruf" },
         { text: "Ich habe noch keine Vorstellung", value: "offen" }
-      ]
-    },
-
+           ]
+    }
+  ];
 
   const answers = {};
-
   let currentQuestion = 0;
 
   const startButton = document.getElementById(
