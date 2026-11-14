@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Entdecke IT-Berufe, Programmierung, Netzwerke und digitale Gestaltung im INDUSTRYAI Campus.">
+  <title>IT & Digitalisierung | INDUSTRYAI</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #071524;
+      color: #f2f7fc;
+      font-family: Arial, sans-serif;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    header {
+      padding: 22px 8%;
+      border-bottom: 1px solid #20394e;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 19px;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+
+    .logo span {
+      color: #35d5e8;
+    }
+
+    .back {
+      color: #35d5e8;
+      font-size: 14px;
+    }
+
+    .hero {
+      max-width: 1100px;
+      margin: auto;
+      padding: 90px 25px 75px;
+      text-align: center;
+    }
+
+    .eyebrow {
+      color: #35d5e8;
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 3px;
+    }
+
+    h1 {
+      font-size: clamp(38px, 6vw, 66px);
+      line-height: 1.1;
+      margin: 22px 0;
+    }
+
+    h1 span {
+      color: #35d5e8;
+    }
+
+    .intro {
+      max-width: 730px;
+      margin: auto;
+      color: #b7c8d8;
+      line-height: 1.8;
+      font-size: 16px;
+    }
+
+    .section {
+      max-width: 1100px;
+      margin: auto;
+      padding: 35px 25px 75px;
+    }
+
+    .section-title {
+      font-size: 30px;
+      margin: 12px 0;
+    }
+
+    .muted {
+      color: #aebfd0;
+      line-height: 1.7;
+    }
+
+    .jobs {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 20px;
+      margin-top: 32px;
+    }
+
+    .job-link {
+      display: block;
+      height: 100%;
+      border-radius: 13px;
+      outline-offset: 4px;
+    }
+
+    .job {
+      height: 100%;
+      min-height: 245px;
+      padding: 25px;
+      border-radius: 13px;
+      border: 1px solid #294960;
+      background: linear-gradient(145deg, #122b40, #0b1d2e);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .job-link:hover .job,
+    .job-link:focus-visible .job {
+      transform: translateY(-5px);
+      border-color: #35d5e8;
+    }
+
+    .job-number {
+      color: #35d5e8;
+      font-size: 12px;
+      letter-spacing: 2px;
+    }
+
+    .job h3 {
+      margin: 18px 0 10px;
+      font-size: 20px;
+    }
+
+    .job p {
+      font-size: 14px;
+    }
+
+    .job-more {
+      display: inline-block;
+      margin-top: 14px;
+      color: #35d5e8;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .feature {
+      margin-top: 25px;
+      padding: 35px;
+      border-radius: 15px;
+      border: 1px solid #28617a;
+      background: linear-gradient(145deg, #122b40, #0b1d2e);
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 35px;
+      align-items: center;
+    }
+
+    .feature-visual {
+      min-height: 260px;
+      border-radius: 12px;
+      border: 1px solid #28617a;
+      background: radial-gradient(circle, #16435b, #091b2b 70%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .screen {
+      width: 100%;
+      max-width: 390px;
+      background: #071524;
+      border: 2px solid #55758b;
+      border-radius: 10px;
+      padding: 16px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    }
+
+    .screen-top {
+      display: flex;
+      gap: 6px;
+      padding-bottom: 13px;
+      border-bottom: 1px solid #294960;
+    }
+
+    .screen-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #35d5e8;
+    }
+
+    .code-line {
+      height: 8px;
+      border-radius: 5px;
+      margin-top: 13px;
+      background: #294960;
+    }
+
+    .code-line.short {
+      width: 45%;
+    }
+
+    .code-line.medium {
+      width: 70%;
+    }
+
+    .code-line.long {
+      width: 95%;
+    }
+
+    .code-line.highlight {
+      background: #35d5e8;
+      width: 60%;
+    }
+
+    .challenge {
+      margin-top: 25px;
+      padding: 30px;
+      border-radius: 12px;
+      background: #091b2b;
+      border: 1px solid #294960;
+    }
+
+    .challenge h3 {
+      margin-top: 0;
+    }
+
+    .question {
+      color: #d8e6ee;
+      line-height: 1.7;
+    }
+
+    .answers {
+      display: grid;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .answer {
+      width: 100%;
+      margin: 0;
+      padding: 14px 16px;
+      text-align: left;
+      color: #eaf4fa;
+      background: #122b40;
+      border: 1px solid #36566d;
+      border-radius: 8px;
+      font-weight: normal;
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .answer:hover:not(:disabled) {
+      background: #193c55;
+      border-color: #35d5e8;
+    }
+
+    .answer:disabled {
+      cursor: default;
+      opacity: 0.85;
+    }
+
+    .answer.correct {
+      border-color: #39c98a;
+      background: #123a34;
+    }
+
+    .answer.wrong {
+      border-color: #e27a7a;
+      background: #42252c;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+    }
+
+    #challenge-result {
+      min-height: 28px;
+      margin-top: 18px;
+      color: #35d5e8;
+      line-height: 1.6;
+    }
+
+    .reset-button {
+      margin-top: 12px;
+      padding: 12px 17px;
+      border: 0;
+      border-radius: 7px;
+      background: #35d5e8;
+      color: #061522;
+      font-weight: bold;
+    }
+
+    .reset-button:hover {
+      background: #75e7f2;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+      margin-top: 30px;
+    }
+
+    .info-card {
+      padding: 23px;
+      border-radius: 12px;
+      border: 1px solid #294960;
+      background: #0b1d2e;
+    }
+
+    .info-card h3 {
+      color: #35d5e8;
+      margin-top: 0;
+    }
+
+    .info-card p {
+      color: #aebfd0;
+      line-height: 1.7;
+      font-size: 14px;
+    }
+
+    footer {
+      padding: 30px;
+      text-align: center;
+      border-top: 1px solid #20394e;
+      color: #91a7ba;
+      font-size: 13px;
+    }
+
+    @media(max-width: 700px) {
+      header {
+        padding: 18px 5%;
+      }
+
+      .hero {
+        padding: 65px 22px 50px;
+      }
+
+      .feature {
+        padding: 22px;
+      }
+
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section-title {
+        font-size: 26px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">INDUSTRY <span>AI</span></div>
+  <a class="back" href="index.html">← Zurück zum Campus</a>
+</header>
+
+<section class="hero">
+  <div class="eyebrow">INDUSTRYAI CAMPUS · WELT 02</div>
+
+  <h1>IT & <span>Digitalisierung.</span></h1>
+
+  <p class="intro">
+    Entdecke die Welt der Software, Computer und digitalen Technologien.
+    Lerne, wie Programme entstehen, Netzwerke funktionieren und kreative
+    Ideen zu digitalen Lösungen werden.
+  </p>
+</section>
+
+<section class="section">
+  <div class="eyebrow">DEINE MÖGLICHKEITEN</div>
+
+  <h2 class="section-title">Entdecke digitale Berufe</h2>
+
+  <p class="muted">
+    Ob Programmierung, IT-Systeme oder Gestaltung:
+    In der digitalen Arbeitswelt entstehen ständig neue Möglichkeiten.
+  </p>
+
+  <div class="jobs">
+
+    <a class="job-link" href="beruf.html?id=fachinformatiker-anwendungsentwicklung">
+      <article class="job">
+        <div class="job-number">BERUF 01</div>
+        <h3>Fachinformatiker für Anwendungsentwicklung</h3>
+        <p class="muted">
+          Entwickle Software, programmiere Anwendungen und verwandle
+          Ideen in funktionierende digitale Produkte.
+        </p>
+        <span class="job-more">Berufsprofil entdecken →</span>
+      </article>
+    </a>
+
+    <a class="job-link" href="beruf.html?id=fachinformatiker-systemintegration">
+      <article class="job">
+        <div class="job-number">BERUF 02</div>
+        <h3>Fachinformatiker für Systemintegration</h3>
+        <p class="muted">
+          Plane Netzwerke, richte Computersysteme ein und sorge dafür,
+          dass die IT-Infrastruktur zuverlässig funktioniert.
+        </p>
+        <span class="job-more">Berufsprofil entdecken →</span>
+      </article>
+    </a>
+
+    <a class="job-link" href="beruf.html?id=mediengestalter">
+      <article class="job">
+        <div class="job-number">BERUF 03</div>
+        <h3>Mediengestalter</h3>
+        <p class="muted">
+          Gestalte digitale und gedruckte Medien, entwickle visuelle
+          Konzepte und setze kreative Ideen um.
+        </p>
+        <span class="job-more">Berufsprofil entdecken →</span>
+      </article>
+    </a>
+
+    <a class="job-link" href="beruf.html?id=bauzeichner">
+      <article class="job">
+        <div class="job-number">BERUF 04</div>
+        <h3>Bauzeichner</h3>
+        <p class="muted">
+          Erstelle technische Zeichnungen und digitale Baupläne
+          für Gebäude und technische Projekte.
+        </p>
+        <span class="job-more">Berufsprofil entdecken →</span>
+      </article>
+    </a>
+
+    <a class="job-link" href="beruf.html?id=gestalter-visuelles-marketing">
+      <article class="job">
+        <div class="job-number">BERUF 05</div>
+        <h3>Gestalter für visuelles Marketing</h3>
+        <p class="muted">
+          Entwickle visuelle Präsentationen, gestalte Verkaufsflächen
+          und bringe Marken kreativ zur Geltung.
+        </p>
+        <span class="job-more">Berufsprofil entdecken →</span>
+      </article>
+    </a>
+
+  </div>
+</section>
+
+<section class="section">
+  <div class="eyebrow">PROBIERE ES AUS</div>
+
+  <h2 class="section-title">Dein erstes kleines Programm</h2>
+
+  <p class="muted">
+    Ein Fachinformatiker für Anwendungsentwicklung muss Probleme erkennen
+    und logisch lösen. Probiere eine kleine Aufgabe selbst aus.
+  </p>
+
+  <div class="feature">
+    <div class="feature-grid">
+
+      <div>
+        <h2>Wie denkt ein Programmierer?</h2>
+
+        <p class="muted">
+          Computer führen Anweisungen Schritt für Schritt aus.
+          Schon eine kleine falsche Bedingung kann dazu führen,
+          dass ein Programm nicht wie gewünscht funktioniert.
+        </p>
+
+        <p class="muted">
+          In dieser Mini-Aufgabe soll ein Programm prüfen,
+          ob eine Person mindestens 18 Jahre alt ist.
+        </p>
+      </div>
+
+      <div class="feature-visual">
+        <div class="screen">
+          <div class="screen-top">
+            <span class="screen-dot"></span>
+            <span class="screen-dot"></span>
+            <span class="screen-dot"></span>
+          </div>
+
+          <div class="code-line short"></div>
+          <div class="code-line medium"></div>
+          <div class="code-line highlight"></div>
+          <div class="code-line long"></div>
+          <div class="code-line medium"></div>
+          <div class="code-line short"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="challenge">
+      <h3>Die Programmier-Challenge</h3>
+
+      <p class="question">
+        Welche Bedingung ist richtig, wenn ein Programm prüfen soll,
+        ob eine Person mindestens 18 Jahre alt ist?
+      </p>
+
+      <div class="answers">
+        <button class="answer" type="button" data-answer="wrong">
+          A: alter = 18
+        </button>
+
+        <button class="answer" type="button" data-answer="correct">
+          B: alter >= 18
+        </button>
+
+        <button class="answer" type="button" data-answer="wrong">
+          C: alter < 18
+        </button>
+      </div>
+
+      <div id="challenge-result" aria-live="polite">
+        Wähle eine Antwort aus.
+      </div>
+
+      <button class="reset-button" id="challenge-reset" type="button">
+        Aufgabe wiederholen
+      </button>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="eyebrow">DIE DIGITALE ARBEITSWELT</div>
+
+  <h2 class="section-title">Was steckt hinter der IT?</h2>
+
+  <p class="muted">
+    Die digitale Welt besteht aus vielen unterschiedlichen Fachgebieten.
+    Diese Bereiche greifen ineinander und ermöglichen moderne Technologien.
+  </p>
+
+  <div class="info-grid">
+
+    <article class="info-card">
+      <h3>Softwareentwicklung</h3>
+      <p>
+        Programme, Apps und Webseiten entwickeln.
+        Programmierlogik verstehen und digitale Lösungen schaffen.
+      </p>
+    </article>
+
+    <article class="info-card">
+      <h3>Netzwerke & Systeme</h3>
+      <p>
+        Computer verbinden, Server verwalten und IT-Systeme
+        einrichten, überwachen und absichern.
+      </p>
+    </article>
+
+    <article class="info-card">
+      <h3>Digitale Gestaltung</h3>
+      <p>
+        Bilder, Videos, Webseiten und visuelle Konzepte
+        für digitale Medien gestalten.
+      </p>
+    </article>
+
+    <article class="info-card">
+      <h3>Technische Planung</h3>
+      <p>
+        Digitale Zeichnungen, technische Modelle und
+        präzise Planungsunterlagen erstellen.
+      </p>
+    </article>
+
+  </div>
+</section>
+
+<footer>
+  INDUSTRYAI · Die Zukunft der Berufsorientierung
+  <br><br>
+  <a href="index.html">Zurück zur Startseite</a>
+</footer>
+
+<script>
+  const answerButtons = document.querySelectorAll(".answer");
+  const challengeResult = document.getElementById("challenge-result");
+  const resetButton = document.getElementById("challenge-reset");
+
+  answerButtons.forEach(function(button) {
+    button.addEventListener("click", function() {
+
+      answerButtons.forEach(function(answer) {
+        answer.disabled = true;
+      });
+
+      if (button.dataset.answer === "correct") {
+        button.classList.add("correct");
+
+        challengeResult.textContent =
+          "Richtig! >= bedeutet größer oder gleich. Damit werden alle Alterswerte ab 18 erfasst.";
+      } else {
+        button.classList.add("wrong");
+
+        challengeResult.textContent =
+          "Nicht ganz. Gesucht ist eine Bedingung, die 18 und alle höheren Zahlen berücksichtigt. Die richtige Antwort ist B: alter >= 18.";
+      }
+    });
+  });
+
+  resetButton.addEventListener("click", function() {
+    answerButtons.forEach(function(button) {
+      button.disabled = false;
+      button.classList.remove("correct", "wrong");
+    });
+
+    challengeResult.textContent = "Wähle eine Antwort aus.";
+  });
+</script>
+
+</body>
+</html>
