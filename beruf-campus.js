@@ -318,7 +318,7 @@
     trainingCard.appendChild(createElement("small", "", "WÄHREND DER AUSBILDUNG"));
     trainingCard.appendChild(createElement("h3", "", pay.training ? formatEuro(pay.training) + " / Monat" : "Kein Einzelwert hinterlegt"));
     trainingCard.appendChild(createElement("p", "", pay.training
-      ? "Durchschnittliche tarifliche Bruttovergütung über die Ausbildungsjahre (BIBB 2025), nicht zwingend der Betrag deines Betriebs."
+      ? "BIBB-Schätzwert der tariflichen Bruttovergütung im Durchschnitt über alle Ausbildungsjahre (2025). Je nach Branche, Region und Betrieb kann die tatsächliche Vergütung abweichen."
       : "Für diesen Beruf liegt hier derzeit kein belastbarer berufsspezifischer Tarifdurchschnitt vor."));
     payGrid.appendChild(trainingCard);
 
@@ -344,21 +344,34 @@
     panel.appendChild(createElement("p", "muted", data.salaryNote));
 
     const sources = createElement("p", "muted");
-    sources.appendChild(document.createTextNode("Quellen: "));
-    const trainingLink = createElement("a", "", "BIBB-Ausbildungsvergütung");
-    trainingLink.href = pay.trainingSource || data.trainingSource;
-    trainingLink.target = "_blank";
-    trainingLink.rel = "noopener noreferrer";
-    trainingLink.style.color = "#42d8ed";
-    sources.appendChild(trainingLink);
-    sources.appendChild(document.createTextNode(" · "));
-    const salaryLink = createElement("a", "", "BA-Entgeltatlas");
-    salaryLink.href = pay.source || data.salarySource;
-    salaryLink.target = "_blank";
-    salaryLink.rel = "noopener noreferrer";
-    salaryLink.style.color = "#42d8ed";
-    sources.appendChild(salaryLink);
-    panel.appendChild(sources);
+    const sourceLinks = [];
+
+    if (pay.training) {
+      const trainingLink = createElement("a", "", "BIBB – Ausbildungsvergütung 2025");
+      trainingLink.href = pay.trainingSource || data.trainingSource;
+      trainingLink.target = "_blank";
+      trainingLink.rel = "noopener noreferrer";
+      trainingLink.style.color = "#42d8ed";
+      sourceLinks.push(trainingLink);
+    }
+
+    if (pay.median) {
+      const salaryLink = createElement("a", "", "BA – Entgeltatlas 2025");
+      salaryLink.href = pay.source || data.salarySource;
+      salaryLink.target = "_blank";
+      salaryLink.rel = "noopener noreferrer";
+      salaryLink.style.color = "#42d8ed";
+      sourceLinks.push(salaryLink);
+    }
+
+    if (sourceLinks.length) {
+      sources.appendChild(document.createTextNode("Quellen: "));
+      sourceLinks.forEach(function (link, index) {
+        if (index) sources.appendChild(document.createTextNode(" · "));
+        sources.appendChild(link);
+      });
+      panel.appendChild(sources);
+    }
 
     section.appendChild(panel);
     const cta = elements.main.querySelector(".campus-cta");
