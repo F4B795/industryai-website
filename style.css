@@ -2074,3 +2074,33 @@ section.hero.hero-modern .hero-visual svg {
   }
 }
 
+.career-answer-options {
+  display: grid;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.career-answer-option {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+  border: 1px solid #30445c;
+  border-radius: 10px;
+  background: #14243a;
+  color: #ffffff;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.career-answer-option:hover {
+  border-color: #42d8ed;
+  background: #1a3049;
+}
+
+.career-answer-option input {
+  accent-color: #42d8ed;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
