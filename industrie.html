@@ -113,6 +113,62 @@
       padding: 25px;
     }
 
+
+    .job-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 54px;
+      height: 54px;
+      margin: 20px 0 16px;
+      border: 1px solid #35d5e880;
+      border-radius: 12px;
+      color: #35d5e8;
+      background: rgba(53,213,232,.12);
+      font-size: 29px;
+      line-height: 1;
+    }
+
+    .job {
+      background: linear-gradient(145deg, rgba(53,213,232,.12), #0b1d2e 76%);
+      border-color: #35d5e855;
+    }
+
+    .job-link:hover .job,
+    .job-link:focus-visible .job {
+      border-color: #35d5e8;
+      box-shadow: 0 12px 30px rgba(53,213,232,.12);
+    }
+
+    .job-number { color: #35d5e8; }
+
+    .job-more, .job-link { --sector-accent: #35d5e8; }
+    .job-more { color: #35d5e8; }
+
+    .info-card {
+      background: linear-gradient(145deg, rgba(53,213,232,.12), #0b1d2e 78%);
+      border-color: #35d5e855;
+    }
+
+    .info-icon {
+      display: inline-flex;
+      width: 38px;
+      height: 38px;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 13px;
+      border: 1px solid #35d5e880;
+      border-radius: 9px;
+      background: rgba(53,213,232,.12);
+      font-size: 21px;
+    }
+
+    .info-card h3 { color: #35d5e8; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .job, .job-link .job { transition: none; }
+    }
+
     .job-number {
       color: #35d5e8;
       font-size: 12px;
@@ -208,6 +264,7 @@
     <a class="job-link" href="beruf.html?id=zerspanungsmechaniker" aria-label="Berufsprofil CNC-Zerspanungsmechaniker öffnen">
       <article class="job">
         <div class="job-number">BERUF 01</div>
+        <div class="job-icon" aria-hidden="true">⚙️</div>
         <h3>CNC-Zerspanungsmechaniker</h3>
         <p class="muted">Programmiere und bediene moderne Dreh- und Fräsmaschinen. Fertige präzise Bauteile für unterschiedlichste Anwendungen.</p>
       </article>
@@ -216,6 +273,7 @@
     <a class="job-link" href="beruf.html?id=industriemechaniker" aria-label="Berufsprofil Industriemechaniker öffnen">
       <article class="job">
         <div class="job-number">BERUF 02</div>
+        <div class="job-icon" aria-hidden="true">🛠️</div>
         <h3>Industriemechaniker</h3>
         <p class="muted">Baue Maschinen und Anlagen, montiere Baugruppen und sorge dafür, dass technische Systeme funktionieren.</p>
       </article>
@@ -224,6 +282,7 @@
     <a class="job-link" href="beruf.html?id=mechatroniker" aria-label="Berufsprofil Mechatroniker öffnen">
       <article class="job">
         <div class="job-number">BERUF 03</div>
+        <div class="job-icon" aria-hidden="true">🤖</div>
         <h3>Mechatroniker</h3>
         <p class="muted">Verbinde Mechanik, Elektronik und Steuerungstechnik zu modernen technischen Systemen.</p>
       </article>
@@ -232,6 +291,7 @@
     <a class="job-link" href="beruf.html?id=elektroniker-automatisierung" aria-label="Berufsprofil Elektroniker für Automatisierungstechnik öffnen">
       <article class="job">
         <div class="job-number">BERUF 04</div>
+        <div class="job-icon" aria-hidden="true">⚡</div>
         <h3>Elektroniker</h3>
         <p class="muted">Arbeite mit elektrischen Anlagen, Steuerungen und innovativer Automatisierungstechnik.</p>
       </article>
