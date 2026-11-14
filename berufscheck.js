@@ -87,29 +87,49 @@
     return result;
   }
 
-  function profileSimilarity(userProfile, careerProfile) {
-    let difference = 0;
-    let used = 0;
+  
+function profileSimilarity(userProfile, careerProfile) {
+  let difference = 0;
+  let used = 0;
 
-    DIMENSIONS.forEach((key) => {
-      const userValue = userProfile[key];
-      const careerValue = Number(careerProfile && careerProfile[key]);
+  DIMENSIONS.forEach((key) => {
+    const userValue = userProfile?.[key];
+    const rawCareerValue = careerProfile?.[key];
 
-      if (userValue === null || !Number.isFinite(careerValue)) {
-        return;
-      }
+    if (
+      userValue === null ||
+      userValue === undefined ||
+      userValue === "" ||
+      rawCareerValue === null ||
+      rawCareerValue === undefined ||
+      rawCareerValue === ""
+    ) {
+      return;
+    }
 
-      difference += Math.abs(
-        userValue - clamp(careerValue, 0, 4) * 25
-      );
+    const numericUserValue = Number(userValue);
+    const numericCareerValue = Number(rawCareerValue);
 
-      used++;
-    });
+    if (
+      !Number.isFinite(numericUserValue) ||
+      !Number.isFinite(numericCareerValue)
+    ) {
+      return;
+    }
 
-    return used
-      ? clamp(100 - difference / used, 0, 100)
-      : null;
-  }
+    difference += Math.abs(
+      numericUserValue - clamp(numericCareerValue, 0, 4) * 25
+    );
+
+    used++;
+  });
+
+  return used > 0
+    ? clamp(100 - difference / used, 0, 100)
+    : null;
+}
+
+
 
   function interestSimilarity(selectedTags, career) {
     const tags = unique(selectedTags);
@@ -130,9 +150,23 @@
     let totalWeight = 0;
 
     Object.entries(userDimensions).forEach(([dimension, count]) => {
+      const rawCareerValue = careerProfile[dimension];
+
+      if (
+        rawCareerValue === null ||
+        rawCareerValue === undefined ||
+        rawCareerValue === ""
+      ) {
+        return;
+      }
+
+      const numericCareerValue = Number(rawCareerValue);
+
+      if (!Number.isFinite(numericCareerValue)) return;
+
       const weight = Math.min(count, 3);
       const careerLevel =
-        clamp(Number(careerProfile[dimension] || 0), 0, 4) / 4;
+        clamp(numericCareerValue, 0, 4) / 4;
 
       weightedFit += careerLevel * weight;
       totalWeight += weight;
@@ -142,6 +176,7 @@
       ? clamp((weightedFit / totalWeight) * 100, 0, 100)
       : null;
   }
+
 
   const ACTIVITY_LEVEL = {
     low: 1,
