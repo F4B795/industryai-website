@@ -264,6 +264,24 @@
       "DEINE BERUFLICHE ZUKUNFT",
       details.careerPaths
     );
+
+    addDetailSection(
+      "Wo kannst du später arbeiten?",
+      "TYPISCHE EINSATZBEREICHE",
+      details.fields
+    );
+
+    addDetailSection(
+      "Worauf kannst du dich spezialisieren?",
+      "FACHLICHE SCHWERPUNKTE",
+      details.specializations
+    );
+
+    addDetailSection(
+      "Wie kann sich dein Berufsweg entwickeln?",
+      "PERSPEKTIVEN MIT BERUFSERFAHRUNG",
+      details.development
+    );
   }
 
   function renderCareer(career) {
