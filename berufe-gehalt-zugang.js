@@ -29,13 +29,24 @@
       "fachinformatiker-anwendungsentwicklung": { training: 1281, region: "Deutschland", trainingSource: "https://www.bibb.de/dienst/publikationen/download/20846" },
       "fachinformatiker-systemintegration": { training: 1281, median: 5189, q1: 4101, q3: 6741, region: "Deutschland", source: "https://web.arbeitsagentur.de/entgeltatlas/beruf/7847", trainingSource: "https://www.bibb.de/dienst/publikationen/download/20846" },
       "mediengestalter": {},
-      "bauzeichner": {},
+      "bauzeichner": { training: 942, region: "Deutschland", trainingSource: "https://www.bibb.de/dienst/publikationen/download/20846" },
       "gestalter-visuelles-marketing": { median: 3327, q1: 2772, q3: 3898, region: "Deutschland", source: "https://web.arbeitsagentur.de/entgeltatlas/beruf/27541" },
       "koch": { training: 1223, median: 3018, q1: 2563, q3: 3581, region: "Deutschland", source: "https://web.arbeitsagentur.de/entgeltatlas/beruf/3722", trainingSource: "https://www.bibb.de/dienst/publikationen/download/20846" },
       "baecker": { training: 1106, region: "Deutschland", trainingSource: "https://www.bibb.de/dienst/publikationen/download/20846" },
       "konditor": {},
       "fachverkaeufer-lebensmittelhandwerk": { training: 1107, median: 2956, q1: 2528, q3: 3531, region: "Deutschland", source: "https://web.arbeitsagentur.de/entgeltatlas/beruf/14468", trainingSource: "https://www.bibb.de/dienst/publikationen/download/20846" },
-      "fachmann-restaurants-veranstaltungsgastronomie": { median: 2652, q1: 2275, q3: 3128, region: "Deutschland", source: "https://web.arbeitsagentur.de/entgeltatlas/beruf/10051" }
+      "fachmann-restaurants-veranstaltungsgastronomie": { median: 2652, q1: 2275, q3: 3128, region: "Deutschland", source: "https://web.arbeitsagentur.de/entgeltatlas/beruf/10051" },
+      "fotograf": {},
+      "landwirt": {},
+      "gaertner": {},
+      "fachkraft-lagerlogistik": {},
+      "berufskraftfahrer": {},
+      "fachkraft-veranstaltungstechnik": {},
+      "industriekaufmann": {},
+      "kaufmann-einzelhandel": {},
+      "steuerfachangestellter": {},
+      "chemielaborant": {},
+      "friseur": {}
     }
   };
 })();
