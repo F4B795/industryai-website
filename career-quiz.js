@@ -188,7 +188,7 @@
   { text: "Speisen zubereiten und neue Rezepte ausprobieren", tags: ["kochen", "lebensmittel", "gastronomie", "kreativ"] },
   { text: "Brot, Kuchen und andere Backwaren herstellen", tags: ["backen", "lebensmittel", "handwerk"] },
   { text: "Gäste bedienen, beraten und betreuen", tags: ["service", "menschen", "kommunikation", "gastronomie"] }
-] ]
+      ]
     },
     {
       id: 24, category: "arbeitsbedingungen",
