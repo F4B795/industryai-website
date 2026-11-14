@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -8,106 +7,98 @@
 <style>
 *{box-sizing:border-box}
 body{margin:0;background:#071524;color:#f2f7fc;font-family:Arial,sans-serif}
-header{padding:20px 6%;border-bottom:1px solid #294960;display:flex;justify-content:space-between;align-items:center}
-.logo{font-size:19px;font-weight:bold;letter-spacing:2px}
-.logo span{color:#42d8ed}
-a{color:inherit;text-decoration:none}
-.back{color:#42d8ed;font-size:14px}
+header{padding:20px 6%;border-bottom:1px solid #294960;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.logo{font-size:19px;font-weight:bold;letter-spacing:2px}.logo span{color:#42d8ed}
+a{color:inherit;text-decoration:none}.back{color:#42d8ed;font-size:14px}
 main{max-width:1150px;margin:auto;padding:45px 22px}
 .eyebrow{color:#42d8ed;font-size:11px;font-weight:bold;letter-spacing:3px}
 h1{font-size:clamp(32px,5vw,52px);margin:15px 0}
 .intro{color:#b7c8d8;line-height:1.8;max-width:760px}
-.layout{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:35px}
-.panel{padding:25px;border:1px solid #294960;border-radius:13px;background:linear-gradient(145deg,#122b40,#0b1d2e)}
+.layout{display:grid;grid-template-columns:minmax(280px,.9fr) minmax(0,1.1fr);gap:22px;margin-top:35px}
+.panel{padding:25px;border:1px solid #294960;border-radius:13px;background:linear-gradient(145deg,#122b40,#0b1d2e);min-width:0}
 .panel h2{margin-top:0;font-size:21px}
 label{display:block;margin:18px 0 8px;color:#c5d5e3;font-size:13px}
 select,input{width:100%;padding:13px;background:#071524;border:1px solid #36566e;border-radius:7px;color:white}
 input[type=range]{padding:0;accent-color:#42d8ed}
 .value{color:#42d8ed;font-weight:bold}
 button{padding:14px 20px;background:#42d8ed;color:#071524;border:0;border-radius:7px;font-weight:bold;cursor:pointer;margin-top:20px}
-button:disabled{opacity:.5;cursor:not-allowed}
+button:hover{background:#8cebf6}
+button:disabled{opacity:.55;cursor:wait}
+button.secondary{background:#294960;color:white;margin-left:5px}
 .visual{min-height:310px;background:radial-gradient(circle,#16435b,#091b2b 75%);border:1px solid #28617a;border-radius:10px;display:flex;align-items:center;justify-content:center;overflow:hidden}
 .machine{width:90%;max-width:470px}
-#tool{transform-origin:250px 120px;transition:transform 1.5s ease}
-#workpiece{transition:all 1.5s ease}
-.running #tool{transform:translate(0,48px)}
-.running #workpiece{filter:brightness(1.4)}
+#cncTool{transform-box:fill-box;transform-origin:center;transform:translate(0,0);transition:transform 1.15s cubic-bezier(.2,.7,.2,1)}
+#workpiece{transform-box:fill-box;transform-origin:center;transition:transform 1.25s ease,fill 1.25s ease}
+#chips{opacity:0;transition:opacity .35s ease}
+#visual.cutting #chips{opacity:1}
+#visual.cutting #workpiece{transform:scaleY(.62);fill:#a9c5d4}
+#visual.spinning .spindle-rotor{animation:spin .7s linear infinite}
+#visual.retracting #chips{opacity:0}
+@keyframes spin{to{transform:rotate(360deg)}}
 .progress{height:9px;background:#071524;border-radius:20px;overflow:hidden;margin-top:17px}
-#bar{height:100%;width:0;background:#42d8ed;transition:width .4s}
+#bar{height:100%;width:0;background:#42d8ed;transition:width .65s ease}
 #status{color:#42d8ed;line-height:1.7;margin-top:16px;min-height:48px}
-.result-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:18px}
-.result{padding:15px;background:#071524;border-radius:8px}
+.result-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:18px}
+.result{padding:15px;background:#071524;border-radius:8px;min-width:0}
 .result small{display:block;color:#8ea9bc;margin-bottom:7px}
-.result strong{color:#42d8ed}
+.result strong{color:#42d8ed;overflow-wrap:anywhere}
 .explanation{margin-top:22px;padding:20px;border-left:3px solid #42d8ed;background:#0b1d2e;color:#c5d5e3;line-height:1.8}
 footer{text-align:center;padding:30px;border-top:1px solid #294960;color:#91a7ba;font-size:13px}
-@media(max-width:750px){.layout{grid-template-columns:1fr}header{padding:18px 5%}.panel{padding:19px}}
+@media(max-width:750px){.layout{grid-template-columns:1fr}header{padding:18px 5%}.panel{padding:19px}.visual{min-height:260px}}
+@media(max-width:420px){main{padding:32px 15px}.result-grid{gap:8px}.result{padding:12px}button{width:100%;margin-left:0!important}.visual{min-height:220px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 </style>
 </head>
 <body>
-
 <header>
   <a class="logo" href="index.html">INDUSTRY<span>AI</span></a>
-  <a class="back" href="industrie.html">← Handwerk & Industrie</a>
+  <a class="back" href="industrie.html">← Handwerk &amp; Industrie</a>
 </header>
-
 <main>
   <div class="eyebrow">INDUSTRYAI · INTERAKTIVES LERNLABOR</div>
   <h1>Dein erstes <span style="color:#42d8ed">CNC-Labor.</span></h1>
-  <p class="intro">
-    Entdecke die Grundlagen der spanenden Fertigung. Wähle ein Material,
-    ein Werkzeug und verändere die beispielhaften Prozessparameter.
-    Beobachte anschließend eine vereinfachte Bearbeitungssimulation.
-  </p>
+  <p class="intro">Entdecke die Grundlagen der spanenden Fertigung. Wähle ein Material, ein Werkzeug und verändere die beispielhaften Prozessparameter. Beobachte anschließend, wie das Werkzeug an das Werkstück heranfährt, eine Bearbeitungsbahn abfährt und sich wieder zurückzieht.</p>
 
   <div class="layout">
     <section class="panel">
       <h2>1. Bearbeitung vorbereiten</h2>
-
       <label for="material">Werkstückmaterial</label>
       <select id="material">
-        <option value="Aluminium">Aluminium</option>
-        <option value="Stahl">Stahl</option>
-        <option value="Messing">Messing</option>
+        <option value="Aluminium">Aluminium</option><option value="Stahl">Stahl</option><option value="Messing">Messing</option>
       </select>
-
-      <label for="tool">Werkzeug</label>
-      <select id="tool">
-        <option value="Drehmeißel">Drehmeißel</option>
-        <option value="Fräser">Fräser</option>
-        <option value="Bohrer">Bohrer</option>
+      <label for="toolSelect">Werkzeug</label>
+      <select id="toolSelect">
+        <option value="Drehmeißel">Drehmeißel</option><option value="Fräser">Fräser</option><option value="Bohrer">Bohrer</option>
       </select>
-
       <label for="speed">Beispiel-Drehzahl: <span class="value" id="speedValue">1200</span> U/min</label>
       <input id="speed" type="range" min="300" max="3000" step="100" value="1200">
-
       <label for="feed">Beispiel-Vorschub: <span class="value" id="feedValue">0,15</span> mm/U</label>
       <input id="feed" type="range" min="0.05" max="0.40" step="0.01" value="0.15">
-
       <button id="start">Bearbeitung simulieren</button>
-      <button id="reset" style="background:#294960;color:white;margin-left:5px">Zurücksetzen</button>
-
-      <div class="explanation">
-        <strong>Wichtig:</strong> Die Parameter sind frei gewählte
-        Demonstrationswerte. Sie sind keine Empfehlungen für reale
-        Maschinen. Werkzeug, Werkstoff, Geometrie und Herstellerangaben
-        müssen in der Praxis berücksichtigt werden.
-      </div>
+      <button id="reset" class="secondary">Zurücksetzen</button>
+      <div class="explanation"><strong>Wichtig:</strong> Die Parameter sind frei gewählte Demonstrationswerte und keine Empfehlungen für reale Maschinen. Werkzeug, Werkstoff, Geometrie und Herstellerangaben müssen in der Praxis berücksichtigt werden.</div>
     </section>
 
     <section class="panel">
       <h2>2. Maschinenvisualisierung</h2>
-
       <div class="visual" id="visual">
-        <svg class="machine" viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
+        <svg class="machine" viewBox="0 0 500 300" role="img" aria-label="Vereinfachte CNC-Drehmaschine mit Werkstück und beweglichem Werkzeug">
           <rect x="20" y="20" width="460" height="260" rx="15" fill="#a7b9c7" stroke="#42d8ed" stroke-width="3"/>
           <rect x="40" y="40" width="420" height="210" rx="8" fill="#263c4c"/>
           <rect x="55" y="55" width="390" height="175" rx="8" fill="#102b3b" stroke="#7895a8" stroke-width="3"/>
           <rect x="80" y="115" width="70" height="65" rx="8" fill="#8299a8"/>
-          <circle cx="150" cy="147" r="32" fill="#718b9c" stroke="#d4e2eb" stroke-width="4"/>
-          <circle cx="150" cy="147" r="17" fill="#172f40"/>
+          <g class="spindle-rotor">
+            <circle cx="150" cy="147" r="32" fill="#718b9c" stroke="#d4e2eb" stroke-width="4"/>
+            <circle cx="150" cy="147" r="17" fill="#172f40"/>
+            <path d="M150 125 L170 139 L170 155 L150 169 L130 155 L130 139 Z" fill="#91aaba"/>
+          </g>
           <rect id="workpiece" x="180" y="135" width="150" height="25" rx="5" fill="#d4e3eb" stroke="#42d8ed" stroke-width="2"/>
-          <g id="tool">
+          <g id="chips">
+            <path d="M290 132 q8 -12 15 0 t15 0" fill="none" stroke="#42d8ed" stroke-width="3" stroke-linecap="round"/>
+            <path d="M270 130 q7 -10 13 0" fill="none" stroke="#d4e3eb" stroke-width="2" stroke-linecap="round"/>
+            <path d="M305 126 q6 -9 12 0" fill="none" stroke="#42d8ed" stroke-width="2" stroke-linecap="round"/>
+          </g>
+          <g id="cncTool">
             <rect x="330" y="190" width="65" height="22" rx="4" fill="#8299a8"/>
             <path d="M350 190 L370 160 L382 160 L370 190 Z" fill="#d8e6ee" stroke="#42d8ed" stroke-width="2"/>
           </g>
@@ -116,10 +107,8 @@ footer{text-align:center;padding:30px;border-top:1px solid #294960;color:#91a7ba
           <rect x="90" y="250" width="320" height="12" rx="4" fill="#526d80"/>
         </svg>
       </div>
-
       <div class="progress"><div id="bar"></div></div>
       <div id="status" aria-live="polite">Die Maschine wartet auf deine Einstellungen.</div>
-
       <div class="result-grid">
         <div class="result"><small>Material</small><strong id="outMaterial">Aluminium</strong></div>
         <div class="result"><small>Werkzeug</small><strong id="outTool">Drehmeißel</strong></div>
@@ -131,122 +120,99 @@ footer{text-align:center;padding:30px;border-top:1px solid #294960;color:#91a7ba
 
   <section class="panel" style="margin-top:22px">
     <h2>3. Was passiert bei der Bearbeitung?</h2>
-    <p class="intro" id="learning">
-      Wähle deine Einstellungen und starte die Simulation, um die einzelnen
-      Schritte kennenzulernen.
-    </p>
+    <p class="intro" id="learning">Wähle deine Einstellungen und starte die Simulation, um die einzelnen Schritte kennenzulernen.</p>
   </section>
 </main>
-
-<footer>
-  INDUSTRYAI · Die Zukunft der Berufsorientierung
-</footer>
-
+<footer>INDUSTRYAI · Die Zukunft der Berufsorientierung</footer>
 <script>
 (function(){
-  const material = document.getElementById("material");
-  const tool = document.getElementById("tool");
-  const speed = document.getElementById("speed");
-  const feed = document.getElementById("feed");
-  const start = document.getElementById("start");
-  const reset = document.getElementById("reset");
-  const visual = document.getElementById("visual");
-  const bar = document.getElementById("bar");
-  const status = document.getElementById("status");
-  const learning = document.getElementById("learning");
+  const material=document.getElementById("material");
+  const toolSelect=document.getElementById("toolSelect");
+  const speed=document.getElementById("speed");
+  const feed=document.getElementById("feed");
+  const start=document.getElementById("start");
+  const reset=document.getElementById("reset");
+  const visual=document.getElementById("visual");
+  const toolGraphic=document.getElementById("cncTool");
+  const workpiece=document.getElementById("workpiece");
+  const bar=document.getElementById("bar");
+  const status=document.getElementById("status");
+  const learning=document.getElementById("learning");
+  let timers=[];
 
-  let timer = null;
-  let step = 0;
-
+  function later(fn,delay){timers.push(setTimeout(fn,delay))}
+  function clearTimers(){timers.forEach(clearTimeout);timers=[]}
   function updateValues(){
-    document.getElementById("speedValue").textContent = speed.value;
-    document.getElementById("feedValue").textContent =
-      Number(feed.value).toLocaleString("de-DE",{minimumFractionDigits:2});
-    document.getElementById("outMaterial").textContent = material.value;
-    document.getElementById("outTool").textContent = tool.value;
-    document.getElementById("outSpeed").textContent = speed.value + " U/min";
-    document.getElementById("outFeed").textContent =
-      Number(feed.value).toLocaleString("de-DE",{minimumFractionDigits:2}) + " mm/U";
+    document.getElementById("speedValue").textContent=speed.value;
+    document.getElementById("feedValue").textContent=Number(feed.value).toLocaleString("de-DE",{minimumFractionDigits:2});
+    document.getElementById("outMaterial").textContent=material.value;
+    document.getElementById("outTool").textContent=toolSelect.value;
+    document.getElementById("outSpeed").textContent=speed.value+" U/min";
+    document.getElementById("outFeed").textContent=Number(feed.value).toLocaleString("de-DE",{minimumFractionDigits:2})+" mm/U";
   }
+  [material,toolSelect,speed,feed].forEach(control=>control.addEventListener("input",updateValues));
 
-  [material,tool,speed,feed].forEach(function(control){
-    control.addEventListener("input",updateValues);
-    control.addEventListener("change",updateValues);
-  });
-
-  const steps = [
-    {
-      text:"Schritt 1: Das Werkstück wird vorbereitet und sicher eingespannt.",
-      detail:"Eine stabile Spannung ist wichtig, damit das Werkstück während der Bearbeitung nicht verrutscht."
-    },
-    {
-      text:"Schritt 2: Das ausgewählte Werkzeug wird positioniert.",
-      detail:"Das Werkzeug übernimmt die eigentliche Materialabtragung. Die Werkzeuggeometrie muss zum Bearbeitungsverfahren passen."
-    },
-    {
-      text:"Schritt 3: Die Bearbeitung läuft in der Simulation.",
-      detail:"Drehzahl und Vorschub beeinflussen den Bearbeitungsprozess. Ihre tatsächliche Wahl hängt unter anderem von Werkstoff und Werkzeug ab."
-    },
-    {
-      text:"Schritt 4: Die Bearbeitung ist abgeschlossen.",
-      detail:"In der Praxis folgen je nach Auftrag die Maßkontrolle, Oberflächenprüfung und Dokumentation."
-    }
-  ];
-
+  function resetVisual(){
+    visual.classList.remove("spinning","cutting","retracting");
+    toolGraphic.style.transform="translate(0,0)";
+    workpiece.style.transform="scaleY(1)";
+    workpiece.setAttribute("fill","#d4e3eb");
+  }
   function finish(){
-    clearInterval(timer);
-    timer = null;
-    bar.style.width = "100%";
-    status.textContent = "Simulation abgeschlossen.";
-    learning.textContent =
-      "Du hast die vier grundlegenden Schritte kennengelernt: " +
-      "Spannen, Werkzeug positionieren, Bearbeiten und Prüfen. " +
-      "Die Darstellung ist eine vereinfachte Lernsimulation und bildet keine reale CNC-Steuerung ab.";
-    visual.classList.remove("running");
-    start.disabled = false;
-    start.textContent = "Erneut simulieren";
+    visual.classList.remove("spinning","cutting","retracting");
+    status.textContent="Simulation abgeschlossen. Das Werkstück wurde in der vereinfachten Darstellung bearbeitet.";
+    learning.textContent="Du hast den Ablauf erlebt: Werkstück spannen, Werkzeug positionieren, entlang der Bearbeitungsbahn Material abtragen und das Werkzeug zurückziehen. In der Praxis folgen je nach Auftrag Maßkontrolle und Oberflächenprüfung. Die Animation ist ein Lernmodell und keine reale CNC-Steuerung.";
+    bar.style.width="100%";
+    start.disabled=false;
+    start.textContent="Erneut simulieren";
   }
-
   start.addEventListener("click",function(){
-    if(timer) clearInterval(timer);
-
+    clearTimers();
+    resetVisual();
     updateValues();
-    step = 0;
-    bar.style.width = "0%";
-    start.disabled = true;
-    start.textContent = "Simulation läuft...";
-    visual.classList.add("running");
+    start.disabled=true;
+    start.textContent="Simulation läuft...";
+    bar.style.width="8%";
+    status.textContent="Schritt 1: Das Werkstück wird eingespannt und die Spindel läuft an.";
+    learning.textContent="Eine sichere Spannung hält das Werkstück während der Bearbeitung in Position.";
+    visual.classList.add("spinning");
 
-    function runStep(){
-      status.textContent = steps[step].text;
-      learning.textContent = steps[step].detail;
-      bar.style.width = ((step+1)/steps.length*100) + "%";
-      step++;
+    later(()=>{
+      status.textContent="Schritt 2: Das Werkzeug fährt an das Werkstück heran.";
+      learning.textContent="Die Maschine positioniert das ausgewählte Werkzeug nahe an der Oberfläche. Der Abstand wird kontrolliert angefahren.";
+      bar.style.width="28%";
+      toolGraphic.style.transform="translate(-8px,-23px)";
+    },1100);
 
-      if(step >= steps.length){
-        timer = setTimeout(finish,1800);
-      }else{
-        timer = setTimeout(runStep,1800);
-      }
-    }
+    later(()=>{
+      status.textContent="Schritt 3: Das Werkzeug fährt die Bearbeitungsbahn ab.";
+      learning.textContent="Während des Vorschubs bewegt sich das Werkzeug entlang des Werkstücks. In dieser vereinfachten Darstellung wird dabei sichtbar Material abgetragen.";
+      bar.style.width="68%";
+      visual.classList.add("cutting");
+      toolGraphic.style.transform="translate(-145px,-23px)";
+    },2600);
 
-    runStep();
+    later(()=>{
+      status.textContent="Schritt 4: Das Werkzeug zieht sich zurück.";
+      learning.textContent="Nach dem Materialabtrag fährt das Werkzeug aus dem Arbeitsbereich. Die Spindel kommt zum Stillstand.";
+      bar.style.width="88%";
+      visual.classList.remove("cutting","spinning");
+      visual.classList.add("retracting");
+      toolGraphic.style.transform="translate(-145px,-62px)";
+    },4400);
+
+    later(finish,5700);
   });
-
   reset.addEventListener("click",function(){
-    if(timer) clearTimeout(timer);
-    timer = null;
-    step = 0;
-    bar.style.width = "0%";
-    status.textContent = "Die Maschine wartet auf deine Einstellungen.";
-    learning.textContent =
-      "Wähle deine Einstellungen und starte die Simulation, um die einzelnen Schritte kennenzulernen.";
-    visual.classList.remove("running");
-    start.disabled = false;
-    start.textContent = "Bearbeitung simulieren";
+    clearTimers();
+    resetVisual();
+    bar.style.width="0%";
+    status.textContent="Die Maschine wartet auf deine Einstellungen.";
+    learning.textContent="Wähle deine Einstellungen und starte die Simulation, um die einzelnen Schritte kennenzulernen.";
+    start.disabled=false;
+    start.textContent="Bearbeitung simulieren";
     updateValues();
   });
-
   updateValues();
 })();
 </script>
