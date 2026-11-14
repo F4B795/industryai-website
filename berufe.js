@@ -1,16 +1,21 @@
 
 /*
  * INDUSTRYAI – Berufedatenbank
- * Version 1.0
+ * Version 2.0
  *
- * Tätigkeitsprofile sind Orientierungswerte von 0 bis 4.
- * Sie beschreiben den Beruf, nicht die Eignung einer Person.
+ * Profile: Orientierungswerte von 0 bis 4.
+ * Sie beschreiben typische Tätigkeitsanforderungen,
+ * nicht die persönliche Eignung eines Menschen.
  */
 
 window.IndustryAICareers = {
-  version: "1.0.0",
+  version: "2.0.0",
 
   careers: [
+
+    // ================================================
+    // TECHNIK, INDUSTRIE UND HANDWERK
+    // ================================================
 
     {
       id: "zerspanungsmechaniker",
@@ -25,7 +30,9 @@ window.IndustryAICareers = {
         teamwork: "mixed",
         routine: "mixed",
         shiftWork: "possible",
-        timePressure: "variable"
+        timePressure: "variable",
+        precision: "high",
+        responsibility: "high"
       },
       activities: [
         "CNC-Dreh-, Fräs- oder Schleifmaschinen einrichten und bedienen",
@@ -34,8 +41,8 @@ window.IndustryAICareers = {
         "Fertigungsprozesse optimieren"
       ],
       dayToDay: "Einrichten, Fertigen, Messen und Optimieren wechseln sich ab.",
-      interestTags: ["maschinen","technik","fertigung","praezision","metall"],
-      valuesTags: ["technik","qualitaet","entwicklung"]
+      interestTags: ["maschinen", "technik", "fertigung", "praezision", "metall"],
+      valuesTags: ["technik", "qualitaet", "entwicklung"]
     },
 
     {
@@ -45,13 +52,15 @@ window.IndustryAICareers = {
       training: { type: "dual", durationMonths: 42 },
       profile: { T:4, A:3, S:2, K:2, C:2, O:3, N:0, B:3, L:3 },
       workingConditions: {
-        locations: ["Werkstatt","Produktion","beim Kunden"],
+        locations: ["Werkstatt", "Produktion", "beim Kunden"],
         physicalActivity: "medium",
         peopleContact: "medium",
         teamwork: "mixed",
         routine: "mixed",
         shiftWork: "possible",
-        timePressure: "variable"
+        timePressure: "variable",
+        precision: "high",
+        responsibility: "high"
       },
       activities: [
         "Maschinen und Produktionsanlagen montieren",
@@ -60,8 +69,8 @@ window.IndustryAICareers = {
         "Funktionen prüfen und dokumentieren"
       ],
       dayToDay: "Du montierst, wartest und reparierst Maschinen oder Anlagen.",
-      interestTags: ["maschinen","technik","reparieren","metall","probleme_loesen"],
-      valuesTags: ["technik","abwechslung","verantwortung"]
+      interestTags: ["maschinen", "technik", "reparieren", "metall", "probleme_loesen"],
+      valuesTags: ["technik", "abwechslung", "verantwortung"]
     },
 
     {
@@ -71,13 +80,15 @@ window.IndustryAICareers = {
       training: { type: "dual", durationMonths: 42 },
       profile: { T:4, A:4, S:2, K:2, C:2, O:3, N:0, B:3, L:4 },
       workingConditions: {
-        locations: ["Werkstatt","Produktion","beim Kunden"],
+        locations: ["Werkstatt", "Produktion", "beim Kunden"],
         physicalActivity: "medium",
         peopleContact: "medium",
         teamwork: "mixed",
         routine: "mixed",
         shiftWork: "possible",
-        timePressure: "variable"
+        timePressure: "variable",
+        precision: "high",
+        responsibility: "high"
       },
       activities: [
         "Mechanische, elektrische und elektronische Komponenten verbinden",
@@ -86,8 +97,8 @@ window.IndustryAICareers = {
         "Fehler suchen und Anlagen instand halten"
       ],
       dayToDay: "Du arbeitest an Systemen, in denen Mechanik und Elektronik zusammenspielen.",
-      interestTags: ["maschinen","elektronik","technik","programmieren","probleme_loesen"],
-      valuesTags: ["technik","entwicklung","abwechslung"]
+      interestTags: ["maschinen", "elektronik", "technik", "programmieren", "probleme_loesen"],
+      valuesTags: ["technik", "entwicklung", "abwechslung"]
     },
 
     {
@@ -97,13 +108,15 @@ window.IndustryAICareers = {
       training: { type: "dual", durationMonths: 42 },
       profile: { T:4, A:4, S:2, K:2, C:2, O:3, N:0, B:3, L:4 },
       workingConditions: {
-        locations: ["Produktion","Werkstatt","beim Kunden"],
+        locations: ["Produktion", "Werkstatt", "beim Kunden"],
         physicalActivity: "medium",
         peopleContact: "medium",
         teamwork: "mixed",
         routine: "mixed",
         shiftWork: "possible",
-        timePressure: "variable"
+        timePressure: "variable",
+        precision: "high",
+        responsibility: "high"
       },
       activities: [
         "Automatisierte Anlagen installieren und konfigurieren",
@@ -112,8 +125,8 @@ window.IndustryAICareers = {
         "Störungen analysieren und beheben"
       ],
       dayToDay: "Du bringst Maschinen und Anlagen dazu, automatisierte Abläufe auszuführen.",
-      interestTags: ["elektronik","automatisierung","programmieren","maschinen","technik"],
-      valuesTags: ["technik","entwicklung","verantwortung"]
+      interestTags: ["elektronik", "automatisierung", "programmieren", "maschinen", "technik"],
+      valuesTags: ["technik", "entwicklung", "verantwortung"]
     },
 
     {
@@ -123,13 +136,15 @@ window.IndustryAICareers = {
       training: { type: "dual", durationMonths: 42 },
       profile: { T:4, A:3, S:2, K:2, C:2, O:2, N:0, B:3, L:3 },
       workingConditions: {
-        locations: ["Werkstatt","Kundenbereich"],
+        locations: ["Werkstatt", "Kundenbereich"],
         physicalActivity: "medium",
         peopleContact: "medium",
         teamwork: "mixed",
         routine: "mixed",
         shiftWork: "rare",
-        timePressure: "variable"
+        timePressure: "variable",
+        precision: "high",
+        responsibility: "high"
       },
       activities: [
         "Fahrzeuge warten und reparieren",
@@ -138,8 +153,8 @@ window.IndustryAICareers = {
         "Fahrzeuge prüfen und Kunden informieren"
       ],
       dayToDay: "Du untersuchst Fahrzeuge, findest Fehler und führst Reparaturen aus.",
-      interestTags: ["fahrzeuge","technik","elektronik","reparieren","probleme_loesen"],
-      valuesTags: ["technik","abwechslung","handwerk"]
+      interestTags: ["fahrzeuge", "technik", "elektronik", "reparieren", "probleme_loesen"],
+      valuesTags: ["technik", "abwechslung", "handwerk"]
     },
 
     {
@@ -149,13 +164,15 @@ window.IndustryAICareers = {
       training: { type: "dual", durationMonths: 42 },
       profile: { T:4, A:3, S:3, K:3, C:2, O:3, N:1, B:4, L:3 },
       workingConditions: {
-        locations: ["beim Kunden","Baustelle","Werkstatt"],
+        locations: ["beim Kunden", "Baustelle", "Werkstatt"],
         physicalActivity: "high",
         peopleContact: "high",
         teamwork: "mixed",
         routine: "mixed",
         shiftWork: "rare",
-        timePressure: "variable"
+        timePressure: "variable",
+        precision: "high",
+        responsibility: "high"
       },
       activities: [
         "Heizungs-, Sanitär- und Klimaanlagen installieren",
@@ -164,8 +181,8 @@ window.IndustryAICareers = {
         "Kunden beraten"
       ],
       dayToDay: "Du installierst, wartest oder reparierst technische Gebäudesysteme.",
-      interestTags: ["technik","handwerk","energie","klima","reparieren"],
-      valuesTags: ["nachhaltigkeit","abwechslung","selbststaendigkeit"]
+      interestTags: ["technik", "handwerk", "energie", "klima", "reparieren"],
+      valuesTags: ["nachhaltigkeit", "abwechslung", "selbststaendigkeit"]
     },
 
     {
@@ -175,13 +192,15 @@ window.IndustryAICareers = {
       training: { type: "dual", durationMonths: 36 },
       profile: { T:4, A:2, S:2, K:2, C:4, O:2, N:1, B:3, L:3 },
       workingConditions: {
-        locations: ["Werkstatt","beim Kunden","Baustelle"],
+        locations: ["Werkstatt", "beim Kunden", "Baustelle"],
         physicalActivity: "medium",
         peopleContact: "medium",
         teamwork: "mixed",
         routine: "mixed",
         shiftWork: "rare",
-        timePressure: "variable"
+        timePressure: "variable",
+        precision: "high",
+        responsibility: "medium"
       },
       activities: [
         "Möbel und Innenausbauten planen und herstellen",
@@ -190,8 +209,8 @@ window.IndustryAICareers = {
         "Montagearbeiten durchführen"
       ],
       dayToDay: "Du verbindest handwerkliche Arbeit mit Gestaltung und Montage.",
-      interestTags: ["holz","gestaltung","handwerk","maschinen","kreativ"],
-      valuesTags: ["kreativitaet","handwerk","selbststaendigkeit"]
+      interestTags: ["holz", "gestaltung", "handwerk", "maschinen", "kreativ"],
+      valuesTags: ["kreativitaet", "handwerk", "selbststaendigkeit"]
     },
 
     {
@@ -201,13 +220,15 @@ window.IndustryAICareers = {
       training: { type: "dual", durationMonths: 24 },
       profile: { T:4, A:3, S:1, K:1, C:1, O:2, N:0, B:3, L:2 },
       workingConditions: {
-        locations: ["Produktion","Werkstatt"],
+        locations: ["Produktion", "Werkstatt"],
         physicalActivity: "medium",
         peopleContact: "low",
         teamwork: "mixed",
         routine: "high",
         shiftWork: "possible",
-        timePressure: "variable"
+        timePressure: "variable",
+        precision: "high",
+        responsibility: "medium"
       },
       activities: [
         "Metallteile spanend bearbeiten",
@@ -216,9 +237,41 @@ window.IndustryAICareers = {
         "Maße und Qualität kontrollieren"
       ],
       dayToDay: "Du bearbeitest Metall an Maschinen und stellst Werkstücke her.",
-      interestTags: ["metall","maschinen","fertigung","praezision","handwerk"],
-      valuesTags: ["handwerk","technik","sicherheit"]
+      interestTags: ["metall", "maschinen", "fertigung", "praezision", "handwerk"],
+      valuesTags: ["handwerk", "technik", "sicherheit"]
     },
+
+    {
+      id: "elektroniker-betriebstechnik",
+      name: "Elektroniker/in für Betriebstechnik",
+      category: "Technik, Industrie & Handwerk",
+      training: { type: "dual", durationMonths: 42 },
+      profile: { T:4, A:4, S:2, K:2, C:2, O:3, N:0, B:3, L:4 },
+      workingConditions: {
+        locations: ["Produktion", "Werkstatt", "beim Kunden"],
+        physicalActivity: "medium",
+        peopleContact: "medium",
+        teamwork: "mixed",
+        routine: "mixed",
+        shiftWork: "possible",
+        timePressure: "variable",
+        precision: "high",
+        responsibility: "high"
+      },
+      activities: [
+        "Elektrische Anlagen installieren und warten",
+        "Schaltanlagen und Steuerungen prüfen",
+        "Fehler in elektrischen Systemen suchen",
+        "Anlagen in Betrieb nehmen"
+      ],
+      dayToDay: "Du sorgst dafür, dass elektrische Anlagen und Systeme zuverlässig funktionieren.",
+      interestTags: ["elektronik", "technik", "strom", "reparieren", "maschinen"],
+      valuesTags: ["technik", "verantwortung", "sicherheit"]
+    },
+
+    // ================================================
+    // IT UND DIGITALISIERUNG
+    // ================================================
 
     {
       id: "fachinformatiker-anwendungsentwicklung",
@@ -227,13 +280,15 @@ window.IndustryAICareers = {
       training: { type: "dual", durationMonths: 36 },
       profile: { T:2, A:4, S:2, K:3, C:4, O:3, N:0, B:2, L:4 },
       workingConditions: {
-        locations: ["Büro","Homeoffice","beim Kunden"],
+        locations: ["Büro", "Homeoffice", "beim Kunden"],
         physicalActivity: "low",
         peopleContact: "medium",
         teamwork: "mixed",
         routine: "mixed",
         shiftWork: "rare",
-        timePressure: "variable"
+        timePressure: "variable",
+        precision: "high",
+        responsibility: "high"
       },
       activities: [
         "Software und Anwendungen entwickeln",
@@ -242,8 +297,8 @@ window.IndustryAICareers = {
         "Programme weiterentwickeln"
       ],
       dayToDay: "Du planst, programmierst und testest Software am Computer.",
-      interestTags: ["software","programmieren","digital","logik","kreativ"],
-      valuesTags: ["entwicklung","flexibilitaet","kreativitaet"]
+      interestTags: ["software", "programmieren", "digital", "logik", "kreativ"],
+      valuesTags: ["entwicklung", "flexibilitaet", "kreativitaet"]
     },
 
     {
@@ -253,13 +308,15 @@ window.IndustryAICareers = {
       training: { type: "dual", durationMonths: 36 },
       profile: { T:3, A:4, S:3, K:4, C:2, O:4, N:0, B:3, L:4 },
       workingConditions: {
-        locations: ["Büro","Rechenzentrum","beim Kunden"],
+        locations: ["Büro", "Rechenzentrum", "beim Kunden"],
         physicalActivity: "low",
         peopleContact: "high",
         teamwork: "high",
         routine: "mixed",
         shiftWork: "possible",
-        timePressure: "variable"
+        timePressure: "variable",
+        precision: "high",
+        responsibility: "high"
       },
       activities: [
         "IT-Systeme und Netzwerke einrichten",
@@ -268,10 +325,13 @@ window.IndustryAICareers = {
         "Nutzer beraten"
       ],
       dayToDay: "Du sorgst dafür, dass Computer, Netzwerke und IT-Dienste funktionieren.",
-      interestTags: ["computer","netzwerke","digital","technik","probleme_loesen"],
-      valuesTags: ["technik","verantwortung","teamwork"]
+      interestTags: ["computer", "netzwerke", "digital", "technik", "probleme_loesen"],
+      valuesTags: ["technik", "verantwortung", "teamwork"]
     },
 
+    // ================================================
+    // MEDIEN, GESTALTUNG UND KREATIVITÄT
+    // ================================================
 
     {
       id: "mediengestalter",
@@ -280,13 +340,15 @@ window.IndustryAICareers = {
       training: { type: "dual", durationMonths: 36 },
       profile: { T:1, A:2, S:2, K:3, C:4, O:3, N:0, B:2, L:4 },
       workingConditions: {
-        locations: ["Büro","Studio","Homeoffice"],
+        locations: ["Büro", "Studio", "Homeoffice"],
         physicalActivity: "low",
         peopleContact: "medium",
         teamwork: "mixed",
         routine: "mixed",
         shiftWork: "rare",
-        timePressure: "variable"
+        timePressure: "variable",
+        precision: "high",
+        responsibility: "medium"
       },
       activities: [
         "Layouts und visuelle Medien gestalten",
@@ -295,8 +357,8 @@ window.IndustryAICareers = {
         "Gestaltung mit Kunden und Teams abstimmen"
       ],
       dayToDay: "Du entwickelst visuelle Inhalte für Print und digitale Medien.",
-      interestTags: ["design","grafik","medien","kreativ","computer"],
-      valuesTags: ["kreativitaet","entwicklung","abwechslung"]
+      interestTags: ["design", "grafik", "medien", "kreativ", "computer"],
+      valuesTags: ["kreativitaet", "entwicklung", "abwechslung"]
     },
 
     {
@@ -306,13 +368,15 @@ window.IndustryAICareers = {
       training: { type: "dual", durationMonths: 36 },
       profile: { T:2, A:2, S:3, K:3, C:4, O:2, N:1, B:2, L:3 },
       workingConditions: {
-        locations: ["Studio","im Freien","beim Kunden"],
+        locations: ["Studio", "im Freien", "beim Kunden"],
         physicalActivity: "medium",
         peopleContact: "high",
         teamwork: "mixed",
         routine: "low",
         shiftWork: "possible",
-        timePressure: "variable"
+        timePressure: "variable",
+        precision: "high",
+        responsibility: "medium"
       },
       activities: [
         "Fotoshootings planen und durchführen",
@@ -321,8 +385,8 @@ window.IndustryAICareers = {
         "Kundenwünsche abstimmen"
       ],
       dayToDay: "Du planst Aufnahmen, fotografierst und bearbeitest Bilder digital.",
-      interestTags: ["fotografie","design","kreativ","medien","menschen"],
-      valuesTags: ["kreativitaet","selbststaendigkeit","abwechslung"]
+      interestTags: ["fotografie", "design", "kreativ", "medien", "menschen"],
+      valuesTags: ["kreativitaet", "selbststaendigkeit", "abwechslung"]
     },
 
     {
@@ -332,13 +396,15 @@ window.IndustryAICareers = {
       training: { type: "dual", durationMonths: 36 },
       profile: { T:3, A:1, S:3, K:3, C:4, O:4, N:1, B:3, L:3 },
       workingConditions: {
-        locations: ["Verkaufsfläche","Werkstatt","Büro"],
+        locations: ["Verkaufsfläche", "Werkstatt", "Büro"],
         physicalActivity: "medium",
         peopleContact: "high",
         teamwork: "high",
         routine: "mixed",
         shiftWork: "possible",
-        timePressure: "variable"
+        timePressure: "variable",
+        precision: "high",
+        responsibility: "medium"
       },
       activities: [
         "Schaufenster und Verkaufsräume gestalten",
@@ -347,9 +413,13 @@ window.IndustryAICareers = {
         "Werbeaktionen visuell umsetzen"
       ],
       dayToDay: "Du gestaltest Verkaufsflächen und machst Produkte visuell erlebbar.",
-      interestTags: ["design","dekoration","marketing","kreativ","handel"],
-      valuesTags: ["kreativitaet","abwechslung","teamwork"]
+      interestTags: ["design", "dekoration", "marketing", "kreativ", "handel"],
+      valuesTags: ["kreativitaet", "abwechslung", "teamwork"]
     },
+
+    // ================================================
+    // NATUR, UMWELT UND TIERE
+    // ================================================
 
     {
       id: "landwirt",
@@ -358,13 +428,15 @@ window.IndustryAICareers = {
       training: { type: "dual", durationMonths: 36 },
       profile: { T:4, A:3, S:1, K:1, C:1, O:3, N:4, B:3, L:3 },
       workingConditions: {
-        locations: ["im Freien","Stall","Betriebshof"],
+        locations: ["im Freien", "Stall", "Betriebshof"],
         physicalActivity: "high",
         peopleContact: "low",
         teamwork: "mixed",
         routine: "mixed",
         shiftWork: "possible",
-        timePressure: "variable"
+        timePressure: "variable",
+        precision: "medium",
+        responsibility: "high"
       },
       activities: [
         "Feldarbeiten und Pflanzenbau durchführen",
@@ -373,8 +445,8 @@ window.IndustryAICareers = {
         "Betriebliche Abläufe dokumentieren"
       ],
       dayToDay: "Du arbeitest mit Natur, Tieren und Technik. Die Aufgaben richten sich nach Jahreszeit und Betrieb.",
-      interestTags: ["landwirtschaft","natur","tiere","maschinen","umwelt"],
-      valuesTags: ["natur","nachhaltigkeit","selbststaendigkeit"]
+      interestTags: ["landwirtschaft", "natur", "tiere", "maschinen", "umwelt"],
+      valuesTags: ["natur", "nachhaltigkeit", "selbststaendigkeit"]
     },
 
     {
@@ -384,13 +456,15 @@ window.IndustryAICareers = {
       training: { type: "dual", durationMonths: 36 },
       profile: { T:4, A:2, S:2, K:2, C:3, O:2, N:4, B:3, L:3 },
       workingConditions: {
-        locations: ["im Freien","Gewächshaus","Gartenbaubetrieb"],
+        locations: ["im Freien", "Gewächshaus", "Gartenbaubetrieb"],
         physicalActivity: "high",
         peopleContact: "medium",
         teamwork: "mixed",
         routine: "mixed",
         shiftWork: "rare",
-        timePressure: "variable"
+        timePressure: "variable",
+        precision: "medium",
+        responsibility: "medium"
       },
       activities: [
         "Pflanzen kultivieren und pflegen",
@@ -399,8 +473,8 @@ window.IndustryAICareers = {
         "Maschinen und Werkzeuge einsetzen"
       ],
       dayToDay: "Du arbeitest mit Pflanzen und gestaltest oder pflegst Grünanlagen und Gärten.",
-      interestTags: ["pflanzen","natur","umwelt","gestaltung","handwerk"],
-      valuesTags: ["natur","nachhaltigkeit","abwechslung"]
+      interestTags: ["pflanzen", "natur", "umwelt", "gestaltung", "handwerk"],
+      valuesTags: ["natur", "nachhaltigkeit", "abwechslung"]
     },
 
     {
@@ -410,13 +484,15 @@ window.IndustryAICareers = {
       training: { type: "dual", durationMonths: 36 },
       profile: { T:2, A:3, S:4, K:4, C:1, O:4, N:3, B:3, L:3 },
       workingConditions: {
-        locations: ["Tierarztpraxis","Tierklinik"],
+        locations: ["Tierarztpraxis", "Tierklinik"],
         physicalActivity: "medium",
         peopleContact: "very_high",
         teamwork: "high",
         routine: "mixed",
         shiftWork: "possible",
-        timePressure: "variable"
+        timePressure: "variable",
+        precision: "high",
+        responsibility: "high"
       },
       activities: [
         "Tierärzte bei Untersuchungen unterstützen",
@@ -425,9 +501,13 @@ window.IndustryAICareers = {
         "Hygiene und Dokumentation übernehmen"
       ],
       dayToDay: "Du kümmerst dich um Tiere und ihre Halter und assistierst bei Behandlungen.",
-      interestTags: ["tiere","gesundheit","helfen","medizin","organisation"],
-      valuesTags: ["tiere","helfen","verantwortung"]
+      interestTags: ["tiere", "gesundheit", "helfen", "medizin", "organisation"],
+      valuesTags: ["tiere", "helfen", "verantwortung"]
     },
+
+    // ================================================
+    // GASTRONOMIE, LOGISTIK UND VERKEHR
+    // ================================================
 
     {
       id: "koch",
@@ -436,13 +516,15 @@ window.IndustryAICareers = {
       training: { type: "dual", durationMonths: 36 },
       profile: { T:3, A:2, S:3, K:2, C:4, O:4, N:1, B:4, L:3 },
       workingConditions: {
-        locations: ["Küche","Gastronomie","Gemeinschaftsverpflegung"],
+        locations: ["Küche", "Gastronomie", "Gemeinschaftsverpflegung"],
         physicalActivity: "high",
         peopleContact: "medium",
         teamwork: "high",
         routine: "mixed",
         shiftWork: "common",
-        timePressure: "high"
+        timePressure: "high",
+        precision: "high",
+        responsibility: "high"
       },
       activities: [
         "Speisen vorbereiten und zubereiten",
@@ -451,8 +533,8 @@ window.IndustryAICareers = {
         "Hygiene und Qualität sicherstellen"
       ],
       dayToDay: "Du arbeitest im Küchenteam und bereitest Speisen unter Zeitvorgaben zu.",
-      interestTags: ["kochen","lebensmittel","kreativ","gastronomie","team"],
-      valuesTags: ["kreativitaet","teamwork","abwechslung"]
+      interestTags: ["kochen", "lebensmittel", "kreativ", "gastronomie", "team"],
+      valuesTags: ["kreativitaet", "teamwork", "abwechslung"]
     },
 
     {
@@ -462,13 +544,15 @@ window.IndustryAICareers = {
       training: { type: "dual", durationMonths: 36 },
       profile: { T:3, A:3, S:2, K:2, C:1, O:4, N:1, B:3, L:3 },
       workingConditions: {
-        locations: ["Lager","Logistikzentrum","Versand"],
+        locations: ["Lager", "Logistikzentrum", "Versand"],
         physicalActivity: "high",
         peopleContact: "medium",
         teamwork: "high",
         routine: "high",
         shiftWork: "possible",
-        timePressure: "variable"
+        timePressure: "variable",
+        precision: "high",
+        responsibility: "high"
       },
       activities: [
         "Waren annehmen und kontrollieren",
@@ -477,8 +561,8 @@ window.IndustryAICareers = {
         "Versand organisieren"
       ],
       dayToDay: "Du sorgst dafür, dass Waren zur richtigen Zeit am richtigen Ort sind.",
-      interestTags: ["logistik","organisation","waren","planung","technik"],
-      valuesTags: ["struktur","teamwork","verantwortung"]
+      interestTags: ["logistik", "organisation", "waren", "planung", "technik"],
+      valuesTags: ["struktur", "teamwork", "verantwortung"]
     },
 
     {
@@ -488,13 +572,15 @@ window.IndustryAICareers = {
       training: { type: "dual", durationMonths: 36 },
       profile: { T:3, A:2, S:2, K:2, C:0, O:3, N:1, B:4, L:2 },
       workingConditions: {
-        locations: ["Fahrzeug","unterwegs","Kundenstandorte"],
+        locations: ["Fahrzeug", "unterwegs", "Kundenstandorte"],
         physicalActivity: "medium",
         peopleContact: "medium",
         teamwork: "low",
         routine: "mixed",
         shiftWork: "possible",
-        timePressure: "variable"
+        timePressure: "variable",
+        precision: "high",
+        responsibility: "high"
       },
       activities: [
         "Fahrzeuge sicher führen",
@@ -503,8 +589,8 @@ window.IndustryAICareers = {
         "Ladung sichern und Lieferungen dokumentieren"
       ],
       dayToDay: "Du transportierst Güter oder Personen und bist viel unterwegs.",
-      interestTags: ["fahren","fahrzeuge","logistik","unterwegs","technik"],
-      valuesTags: ["selbststaendigkeit","verantwortung","abwechslung"]
+      interestTags: ["fahren", "fahrzeuge", "logistik", "unterwegs", "technik"],
+      valuesTags: ["selbststaendigkeit", "verantwortung", "abwechslung"]
     },
 
     {
@@ -514,13 +600,15 @@ window.IndustryAICareers = {
       training: { type: "dual", durationMonths: 36 },
       profile: { T:4, A:4, S:3, K:3, C:3, O:3, N:0, B:4, L:4 },
       workingConditions: {
-        locations: ["Veranstaltungsort","Bühne","Lager"],
+        locations: ["Veranstaltungsort", "Bühne", "Lager"],
         physicalActivity: "high",
         peopleContact: "high",
-        teamwork: "very_high",
+        teamwork: "high",
         routine: "low",
         shiftWork: "common",
-        timePressure: "high"
+        timePressure: "high",
+        precision: "high",
+        responsibility: "high"
       },
       activities: [
         "Bühnen-, Licht-, Ton- und Videotechnik aufbauen",
@@ -529,8 +617,281 @@ window.IndustryAICareers = {
         "Sicherheitsvorgaben beachten"
       ],
       dayToDay: "Du sorgst dafür, dass technische Abläufe bei Veranstaltungen funktionieren.",
-      interestTags: ["veranstaltungen","technik","musik","licht","ton","team"],
-      valuesTags: ["abwechslung","teamwork","technik"]
+      interestTags: ["veranstaltungen", "technik", "musik", "licht", "ton", "team"],
+      valuesTags: ["abwechslung", "teamwork", "technik"]
     },
+
+    // ================================================
+    // GESUNDHEIT UND SOZIALES
+    // ================================================
+
+    {
+      id: "pflegefachfrau",
+      name: "Pflegefachfrau/-mann",
+      category: "Gesundheit & Soziales",
+      training: { type: "school_based", durationMonths: 36 },
+      profile: { T:2, A:3, S:4, K:4, C:1, O:4, N:1, B:4, L:4 },
+      workingConditions: {
+        locations: ["Krankenhaus", "Pflegeeinrichtung", "beim Kunden"],
+        physicalActivity: "high",
+        peopleContact: "very_high",
+        teamwork: "high",
+        routine: "mixed",
+        shiftWork: "common",
+        timePressure: "high",
+        precision: "high",
+        responsibility: "high"
+      },
+      activities: [
+        "Menschen pflegerisch versorgen und begleiten",
+        "Gesundheitszustände beobachten und dokumentieren",
+        "Bei medizinischen Maßnahmen unterstützen",
+        "Mit Angehörigen und anderen Fachkräften zusammenarbeiten"
+      ],
+      dayToDay: "Du begleitest Menschen in unterschiedlichen Lebens- und Gesundheitssituationen.",
+      interestTags: ["menschen", "helfen", "gesundheit", "medizin", "pflege"],
+      valuesTags: ["helfen", "verantwortung", "teamwork"]
+    },
+
+    {
+      id: "medizinische-fachangestellte",
+      name: "Medizinische/r Fachangestellte/r",
+      category: "Gesundheit & Soziales",
+      training: { type: "dual", durationMonths: 36 },
+      profile: { T:2, A:3, S:4, K:4, C:1, O:4, N:1, B:3, L:3 },
+      workingConditions: {
+        locations: ["Arztpraxis", "Labor", "Klinik"],
+        physicalActivity: "medium",
+        peopleContact: "very_high",
+        teamwork: "high",
+        routine: "high",
+        shiftWork: "rare",
+        timePressure: "variable",
+        precision: "high",
+        responsibility: "high"
+      },
+      activities: [
+        "Patienten empfangen und betreuen",
+        "Termine und Praxisabläufe organisieren",
+        "Bei Untersuchungen und Behandlungen assistieren",
+        "Proben und medizinische Daten bearbeiten"
+      ],
+      dayToDay: "Du verbindest medizinische Assistenz mit Organisation und Patientenkontakt.",
+      interestTags: ["menschen", "gesundheit", "medizin", "organisation", "helfen"],
+      valuesTags: ["helfen", "sicherheit", "verantwortung"]
+    },
+
+    {
+      id: "erzieher",
+      name: "Erzieher/in",
+      category: "Gesundheit & Soziales",
+      training: { type: "school_based", durationMonths: 36 },
+      profile: { T:1, A:2, S:4, K:4, C:4, O:3, N:2, B:4, L:4 },
+      workingConditions: {
+        locations: ["Kindergarten", "Schule", "Jugendeinrichtung"],
+        physicalActivity: "medium",
+        peopleContact: "very_high",
+        teamwork: "high",
+        routine: "mixed",
+        shiftWork: "rare",
+        timePressure: "variable",
+        precision: "medium",
+        responsibility: "high"
+      },
+      activities: [
+        "Kinder und Jugendliche betreuen und fördern",
+        "Spiel- und Lernangebote planen",
+        "Entwicklung beobachten und dokumentieren",
+        "Mit Eltern und Teams zusammenarbeiten"
+      ],
+      dayToDay: "Du begleitest junge Menschen in ihrer Entwicklung und gestaltest ihren Alltag.",
+      interestTags: ["menschen", "helfen", "kinder", "kommunikation", "kreativ"],
+      valuesTags: ["helfen", "verantwortung", "teamwork"]
+    },
+
+    // ================================================
+    // WIRTSCHAFT, VERWALTUNG UND KAUFMÄNNISCHE BERUFE
+    // ================================================
+
+    {
+      id: "industriekaufmann",
+      name: "Industriekaufmann/-frau",
+      category: "Wirtschaft & Verwaltung",
+      training: { type: "dual", durationMonths: 36 },
+      profile: { T:1, A:4, S:3, K:4, C:2, O:4, N:0, B:2, L:3 },
+      workingConditions: {
+        locations: ["Büro", "Produktion"],
+        physicalActivity: "low",
+        peopleContact: "high",
+        teamwork: "high",
+        routine: "mixed",
+        shiftWork: "rare",
+        timePressure: "variable",
+        precision: "high",
+        responsibility: "high"
+      },
+      activities: [
+        "Einkauf und Materialwirtschaft organisieren",
+        "Angebote und Aufträge bearbeiten",
+        "Produktions- und Vertriebsprozesse unterstützen",
+        "Mit Kunden, Lieferanten und Abteilungen kommunizieren"
+      ],
+      dayToDay: "Du koordinierst kaufmännische Abläufe in einem Industrieunternehmen.",
+      interestTags: ["wirtschaft", "organisation", "planung", "zahlen", "kommunikation"],
+      valuesTags: ["struktur", "entwicklung", "teamwork"]
+    },
+
+    {
+      id: "kaufmann-einzelhandel",
+      name: "Kaufmann/-frau im Einzelhandel",
+      category: "Wirtschaft & Verwaltung",
+      training: { type: "dual", durationMonths: 36 },
+      profile: { T:1, A:2, S:4, K:4, C:2, O:3, N:0, B:3, L:3 },
+      workingConditions: {
+        locations: ["Verkaufsfläche", "Lager", "Büro"],
+        physicalActivity: "medium",
+        peopleContact: "very_high",
+        teamwork: "high",
+        routine: "mixed",
+        shiftWork: "possible",
+        timePressure: "variable",
+        precision: "medium",
+        responsibility: "medium"
+      },
+      activities: [
+        "Kunden beraten und Waren verkaufen",
+        "Waren präsentieren und bestellen",
+        "Kassenvorgänge durchführen",
+        "Lagerbestände und Verkaufsflächen organisieren"
+      ],
+      dayToDay: "Du arbeitest im Verkauf und verbindest Beratung mit Warenwirtschaft.",
+      interestTags: ["handel", "menschen", "beratung", "kommunikation", "organisation"],
+      valuesTags: ["teamwork", "entwicklung", "abwechslung"]
+    },
+
+    {
+      id: "steuerfachangestellter",
+      name: "Steuerfachangestellte/r",
+      category: "Wirtschaft & Verwaltung",
+      training: { type: "dual", durationMonths: 36 },
+      profile: { T:0, A:4, S:2, K:3, C:1, O:4, N:0, B:2, L:4 },
+      workingConditions: {
+        locations: ["Büro", "Homeoffice"],
+        physicalActivity: "low",
+        peopleContact: "medium",
+        teamwork: "mixed",
+        routine: "high",
+        shiftWork: "rare",
+        timePressure: "variable",
+        precision: "high",
+        responsibility: "high"
+      },
+      activities: [
+        "Buchführungen und Steuererklärungen bearbeiten",
+        "Belege und Geschäftsvorgänge prüfen",
+        "Lohn- und Gehaltsabrechnungen vorbereiten",
+        "Mandanten und Behörden kontaktieren"
+      ],
+      dayToDay: "Du arbeitest mit Zahlen, Dokumenten und steuerlichen Vorgängen.",
+      interestTags: ["zahlen", "wirtschaft", "organisation", "logik", "buero"],
+      valuesTags: ["struktur", "sicherheit", "verantwortung"]
+    },
+
+    // ================================================
+    // BAU, PLANUNG UND TECHNISCHE ZEICHNUNG
+    // ================================================
+
+    {
+      id: "bauzeichner",
+      name: "Bauzeichner/in",
+      category: "Bau, Planung & Technik",
+      training: { type: "dual", durationMonths: 36 },
+      profile: { T:2, A:4, S:2, K:2, C:3, O:4, N:1, B:2, L:3 },
+      workingConditions: {
+        locations: ["Büro", "Baustelle"],
+        physicalActivity: "low",
+        peopleContact: "medium",
+        teamwork: "mixed",
+        routine: "mixed",
+        shiftWork: "rare",
+        timePressure: "variable",
+        precision: "high",
+        responsibility: "high"
+      },
+      activities: [
+        "Technische Bauzeichnungen erstellen",
+        "CAD-Programme verwenden",
+        "Maße und technische Vorgaben berücksichtigen",
+        "Planungsunterlagen überarbeiten"
+      ],
+      dayToDay: "Du setzt Bau- und Planungsideen in technische Zeichnungen um.",
+      interestTags: ["planung", "technik", "gestaltung", "computer", "praezision"],
+      valuesTags: ["struktur", "technik", "entwicklung"]
+    },
+
+    // ================================================
+    // NATURWISSENSCHAFT UND LABOR
+    // ================================================
+
+    {
+      id: "chemielaborant",
+      name: "Chemielaborant/in",
+      category: "Naturwissenschaft & Labor",
+      training: { type: "dual", durationMonths: 42 },
+      profile: { T:3, A:4, S:2, K:2, C:2, O:4, N:2, B:2, L:4 },
+      workingConditions: {
+        locations: ["Labor", "Produktion"],
+        physicalActivity: "low",
+        peopleContact: "medium",
+        teamwork: "mixed",
+        routine: "mixed",
+        shiftWork: "possible",
+        timePressure: "variable",
+        precision: "high",
+        responsibility: "high"
+      },
+      activities: [
+        "Chemische Versuche und Analysen durchführen",
+        "Proben vorbereiten und untersuchen",
+        "Messwerte dokumentieren und auswerten",
+        "Laborgeräte bedienen und pflegen"
+      ],
+      dayToDay: "Du untersuchst Stoffe und Materialien und arbeitest mit Messgeräten und Laborverfahren.",
+      interestTags: ["forschung", "chemie", "logik", "analyse", "technik"],
+      valuesTags: ["qualitaet", "entwicklung", "verantwortung"]
+    },
+
+    // ================================================
+    // KÖRPERNAHE DIENSTLEISTUNGEN
+    // ================================================
+
+    {
+      id: "friseur",
+      name: "Friseur/in",
+      category: "Dienstleistung & Gestaltung",
+      training: { type: "dual", durationMonths: 36 },
+      profile: { T:2, A:1, S:4, K:4, C:4, O:2, N:0, B:3, L:3 },
+      workingConditions: {
+        locations: ["Salon", "Kundenbereich"],
+        physicalActivity: "medium",
+        peopleContact: "very_high",
+        teamwork: "mixed",
+        routine: "mixed",
+        shiftWork: "rare",
+        timePressure: "variable",
+        precision: "high",
+        responsibility: "medium"
+      },
+      activities: [
+        "Haare schneiden, färben und stylen",
+        "Kunden beraten",
+        "Frisuren und Looks gestalten",
+        "Arbeitsmaterialien und Salonabläufe organisieren"
+      ],
+      dayToDay: "Du verbindest handwerkliche Präzision, Gestaltung und persönlichen Kundenkontakt.",
+      interestTags: ["gestaltung", "kreativ", "menschen", "beratung", "handwerk"],
+      valuesTags: ["kreativitaet", "teamwork", "selbststaendigkeit"]
+    }
+
   ]
 };
