@@ -4,7 +4,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 
   // Automatisches Jahr im Footer
-  const footerYear = document.querySelector("footer p:last-child");
+  const footerYear = document.querySelector("footer p:last-of-type");
 
   if (footerYear) {
     footerYear.textContent = "© " +
