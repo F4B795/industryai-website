@@ -202,6 +202,11 @@
         { text: "Draußen in der Natur", value: "Draußen" },
         { text: "Beim Kunden oder unterwegs", value: "beim Kunden" },
         { text: "Krankenhaus oder Praxis", value: "Gesundheitswesen" },
+        { text: "Küche oder Großküche", value: "Küche" },
+        { text: "Bäckerei oder Backstube", value: "Bäckerei" },
+        { text: "Konditorei", value: "Konditorei" },
+        { text: "Restaurant oder Hotel", value: "Restaurant" },
+        { text: "Café", value: "Café" },
         { text: "Ich bin offen", value: "offen" }
       ]
     },
