@@ -2354,3 +2354,61 @@ footer .ia-footer-links a:hover{color:var(--cyan)}
   header nav .nav-button{padding:8px 10px}
   footer .ia-footer-links{gap:10px 16px}
 }
+
+
+/* INDUSTRYAI – zentrale Konsistenzkorrektur November 2026
+   Einheitliche Abschnittsüberschriften, saubere Zeilenumbrüche und mobile Navigation. */
+.ia-campus-heading,
+.ia-vision-heading,
+.ia-home-section-head,
+.ia-career-heading,
+.ia-subpage-intro {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+.ia-campus-heading h2,
+.ia-vision-heading h2,
+.ia-home-section-head h2,
+.ia-career-heading h2 {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  text-wrap: balance;
+}
+.ia-campus-heading h2 span,
+.ia-vision-heading h2 span {
+  display: block;
+  margin-top: 8px;
+}
+.ia-campus-heading p,
+.ia-vision-heading p,
+.ia-home-section-head p,
+.ia-career-heading p,
+.ia-subpage-intro > p {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+@media (max-width: 800px) {
+  header {
+    height: auto !important;
+    min-height: 72px !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    padding-top: 12px !important;
+    padding-bottom: 8px !important;
+  }
+  header nav {
+    width: 100% !important;
+    justify-content: center !important;
+    flex-wrap: wrap !important;
+    padding: 5px 0 9px !important;
+  }
+}
+@media (max-width: 480px) {
+  header nav {
+    gap: 9px 13px !important;
+    font-size: 11px !important;
+  }
+}
