@@ -862,7 +862,16 @@ function showResults(result) {
       const card = document.createElement("article");
       card.className = "career-result-card";
 
-      addText(card, "h3", (index + 1) + ". " + career.name);
+    const title = document.createElement("h3");
+const careerLink = document.createElement("a");
+
+careerLink.href = "beruf.html?id=" + encodeURIComponent(career.id);
+careerLink.textContent = (index + 1) + ". " + career.name;
+careerLink.style.color = "#42d8ed";
+careerLink.style.textDecoration = "none";
+
+title.appendChild(careerLink);
+card.appendChild(title);
 
       if (career.requestedByUser) {
         addText(
