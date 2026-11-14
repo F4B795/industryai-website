@@ -710,20 +710,30 @@
     const avoidances = [];
 
     // Alltagssituationen ergeben das Interessen- und Verhaltensprofil.
+   
     questions.filter(q => q.category === "alltag").forEach(question => {
       const selectedIndex = answers[question.id];
       if (selectedIndex === undefined) return;
 
       const selected = question.options[selectedIndex];
 
-      question.options.forEach(option => {
-        dimensions.forEach(dimension => {
-          const possible = Number(option.scores?.[dimension] || 0);
-          maximum[dimension] += Math.max(
-            ...question.options.map(o => Number(o.scores?.[dimension] || 0))
+      dimensions.forEach(dimension => {
+        const questionMaximum = Math.max(
+          ...question.options.map(option =>
+            Number(option.scores?.[dimension] || 0)
+          )
+        );
+
+        if (questionMaximum > 0) {
+          points[dimension] += Number(
+            selected.scores?.[dimension] || 0
           );
-        });
+
+          maximum[dimension] += questionMaximum;
+        }
       });
+    });
+
 
       dimensions.forEach(dimension => {
         points[dimension] += Number(
