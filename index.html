@@ -76,6 +76,14 @@
     @media(max-width:800px){.ia-home-visual{min-height:300px}.ia-industry-scene{width:100%}.ia-scene-caption{font-size:8px}}
     @media(max-width:560px){.ia-home-grid{grid-template-columns:1fr}.ia-home-card{min-height:295px}.ia-card-art{height:130px}.ia-home-visual{min-height:250px}.ia-scene-badge{width:34px;height:34px;font-size:18px}}
 
+    .ia-home-visual{min-height:390px;overflow:hidden;border-radius:14px;position:relative}
+    .ia-hero-image{display:block;width:100%;height:100%;min-height:390px;object-fit:cover;object-position:center;border-radius:14px;box-shadow:0 18px 50px rgba(0,0,0,.28)}
+    .ia-card-art{height:165px;position:relative;overflow:hidden;background:#102b40}
+    .ia-card-art img{display:block;width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .45s ease}
+    .ia-home-card:hover .ia-card-art img{transform:scale(1.06)}
+    .ia-card-art:after{content:"";position:absolute;inset:35% 0 0;background:linear-gradient(180deg,transparent,rgba(7,19,33,.42));pointer-events:none}
+    @media(max-width:800px){.ia-home-visual{min-height:260px}.ia-hero-image{min-height:260px}}
+    @media(max-width:560px){.ia-home-visual{min-height:210px}.ia-hero-image{min-height:210px}.ia-card-art{height:155px}}
   </style>
 </head>
 <body>
@@ -107,66 +115,8 @@
           <a class="ia-home-secondary" href="#bereiche">Plattform entdecken</a>
         </div>
       </div>
-      <div class="ia-home-visual" role="img" aria-label="Junge Fachkräfte, CNC-Technik und moderne Ausbildungsunternehmen">
-        <div class="ia-scene-glow"></div>
-        <div class="ia-scene-orbit"></div>
-        <div class="ia-scene-badge ia-scene-badge-one">⚙</div>
-        <div class="ia-scene-badge ia-scene-badge-two">⌘</div>
-        <div class="ia-scene-badge ia-scene-badge-three">↗</div>
-        <svg class="ia-industry-scene" viewBox="0 0 620 430" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <defs>
-            <linearGradient id="sceneGlass" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#1c526b"/><stop offset="1" stop-color="#0a1b2a"/></linearGradient>
-            <linearGradient id="sceneMetal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#b5d3df"/><stop offset=".45" stop-color="#55788d"/><stop offset="1" stop-color="#142b40"/></linearGradient>
-            <linearGradient id="sceneCyan" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#7cf5ff"/><stop offset="1" stop-color="#16a8cf"/></linearGradient>
-          </defs>
-          <ellipse cx="330" cy="385" rx="260" ry="28" fill="#16b8d6" opacity=".13"/>
-          <path d="M60 325 L220 250 L540 300 L390 380 Z" fill="#102b40" stroke="#42d8ed" stroke-opacity=".45"/>
-          <path d="M85 315 L225 250 L225 330 L85 370 Z" fill="#153c54" stroke="#3a8aa5"/>
-          <path d="M225 250 L520 292 L520 355 L225 330 Z" fill="url(#sceneGlass)" stroke="#42d8ed" stroke-opacity=".6"/>
-          <g stroke="#42d8ed" stroke-opacity=".6" fill="none"><path d="M250 267 V333 M295 273 V339 M340 279 V345 M385 285 V350 M430 291 V355 M475 297 V360"/><path d="M235 292 L510 328"/></g>
-          <path d="M105 295 V185 H200 V265" fill="#102b40" stroke="#6e9eb5" stroke-width="5"/>
-          <path d="M115 185 H190 L180 140 H125 Z" fill="url(#sceneMetal)" stroke="#a6d1e3" stroke-width="3"/>
-          <path d="M145 140 V105 H168 V140" fill="#183d55" stroke="#42d8ed" stroke-width="3"/>
-          <rect x="132" y="205" width="42" height="45" rx="4" fill="#071321" stroke="#42d8ed"/>
-          <path d="M140 215 H165 M140 225 H160 M140 235 H165" stroke="#42d8ed" stroke-width="2"/>
-          <g transform="translate(435 85)">
-            <path d="M20 190 L55 120 L85 130 L60 205" fill="none" stroke="#d5a24b" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M55 120 L90 65 L120 80 L85 130" fill="none" stroke="#d5a24b" stroke-width="17" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M90 65 L115 35 L132 45 L120 80" fill="none" stroke="#d5a24b" stroke-width="13" stroke-linecap="round"/>
-            <path d="M127 43 L145 28 M127 43 L148 55" stroke="#d5a24b" stroke-width="7" stroke-linecap="round"/>
-            <circle cx="55" cy="120" r="11" fill="#15364b" stroke="#42d8ed" stroke-width="3"/>
-            <circle cx="90" cy="65" r="10" fill="#15364b" stroke="#42d8ed" stroke-width="3"/>
-            <path d="M0 205 H78" stroke="#42d8ed" stroke-width="4"/>
-          </g>
-          <g transform="translate(250 70)">
-            <path d="M0 105 Q0 45 58 45 Q116 45 116 105 V160 H0 Z" fill="#10243a" stroke="#42d8ed" stroke-width="3"/>
-            <path d="M16 100 Q16 60 58 60 Q100 60 100 100 V112 H16 Z" fill="#234b61"/>
-            <path d="M24 160 L12 235 H44 L58 190 L72 235 H105 L92 160" fill="#18364d"/>
-            <path d="M28 115 H88 L80 160 H36 Z" fill="#0a1b2a" stroke="#4c8098"/>
-            <path d="M30 125 H86" stroke="#42d8ed" stroke-width="3"/>
-            <circle cx="58" cy="26" r="31" fill="#b87953"/>
-            <path d="M28 25 Q30 -15 62 -9 Q90 -4 89 29 Q75 8 54 13 Q41 22 28 25" fill="#263342"/>
-            <path d="M44 29 H52 M65 29 H73" stroke="#10243a" stroke-width="3" stroke-linecap="round"/>
-            <path d="M52 44 Q60 50 68 44" stroke="#7a3f38" stroke-width="2" fill="none"/>
-            <path d="M4 105 Q58 125 112 105" stroke="#42d8ed" stroke-width="3" fill="none"/>
-          </g>
-          <g transform="translate(365 135) scale(.72)">
-            <circle cx="55" cy="25" r="29" fill="#d39a72"/>
-            <path d="M27 25 Q30 -12 60 -8 Q85 -3 84 28 L70 15 L40 16 Z" fill="#29394a"/>
-            <path d="M8 100 Q8 53 55 53 Q102 53 102 100 V185 H8 Z" fill="#b66c36" stroke="#e3a65d" stroke-width="3"/>
-            <path d="M20 90 H90 V145 H20 Z" fill="#17344a"/>
-            <path d="M25 104 H85 M25 116 H85" stroke="#42d8ed" stroke-width="3"/>
-          </g>
-          <g transform="translate(160 190) scale(.58)">
-            <circle cx="55" cy="25" r="29" fill="#dcae8c"/>
-            <path d="M27 24 Q30 -12 60 -8 Q85 -3 84 28 L70 15 L40 16 Z" fill="#263342"/>
-            <path d="M8 100 Q8 53 55 53 Q102 53 102 100 V185 H8 Z" fill="#236b86" stroke="#42d8ed" stroke-width="3"/>
-            <path d="M20 90 H90 V145 H20 Z" fill="#17344a"/>
-          </g>
-          <path d="M220 385 Q320 410 430 385" fill="none" stroke="#42d8ed" stroke-width="3" opacity=".8"/>
-          <circle cx="220" cy="385" r="5" fill="#8af7ff"/><circle cx="430" cy="385" r="5" fill="#8af7ff"/>
-        </svg>
-        <div class="ia-scene-caption">MENSCHEN · BERUFE · BETRIEBE · ZUKUNFT</div>
+      <div class="ia-home-visual">
+        <img class="ia-hero-image" src="images/hero-industryai.jpg" alt="Junge Fachkräfte in einer modernen Industriehalle mit CNC-Technik und Robotik">
       </div>
     </div>
   </section>
@@ -189,10 +139,10 @@
       <p>Wähle einen Bereich und starte direkt. Alle Funktionen und Inhalte findest du an einem zentralen Ort.</p>
     </div>
     <div class="ia-home-grid">
-      <a class="ia-home-navlink" href="plattform.html#berufscheck"><article class="ia-home-card ia-card-career"><div class="ia-card-art"><span class="ia-art-symbol">✓</span><span class="ia-art-line"></span><span class="ia-art-line short"></span><span class="ia-art-line"></span></div><div class="ia-home-card-body"><div class="ia-home-card-icon">⌕</div><h3>Berufscheck</h3><p>Entdecke deine Interessen und Stärken. Finde heraus, welche Ausbildungsberufe zu dir passen könnten.</p><span>Zum Berufscheck →</span></div></article></a>
-      <a class="ia-home-navlink" href="plattform.html#check"><article class="ia-home-card ia-card-recruiting"><div class="ia-card-art"><span class="ia-chart-bar b1"></span><span class="ia-chart-bar b2"></span><span class="ia-chart-bar b3"></span><span class="ia-chart-bar b4"></span><span class="ia-chart-trend">↗</span></div><div class="ia-home-card-body"><div class="ia-home-card-icon">◇</div><h3>Recruiting-Check</h3><p>Finde heraus, wie gut dein Unternehmen aufgestellt ist, um junge Talente zu erreichen.</p><span>Zum Recruiting-Check →</span></div></article></a>
-      <a class="ia-home-navlink" href="plattform.html#campus"><article class="ia-home-card ia-card-worlds"><div class="ia-card-art"><span class="ia-world-ring"></span><span class="ia-world-core">⚙</span><span class="ia-world-dot"></span></div><div class="ia-home-card-body"><div class="ia-home-card-icon">⌘</div><h3>Berufe entdecken</h3><p>Erkunde verschiedene Berufsfelder und entdecke spannende Tätigkeiten und Arbeitswelten.</p><span>Berufswelten entdecken →</span></div></article></a>
-      <a class="ia-home-navlink" href="plattform.html#unternehmen"><article class="ia-home-card ia-card-company"><div class="ia-card-art"><span class="ia-company-building"><i></i><i></i><i></i><i></i><i></i><i></i></span></div><div class="ia-home-card-body"><div class="ia-home-card-icon">▦</div><h3>Unternehmen</h3><p>Lerne Ausbildungsbetriebe kennen und erhalte Einblicke in ihre Arbeitswelt und Ausbildungsangebote.</p><span>Unternehmen kennenlernen →</span></div></article></a>
+      <a class="ia-home-navlink" href="plattform.html#berufscheck"><article class="ia-home-card ia-card-career"><div class="ia-card-art"><img src="images/berufscheck.jpg" alt="Berufsorientierung und digitaler Berufscheck"></div><div class="ia-home-card-body"><div class="ia-home-card-icon">⌕</div><h3>Berufscheck</h3><p>Entdecke deine Interessen und Stärken. Finde heraus, welche Ausbildungsberufe zu dir passen könnten.</p><span>Zum Berufscheck →</span></div></article></a>
+      <a class="ia-home-navlink" href="plattform.html#check"><article class="ia-home-card ia-card-recruiting"><div class="ia-card-art"><img src="images/recruiting-check.jpg" alt="Digitales Recruiting-Dashboard"></div><div class="ia-home-card-body"><div class="ia-home-card-icon">◇</div><h3>Recruiting-Check</h3><p>Finde heraus, wie gut dein Unternehmen aufgestellt ist, um junge Talente zu erreichen.</p><span>Zum Recruiting-Check →</span></div></article></a>
+      <a class="ia-home-navlink" href="plattform.html#campus"><article class="ia-home-card ia-card-worlds"><div class="ia-card-art"><img src="images/berufe-entdecken.jpg" alt="Präzisionsfertigung mit CNC-Maschine"></div><div class="ia-home-card-body"><div class="ia-home-card-icon">⌘</div><h3>Berufe entdecken</h3><p>Erkunde verschiedene Berufsfelder und entdecke spannende Tätigkeiten und Arbeitswelten.</p><span>Berufswelten entdecken →</span></div></article></a>
+      <a class="ia-home-navlink" href="plattform.html#unternehmen"><article class="ia-home-card ia-card-company"><div class="ia-card-art"><img src="images/unternehmen.jpg" alt="Modernes Ausbildungsunternehmen"></div><div class="ia-home-card-body"><div class="ia-home-card-icon">▦</div><h3>Unternehmen</h3><p>Lerne Ausbildungsbetriebe kennen und erhalte Einblicke in ihre Arbeitswelt und Ausbildungsangebote.</p><span>Unternehmen kennenlernen →</span></div></article></a>
     </div>
   </section>
   <section class="ia-home-mission" id="vision">
