@@ -2337,3 +2337,20 @@ section.hero.hero-modern .hero-visual svg {
   }
 }
 
+
+
+/* INDUSTRYAI – konsistente Navigation und Footer auf allen Hauptseiten */
+header nav a[aria-current="page"]{color:var(--cyan)}
+footer .ia-footer-links{display:flex;justify-content:center;gap:10px 22px;flex-wrap:wrap;margin:12px 0 0;font-size:12px}
+footer .ia-footer-links a{color:#aebfce}
+footer .ia-footer-links a:hover{color:var(--cyan)}
+@media(max-width:800px){
+  header{padding:12px 5%;height:auto;min-height:72px;gap:12px}
+  header nav{width:100%;display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:10px 18px;padding:4px 0 10px;font-size:12px}
+  header nav a{white-space:nowrap}
+}
+@media(max-width:480px){
+  header nav{gap:9px 13px;font-size:11px}
+  header nav .nav-button{padding:8px 10px}
+  footer .ia-footer-links{gap:10px 16px}
+}
