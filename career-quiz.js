@@ -723,103 +723,256 @@
     showResults(result);
   }
 
-  function showResults(result) {
-    app.hidden = true;
-    resultsContainer.hidden = false;
-    resultsContainer.innerHTML = "";
+ 
+function showResults(result) {
+  app.hidden = true;
+  resultsContainer.hidden = false;
+  resultsContainer.innerHTML = "";
 
-    const heading = document.createElement("h2");
-    heading.textContent = "Deine möglichen Berufswege";
-    resultsContainer.appendChild(heading);
+  const heading = document.createElement("h2");
+  heading.textContent = "Deine möglichen Berufswege";
+  resultsContainer.appendChild(heading);
 
-    const introduction = document.createElement("p");
-    introduction.textContent =
-      "Diese Berufe sind Vorschläge auf Grundlage deiner Antworten. " +
-      "Sie helfen dir, neue Möglichkeiten zu entdecken – sie entscheiden nicht für dich.";
-    resultsContainer.appendChild(introduction);
+  const introduction = document.createElement("p");
+  introduction.textContent =
+    "Diese Empfehlungen basieren auf deinen Antworten. " +
+    "Du siehst, welche Bereiche besonders gut zu deinen Angaben passen.";
+  resultsContainer.appendChild(introduction);
 
-    if (!result || !Array.isArray(result.results) || result.results.length === 0) {
-      const empty = document.createElement("p");
-      empty.textContent =
-        "Es konnten noch keine passenden Berufsvorschläge erstellt werden. " +
-        "Bitte überprüfe die Berufedatenbank.";
-      resultsContainer.appendChild(empty);
-    } else {
-      result.results.forEach(function (career, index) {
-        const card = document.createElement("article");
-        card.className = "career-result-card";
+  const legend = document.createElement("div");
+  legend.className = "career-score-details";
 
-        const title = document.createElement("h3");
-        title.textContent = (index + 1) + ". " + career.name;
-        card.appendChild(title);
+  const legendHeading = document.createElement("h3");
+  legendHeading.textContent = "So wird die Übereinstimmung berechnet";
+  legend.appendChild(legendHeading);
 
-        const match = document.createElement("p");
-        match.textContent = career.match === null || career.match === undefined
-          ? "Noch keine ausreichenden Angaben für einen Vergleich."
-          : "Übereinstimmung: " + career.match + " %";
-        card.appendChild(match);
+  const weightText = document.createElement("p");
+  weightText.textContent =
+    "Persönliches Profil: 40 % · Interessen: 30 % · " +
+    "Arbeitsbedingungen: 20 % · Werte: 10 %";
+  legend.appendChild(weightText);
 
-        if (career.requestedByUser) {
-          const desired = document.createElement("p");
-          desired.textContent = "Diesen Beruf hast du selbst ausgewählt.";
-          card.appendChild(desired);
-        }
+  resultsContainer.appendChild(legend);
 
-        if (career.dayToDay) {
-          const day = document.createElement("p");
-          day.textContent = career.dayToDay;
-          card.appendChild(day);
-        }
+  const componentNames = {
+    profile: "Persönliches Profil",
+    interests: "Interessen",
+    conditions: "Arbeitsbedingungen",
+    values: "Persönliche Werte"
+  };
 
-        if (Array.isArray(career.activities) && career.activities.length) {
-          const list = document.createElement("ul");
-          career.activities.forEach(function (activity) {
-            const item = document.createElement("li");
-            item.textContent = activity;
-            list.appendChild(item);
-          });
-          card.appendChild(list);
-        }
-
-        if (Array.isArray(career.conflictNotes)) {
-          career.conflictNotes.forEach(function (note) {
-            const warning = document.createElement("p");
-            warning.textContent = note;
-            card.appendChild(warning);
-          });
-        }
-
-        resultsContainer.appendChild(card);
-      });
-    }
-
-    const disclaimer = document.createElement("p");
-    disclaimer.textContent = result && result.disclaimer
-      ? result.disclaimer
-      : "Die Ergebnisse sind eine Orientierung und keine Eignungsdiagnose.";
-    resultsContainer.appendChild(disclaimer);
-
-    const restart = document.createElement("button");
-    restart.type = "button";
-    restart.textContent = "Berufscheck erneut starten";
-
-    restart.addEventListener("click", function () {
-      Object.keys(answers).forEach(function (key) {
-        delete answers[key];
-      });
-
-      currentQuestion = 0;
-      resultsContainer.hidden = true;
-      app.hidden = false;
-      renderQuestion();
-    });
-
-    resultsContainer.appendChild(restart);
+  function addText(parent, tag, text, className) {
+    const element = document.createElement(tag);
+    element.textContent = text;
+    if (className) element.className = className;
+    parent.appendChild(element);
+    return element;
   }
 
-  startButton.addEventListener("click", startQuiz);
-  nextButton.addEventListener("click", nextQuestion);
-  backButton.addEventListener("click", previousQuestion);
+  function addScoreBars(parent, components) {
+    const section = document.createElement("div");
+    section.className = "career-score-details";
 
-  console.log("INDUSTRYAI Berufscheck Version 3.0 geladen – " + questions.length + " Fragen.");
+    addText(section, "h4", "Deine Übereinstimmung im Detail");
+
+    Object.keys(componentNames).forEach(function (key) {
+      const value = components && components[key];
+
+      const row = document.createElement("div");
+      row.className = "career-score-row";
+
+      const label = document.createElement("span");
+      label.className = "career-score-label";
+      label.textContent = componentNames[key];
+      row.appendChild(label);
+
+      const track = document.createElement("div");
+      track.className = "career-score-track";
+
+      const fill = document.createElement("div");
+      fill.className = "career-score-fill";
+
+      if (value === null || value === undefined) {
+        fill.style.width = "0%";
+        fill.style.opacity = "0.25";
+      } else {
+        fill.style.width = Math.max(0, Math.min(100, value)) + "%";
+      }
+
+      track.appendChild(fill);
+      row.appendChild(track);
+
+      const score = document.createElement("span");
+      score.className = "career-score-value";
+      score.textContent =
+        value === null || value === undefined ? "–" : value + " %";
+      row.appendChild(score);
+
+      section.appendChild(row);
+    });
+
+    parent.appendChild(section);
+  }
+
+  function addReasons(parent, reasons) {
+    if (!Array.isArray(reasons) || !reasons.length) return;
+
+    const section = document.createElement("div");
+    section.className = "career-match-reasons";
+
+    addText(section, "h4", "Warum dieser Beruf vorgeschlagen wird");
+
+    const list = document.createElement("ul");
+
+    reasons.forEach(function (reason) {
+      addText(list, "li", reason);
+    });
+
+    section.appendChild(list);
+    parent.appendChild(section);
+  }
+
+  function addConflicts(parent, notes) {
+    if (!Array.isArray(notes) || !notes.length) return;
+
+    const section = document.createElement("div");
+    section.className = "career-conflict-notes";
+
+    addText(section, "h4", "Das solltest du bei diesem Beruf beachten");
+
+    const list = document.createElement("ul");
+
+    notes.forEach(function (note) {
+      addText(list, "li", note);
+    });
+
+    section.appendChild(list);
+    parent.appendChild(section);
+  }
+
+  if (!result || !Array.isArray(result.results) || !result.results.length) {
+    addText(
+      resultsContainer,
+      "p",
+      "Es konnten keine passenden Berufsvorschläge erstellt werden. " +
+      "Bitte überprüfe die Berufedatenbank."
+    );
+  } else {
+    result.results.forEach(function (career, index) {
+      const card = document.createElement("article");
+      card.className = "career-result-card";
+
+      addText(card, "h3", (index + 1) + ". " + career.name);
+
+      if (career.requestedByUser) {
+        addText(
+          card,
+          "span",
+          "Von dir ausgewählter Wunschberuf",
+          "career-requested-label"
+        );
+      }
+
+      const match = career.match;
+
+      addText(
+        card,
+        "p",
+        match === null || match === undefined
+          ? "Noch keine ausreichenden Angaben für einen Vergleich."
+          : "Gesamtübereinstimmung: " + match + " %"
+      );
+
+      if (career.category) {
+        addText(card, "p", "Berufsfeld: " + career.category);
+      }
+
+      if (career.dayToDay) {
+        addText(card, "p", career.dayToDay);
+      }
+
+      if (Array.isArray(career.activities) && career.activities.length) {
+        addText(card, "h4", "Typische Tätigkeiten");
+
+        const activityList = document.createElement("ul");
+
+        career.activities.forEach(function (activity) {
+          addText(activityList, "li", activity);
+        });
+
+        card.appendChild(activityList);
+      }
+
+      addScoreBars(card, career.components);
+      addReasons(card, career.reasons);
+      addConflicts(card, career.conflictNotes);
+
+      if (career.training) {
+        const training = career.training;
+        const duration = training.durationMonths;
+
+        if (duration) {
+          addText(
+            card,
+            "p",
+            "Ausbildungsdauer: " +
+            (duration / 12).toLocaleString("de-DE", {
+              maximumFractionDigits: 1
+            }) +
+            " Jahre"
+          );
+        }
+
+        if (training.type) {
+          const typeNames = {
+            dual: "Duale Ausbildung",
+            school_based: "Schulische Ausbildung",
+            university: "Studium",
+            dual_study: "Duales Studium"
+          };
+
+          addText(
+            card,
+            "p",
+            "Ausbildungsweg: " +
+            (typeNames[training.type] || training.type)
+          );
+        }
+      }
+
+      resultsContainer.appendChild(card);
+    });
+  }
+
+  addText(
+    resultsContainer,
+    "p",
+    result && result.disclaimer
+      ? result.disclaimer
+      : "Die Ergebnisse sind Orientierungsvorschläge und keine Eignungsdiagnose."
+  );
+
+  const restart = document.createElement("button");
+  restart.type = "button";
+  restart.textContent = "Berufscheck erneut starten";
+
+  restart.addEventListener("click", function () {
+    Object.keys(answers).forEach(function (key) {
+      delete answers[key];
+    });
+
+    currentQuestion = 0;
+    resultsContainer.hidden = true;
+    app.hidden = false;
+    renderQuestion();
+  });
+
+  resultsContainer.appendChild(restart);
+}
+
+startButton.addEventListener("click", startQuiz);
+nextButton.addEventListener("click", nextQuestion);
+backButton.addEventListener("click", previousQuestion);
+
+console.log("INDUSTRYAI Berufscheck Version 3.0 geladen – " + questions.length + " Fragen.");
 })();
