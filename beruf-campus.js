@@ -284,6 +284,88 @@
     );
   }
 
+  function formatEuro(value) {
+    return Number(value).toLocaleString("de-DE") + " €";
+  }
+
+  function renderAccessAndSalary(career, careerDetails) {
+    const data = window.IndustryAICompensation;
+    if (!data) return;
+
+    const section = createElement("section", "section");
+    section.appendChild(createElement("div", "eyebrow", "ZUGANG UND VERDIENST"));
+    section.appendChild(createElement("h2", "", "Voraussetzungen und Gehalt"));
+
+    const panel = createElement("div", "content-panel");
+    panel.appendChild(createElement("h3", "", "Wie kommst du in diesen Beruf?"));
+    panel.appendChild(createElement("p", "muted", data.accessNote));
+
+    if (careerDetails && Array.isArray(careerDetails.prerequisites) && careerDetails.prerequisites.length) {
+      panel.appendChild(createElement("p", "muted", "Hilfreiche Fähigkeiten und Interessen für diesen Beruf:"));
+      const skills = document.createElement("ul");
+      careerDetails.prerequisites.forEach(function (item) {
+        skills.appendChild(createElement("li", "", item));
+      });
+      panel.appendChild(skills);
+    }
+
+    panel.appendChild(createElement("h3", "", "Was kannst du verdienen?"));
+    const pay = data.careers && data.careers[career.id] ? data.careers[career.id] : {};
+
+    const payGrid = createElement("div", "info-grid");
+
+    const trainingCard = createElement("article", "info-card");
+    trainingCard.appendChild(createElement("small", "", "WÄHREND DER AUSBILDUNG"));
+    trainingCard.appendChild(createElement("h3", "", pay.training ? formatEuro(pay.training) + " / Monat" : "Kein Einzelwert hinterlegt"));
+    trainingCard.appendChild(createElement("p", "", pay.training
+      ? "Durchschnittliche tarifliche Bruttovergütung über die Ausbildungsjahre (BIBB 2025), nicht zwingend der Betrag deines Betriebs."
+      : "Für diesen Beruf liegt hier derzeit kein belastbarer berufsspezifischer Tarifdurchschnitt vor."));
+    payGrid.appendChild(trainingCard);
+
+    const entryCard = createElement("article", "info-card");
+    entryCard.appendChild(createElement("small", "", "BERUFSEINSTIEG"));
+    entryCard.appendChild(createElement("h3", "", "Betriebs- und tarifabhängig"));
+    entryCard.appendChild(createElement("p", "", "Ein bundesweit einheitlicher, amtlicher Einstiegswert nach der Ausbildung wird nicht ausgewiesen. Das konkrete Angebot hängt unter anderem von Region, Tarifvertrag, Branche und Aufgaben ab."));
+    payGrid.appendChild(entryCard);
+
+    const experiencedCard = createElement("article", "info-card");
+    experiencedCard.appendChild(createElement("small", "", "FACHKRÄFTE – MEDIAN"));
+    experiencedCard.appendChild(createElement("h3", "", pay.median ? formatEuro(pay.median) + " / Monat" : "Kein belastbarer Wert verfügbar"));
+    experiencedCard.appendChild(createElement("p", "", pay.median
+      ? "Median des monatlichen Bruttoentgelts bei Vollzeit in Deutschland. Das ist kein reines Gehalt von Berufserfahrenen, sondern der Median aller erfassten Altersgruppen."
+      : "Für diesen Beruf wird hier kein bestätigter Medianwert angezeigt. Bitte keine Gehaltszahl daraus ableiten."));
+    if (pay.q1 && pay.q3) {
+      experiencedCard.appendChild(createElement("p", "muted", "Unteres bis oberes Quartil: " + formatEuro(pay.q1) + " bis " + formatEuro(pay.q3) + "."));
+    }
+    if (pay.note) experiencedCard.appendChild(createElement("p", "muted", pay.note));
+    payGrid.appendChild(experiencedCard);
+
+    panel.appendChild(payGrid);
+    panel.appendChild(createElement("p", "muted", data.salaryNote));
+
+    const sources = createElement("p", "muted");
+    sources.appendChild(document.createTextNode("Quellen: "));
+    const trainingLink = createElement("a", "", "BIBB-Ausbildungsvergütung");
+    trainingLink.href = pay.trainingSource || data.trainingSource;
+    trainingLink.target = "_blank";
+    trainingLink.rel = "noopener noreferrer";
+    trainingLink.style.color = "#42d8ed";
+    sources.appendChild(trainingLink);
+    sources.appendChild(document.createTextNode(" · "));
+    const salaryLink = createElement("a", "", "BA-Entgeltatlas");
+    salaryLink.href = pay.source || data.salarySource;
+    salaryLink.target = "_blank";
+    salaryLink.rel = "noopener noreferrer";
+    salaryLink.style.color = "#42d8ed";
+    sources.appendChild(salaryLink);
+    panel.appendChild(sources);
+
+    section.appendChild(panel);
+    const cta = elements.main.querySelector(".campus-cta");
+    if (cta) elements.main.insertBefore(section, cta);
+    else elements.main.appendChild(section);
+  }
+
   function renderCareer(career) {
     const careerDetails =
       detailsDatabase &&
