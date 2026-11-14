@@ -124,6 +124,62 @@
       border-color: #35d5e8;
     }
 
+
+    .job-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 54px;
+      height: 54px;
+      margin: 20px 0 16px;
+      border: 1px solid #55d6b080;
+      border-radius: 12px;
+      color: #55d6b0;
+      background: rgba(85,214,176,.12);
+      font-size: 29px;
+      line-height: 1;
+    }
+
+    .job {
+      background: linear-gradient(145deg, rgba(85,214,176,.12), #0b1d2e 76%);
+      border-color: #55d6b055;
+    }
+
+    .job-link:hover .job,
+    .job-link:focus-visible .job {
+      border-color: #55d6b0;
+      box-shadow: 0 12px 30px rgba(85,214,176,.12);
+    }
+
+    .job-number { color: #55d6b0; }
+
+    .job-more, .job-link { --sector-accent: #55d6b0; }
+    .job-more { color: #55d6b0; }
+
+    .info-card {
+      background: linear-gradient(145deg, rgba(85,214,176,.12), #0b1d2e 78%);
+      border-color: #55d6b055;
+    }
+
+    .info-icon {
+      display: inline-flex;
+      width: 38px;
+      height: 38px;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 13px;
+      border: 1px solid #55d6b080;
+      border-radius: 9px;
+      background: rgba(85,214,176,.12);
+      font-size: 21px;
+    }
+
+    .info-card h3 { color: #55d6b0; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .job, .job-link .job { transition: none; }
+    }
+
     .job-number {
       color: #35d5e8;
       font-size: 12px;
@@ -370,6 +426,7 @@
     <a class="job-link" href="beruf.html?id=pflegefachfrau">
       <article class="job">
         <div class="job-number">BERUF 01</div>
+        <div class="job-icon" aria-hidden="true">🩺</div>
         <h3>Pflegefachfrau / Pflegefachmann</h3>
         <p class="muted">
           Begleite Menschen in unterschiedlichen Lebenssituationen,
@@ -383,6 +440,7 @@
     <a class="job-link" href="beruf.html?id=medizinische-fachangestellte">
       <article class="job">
         <div class="job-number">BERUF 02</div>
+        <div class="job-icon" aria-hidden="true">🏥</div>
         <h3>Medizinische Fachangestellte</h3>
         <p class="muted">
           Unterstütze Ärztinnen und Ärzte, betreue Patientinnen
@@ -395,6 +453,7 @@
     <a class="job-link" href="beruf.html?id=tiermedizinische-fachangestellte">
       <article class="job">
         <div class="job-number">BERUF 03</div>
+        <div class="job-icon" aria-hidden="true">🐾</div>
         <h3>Tiermedizinische Fachangestellte</h3>
         <p class="muted">
           Unterstütze bei der Untersuchung und Versorgung von Tieren,
@@ -407,6 +466,7 @@
     <a class="job-link" href="beruf.html?id=erzieher">
       <article class="job">
         <div class="job-number">BERUF 04</div>
+        <div class="job-icon" aria-hidden="true">🤝</div>
         <h3>Erzieher</h3>
         <p class="muted">
           Begleite Kinder und Jugendliche in ihrer Entwicklung,
@@ -511,6 +571,7 @@
   <div class="info-grid">
 
     <article class="info-card">
+      <div class="info-icon" aria-hidden="true">❤️</div>
       <h3>Pflege & Betreuung</h3>
       <p>
         Menschen im Alltag begleiten, bei der Versorgung unterstützen
@@ -519,6 +580,7 @@
     </article>
 
     <article class="info-card">
+      <div class="info-icon" aria-hidden="true">🧑‍⚕️</div>
       <h3>Medizinische Assistenz</h3>
       <p>
         Ärztliche Teams unterstützen, Untersuchungen vorbereiten
@@ -527,6 +589,7 @@
     </article>
 
     <article class="info-card">
+      <div class="info-icon" aria-hidden="true">🐾</div>
       <h3>Tiermedizin</h3>
       <p>
         Tiere bei Untersuchungen und Behandlungen begleiten
@@ -535,6 +598,7 @@
     </article>
 
     <article class="info-card">
+      <div class="info-icon" aria-hidden="true">🌱</div>
       <h3>Pädagogik & Entwicklung</h3>
       <p>
         Kinder und Jugendliche begleiten, ihre Entwicklung fördern
