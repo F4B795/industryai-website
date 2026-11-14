@@ -1,12 +1,9 @@
 
 /*
  * INDUSTRYAI – Dynamic Career Campus
- * Version 2.0
+ * Version 3.0
  *
- * Lädt individuelle Berufsprofile anhand der URL:
- * beruf.html?id=zerspanungsmechaniker
- *
- * Ergänzt die Detaildaten aus beruf-details.js.
+ * Lädt Berufsprofile und optionale erweiterte Details.
  */
 
 (function () {
@@ -24,17 +21,7 @@
     conditions: document.getElementById("career-conditions"),
     training: document.getElementById("career-training"),
     error: document.getElementById("career-error"),
-    main: document.getElementById("career-campus"),
-
-    prerequisites: document.getElementById("career-prerequisites"),
-    learning: document.getElementById("career-learning"),
-    furtherTraining: document.getElementById("career-further-training"),
-    careerPaths: document.getElementById("career-paths"),
-
-    prerequisitesSection: document.getElementById("career-prerequisites-section"),
-    learningSection: document.getElementById("career-learning-section"),
-    furtherTrainingSection: document.getElementById("career-further-training-section"),
-    careerPathsSection: document.getElementById("career-paths-section")
+    main: document.getElementById("career-campus")
   };
 
   const params = new URLSearchParams(window.location.search);
@@ -95,7 +82,6 @@
   function showError() {
     if (elements.main) elements.main.hidden = true;
     if (elements.error) elements.error.hidden = false;
-
     document.title = "Beruf nicht gefunden | INDUSTRYAI";
   }
 
@@ -134,7 +120,9 @@
       dual_study: "Duales Studium"
     };
 
-    const type = types[training.type] || "Ausbildungsweg nicht näher angegeben";
+    const type =
+      types[training.type] ||
+      "Ausbildungsweg nicht näher angegeben";
 
     if (!training.durationMonths) return type;
 
@@ -158,53 +146,91 @@
   }
 
   function formatLevel(value) {
-    return levelNames[value] || "Je nach Betrieb unterschiedlich";
+    return levelNames[value] ||
+      "Je nach Betrieb unterschiedlich";
   }
 
-  function renderList(element, items, fallback) {
-    if (!element) return;
+  function addConditionCard(item) {
+    const card = createElement("article", "info-card");
 
-    element.innerHTML = "";
+    card.appendChild(createElement("small", "", item.label));
+    card.appendChild(createElement("h3", "", item.value));
+    card.appendChild(createElement("p", "", item.description));
 
-    if (!Array.isArray(items) || !items.length) {
-      element.appendChild(createElement("li", "", fallback));
-      return;
-    }
+    elements.conditions.appendChild(card);
+  }
+
+  function addDetailSection(title, eyebrow, items) {
+    if (!Array.isArray(items) || !items.length) return;
+
+    const section = createElement("section", "section");
+    const label = createElement("div", "eyebrow", eyebrow);
+    const heading = createElement("h2", "", title);
+    const panel = createElement("div", "content-panel");
+    const list = document.createElement("ul");
 
     items.forEach(function (item) {
-      element.appendChild(createElement("li", "", item));
+      list.appendChild(createElement("li", "", item));
     });
+
+    panel.appendChild(list);
+    section.appendChild(label);
+    section.appendChild(heading);
+    section.appendChild(panel);
+
+    const cta = elements.main.querySelector(".campus-cta");
+
+    if (cta) {
+      elements.main.insertBefore(section, cta);
+    } else {
+      elements.main.appendChild(section);
+    }
   }
 
-  function renderDetailSection(section, list, items, fallback) {
-    if (!section || !list) return;
+  function renderExtendedDetails(details) {
+    if (!details) return;
 
-    if (!Array.isArray(items) || !items.length) {
-      section.hidden = true;
-      return;
-    }
+    addDetailSection(
+      "Das solltest du mitbringen",
+      "DEINE VORAUSSETZUNGEN",
+      details.prerequisites
+    );
 
-    section.hidden = false;
-    renderList(list, items, fallback);
+    addDetailSection(
+      "Das lernst du in diesem Beruf",
+      "AUSBILDUNG UND LERNINHALTE",
+      details.learning
+    );
+
+    addDetailSection(
+      "Deine Weiterbildungsmöglichkeiten",
+      "DEINE ENTWICKLUNG",
+      details.furtherTraining
+    );
+
+    addDetailSection(
+      "Mögliche Karrierewege",
+      "DEINE BERUFLICHE ZUKUNFT",
+      details.careerPaths
+    );
   }
 
   function renderCareer(career) {
-    document.title = career.name + " entdecken | INDUSTRYAI";
-
-    const details = detailsDatabase &&
+    const careerDetails =
+      detailsDatabase &&
       detailsDatabase.careers &&
       detailsDatabase.careers[career.id];
+
+    document.title = career.name + " entdecken | INDUSTRYAI";
 
     elements.title.textContent = career.name;
 
     elements.intro.textContent =
-      details && details.intro
-        ? details.intro
-        : "Entdecke den Beruf " + career.name +
-          ", seine typischen Tätigkeiten, das Arbeitsumfeld " +
-          "und mögliche Ausbildungswege.";
-
-    elements.overview.innerHTML = "";
+      (careerDetails && careerDetails.intro) ||
+      career.intro ||
+      "Entdecke den Beruf " + career.name +
+      ", seine typischen Tätigkeiten, das Arbeitsumfeld " +
+      "und mögliche Ausbildungswege.";
 
     addOverviewCard(
       "BERUFSFELD",
@@ -293,51 +319,18 @@
 
     elements.conditions.innerHTML = "";
 
-    conditionCards.forEach(function (item) {
-      const card = createElement("article", "info-card");
-
-      card.appendChild(createElement("small", "", item.label));
-      card.appendChild(createElement("h3", "", item.value));
-      card.appendChild(createElement("p", "", item.description));
-
-      elements.conditions.appendChild(card);
-    });
+    conditionCards.forEach(addConditionCard);
 
     elements.training.textContent = formatTraining(career.training);
 
-    renderDetailSection(
-      elements.prerequisitesSection,
-      elements.prerequisites,
-      details && details.prerequisites,
-      "Weitere Angaben folgen."
-    );
-
-    renderDetailSection(
-      elements.learningSection,
-      elements.learning,
-      details && details.learning,
-      "Weitere Angaben folgen."
-    );
-
-    renderDetailSection(
-      elements.furtherTrainingSection,
-      elements.furtherTraining,
-      details && details.furtherTraining,
-      "Weitere Angaben folgen."
-    );
-
-    renderDetailSection(
-      elements.careerPathsSection,
-      elements.careerPaths,
-      details && details.careerPaths,
-      "Weitere Angaben folgen."
-    );
+    renderExtendedDetails(careerDetails);
   }
 
   if (
     !database ||
     !Array.isArray(database.careers) ||
-    !careerId
+    !careerId ||
+    !elements.main
   ) {
     showError();
     return;
@@ -355,7 +348,7 @@
   renderCareer(career);
 
   console.log(
-    "INDUSTRYAI Campus geladen:",
+    "INDUSTRYAI Campus Version 3.0 geladen:",
     career.name,
     "(" + career.id + ")"
   );
