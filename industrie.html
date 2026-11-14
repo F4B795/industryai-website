@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -144,6 +143,44 @@
       margin-top: 18px;
     }
 
+    .lab-link {
+      margin-top: 24px;
+      padding: 24px 26px;
+      border: 1px solid #28617a;
+      border-radius: 13px;
+      background: linear-gradient(145deg, #122b40, #0b1d2e);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .lab-link h3 {
+      margin: 0 0 8px;
+      color: #f2f7fc;
+    }
+
+    .lab-link p {
+      margin: 0;
+      color: #aebfd0;
+      line-height: 1.6;
+    }
+
+    .lab-link-button {
+      display: inline-block;
+      background: #35d5e8;
+      color: #061522;
+      border-radius: 7px;
+      padding: 13px 18px;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+
+    .lab-link-button:hover {
+      background: #75e7f2;
+    }
+
     footer {
       text-align: center;
       padding: 30px;
@@ -216,106 +253,115 @@
   <div class="eyebrow">PROBIERE ES AUS</div>
   <h2 class="section-title">Erlebe eine CNC-Maschine</h2>
 
-  
-<div class="machine" id="cnc-demo">
-  <div class="machine-visual">
-    
-<svg class="cnc-machine" viewBox="0 0 600 360" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <linearGradient id="bodyCnc" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#dce8f0"/>
-      <stop offset="1" stop-color="#71899b"/>
-    </linearGradient>
-    <linearGradient id="glassCnc" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#173d50"/>
-      <stop offset="1" stop-color="#071b2b"/>
-    </linearGradient>
-  </defs>
+  <div class="machine" id="cnc-demo">
+    <div class="machine-visual">
 
-  <!-- Maschinengehäuse -->
-  <rect x="55" y="35" width="490" height="285" rx="18" fill="url(#bodyCnc)" stroke="#43d8ed" stroke-width="3"/>
-  <rect x="75" y="55" width="450" height="235" rx="10" fill="#263c4c"/>
-  <rect x="95" y="75" width="310" height="190" rx="8" fill="url(#glassCnc)" stroke="#7895a8" stroke-width="5"/>
+      <svg class="cnc-machine" viewBox="0 0 600 360" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="bodyCnc" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#dce8f0"/>
+            <stop offset="1" stop-color="#71899b"/>
+          </linearGradient>
+          <linearGradient id="glassCnc" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#173d50"/>
+            <stop offset="1" stop-color="#071b2b"/>
+          </linearGradient>
+        </defs>
 
-  <!-- Innenraum -->
-  <path d="M110 90 H390 V250 H110 Z" fill="#102b3b"/>
-  <path d="M125 105 H375" stroke="#365b70" stroke-width="3"/>
+        <!-- Maschinengehäuse -->
+        <rect x="55" y="35" width="490" height="285" rx="18" fill="url(#bodyCnc)" stroke="#43d8ed" stroke-width="3"/>
+        <rect x="75" y="55" width="450" height="235" rx="10" fill="#263c4c"/>
+        <rect x="95" y="75" width="310" height="190" rx="8" fill="url(#glassCnc)" stroke="#7895a8" stroke-width="5"/>
 
-  <!-- Spindel -->
-  <rect x="125" y="155" width="70" height="55" rx="8" fill="#a9bdca"/>
-    <g class="cnc-spindle-rotor">
-  <circle cx="195" cy="182" r="35" fill="#708b9c" stroke="#d4e2eb" stroke-width="5"/>
-  <circle cx="195" cy="182" r="22" fill="#172f40"/>
-  <path d="M195 160 L215 174 L215 190 L195 204 L175 190 L175 174 Z" fill="#91aaba"/>
-</g>
-  <!-- Werkstück -->
-  <rect x="215" y="170" width="115" height="24" rx="4" fill="#d4e3eb" stroke="#43d8ed" stroke-width="2"/>
-  <path d="M235 170 V194 M250 170 V194 M265 170 V194" stroke="#829dad" stroke-width="2"/>
+        <!-- Innenraum -->
+        <path d="M110 90 H390 V250 H110 Z" fill="#102b3b"/>
+        <path d="M125 105 H375" stroke="#365b70" stroke-width="3"/>
 
-  <!-- Werkzeug -->
-  <g class="cnc-tool">
-  <rect x="285" y="215" width="65" height="20" rx="4" fill="#8299a8"/>
-  <path d="M310 215 L330 190 L340 190 L325 215 Z" fill="#d8e6ee" stroke="#43d8ed" stroke-width="2"/>
-  <path d="M340 190 L330 182" stroke="#43d8ed" stroke-width="3"/>
+        <!-- Spindel -->
+        <rect x="125" y="155" width="70" height="55" rx="8" fill="#a9bdca"/>
+        <g class="cnc-spindle-rotor">
+          <circle cx="195" cy="182" r="35" fill="#708b9c" stroke="#d4e2eb" stroke-width="5"/>
+          <circle cx="195" cy="182" r="22" fill="#172f40"/>
+          <path d="M195 160 L215 174 L215 190 L195 204 L175 190 L175 174 Z" fill="#91aaba"/>
+        </g>
 
-    </g>
-  <!-- Bedienpult -->
-  <rect x="425" y="85" width="82" height="145" rx="8" fill="#172c3b" stroke="#9eb5c5" stroke-width="3"/>
-  <rect x="438" y="100" width="56" height="42" rx="4" fill="#071724" stroke="#43d8ed"/>
-  <path d="M445 128 L455 117 L465 122 L480 108" fill="none" stroke="#43d8ed" stroke-width="3"/>
-  <circle cx="451" cy="165" r="7" fill="#43d8ed"/>
-  <circle cx="477" cy="165" r="7" fill="#7d9aaa"/>
-  <circle cx="451" cy="193" r="7" fill="#7d9aaa"/>
-  <circle cx="477" cy="193" r="7" fill="#43d8ed"/>
+        <!-- Werkstück -->
+        <rect x="215" y="170" width="115" height="24" rx="4" fill="#d4e3eb" stroke="#43d8ed" stroke-width="2"/>
+        <path d="M235 170 V194 M250 170 V194 M265 170 V194" stroke="#829dad" stroke-width="2"/>
 
-  <!-- Maschinenfuß -->
-  <rect x="85" y="290" width="430" height="18" rx="5" fill="#526d80"/>
-  <rect x="115" y="308" width="45" height="12" fill="#263c4c"/>
-  <rect x="440" y="308" width="45" height="12" fill="#263c4c"/>
-</svg>
+        <!-- Werkzeug -->
+        <g class="cnc-tool">
+          <rect x="285" y="215" width="65" height="20" rx="4" fill="#8299a8"/>
+          <path d="M310 215 L330 190 L340 190 L325 215 Z" fill="#d8e6ee" stroke="#43d8ed" stroke-width="2"/>
+          <path d="M340 190 L330 182" stroke="#43d8ed" stroke-width="3"/>
+        </g>
 
-  </div>
+        <!-- Bedienpult -->
+        <rect x="425" y="85" width="82" height="145" rx="8" fill="#172c3b" stroke="#9eb5c5" stroke-width="3"/>
+        <rect x="438" y="100" width="56" height="42" rx="4" fill="#071724" stroke="#43d8ed"/>
+        <path d="M445 128 L455 117 L465 122 L480 108" fill="none" stroke="#43d8ed" stroke-width="3"/>
+        <circle cx="451" cy="165" r="7" fill="#43d8ed"/>
+        <circle cx="477" cy="165" r="7" fill="#7d9aaa"/>
+        <circle cx="451" cy="193" r="7" fill="#7d9aaa"/>
+        <circle cx="477" cy="193" r="7" fill="#43d8ed"/>
 
-  <div class="machine-content">
-    <h2>Dein erstes CNC-Erlebnis</h2>
+        <!-- Maschinenfuß -->
+        <rect x="85" y="290" width="430" height="18" rx="5" fill="#526d80"/>
+        <rect x="115" y="308" width="45" height="12" fill="#263c4c"/>
+        <rect x="440" y="308" width="45" height="12" fill="#263c4c"/>
+      </svg>
 
-    <p class="muted">
-      Entdecke, wie aus einem Stück Metall ein präzises Werkstück entsteht.
-      Wähle dein Material und dein Werkzeug und starte die Bearbeitung.
-    </p>
+    </div>
 
-    <label for="cnc-material">1. Werkstück auswählen</label>
-    <select id="cnc-material">
-      <option value="Aluminium">Aluminium</option>
-      <option value="Stahl">Stahl</option>
-      <option value="Messing">Messing</option>
-    </select>
+    <div class="machine-content">
+      <h2>Dein erstes CNC-Erlebnis</h2>
 
-    <label for="cnc-tool">2. Werkzeug auswählen</label>
-    <select id="cnc-tool">
-      <option value="Drehmeißel">Drehmeißel</option>
-      <option value="Bohrer">Bohrer</option>
-      <option value="Fräser">Fräser</option>
-    </select>
+      <p class="muted">
+        Entdecke, wie aus einem Stück Metall ein präzises Werkstück entsteht.
+        Wähle dein Material und dein Werkzeug und starte die Bearbeitung.
+      </p>
 
-    <button type="button" id="cnc-start">
-      Bearbeitung starten
-    </button>
-    <div class="cnc-progress">
-  <div class="cnc-progress-info">
-    <span>Bearbeitungsfortschritt</span>
-    <span id="cnc-percent">0 %</span>
-  </div>
-  <div class="cnc-progress-track">
-    <div id="cnc-progress-bar"></div>
-  </div>
-</div>
+      <label for="cnc-material">1. Werkstück auswählen</label>
+      <select id="cnc-material">
+        <option value="Aluminium">Aluminium</option>
+        <option value="Stahl">Stahl</option>
+        <option value="Messing">Messing</option>
+      </select>
 
-    <div id="cnc-result" aria-live="polite">
-      Deine Maschine wartet auf den Start.
+      <label for="cnc-tool">2. Werkzeug auswählen</label>
+      <select id="cnc-tool">
+        <option value="Drehmeißel">Drehmeißel</option>
+        <option value="Bohrer">Bohrer</option>
+        <option value="Fräser">Fräser</option>
+      </select>
+
+      <button type="button" id="cnc-start">
+        Bearbeitung starten
+      </button>
+
+      <div class="cnc-progress">
+        <div class="cnc-progress-info">
+          <span>Bearbeitungsfortschritt</span>
+          <span id="cnc-percent">0 %</span>
+        </div>
+        <div class="cnc-progress-track">
+          <div id="cnc-progress-bar"></div>
+        </div>
+      </div>
+
+      <div id="cnc-result" aria-live="polite">
+        Deine Maschine wartet auf den Start.
+      </div>
     </div>
   </div>
-</div>
+
+  <div class="lab-link">
+    <div>
+      <h3>Bereit für den nächsten Schritt?</h3>
+      <p>Im CNC-Lernlabor kannst du Material und Werkzeug auswählen und einen vereinfachten CNC-Bearbeitungsablauf interaktiv durchspielen.</p>
+    </div>
+    <a class="lab-link-button" href="cnc-labor.html">CNC-Lernlabor öffnen →</a>
+  </div>
 
 </section>
 
@@ -335,55 +381,60 @@
       "4. Die Maschine bearbeitet das Werkstück präzise.<br><br>" +
       "Das war dein erster Einblick in die CNC-Fertigung!";
   }
-  
-const cncButton = document.getElementById("cnc-start");
-const cncResult = document.getElementById("cnc-result");
+
+  const cncButton = document.getElementById("cnc-start");
+  const cncResult = document.getElementById("cnc-result");
   const cncProgressBar = document.getElementById("cnc-progress-bar");
   const cncPercent = document.getElementById("cnc-percent");
 
-if (cncButton && cncResult) {
-  cncButton.addEventListener("click", function () {
-    const material = document.getElementById("cnc-material").value;
-    const tool = document.getElementById("cnc-tool").value;
+  if (cncButton && cncResult) {
+    cncButton.addEventListener("click", function () {
+      const material = document.getElementById("cnc-material").value;
+      const tool = document.getElementById("cnc-tool").value;
 
-    cncButton.disabled = true;
+      cncButton.disabled = true;
 
-    const steps = [
-      "1/4 – Werkstück aus " + material + " wird eingespannt ...",
-      "2/4 – " + tool + " wird ausgewählt und positioniert ...",
-      "3/4 – CNC-Bearbeitung läuft ...",
-      "4/4 – Bearbeitung abgeschlossen!"
-    ];
+      const steps = [
+        "1/4 – Werkstück aus " + material + " wird eingespannt ...",
+        "2/4 – " + tool + " wird ausgewählt und positioniert ...",
+        "3/4 – CNC-Bearbeitung läuft ...",
+        "4/4 – Bearbeitung abgeschlossen!"
+      ];
 
-    let step = 0;
-    if (cncProgressBar) cncProgressBar.style.width = "0%";
-if (cncPercent) cncPercent.textContent = "0 %";
+      let step = 0;
 
-    cncResult.textContent = steps[step];
+      if (cncProgressBar) cncProgressBar.style.width = "0%";
+      if (cncPercent) cncPercent.textContent = "0 %";
 
-    const timer = setInterval(function () {
-      step++;
+      cncResult.textContent = steps[step];
 
-      if (step < steps.length) {
-        cncResult.textContent = steps[step];
-        const progress = Math.round((step / (steps.length - 1)) * 100);
-if (cncProgressBar) cncProgressBar.style.width = progress + "%";
-if (cncPercent) cncPercent.textContent = progress + " %";
-      } else {
-        clearInterval(timer);
-        if (cncProgressBar) cncProgressBar.style.width = "100%";
-if (cncPercent) cncPercent.textContent = "100 %";
-        cncResult.textContent =
-          "Fertig! Dein Werkstück aus " + material +
-          " wurde mit dem " + tool +
-          " bearbeitet. Du hast den CNC-Ablauf kennengelernt!";
-        cncButton.disabled = false;
-        cncButton.textContent = "Erneut bearbeiten";
-      }
-    }, 1800);
-  });
-}
+      const timer = setInterval(function () {
+        step++;
 
+        if (step < steps.length) {
+          cncResult.textContent = steps[step];
+
+          const progress = Math.round((step / (steps.length - 1)) * 100);
+
+          if (cncProgressBar) cncProgressBar.style.width = progress + "%";
+          if (cncPercent) cncPercent.textContent = progress + " %";
+        } else {
+          clearInterval(timer);
+
+          if (cncProgressBar) cncProgressBar.style.width = "100%";
+          if (cncPercent) cncPercent.textContent = "100 %";
+
+          cncResult.textContent =
+            "Fertig! Dein Werkstück aus " + material +
+            " wurde mit dem " + tool +
+            " bearbeitet. Du hast den CNC-Ablauf kennengelernt!";
+
+          cncButton.disabled = false;
+          cncButton.textContent = "Erneut bearbeiten";
+        }
+      }, 1800);
+    });
+  }
 </script>
 
 </body>
