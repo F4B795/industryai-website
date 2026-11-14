@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Entdecke Gesundheitsberufe, Pflege, Medizin und Betreuung im INDUSTRYAI Campus.">
+  <title>Gesundheit & Pflege | INDUSTRYAI</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #071524;
+      color: #f2f7fc;
+      font-family: Arial, sans-serif;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    header {
+      padding: 22px 8%;
+      border-bottom: 1px solid #20394e;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 19px;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+
+    .logo span {
+      color: #35d5e8;
+    }
+
+    .back {
+      color: #35d5e8;
+      font-size: 14px;
+    }
+
+    .hero {
+      max-width: 1100px;
+      margin: auto;
+      padding: 90px 25px 75px;
+      text-align: center;
+    }
+
+    .eyebrow {
+      color: #35d5e8;
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 3px;
+    }
+
+    h1 {
+      font-size: clamp(38px, 6vw, 66px);
+      line-height: 1.1;
+      margin: 22px 0;
+    }
+
+    h1 span {
+      color: #35d5e8;
+    }
+
+    .intro {
+      max-width: 730px;
+      margin: auto;
+      color: #b7c8d8;
+      line-height: 1.8;
+      font-size: 16px;
+    }
+
+    .section {
+      max-width: 1100px;
+      margin: auto;
+      padding: 35px 25px 75px;
+    }
+
+    .section-title {
+      font-size: 30px;
+      margin: 12px 0;
+    }
+
+    .muted {
+      color: #aebfd0;
+      line-height: 1.7;
+    }
+
+    .jobs {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 20px;
+      margin-top: 32px;
+    }
+
+    .job-link {
+      display: block;
+      height: 100%;
+      border-radius: 13px;
+      outline-offset: 4px;
+    }
+
+    .job {
+      height: 100%;
+      min-height: 245px;
+      padding: 25px;
+      border-radius: 13px;
+      border: 1px solid #294960;
+      background: linear-gradient(145deg, #122b40, #0b1d2e);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .job-link:hover .job,
+    .job-link:focus-visible .job {
+      transform: translateY(-5px);
+      border-color: #35d5e8;
+    }
+
+    .job-number {
+      color: #35d5e8;
+      font-size: 12px;
+      letter-spacing: 2px;
+    }
+
+    .job h3 {
+      margin: 18px 0 10px;
+      font-size: 20px;
+    }
+
+    .job p {
+      font-size: 14px;
+    }
+
+    .job-more {
+      display: inline-block;
+      margin-top: 14px;
+      color: #35d5e8;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .feature {
+      margin-top: 25px;
+      padding: 35px;
+      border-radius: 15px;
+      border: 1px solid #28617a;
+      background: linear-gradient(145deg, #122b40, #0b1d2e);
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 35px;
+      align-items: center;
+    }
+
+    .feature-visual {
+      min-height: 260px;
+      border-radius: 12px;
+      border: 1px solid #28617a;
+      background: radial-gradient(circle, #16435b, #091b2b 70%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 25px;
+    }
+
+    .health-symbol {
+      width: 170px;
+      height: 170px;
+      border: 2px solid #35d5e8;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #35d5e8;
+      font-size: 100px;
+      font-weight: normal;
+      box-shadow: 0 0 45px rgba(53, 213, 232, 0.15);
+    }
+
+    .scenario {
+      margin-top: 25px;
+      padding: 30px;
+      border-radius: 12px;
+      background: #091b2b;
+      border: 1px solid #294960;
+    }
+
+    .scenario h3 {
+      margin-top: 0;
+    }
+
+    .scenario-question {
+      color: #d8e6ee;
+      line-height: 1.7;
+    }
+
+    .answers {
+      display: grid;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .answer {
+      width: 100%;
+      margin: 0;
+      padding: 14px 16px;
+      text-align: left;
+      color: #eaf4fa;
+      background: #122b40;
+      border: 1px solid #36566d;
+      border-radius: 8px;
+      font-weight: normal;
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .answer:hover:not(:disabled) {
+      background: #193c55;
+      border-color: #35d5e8;
+    }
+
+    .answer:disabled {
+      cursor: default;
+      opacity: 0.85;
+    }
+
+    .answer.correct {
+      border-color: #39c98a;
+      background: #123a34;
+    }
+
+    .answer.wrong {
+      border-color: #e27a7a;
+      background: #42252c;
+    }
+
+    #scenario-result {
+      min-height: 28px;
+      margin-top: 18px;
+      color: #35d5e8;
+      line-height: 1.6;
+    }
+
+    .reset-button {
+      margin-top: 12px;
+      padding: 12px 17px;
+      border: 0;
+      border-radius: 7px;
+      background: #35d5e8;
+      color: #061522;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .reset-button:hover {
+      background: #75e7f2;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+      margin-top: 30px;
+    }
+
+    .info-card {
+      padding: 23px;
+      border-radius: 12px;
+      border: 1px solid #294960;
+      background: #0b1d2e;
+    }
+
+    .info-card h3 {
+      color: #35d5e8;
+      margin-top: 0;
+    }
+
+    .info-card p {
+      color: #aebfd0;
+      line-height: 1.7;
+      font-size: 14px;
+    }
+
+    .notice {
+      margin-top: 18px;
+      color: #91a7ba;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    footer {
+      padding: 30px;
+      text-align: center;
+      border-top: 1px solid #20394e;
+      color: #91a7ba;
+      font-size: 13px;
+    }
+
+    @media(max-width: 700px) {
+      header {
+        padding: 18px 5%;
+      }
+
+      .hero {
+        padding: 65px 22px 50px;
+      }
+
+      .feature {
+        padding: 22px;
+      }
+
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section-title {
+        font-size: 26px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">INDUSTRY <span>AI</span></div>
+  <a class="back" href="index.html">← Zurück zum Campus</a>
+</header>
+
+<section class="hero">
+  <div class="eyebrow">INDUSTRYAI CAMPUS · WELT 03</div>
+
+  <h1>Gesundheit & <span>Pflege.</span></h1>
+
+  <p class="intro">
+    Entdecke Berufe, bei denen Menschen im Mittelpunkt stehen.
+    Lerne die Welt der Medizin, Pflege und Betreuung kennen
+    und erfahre, wie vielseitig die Arbeit im Gesundheitswesen ist.
+  </p>
+</section>
+
+<section class="section">
+  <div class="eyebrow">DEINE MÖGLICHKEITEN</div>
+
+  <h2 class="section-title">Entdecke soziale und medizinische Berufe</h2>
+
+  <p class="muted">
+    Von der medizinischen Versorgung bis zur persönlichen Betreuung:
+    Im Gesundheitswesen sind Fachwissen, Verantwortung und
+    zwischenmenschliche Fähigkeiten gefragt.
+  </p>
+
+  <div class="jobs">
+
+    <a class="job-link" href="beruf.html?id=pflegefachfrau">
+      <article class="job">
+        <div class="job-number">BERUF 01</div>
+        <h3>Pflegefachfrau / Pflegefachmann</h3>
+        <p class="muted">
+          Begleite Menschen in unterschiedlichen Lebenssituationen,
+          unterstütze ihre Versorgung und übernimm Verantwortung
+          in der professionellen Pflege.
+        </p>
+        <span class="job-more">Berufsprofil entdecken →</span>
+      </article>
+    </a>
+
+    <a class="job-link" href="beruf.html?id=medizinische-fachangestellte">
+      <article class="job">
+        <div class="job-number">BERUF 02</div>
+        <h3>Medizinische Fachangestellte</h3>
+        <p class="muted">
+          Unterstütze Ärztinnen und Ärzte, betreue Patientinnen
+          und Patienten und organisiere Abläufe in einer Praxis.
+        </p>
+        <span class="job-more">Berufsprofil entdecken →</span>
+      </article>
+    </a>
+
+    <a class="job-link" href="beruf.html?id=tiermedizinische-fachangestellte">
+      <article class="job">
+        <div class="job-number">BERUF 03</div>
+        <h3>Tiermedizinische Fachangestellte</h3>
+        <p class="muted">
+          Unterstütze bei der Untersuchung und Versorgung von Tieren,
+          betreue Tierhalter und organisiere den Praxisalltag.
+        </p>
+        <span class="job-more">Berufsprofil entdecken →</span>
+      </article>
+    </a>
+
+    <a class="job-link" href="beruf.html?id=erzieher">
+      <article class="job">
+        <div class="job-number">BERUF 04</div>
+        <h3>Erzieher</h3>
+        <p class="muted">
+          Begleite Kinder und Jugendliche in ihrer Entwicklung,
+          gestalte pädagogische Angebote und unterstütze
+          ihre Selbstständigkeit.
+        </p>
+        <span class="job-more">Berufsprofil entdecken →</span>
+      </article>
+    </a>
+
+  </div>
+</section>
+
+<section class="section">
+  <div class="eyebrow">PROBIERE ES AUS</div>
+
+  <h2 class="section-title">Eine Situation aus dem Berufsalltag</h2>
+
+  <p class="muted">
+    In sozialen und medizinischen Berufen kommt es nicht nur auf
+    Fachwissen an. Auch Aufmerksamkeit, Kommunikation und ein
+    verantwortungsvoller Umgang mit Menschen sind wichtig.
+  </p>
+
+  <div class="feature">
+
+    <div class="feature-grid">
+
+      <div>
+        <h2>Was würdest du tun?</h2>
+
+        <p class="muted">
+          Stell dir vor, du arbeitest in einer medizinischen Praxis.
+          Eine Patientin wirkt bei ihrer Ankunft nervös und unsicher.
+        </p>
+
+        <p class="muted">
+          Wie gehst du mit dieser Situation um?
+          Wähle die Antwort, die deiner Meinung nach am besten passt.
+        </p>
+      </div>
+
+      <div class="feature-visual">
+        <div class="health-symbol">+</div>
+      </div>
+
+    </div>
+
+    <div class="scenario">
+      <h3>Deine Praxis-Challenge</h3>
+
+      <p class="scenario-question">
+        Eine Patientin wartet auf ihre Untersuchung und macht
+        einen besorgten Eindruck. Was ist eine sinnvolle erste Reaktion?
+      </p>
+
+      <div class="answers">
+
+        <button class="answer" type="button" data-answer="wrong">
+          A: Die Situation ignorieren und einfach mit der nächsten Aufgabe weitermachen.
+        </button>
+
+        <button class="answer" type="button" data-answer="correct">
+          B: Ruhig auf die Patientin zugehen, zuhören und ihr erklären, wie es weitergeht.
+        </button>
+
+        <button class="answer" type="button" data-answer="wrong">
+          C: Ohne weitere Erklärung sofort mit der Untersuchung beginnen.
+        </button>
+
+      </div>
+
+      <div id="scenario-result" aria-live="polite">
+        Wähle eine Antwort aus.
+      </div>
+
+      <button class="reset-button" id="scenario-reset" type="button">
+        Aufgabe wiederholen
+      </button>
+    </div>
+
+    <p class="notice">
+      Diese Übung dient ausschließlich der Berufsorientierung.
+      Sie ersetzt keine medizinische oder pflegerische Ausbildung
+      und stellt keine Handlungsanweisung für reale Behandlungssituationen dar.
+    </p>
+
+  </div>
+</section>
+
+<section class="section">
+  <div class="eyebrow">DIE ARBEITSWELT</div>
+
+  <h2 class="section-title">Was macht Berufe im Gesundheitswesen aus?</h2>
+
+  <p class="muted">
+    Das Gesundheitswesen bietet unterschiedliche Tätigkeitsfelder.
+    Je nach Beruf unterscheiden sich Arbeitsumgebung,
+    Aufgaben und Verantwortungsbereiche.
+  </p>
+
+  <div class="info-grid">
+
+    <article class="info-card">
+      <h3>Pflege & Betreuung</h3>
+      <p>
+        Menschen im Alltag begleiten, bei der Versorgung unterstützen
+        und ihre Selbstständigkeit fördern.
+      </p>
+    </article>
+
+    <article class="info-card">
+      <h3>Medizinische Assistenz</h3>
+      <p>
+        Ärztliche Teams unterstützen, Untersuchungen vorbereiten
+        und organisatorische Aufgaben übernehmen.
+      </p>
+    </article>
+
+    <article class="info-card">
+      <h3>Tiermedizin</h3>
+      <p>
+        Tiere bei Untersuchungen und Behandlungen begleiten
+        und Tierhalter im Praxisalltag betreuen.
+      </p>
+    </article>
+
+    <article class="info-card">
+      <h3>Pädagogik & Entwicklung</h3>
+      <p>
+        Kinder und Jugendliche begleiten, ihre Entwicklung fördern
+        und soziale Kompetenzen stärken.
+      </p>
+    </article>
+
+  </div>
+</section>
+
+<footer>
+  INDUSTRYAI · Die Zukunft der Berufsorientierung
+  <br><br>
+  <a href="index.html">Zurück zur Startseite</a>
+</footer>
+
+<script>
+  const answerButtons = document.querySelectorAll(".answer");
+  const scenarioResult = document.getElementById("scenario-result");
+  const resetButton = document.getElementById("scenario-reset");
+
+  answerButtons.forEach(function(button) {
+    button.addEventListener("click", function() {
+
+      answerButtons.forEach(function(answer) {
+        answer.disabled = true;
+      });
+
+      if (button.dataset.answer === "correct") {
+        button.classList.add("correct");
+
+        scenarioResult.textContent =
+          "Richtig! Eine ruhige und verständnisvolle Kommunikation kann Sicherheit vermitteln. Zuhören und verständlich informieren sind wichtige Fähigkeiten in medizinischen und sozialen Berufen.";
+      } else {
+        button.classList.add("wrong");
+
+        scenarioResult.textContent =
+          "Diese Reaktion wäre nicht ideal. In einer solchen Situation ist es wichtig, die Unsicherheit wahrzunehmen, zuzuhören und verständlich zu informieren. Die passende Antwort ist B.";
+      }
+    });
+  });
+
+  resetButton.addEventListener("click", function() {
+    answerButtons.forEach(function(button) {
+      button.disabled = false;
+      button.classList.remove("correct", "wrong");
+    });
+
+    scenarioResult.textContent = "Wähle eine Antwort aus.";
+  });
+</script>
+
+</body>
+</html>
