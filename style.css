@@ -2104,3 +2104,236 @@ section.hero.hero-modern .hero-visual svg {
   height: 18px;
   flex-shrink: 0;
 }
+
+/* =========================================
+   INDUSTRYAI – BERUFS-CHECK ERGEBNISSE V3
+   ========================================= */
+
+#career-results {
+  max-width: 900px;
+  margin: 35px auto 0;
+  padding: 30px;
+  color: #f2f7fb;
+}
+
+#career-results > h2 {
+  color: #f2f7fb;
+  margin-bottom: 15px;
+}
+
+#career-results > p {
+  color: #a9bac9;
+  line-height: 1.8;
+  margin-bottom: 22px;
+}
+
+.career-result-card {
+  position: relative;
+  margin: 22px 0;
+  padding: 26px;
+  border: 1px solid #29465e;
+  border-radius: 13px;
+  background: linear-gradient(145deg, #142b40, #0b1c2c);
+  transition: border-color .2s ease, transform .2s ease;
+}
+
+.career-result-card:hover {
+  border-color: #42d8ed;
+  transform: translateY(-2px);
+}
+
+.career-result-card h3 {
+  color: #f2f7fb;
+  font-family: Manrope, sans-serif;
+  font-size: 21px;
+  line-height: 1.35;
+  margin: 0 0 13px;
+}
+
+.career-result-card > p {
+  color: #a9bac9;
+  font-size: 14px;
+  line-height: 1.75;
+  margin: 10px 0;
+}
+
+.career-result-card > p:first-of-type {
+  color: #42d8ed;
+  font-weight: 700;
+}
+
+.career-result-card ul {
+  margin: 18px 0;
+  padding-left: 21px;
+  color: #d5e1eb;
+}
+
+.career-result-card li {
+  margin: 8px 0;
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+/* Ausgewählter Wunschberuf */
+
+.career-result-card p:has(+ ul) {
+  margin-bottom: 12px;
+}
+
+/* Bewertungsbereiche */
+
+.career-score-details {
+  margin-top: 22px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(66, 216, 237, .18);
+}
+
+.career-score-row {
+  display: grid;
+  grid-template-columns: minmax(120px, 1fr) minmax(100px, 2fr) 45px;
+  align-items: center;
+  gap: 12px;
+  margin: 13px 0;
+}
+
+.career-score-label {
+  color: #c5d5e3;
+  font-size: 12px;
+}
+
+.career-score-track {
+  width: 100%;
+  height: 8px;
+  overflow: hidden;
+  border-radius: 20px;
+  background: #071321;
+}
+
+.career-score-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #168ba8, #42d8ed);
+}
+
+.career-score-value {
+  color: #42d8ed;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: right;
+}
+
+/* Begründungen für die Empfehlungen */
+
+.career-match-reasons {
+  margin-top: 20px;
+  padding: 17px;
+  border-left: 3px solid #42d8ed;
+  border-radius: 0 8px 8px 0;
+  background: rgba(66, 216, 237, .06);
+}
+
+.career-match-reasons h4 {
+  color: #42d8ed;
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+
+.career-match-reasons p,
+.career-match-reasons li {
+  color: #c5d5e3;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+/* Hinweise zu möglichen Konflikten */
+
+.career-conflict-notes {
+  margin-top: 18px;
+  padding: 16px;
+  border: 1px solid rgba(221, 165, 75, .35);
+  border-radius: 8px;
+  background: rgba(221, 165, 75, .07);
+}
+
+.career-conflict-notes h4 {
+  color: #e6bd79;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.career-conflict-notes p,
+.career-conflict-notes li {
+  color: #d5c6ad;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+/* Wunschberuf-Markierung */
+
+.career-requested-label {
+  display: inline-block;
+  margin: 0 0 12px;
+  padding: 6px 10px;
+  border: 1px solid rgba(66, 216, 237, .45);
+  border-radius: 30px;
+  color: #42d8ed;
+  background: rgba(66, 216, 237, .08);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .5px;
+}
+
+/* Neustart */
+
+#career-results > button {
+  display: block;
+  width: 100%;
+  margin-top: 30px;
+  padding: 16px 22px;
+  border: 1px solid #42d8ed;
+  border-radius: 8px;
+  background: #42d8ed;
+  color: #071321;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: .2s ease;
+}
+
+#career-results > button:hover {
+  background: #ffffff;
+  transform: translateY(-2px);
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+  #career-results {
+    padding: 20px 15px;
+  }
+
+  .career-result-card {
+    padding: 20px 16px;
+  }
+
+  .career-result-card h3 {
+    font-size: 19px;
+  }
+
+  .career-score-row {
+    grid-template-columns: 1fr 1.3fr 38px;
+    gap: 8px;
+  }
+
+  .career-score-label {
+    font-size: 11px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .career-result-card,
+  #career-results > button {
+    transition: none;
+  }
+}
+
