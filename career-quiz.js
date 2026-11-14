@@ -1,29 +1,28 @@
 
 /*
  * INDUSTRYAI – Interaktiver Berufscheck
- * Version 2.0
+ * Version 3.0
  *
  * 40 Fragen:
- *  1–12  Alltagssituationen
- * 13–22  Selbsteinschätzung
- * 23–34  Interessen und Arbeitsweise
- * 35–36  Werte und persönliche Wünsche
- * 37–40  Zukunft und Berufswünsche
+ * 12 Alltagssituationen
+ * 10 Selbsteinschätzung
+ * 18 Interessen, Arbeitsbedingungen und Zukunft
  *
- * Alle Fragen sind freiwillig.
+ * Die Auswertung dient der Berufsorientierung,
+ * nicht der wissenschaftlichen Eignungsdiagnostik.
  */
 
 (function () {
   "use strict";
 
+  const dimensions = ["T", "A", "S", "K", "C", "O", "N", "B", "L"];
+
   const questions = [
     // --------------------------------------------------
-    // BLOCK 1: ALLTAGSSITUATIONEN (1–12)
+    // 1–12: ALLTAGSSITUATIONEN
     // --------------------------------------------------
-
     {
-      id: 1,
-      category: "alltag",
+      id: 1, category: "alltag",
       title: "Du bekommst ein Möbelstück zum Selbstaufbauen. Wie gehst du vor?",
       type: "single",
       options: [
@@ -34,8 +33,7 @@
       ]
     },
     {
-      id: 2,
-      category: "alltag",
+      id: 2, category: "alltag",
       title: "Du organisierst eine Feier mit Freunden. Was übernimmst du am ehesten?",
       type: "single",
       options: [
@@ -46,8 +44,7 @@
       ]
     },
     {
-      id: 3,
-      category: "alltag",
+      id: 3, category: "alltag",
       title: "Du möchtest ein neues Hobby lernen. Was passt am besten zu dir?",
       type: "single",
       options: [
@@ -58,8 +55,7 @@
       ]
     },
     {
-      id: 4,
-      category: "alltag",
+      id: 4, category: "alltag",
       title: "Ein Freund hat ein Problem. Wie reagierst du?",
       type: "single",
       options: [
@@ -70,8 +66,7 @@
       ]
     },
     {
-      id: 5,
-      category: "alltag",
+      id: 5, category: "alltag",
       title: "Du hast einen freien Nachmittag. Was machst du am liebsten?",
       type: "single",
       options: [
@@ -82,8 +77,7 @@
       ]
     },
     {
-      id: 6,
-      category: "alltag",
+      id: 6, category: "alltag",
       title: "Zwei Menschen streiten sich. Was würdest du tun?",
       type: "single",
       options: [
@@ -94,8 +88,7 @@
       ]
     },
     {
-      id: 7,
-      category: "alltag",
+      id: 7, category: "alltag",
       title: "Du stehst vor einem schwierigen Rätsel oder Problem.",
       type: "single",
       options: [
@@ -106,8 +99,7 @@
       ]
     },
     {
-      id: 8,
-      category: "alltag",
+      id: 8, category: "alltag",
       title: "Ein geplanter Ausflug läuft plötzlich anders als erwartet.",
       type: "single",
       options: [
@@ -118,8 +110,7 @@
       ]
     },
     {
-      id: 9,
-      category: "alltag",
+      id: 9, category: "alltag",
       title: "Eine neue Person kommt in deine Gruppe. Wie verhältst du dich?",
       type: "single",
       options: [
@@ -130,8 +121,7 @@
       ]
     },
     {
-      id: 10,
-      category: "alltag",
+      id: 10, category: "alltag",
       title: "Du bemerkst, dass dir ein Fehler passiert ist.",
       type: "single",
       options: [
@@ -142,8 +132,7 @@
       ]
     },
     {
-      id: 11,
-      category: "alltag",
+      id: 11, category: "alltag",
       title: "Jemand lobt dich für etwas. Was freut dich besonders?",
       type: "single",
       options: [
@@ -154,8 +143,7 @@
       ]
     },
     {
-      id: 12,
-      category: "alltag",
+      id: 12, category: "alltag",
       title: "Du möchtest eine persönliche Herausforderung meistern.",
       type: "single",
       options: [
@@ -167,90 +155,27 @@
     },
 
     // --------------------------------------------------
-    // BLOCK 2: SELBSTEINSCHÄTZUNG (13–22)
+    // 13–22: SELBSTEINSCHÄTZUNG
     // --------------------------------------------------
-
-    {
-      id: 13,
-      category: "selbstbild",
-      title: "Ich bleibe auch an einer schwierigen Aufgabe dran.",
-      type: "scale",
-      dimension: "L"
-    },
-    {
-      id: 14,
-      category: "selbstbild",
-      title: "Ich erkenne gerne logische Zusammenhänge und löse knifflige Probleme.",
-      type: "scale",
-      dimension: "A"
-    },
-    {
-      id: 15,
-      category: "selbstbild",
-      title: "Ich merke schnell, wenn andere Menschen Unterstützung brauchen.",
-      type: "scale",
-      dimension: "S"
-    },
-    {
-      id: 16,
-      category: "selbstbild",
-      title: "Ich kann meine Gedanken und Ideen gut erklären.",
-      type: "scale",
-      dimension: "K"
-    },
-    {
-      id: 17,
-      category: "selbstbild",
-      title: "Ich entwickle gerne eigene Ideen und kreative Lösungen.",
-      type: "scale",
-      dimension: "C"
-    },
-    {
-      id: 18,
-      category: "selbstbild",
-      title: "Ich plane gerne und behalte Aufgaben und Termine im Blick.",
-      type: "scale",
-      dimension: "O"
-    },
-    {
-      id: 19,
-      category: "selbstbild",
-      title: "Ich interessiere mich für Natur, Tiere und Umwelt.",
-      type: "scale",
-      dimension: "N"
-    },
-    {
-      id: 20,
-      category: "selbstbild",
-      title: "Wenn etwas Unerwartetes passiert, finde ich meistens einen Weg damit umzugehen.",
-      type: "scale",
-      dimension: "B"
-    },
-    {
-      id: 21,
-      category: "selbstbild",
-      title: "Ich probiere gerne neue Dinge aus und lerne neue Fähigkeiten.",
-      type: "scale",
-      dimension: "L"
-    },
-    {
-      id: 22,
-      category: "selbstbild",
-      title: "Ich arbeite gerne praktisch mit Werkzeugen, Geräten oder Materialien.",
-      type: "scale",
-      dimension: "T"
-    },
+    { id: 13, category: "selbstbild", title: "Ich bleibe auch an einer schwierigen Aufgabe dran.", type: "scale", dimension: "L" },
+    { id: 14, category: "selbstbild", title: "Ich erkenne gerne logische Zusammenhänge und löse knifflige Probleme.", type: "scale", dimension: "A" },
+    { id: 15, category: "selbstbild", title: "Ich merke schnell, wenn andere Menschen Unterstützung brauchen.", type: "scale", dimension: "S" },
+    { id: 16, category: "selbstbild", title: "Ich kann meine Gedanken und Ideen gut erklären.", type: "scale", dimension: "K" },
+    { id: 17, category: "selbstbild", title: "Ich entwickle gerne eigene Ideen und kreative Lösungen.", type: "scale", dimension: "C" },
+    { id: 18, category: "selbstbild", title: "Ich plane gerne und behalte Aufgaben und Termine im Blick.", type: "scale", dimension: "O" },
+    { id: 19, category: "selbstbild", title: "Ich interessiere mich für Natur, Tiere und Umwelt.", type: "scale", dimension: "N" },
+    { id: 20, category: "selbstbild", title: "Wenn etwas Unerwartetes passiert, finde ich meistens einen Weg damit umzugehen.", type: "scale", dimension: "B" },
+    { id: 21, category: "selbstbild", title: "Ich probiere gerne neue Dinge aus und lerne neue Fähigkeiten.", type: "scale", dimension: "L" },
+    { id: 22, category: "selbstbild", title: "Ich arbeite gerne praktisch mit Werkzeugen, Geräten oder Materialien.", type: "scale", dimension: "T" },
 
     // --------------------------------------------------
-    // BLOCK 3: INTERESSEN UND ARBEITSWEISE (23–34)
+    // 23–34: INTERESSEN UND ARBEITSALLTAG
     // --------------------------------------------------
-
     {
-      id: 23,
-      category: "arbeitsinteressen",
-      title: "Welche dieser Tätigkeiten würdest du gerne ausprobieren?",
-      type: "multiple",
-      maxSelections: 3,
+      id: 23, category: "interessen",
+      title: "Welche Tätigkeiten würdest du gerne ausprobieren?",
+      description: "Wähle bis zu drei Antworten.",
+      type: "multiple", maxSelections: 3,
       options: [
         { text: "Maschinen und technische Geräte bedienen", tags: ["maschinen", "technik"] },
         { text: "Computerprogramme entwickeln", tags: ["software", "programmieren"] },
@@ -258,132 +183,60 @@
         { text: "Dinge gestalten oder kreativ arbeiten", tags: ["design", "kreativ"] },
         { text: "Abläufe planen und organisieren", tags: ["organisation", "planung"] },
         { text: "Mit Tieren oder Pflanzen arbeiten", tags: ["tiere", "natur"] },
-        { text: "Probleme untersuchen und Lösungen finden", tags: ["probleme_loesen", "logik"] },
-        { text: "Veranstaltungen oder Projekte organisieren", tags: ["veranstaltungen", "organisation"] }
+        { text: "Fahrzeuge warten oder reparieren", tags: ["fahrzeuge", "reparieren"] },
+        { text: "Untersuchen, messen und analysieren", tags: ["forschung", "logik"] }
       ]
     },
     {
-      id: 24,
-      category: "arbeitsinteressen",
-      title: "Wo könntest du dir deinen Arbeitsalltag am ehesten vorstellen?",
+      id: 24, category: "arbeitsbedingungen",
+      title: "An welchen Orten könntest du dir Arbeit vorstellen?",
+      description: "Mehrfachauswahl möglich.",
       type: "multiple",
-      maxSelections: 2,
       options: [
-        { text: "In einer Werkstatt oder Produktionshalle", value: "Werkstatt" },
-        { text: "Im Büro oder am Computer", value: "Büro" },
-        { text: "Draußen in der Natur", value: "im Freien" },
-        { text: "In einem Labor oder medizinischen Bereich", value: "Labor" },
-        { text: "Im Kontakt mit Kunden oder Besuchern", value: "Kundenbereich" },
-        { text: "Unterwegs an wechselnden Einsatzorten", value: "beim Kunden" },
-        { text: "In einer Küche oder Gastronomie", value: "Küche" },
-        { text: "Ich bin noch offen", value: "offen" }
+        { text: "Werkstatt", value: "Werkstatt" },
+        { text: "Produktion oder Fabrik", value: "Produktion" },
+        { text: "Büro", value: "Büro" },
+        { text: "Draußen in der Natur", value: "Draußen" },
+        { text: "Beim Kunden oder unterwegs", value: "beim Kunden" },
+        { text: "Krankenhaus oder Praxis", value: "Gesundheitswesen" },
+        { text: "Ich bin offen", value: "offen" }
       ]
     },
     {
-      id: 25,
-      category: "arbeitsinteressen",
+      id: 25, category: "arbeitsbedingungen",
       title: "Wie arbeitest du am liebsten?",
       type: "single",
       options: [
-        { text: "Am liebsten selbstständig und allein", value: "low" },
-        { text: "Am liebsten im Team", value: "high" },
-        { text: "Eine Mischung aus beidem", value: "mixed" },
-        { text: "Das hängt von der Aufgabe ab", value: "mixed" }
+        { text: "Am liebsten im Team.", value: "high" },
+        { text: "Eine Mischung aus Teamarbeit und selbstständiger Arbeit.", value: "mixed" },
+        { text: "Am liebsten selbstständig.", value: "low" }
       ]
     },
     {
-      id: 26,
-      category: "arbeitsinteressen",
-      title: "Wie stehst du zu körperlicher und praktischer Arbeit?",
+      id: 26, category: "arbeitsbedingungen",
+      title: "Wie viel körperliche Aktivität darf deine Arbeit beinhalten?",
       type: "single",
       options: [
-        { text: "Ich möchte überwiegend praktisch und körperlich arbeiten.", value: "high" },
-        { text: "Eine Mischung aus praktisch und am Schreibtisch ist ideal.", value: "medium" },
-        { text: "Ich bevorzuge eher leichte körperliche Arbeit.", value: "low" },
-        { text: "Ich bin noch unentschlossen.", value: null }
+        { text: "Möglichst wenig körperliche Belastung.", value: "low" },
+        { text: "Etwas Bewegung ist gut.", value: "medium" },
+        { text: "Ich möchte körperlich aktiv sein.", value: "high" }
       ]
     },
     {
-      id: 27,
-      category: "arbeitsinteressen",
-      title: "Wie viel Kontakt mit anderen Menschen möchtest du bei der Arbeit?",
+      id: 27, category: "arbeitsbedingungen",
+      title: "Wie viel Kontakt mit anderen Menschen möchtest du?",
       type: "single",
       options: [
-        { text: "Sehr viel Kontakt und Austausch", value: "very_high" },
-        { text: "Regelmäßigen Kontakt", value: "high" },
-        { text: "Gelegentlichen Kontakt", value: "medium" },
-        { text: "Lieber überwiegend für mich arbeiten", value: "low" }
+        { text: "Eher wenig Kontakt.", value: "low" },
+        { text: "Eine ausgewogene Mischung.", value: "medium" },
+        { text: "Sehr gerne viel Kontakt.", value: "high" }
       ]
     },
     {
-      id: 28,
-      category: "arbeitsinteressen",
-      title: "Wie gerne arbeitest du mit Details und Genauigkeit?",
-      type: "single",
-      options: [
-        { text: "Sehr gerne, ich achte auf jedes Detail.", value: "high" },
-        { text: "Wenn es für die Aufgabe wichtig ist.", value: "medium" },
-        { text: "Ich arbeite lieber mit dem großen Ganzen.", value: "low" },
-        { text: "Das kann ich noch nicht einschätzen.", value: null }
-      ]
-    },
-    {
-      id: 29,
-      category: "arbeitsinteressen",
-      title: "Was passt besser zu deinem gewünschten Arbeitsalltag?",
-      type: "single",
-      options: [
-        { text: "Klare Abläufe und wiederkehrende Aufgaben", value: "high" },
-        { text: "Eine Mischung aus Routine und Abwechslung", value: "mixed" },
-        { text: "Jeden Tag neue Aufgaben und Herausforderungen", value: "low" },
-        { text: "Ich bin noch offen.", value: null }
-      ]
-    },
-    {
-      id: 30,
-      category: "arbeitsinteressen",
-      title: "Wie viel Verantwortung möchtest du übernehmen?",
-      type: "single",
-      options: [
-        { text: "Ich möchte gerne Verantwortung übernehmen.", value: "high" },
-        { text: "Schrittweise mehr Verantwortung übernehmen.", value: "medium" },
-        { text: "Ich möchte zunächst klare Aufgaben haben.", value: "low" },
-        { text: "Das weiß ich noch nicht.", value: null }
-      ]
-    },
-    {
-      id: 31,
-      category: "arbeitsinteressen",
-      title: "Welche Arbeitszeiten kannst du dir vorstellen?",
-      type: "single",
-      options: [
-        { text: "Regelmäßige Arbeitszeiten am Tag", value: "regular" },
-        { text: "Früher Arbeitsbeginn", value: "early" },
-        { text: "Schichtarbeit wäre für mich in Ordnung.", value: "okay" },
-        { text: "Auch abends oder am Wochenende arbeiten", value: "prefer" },
-        { text: "Ich bin noch offen.", value: null }
-      ]
-    },
-    {
-      id: 32,
-      category: "arbeitsinteressen",
-      title: "Wie lernst du neue Dinge am liebsten?",
-      type: "single",
-      options: [
-        { text: "Durch praktisches Ausprobieren", tags: ["handwerk", "technik"] },
-        { text: "Durch Erklärungen und Lesen", tags: ["logik", "lernen"] },
-        { text: "Indem ich anderen zuschaue und es nachmache", tags: ["technik", "lernen"] },
-        { text: "Gemeinsam mit anderen", tags: ["team", "kommunikation"] },
-        { text: "Durch eigene Projekte", tags: ["kreativ", "probleme_loesen"] }
-      ]
-    },
-    {
-      id: 33,
-      category: "interessen",
+      id: 28, category: "interessen",
       title: "Welche Themen interessieren dich besonders?",
       description: "Wähle bis zu fünf Themen aus.",
-      type: "multiple",
-      maxSelections: 5,
+      type: "multiple", maxSelections: 5,
       options: [
         { text: "Maschinen, Technik und Fahrzeuge", tags: ["maschinen", "technik", "fahrzeuge"] },
         { text: "Computer, Software und Digitalisierung", tags: ["computer", "software", "digital"] },
@@ -398,12 +251,40 @@
       ]
     },
     {
-      id: 34,
-      category: "interessen",
+      id: 29, category: "arbeitsbedingungen",
+      title: "Wie sollte dein Arbeitsalltag aussehen?",
+      type: "single",
+      options: [
+        { text: "Klare Abläufe und wiederkehrende Aufgaben.", value: "high" },
+        { text: "Eine Mischung aus Routine und Abwechslung.", value: "mixed" },
+        { text: "Möglichst abwechslungsreich und unterschiedlich.", value: "low" }
+      ]
+    },
+    {
+      id: 30, category: "arbeitsbedingungen",
+      title: "Wie stehst du zu Verantwortung bei der Arbeit?",
+      type: "single",
+      options: [
+        { text: "Ich übernehme gerne Verantwortung.", value: "high" },
+        { text: "Mit wachsender Erfahrung gerne mehr.", value: "medium" },
+        { text: "Ich möchte zunächst klare Aufgaben ohne viel Verantwortung.", value: "low" }
+      ]
+    },
+    {
+      id: 31, category: "arbeitsbedingungen",
+      title: "Wie stehst du zu Schichtarbeit oder wechselnden Arbeitszeiten?",
+      type: "single",
+      options: [
+        { text: "Schichtarbeit wäre für mich in Ordnung.", value: "possible" },
+        { text: "Lieber feste Arbeitszeiten.", value: "rare" },
+        { text: "Ich bin noch unentschlossen.", value: "open" }
+      ]
+    },
+    {
+      id: 32, category: "interessen",
       title: "Was motiviert dich besonders?",
       description: "Wähle bis zu drei Antworten.",
-      type: "multiple",
-      maxSelections: 3,
+      type: "multiple", maxSelections: 3,
       options: [
         { text: "Etwas mit den eigenen Händen erschaffen", tags: ["handwerk", "technik"] },
         { text: "Schwierige Probleme lösen", tags: ["probleme_loesen", "logik"] },
@@ -416,18 +297,39 @@
         { text: "Immer wieder etwas Neues lernen", tags: ["lernen", "entwicklung"] }
       ]
     },
-
-    // --------------------------------------------------
-    // BLOCK 4: WERTE UND ZUKUNFT (35–40)
-    // --------------------------------------------------
-
     {
-      id: 35,
-      category: "werte",
+      id: 33, category: "interessen",
+      title: "Welche Arbeitsweise spricht dich am meisten an?",
+      type: "single",
+      options: [
+        { text: "Praktisch arbeiten und etwas herstellen.", tags: ["handwerk", "fertigung"] },
+        { text: "Analysieren, planen und Lösungen finden.", tags: ["logik", "planung"] },
+        { text: "Mit Menschen arbeiten und sie unterstützen.", tags: ["menschen", "helfen"] },
+        { text: "Gestalten, entwickeln und neue Ideen umsetzen.", tags: ["kreativ", "entwicklung"] },
+        { text: "Organisieren, koordinieren und verwalten.", tags: ["organisation", "planung"] }
+      ]
+    },
+    {
+      id: 34, category: "interessen",
+      title: "In welcher Umgebung fühlst du dich am ehesten wohl?",
+      type: "single",
+      options: [
+        { text: "In einer technischen oder handwerklichen Umgebung.", tags: ["technik", "handwerk"] },
+        { text: "In einer digitalen oder modernen Büroumgebung.", tags: ["computer", "digital"] },
+        { text: "In einer sozialen oder medizinischen Umgebung.", tags: ["menschen", "gesundheit"] },
+        { text: "In einer kreativen Umgebung.", tags: ["kreativ", "design"] },
+        { text: "Draußen oder in der Natur.", tags: ["natur", "tiere"] }
+      ]
+    },
+
+    // --------------------------------------------------
+    // 35–40: WERTE UND ZUKUNFT
+    // --------------------------------------------------
+    {
+      id: 35, category: "werte",
       title: "Was ist dir bei einem späteren Beruf besonders wichtig?",
       description: "Wähle bis zu drei Punkte.",
-      type: "multiple",
-      maxSelections: 3,
+      type: "multiple", maxSelections: 3,
       options: [
         { text: "Ein sicherer Arbeitsplatz", value: "sicherheit" },
         { text: "Gutes Einkommen", value: "einkommen" },
@@ -442,12 +344,10 @@
       ]
     },
     {
-      id: 36,
-      category: "werte",
+      id: 36, category: "werte",
       title: "Was würdest du bei einem Beruf möglichst vermeiden wollen?",
       description: "Wähle bis zu drei Punkte. Das schließt keinen Beruf automatisch aus.",
-      type: "multiple",
-      maxSelections: 3,
+      type: "multiple", maxSelections: 3,
       options: [
         { text: "Sehr viel Kundenkontakt", value: "viel_kundenkontakt" },
         { text: "Körperlich anstrengende Arbeit", value: "koerperliche_arbeit" },
@@ -463,8 +363,7 @@
       ]
     },
     {
-      id: 37,
-      category: "zukunft",
+      id: 37, category: "zukunft",
       title: "Welcher Bildungsweg könnte zu dir passen?",
       type: "single",
       options: [
@@ -477,12 +376,10 @@
       ]
     },
     {
-      id: 38,
-      category: "zukunft",
+      id: 38, category: "zukunft",
       title: "In welchem Bereich möchtest du dich gerne weiterentwickeln?",
       description: "Wähle bis zu drei Bereiche.",
-      type: "multiple",
-      maxSelections: 3,
+      type: "multiple", maxSelections: 3,
       options: [
         { text: "Technik und Handwerk", tags: ["technik", "handwerk"] },
         { text: "Analysieren und Probleme lösen", tags: ["logik", "probleme_loesen"] },
@@ -496,8 +393,7 @@
       ]
     },
     {
-      id: 39,
-      category: "zukunft",
+      id: 39, category: "zukunft",
       title: "Hast du bereits Erfahrungen in einem dieser Bereiche gesammelt?",
       description: "Mehrfachauswahl möglich. Keine Erfahrung zu haben ist völlig in Ordnung.",
       type: "multiple",
@@ -511,30 +407,46 @@
       ]
     },
     {
-      id: 40,
-      category: "zukunft",
+      id: 40, category: "zukunft",
       title: "Gibt es einen Beruf, den du unbedingt einmal ausprobieren möchtest?",
-      description: "Du kannst bis zu drei Berufe auswählen.",
-      type: "multiple",
-      maxSelections: 3,
+      description: "Du kannst bis zu drei Berufe auswählen. Deine Auswahl wird bei den Ergebnissen berücksichtigt.",
+      type: "multiple", maxSelections: 3,
       options: [
         { text: "Zerspanungsmechaniker/in", value: "zerspanungsmechaniker" },
+        { text: "Industriemechaniker/in", value: "industriemechaniker" },
         { text: "Mechatroniker/in", value: "mechatroniker" },
-        { text: "Fachinformatiker/in", value: "fachinformatiker-anwendungsentwicklung" },
-        { text: "Pflegefachfrau/-mann", value: "pflegefachfrau" },
+        { text: "Elektroniker/in für Automatisierungstechnik", value: "elektroniker-automatisierung" },
+        { text: "Kfz-Mechatroniker/in", value: "kfz-mechatroniker" },
+        { text: "Anlagenmechaniker/in SHK", value: "anlagenmechaniker-shk" },
+        { text: "Tischler/in", value: "tischler" },
+        { text: "Fachkraft für Metalltechnik", value: "fachkraft-metalltechnik-zerspanung" },
+        { text: "Elektroniker/in für Betriebstechnik", value: "elektroniker-betriebstechnik" },
+        { text: "Fachinformatiker/in Anwendungsentwicklung", value: "fachinformatiker-anwendungsentwicklung" },
+        { text: "Fachinformatiker/in Systemintegration", value: "fachinformatiker-systemintegration" },
         { text: "Mediengestalter/in", value: "mediengestalter" },
         { text: "Fotograf/in", value: "fotograf" },
+        { text: "Gestalter/in für visuelles Marketing", value: "gestalter-visuelles-marketing" },
         { text: "Landwirt/in", value: "landwirt" },
+        { text: "Gärtner/in", value: "gaertner" },
+        { text: "Tiermedizinische/r Fachangestellte/r", value: "tiermedizinische-fachangestellte" },
         { text: "Koch/Köchin", value: "koch" },
+        { text: "Fachkraft für Lagerlogistik", value: "fachkraft-lagerlogistik" },
+        { text: "Berufskraftfahrer/in", value: "berufskraftfahrer" },
+        { text: "Fachkraft für Veranstaltungstechnik", value: "fachkraft-veranstaltungstechnik" },
+        { text: "Pflegefachfrau/-mann", value: "pflegefachfrau" },
+        { text: "Medizinische/r Fachangestellte/r", value: "medizinische-fachangestellte" },
+        { text: "Erzieher/in", value: "erzieher" },
+        { text: "Industriekaufmann/-frau", value: "industriekaufmann" },
+        { text: "Kaufmann/-frau im Einzelhandel", value: "kaufmann-einzelhandel" },
+        { text: "Steuerfachangestellte/r", value: "steuerfachangestellter" },
+        { text: "Bauzeichner/in", value: "bauzeichner" },
+        { text: "Chemielaborant/in", value: "chemielaborant" },
+        { text: "Friseur/in", value: "friseur" },
         { text: "Einen anderen Beruf", value: "anderer-beruf" },
         { text: "Ich habe noch keine Vorstellung", value: "offen" }
       ]
     }
   ];
-
-  // ----------------------------------------------------
-  // INITIALISIERUNG
-  // ----------------------------------------------------
 
   const answers = {};
   let currentQuestion = 0;
@@ -548,107 +460,33 @@
   const nextButton = document.getElementById("career-next");
   const resultsContainer = document.getElementById("career-results");
 
-  const headingContainer = document.querySelector(
-    ".ia-career-check .ia-check-heading"
-  );
-
-  if (
-    !startButton ||
-    !app ||
-    !questionContainer ||
-    !progressText ||
-    !progressBar ||
-    !backButton ||
-    !nextButton ||
-    !resultsContainer
-  ) {
-    console.error(
-      "INDUSTRYAI: Nicht alle benötigten Berufscheck-Elemente wurden gefunden."
-    );
+  if (!startButton || !app || !questionContainer || !progressText ||
+      !progressBar || !backButton || !nextButton || !resultsContainer) {
+    console.error("INDUSTRYAI: Quiz-Elemente fehlen im HTML.");
     return;
   }
 
-  // ----------------------------------------------------
-  // HILFSFUNKTIONEN
-  // ----------------------------------------------------
-
-  function getQuestion(id) {
-    return questions.find(question => question.id === id);
-  }
-
-  function getSelectedOptions(id) {
-    const question = getQuestion(id);
-    const answer = answers[id];
-
-    if (!question || answer === undefined) return [];
-
-    const indexes = Array.isArray(answer) ? answer : [answer];
-
-    return indexes
-      .map(index => question.options[index])
-      .filter(Boolean);
-  }
-
-  function getSingleValue(id) {
-    const selected = getSelectedOptions(id);
-    return selected.length ? selected[0].value ?? null : null;
-  }
-
-  function getSelectedValues(id) {
-    return getSelectedOptions(id)
-      .map(option => option.value)
-      .filter(value => value !== null && value !== undefined);
-  }
-
-  function getSelectedTags(id) {
-    return getSelectedOptions(id)
-      .flatMap(option => Array.isArray(option.tags) ? option.tags : []);
-  }
-
-  // ----------------------------------------------------
-  // FORTSCHRITT
-  // ----------------------------------------------------
-
   function updateProgress() {
-    const progress =
-      ((currentQuestion + 1) / questions.length) * 100;
-
-    progressText.textContent =
-      "Frage " + (currentQuestion + 1) +
-      " von " + questions.length;
-
+    const progress = ((currentQuestion + 1) / questions.length) * 100;
+    progressText.textContent = "Frage " + (currentQuestion + 1) + " von " + questions.length;
     progressBar.style.width = progress + "%";
     backButton.disabled = currentQuestion === 0;
-
-    nextButton.textContent =
-      currentQuestion === questions.length - 1
-        ? "Auswertung anzeigen"
-        : "Weiter";
+    nextButton.textContent = currentQuestion === questions.length - 1
+      ? "Auswertung anzeigen"
+      : "Weiter";
   }
 
-  // ----------------------------------------------------
-  // QUIZ STARTEN
-  // ----------------------------------------------------
-
   function startQuiz() {
-    if (headingContainer) {
-      headingContainer.hidden = true;
-    }
-
+    const heading = document.querySelector(".ia-career-check .ia-check-heading");
+    if (heading) heading.hidden = true;
     resultsContainer.hidden = true;
     app.hidden = false;
-
     currentQuestion = 0;
     renderQuestion();
   }
 
-  // ----------------------------------------------------
-  // FRAGE DARSTELLEN
-  // ----------------------------------------------------
-
   function renderQuestion() {
     const question = questions[currentQuestion];
-
     if (!question) return;
 
     updateProgress();
@@ -679,63 +517,29 @@
       input.value = String(index);
 
       if (inputType === "checkbox") {
-        input.checked =
-          Array.isArray(saved) && saved.includes(index);
+        input.checked = Array.isArray(saved) && saved.includes(index);
       } else {
         input.checked = saved === index;
       }
 
-      input.addEventListener("change", () => {
+      input.addEventListener("change", function () {
         if (inputType === "checkbox") {
-          let selected = Array.isArray(answers[question.id])
+          const selected = Array.isArray(answers[question.id])
             ? [...answers[question.id]]
             : [];
 
-          const isExclusiveOption =
-            option.value === "keine" ||
-            option.value === "offen";
-
           if (input.checked) {
-            if (isExclusiveOption) {
-              selected = [index];
-            } else {
-              const exclusiveIndex = question.options.findIndex(
-                item =>
-                  item.value === "keine" ||
-                  item.value === "offen"
-              );
-
-              if (exclusiveIndex !== -1) {
-                selected = selected.filter(
-                  selectedIndex => selectedIndex !== exclusiveIndex
-                );
-              }
-
-              if (
-                question.maxSelections &&
-                selected.length >= question.maxSelections
-              ) {
-                input.checked = false;
-                return;
-              }
-
-              selected.push(index);
+            if (question.maxSelections && selected.length >= question.maxSelections) {
+              input.checked = false;
+              return;
             }
+            selected.push(index);
           } else {
-            selected = selected.filter(
-              selectedIndex => selectedIndex !== index
-            );
+            const position = selected.indexOf(index);
+            if (position !== -1) selected.splice(position, 1);
           }
 
           answers[question.id] = selected;
-
-          // Auswahl sofort aktualisieren, damit gegenseitig
-          // ausschließende Optionen korrekt dargestellt werden.
-          if (isExclusiveOption || question.options.some(item =>
-            item.value === "keine" || item.value === "offen"
-          )) {
-            renderQuestion();
-          }
         } else {
           answers[question.id] = index;
         }
@@ -743,39 +547,29 @@
 
       const text = document.createElement("span");
       text.textContent = option.text;
-
       label.appendChild(input);
       label.appendChild(text);
       answerArea.appendChild(label);
     }
 
     if (question.type === "scale") {
-      const scaleLabels = [
+      [
         "Trifft gar nicht zu",
         "Trifft eher nicht zu",
         "Teils / teils",
         "Trifft eher zu",
         "Trifft völlig zu"
-      ];
-
-      scaleLabels.forEach((text, index) => {
-        createOption({ text }, index + 1, "radio");
+      ].forEach(function (text, index) {
+        createOption({ text: text }, index + 1, "radio");
       });
     } else {
-      (question.options || []).forEach((option, index) => {
-        const inputType =
-          question.type === "multiple" ? "checkbox" : "radio";
-
-        createOption(option, index, inputType);
+      (question.options || []).forEach(function (option, index) {
+        createOption(option, index, question.type === "multiple" ? "checkbox" : "radio");
       });
     }
 
     questionContainer.appendChild(answerArea);
   }
-
-  // ----------------------------------------------------
-  // NAVIGATION
-  // ----------------------------------------------------
 
   function nextQuestion() {
     if (currentQuestion < questions.length - 1) {
@@ -793,185 +587,141 @@
     }
   }
 
-  // ----------------------------------------------------
-  // AUSWERTUNG VORBEREITEN
-  // ----------------------------------------------------
+  function getSelectedValue(questionId) {
+    const question = questions.find(function (item) {
+      return item.id === questionId;
+    });
+    const answer = answers[questionId];
+
+    return question && answer !== undefined
+      ? question.options[answer] && question.options[answer].value
+      : null;
+  }
+
+  function getSelectedValues(questionId) {
+    const question = questions.find(function (item) {
+      return item.id === questionId;
+    });
+    if (!question || !Array.isArray(answers[questionId])) return [];
+
+    return answers[questionId].map(function (index) {
+      return question.options[index];
+    }).filter(Boolean);
+  }
 
   function finishQuiz() {
-    const dimensions = ["T", "A", "S", "K", "C", "O", "N", "B", "L"];
-
     const points = {};
     const maximum = {};
 
-    dimensions.forEach(dimension => {
+    dimensions.forEach(function (dimension) {
       points[dimension] = 0;
       maximum[dimension] = 0;
     });
 
-    // 1. Profil aus den Alltagssituationen berechnen.
-    questions
-      .filter(question => question.category === "alltag")
-      .forEach(question => {
-        const selectedIndex = answers[question.id];
+    // Das Verhaltensprofil wird aus den Alltagssituationen gebildet.
+    questions.filter(function (question) {
+      return question.category === "alltag";
+    }).forEach(function (question) {
+      const selectedIndex = answers[question.id];
+      if (selectedIndex === undefined) return;
 
-        if (selectedIndex === undefined) return;
+      const selected = question.options[selectedIndex];
 
-        const selected = question.options[selectedIndex];
-        if (!selected) return;
+      dimensions.forEach(function (dimension) {
+        const questionMaximum = Math.max.apply(null, question.options.map(function (option) {
+          return Number(option.scores && option.scores[dimension] || 0);
+        }));
 
-        dimensions.forEach(dimension => {
-          const questionMaximum = Math.max(
-            ...question.options.map(option =>
-              Number(option.scores?.[dimension] || 0)
-            )
-          );
-
-          if (questionMaximum > 0) {
-            points[dimension] += Number(
-              selected.scores?.[dimension] || 0
-            );
-
-            maximum[dimension] += questionMaximum;
-          }
-        });
+        if (questionMaximum > 0) {
+          points[dimension] += Number(selected.scores && selected.scores[dimension] || 0);
+          maximum[dimension] += questionMaximum;
+        }
       });
+    });
 
     const profile = {};
-
-    dimensions.forEach(dimension => {
+    dimensions.forEach(function (dimension) {
       profile[dimension] = maximum[dimension] > 0
-        ? Math.round(
-            (points[dimension] / maximum[dimension]) * 100
-          )
+        ? Math.round(points[dimension] / maximum[dimension] * 100)
         : null;
     });
 
-    // 2. Selbstbild separat erfassen.
-    const selfAssessment = {};
+    // Interessen-Tags sammeln.
+    const selectedTags = [];
+    [23, 28, 32, 33, 34, 38].forEach(function (id) {
+      const question = questions.find(function (item) {
+        return item.id === id;
+      });
+      if (!question || answers[id] === undefined) return;
 
-    questions
-      .filter(question => question.category === "selbstbild")
-      .forEach(question => {
-        const answer = answers[question.id];
+      const indexes = Array.isArray(answers[id]) ? answers[id] : [answers[id]];
+      indexes.forEach(function (index) {
+        const option = question.options[index];
+        if (option && option.tags) selectedTags.push.apply(selectedTags, option.tags);
+      });
+    });
 
-        if (answer === undefined || !question.dimension) return;
+    // Arbeitsbedingungen.
+    const locations = getSelectedValues(24)
+      .map(function (option) { return option.value; })
+      .filter(function (value) { return value && value !== "offen"; });
 
-        selfAssessment[question.dimension] =
-          Math.round(((answer - 1) / 4) * 100);
+    const teamwork = getSelectedValue(25);
+    const physicalActivity = getSelectedValue(26);
+    const peopleContact = getSelectedValue(27);
+    const routine = getSelectedValue(29);
+    const responsibility = getSelectedValue(30);
+    const shiftWork = getSelectedValue(31);
+
+    // Werte und Abneigungen.
+    const values = getSelectedValues(35)
+      .map(function (option) { return option.value; })
+      .filter(Boolean);
+
+    const avoidances = getSelectedValues(36)
+      .map(function (option) { return option.value; })
+      .filter(function (value) { return value && value !== "keine"; });
+
+    // Vom Nutzer ausdrücklich gewünschte Berufe.
+    const desiredCareers = getSelectedValues(40)
+      .map(function (option) { return option.value; })
+      .filter(function (value) {
+        return value && value !== "offen" && value !== "anderer-beruf";
       });
 
-    // 3. Interessen sammeln.
-    const interestQuestionIds = [23, 32, 33, 34, 38];
-
-    const selectedTags = [
-      ...new Set(
-        interestQuestionIds.flatMap(id => getSelectedTags(id))
-      )
-    ];
-
-    // 4. Arbeitsorte sammeln.
-    const locations = getSelectedValues(24)
-      .filter(value => value !== "offen");
-
-    // 5. Werte sammeln.
-    const values = getSelectedValues(35);
-
-    // 6. Vermeidungswünsche sammeln.
-    const avoidances = getSelectedValues(36)
-      .filter(value => value !== "keine");
-
-    // 7. Wunschberufe sammeln.
-    const desiredCareers = getSelectedValues(40)
-      .filter(value =>
-        value !== "offen" &&
-        value !== "anderer-beruf"
-      );
-
-    // 8. Arbeitsbedingungen.
-    const preferences = {
-      locations,
-      teamwork: getSingleValue(25),
-      physicalActivity: getSingleValue(26),
-      peopleContact: getSingleValue(27),
-      precision: getSingleValue(28),
-      routine: getSingleValue(29),
-      responsibility: getSingleValue(30),
-      shiftWork: getSingleValue(31),
-      values
-    };
-
-    // 9. Zukunft und Erfahrungen.
-    const educationPath = getSingleValue(37);
-
-    const experience = getSelectedValues(39)
-      .filter(value => value !== "keine");
-
-    // 10. Daten an die Auswertungslogik übergeben.
     const evaluationInput = {
-      profile,
-      selfAssessment,
+      profile: profile,
       interests: selectedTags,
-      values,
-      desiredCareers,
-      avoidances,
-      preferences,
-      educationPath,
-      experience
+      values: values,
+      desiredCareers: desiredCareers,
+      avoidances: avoidances,
+      preferences: {
+        locations: locations,
+        teamwork: teamwork,
+        physicalActivity: physicalActivity,
+        peopleContact: peopleContact,
+        routine: routine,
+        responsibility: responsibility,
+        shiftWork: shiftWork,
+        values: values
+      }
     };
 
     const database = window.IndustryAICareers;
     const evaluator = window.IndustryAICareerCheck;
 
-    if (
-      !database ||
-      !evaluator ||
-      typeof evaluator.evaluate !== "function"
-    ) {
-      showError(
-        "Die Auswertung konnte nicht geladen werden. Bitte lade die Seite neu."
-      );
+    if (!database || !evaluator || typeof evaluator.evaluate !== "function") {
+      resultsContainer.textContent =
+        "Die Auswertung konnte nicht geladen werden. Bitte lade die Seite neu.";
+      resultsContainer.hidden = false;
+      app.hidden = true;
+      console.error("INDUSTRYAI: Berufedatenbank oder Auswertungslogik fehlt.");
       return;
     }
 
-    try {
-      const result = evaluator.evaluate(
-        evaluationInput,
-        database,
-        { limit: 5 }
-      );
-
-      showResults(result);
-    } catch (error) {
-      console.error(
-        "INDUSTRYAI – Fehler bei der Auswertung:",
-        error
-      );
-
-      showError(
-        "Bei der Auswertung ist ein Fehler aufgetreten. Bitte lade die Seite neu."
-      );
-    }
+    const result = evaluator.evaluate(evaluationInput, database, { limit: 5 });
+    showResults(result);
   }
-
-  // ----------------------------------------------------
-  // FEHLERANZEIGE
-  // ----------------------------------------------------
-
-  function showError(message) {
-    app.hidden = true;
-    resultsContainer.hidden = false;
-    resultsContainer.innerHTML = "";
-
-    const error = document.createElement("p");
-    error.textContent = message;
-    resultsContainer.appendChild(error);
-
-    addRestartButton();
-  }
-
-  // ----------------------------------------------------
-  // ERGEBNISSE DARSTELLEN
-  // ----------------------------------------------------
 
   function showResults(result) {
     app.hidden = true;
@@ -984,74 +734,18 @@
 
     const introduction = document.createElement("p");
     introduction.textContent =
-      "Diese Berufe passen nach deinen Antworten zu deinen Interessen und Vorstellungen. " +
-      "Sie sind Vorschläge zum Entdecken – keine endgültige Entscheidung.";
-
+      "Diese Berufe sind Vorschläge auf Grundlage deiner Antworten. " +
+      "Sie helfen dir, neue Möglichkeiten zu entdecken – sie entscheiden nicht für dich.";
     resultsContainer.appendChild(introduction);
 
-    // Selbsteinschätzung separat darstellen.
-    if (
-      result.selfAssessment &&
-      Object.keys(result.selfAssessment).length > 0
-    ) {
-      const selfHeading = document.createElement("h3");
-      selfHeading.textContent = "Deine Selbsteinschätzung";
-      resultsContainer.appendChild(selfHeading);
-
-      const selfDescription = document.createElement("p");
-      selfDescription.textContent =
-        "So hast du deine eigenen Fähigkeiten und Interessen eingeschätzt. " +
-        "Diese Werte sind keine objektive Eignungsprüfung.";
-
-      resultsContainer.appendChild(selfDescription);
-
-      const dimensionNames = {
-        T: "Technik und praktisches Arbeiten",
-        A: "Analytisches Denken",
-        S: "Soziale Fähigkeiten",
-        K: "Kommunikation",
-        C: "Kreativität",
-        O: "Organisation",
-        N: "Natur und Umwelt",
-        B: "Handeln und Situationen bewältigen",
-        L: "Lernen und Entwicklung"
-      };
-
-      Object.entries(result.selfAssessment).forEach(
-        ([dimension, value]) => {
-          const item = document.createElement("div");
-          item.className = "career-self-assessment-item";
-
-          const label = document.createElement("p");
-          label.textContent =
-            (dimensionNames[dimension] || dimension) +
-            ": " + value + " %";
-
-          const bar = document.createElement("div");
-          bar.className = "career-self-assessment-bar";
-
-          const fill = document.createElement("div");
-          fill.className = "career-self-assessment-fill";
-          fill.style.width = value + "%";
-
-          bar.appendChild(fill);
-          item.appendChild(label);
-          item.appendChild(bar);
-
-          resultsContainer.appendChild(item);
-        }
-      );
-    }
-
-    // Berufsergebnisse.
-    if (!result.results || result.results.length === 0) {
+    if (!result || !Array.isArray(result.results) || result.results.length === 0) {
       const empty = document.createElement("p");
       empty.textContent =
-        "Es konnten noch keine passenden Berufsvorschläge ermittelt werden.";
-
+        "Es konnten noch keine passenden Berufsvorschläge erstellt werden. " +
+        "Bitte überprüfe die Berufedatenbank.";
       resultsContainer.appendChild(empty);
     } else {
-      result.results.forEach((career, index) => {
+      result.results.forEach(function (career, index) {
         const card = document.createElement("article");
         card.className = "career-result-card";
 
@@ -1060,17 +754,14 @@
         card.appendChild(title);
 
         const match = document.createElement("p");
-        match.textContent = career.match === null
+        match.textContent = career.match === null || career.match === undefined
           ? "Noch keine ausreichenden Angaben für einen Vergleich."
-          : "Profil-Übereinstimmung: " + career.match + " %";
-
+          : "Übereinstimmung: " + career.match + " %";
         card.appendChild(match);
 
         if (career.requestedByUser) {
           const desired = document.createElement("p");
-          desired.textContent =
-            "Diesen Beruf hast du selbst ausgewählt.";
-
+          desired.textContent = "Diesen Beruf hast du selbst ausgewählt.";
           card.appendChild(desired);
         }
 
@@ -1080,28 +771,19 @@
           card.appendChild(day);
         }
 
-        if (
-          career.activities &&
-          career.activities.length > 0
-        ) {
+        if (Array.isArray(career.activities) && career.activities.length) {
           const list = document.createElement("ul");
-
-          career.activities.forEach(activity => {
+          career.activities.forEach(function (activity) {
             const item = document.createElement("li");
             item.textContent = activity;
             list.appendChild(item);
           });
-
           card.appendChild(list);
         }
 
-        if (
-          career.conflictNotes &&
-          career.conflictNotes.length > 0
-        ) {
-          career.conflictNotes.forEach(note => {
+        if (Array.isArray(career.conflictNotes)) {
+          career.conflictNotes.forEach(function (note) {
             const warning = document.createElement("p");
-            warning.className = "career-conflict-note";
             warning.textContent = note;
             card.appendChild(warning);
           });
@@ -1111,53 +793,33 @@
       });
     }
 
-    // Disclaimer.
     const disclaimer = document.createElement("p");
-    disclaimer.className = "career-disclaimer";
-    disclaimer.textContent = result.disclaimer ||
-      "Die Vorschläge dienen der Berufsorientierung und ersetzen keine persönliche Beratung.";
-
+    disclaimer.textContent = result && result.disclaimer
+      ? result.disclaimer
+      : "Die Ergebnisse sind eine Orientierung und keine Eignungsdiagnose.";
     resultsContainer.appendChild(disclaimer);
 
-    addRestartButton();
-  }
-
-  // ----------------------------------------------------
-  // NEUSTART
-  // ----------------------------------------------------
-
-  function addRestartButton() {
     const restart = document.createElement("button");
     restart.type = "button";
     restart.textContent = "Berufscheck erneut starten";
 
-    restart.addEventListener("click", () => {
-      Object.keys(answers).forEach(key => {
+    restart.addEventListener("click", function () {
+      Object.keys(answers).forEach(function (key) {
         delete answers[key];
       });
 
       currentQuestion = 0;
-
       resultsContainer.hidden = true;
-      app.hidden = true;
-
-      if (headingContainer) {
-        headingContainer.hidden = false;
-      }
-
-      questionContainer.innerHTML = "";
-      progressBar.style.width = "0%";
+      app.hidden = false;
+      renderQuestion();
     });
 
     resultsContainer.appendChild(restart);
   }
 
-  // ----------------------------------------------------
-  // EVENT LISTENER
-  // ----------------------------------------------------
-
   startButton.addEventListener("click", startQuiz);
   nextButton.addEventListener("click", nextQuestion);
   backButton.addEventListener("click", previousQuestion);
 
+  console.log("INDUSTRYAI Berufscheck Version 3.0 geladen – " + questions.length + " Fragen.");
 })();
