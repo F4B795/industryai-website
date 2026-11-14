@@ -84,6 +84,39 @@
     .ia-card-art:after{content:"";position:absolute;inset:35% 0 0;background:linear-gradient(180deg,transparent,rgba(7,19,33,.42));pointer-events:none}
     @media(max-width:800px){.ia-home-visual{min-height:260px}.ia-hero-image{min-height:260px}}
     @media(max-width:560px){.ia-home-visual{min-height:210px}.ia-hero-image{min-height:210px}.ia-card-art{height:155px}}
+
+    /* Startseite – enger Bildbanner wie in der freigegebenen Referenz */
+    .ia-home-hero.ia-home-hero-banner{position:relative;isolation:isolate;min-height:390px;padding:42px 7%;display:flex;align-items:center;overflow:hidden;background:#061522}
+    .ia-home-hero-banner:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(4,15,26,.98) 0%,rgba(4,15,26,.92) 30%,rgba(4,15,26,.42) 49%,rgba(4,15,26,.03) 72%),linear-gradient(0deg,rgba(4,15,26,.12),transparent 35%)}
+    .ia-hero-background{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;object-position:center 48%}
+    .ia-home-hero-banner .ia-home-hero-inner{width:min(1200px,100%);min-height:305px;grid-template-columns:minmax(0, .82fr) minmax(0, 1.18fr);gap:0;align-items:center}
+    .ia-home-hero-banner .ia-home-copy{max-width:510px;position:relative;z-index:1}
+    .ia-home-hero-banner .ia-home-eyebrow{font-size:11px;letter-spacing:2.4px;margin-bottom:14px}
+    .ia-home-hero-banner .ia-home-copy h1{font-size:clamp(34px,4.3vw,58px);line-height:1.02;letter-spacing:-1.6px;margin:0 0 16px}
+    .ia-home-hero-banner .ia-home-copy p{font-size:14px;line-height:1.55;max-width:450px;color:#d0dce6}
+    .ia-home-hero-banner .ia-home-actions{margin-top:20px}
+    .ia-home-hero-banner .ia-home-secondary{padding:10px 17px;font-size:12px;background:rgba(5,21,34,.62);border-color:#42d8ed}
+    .ia-home-hero-banner .ia-home-visual{display:none}
+    .ia-home-areas{padding:34px 5% 48px;background:linear-gradient(180deg,#071b2a,#061522)}
+    .ia-home-areas .ia-home-section-head{margin-bottom:24px}
+    .ia-home-areas .ia-home-section-head .ia-home-eyebrow{margin-bottom:8px;font-size:10px}
+    .ia-home-areas .ia-home-section-head h2{font-size:clamp(26px,3vw,38px);margin:5px auto 8px}
+    .ia-home-areas .ia-home-section-head p{font-size:12px}
+    .ia-home-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+    .ia-home-card{min-height:190px;height:190px;border-radius:12px;border-color:rgba(66,216,237,.55);padding:0;display:block;background:#0a2030}
+    .ia-card-art{position:absolute;inset:0;height:100%;z-index:0}
+    .ia-card-art img{height:100%;width:100%;object-fit:cover}
+    .ia-card-art:after{inset:0;background:linear-gradient(90deg,rgba(4,16,27,.88) 0%,rgba(4,16,27,.64) 52%,rgba(4,16,27,.1) 100%),linear-gradient(0deg,rgba(4,16,27,.68),transparent 70%)}
+    .ia-home-card-body{position:absolute;inset:0;z-index:1;display:flex;flex-direction:column;justify-content:flex-end;padding:16px 17px 15px}
+    .ia-home-card-icon{position:absolute;top:13px;left:14px;right:auto;width:30px;height:30px;flex-basis:30px;border-radius:7px;background:rgba(5,23,36,.72);font-size:16px}
+    .ia-home-card h3{font-size:16px;margin:0 0 4px;text-shadow:0 1px 8px #061522}
+    .ia-home-card p{font-size:10px;line-height:1.4;margin:0 0 8px;color:#d5e0e9;max-width:95%}
+    .ia-home-card-body>span{font-size:10px}
+    .ia-home-card:hover{transform:translateY(-4px);border-color:#42d8ed}
+    .ia-home-video{padding:65px 7%;background:#0a1928}
+    @media(max-width:900px){.ia-home-hero.ia-home-hero-banner{min-height:360px;padding:38px 6%}.ia-home-hero-banner .ia-home-hero-inner{min-height:280px;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr)}.ia-home-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.ia-home-card{height:190px}}
+    @media(max-width:600px){.ia-home-hero.ia-home-hero-banner{min-height:440px;padding:38px 6%;align-items:flex-start}.ia-home-hero-banner:after{background:linear-gradient(90deg,rgba(4,15,26,.94),rgba(4,15,26,.55)),linear-gradient(0deg,rgba(4,15,26,.6),transparent)}.ia-home-hero-banner .ia-home-hero-inner{min-height:360px;display:block}.ia-home-hero-banner .ia-home-copy{max-width:100%;padding-top:10px}.ia-home-hero-banner .ia-home-copy h1{font-size:clamp(36px,9vw,48px)}.ia-home-hero-banner .ia-home-copy p{font-size:13px;max-width:360px}.ia-hero-background{object-position:58% center}.ia-home-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.ia-home-card{height:180px;min-height:180px}.ia-home-card-body{padding:13px 11px}.ia-home-card h3{font-size:14px}.ia-home-card p{font-size:9px}.ia-home-card-icon{top:10px;left:10px}.ia-home-areas{padding:30px 4% 38px}}
+    @media(max-width:390px){.ia-home-grid{grid-template-columns:1fr}.ia-home-card{height:175px}}
   </style>
 </head>
 <body>
@@ -105,7 +138,8 @@
   </nav>
 </header>
 <main>
-  <section class="ia-home-hero">
+  <section class="ia-home-hero ia-home-hero-banner">
+    <img class="ia-hero-background" src="images/hero-industryai.jpg" alt="" aria-hidden="true">
     <div class="ia-home-hero-inner">
       <div class="ia-home-copy">
         <div class="ia-home-eyebrow">DIE ZUKUNFT DER BERUFSORIENTIERUNG</div>
@@ -115,21 +149,6 @@
           <a class="ia-home-secondary" href="#bereiche">Plattform entdecken</a>
         </div>
       </div>
-      <div class="ia-home-visual">
-        <img class="ia-hero-image" src="images/hero-industryai.jpg" alt="Junge Fachkräfte in einer modernen Industriehalle mit CNC-Technik und Robotik">
-      </div>
-    </div>
-  </section>
-  <section class="ia-home-video" id="imagefilm">
-    <div class="ia-home-section-head">
-      <div class="ia-home-eyebrow">DAS IST INDUSTRYAI</div>
-      <h2>Eine Idee. Neue Wege. Mehr Möglichkeiten.</h2>
-      <p>Wir möchten zeigen, wie moderne Berufsorientierung und Nachwuchsgewinnung zusammenfinden. Unser kurzer Unternehmensfilm wird INDUSTRYAI, unsere Lösungen und unsere Vision vorstellen.</p>
-    </div>
-    <div class="ia-video-placeholder">
-      <div class="ia-video-play" aria-hidden="true">▶</div>
-      <h3>Unser INDUSTRYAI-Imagefilm</h3>
-      <p>Der Unternehmensfilm ist in Vorbereitung und wird hier direkt auf der Startseite eingebunden.</p>
     </div>
   </section>
   <section class="ia-home-areas" id="bereiche">
@@ -143,6 +162,18 @@
       <a class="ia-home-navlink" href="plattform.html#check"><article class="ia-home-card ia-card-recruiting"><div class="ia-card-art"><img src="images/recruiting-check.jpg" alt="Digitales Recruiting-Dashboard"></div><div class="ia-home-card-body"><div class="ia-home-card-icon">◇</div><h3>Recruiting-Check</h3><p>Finde heraus, wie gut dein Unternehmen aufgestellt ist, um junge Talente zu erreichen.</p><span>Zum Recruiting-Check →</span></div></article></a>
       <a class="ia-home-navlink" href="plattform.html#campus"><article class="ia-home-card ia-card-worlds"><div class="ia-card-art"><img src="images/berufe-entdecken.jpg" alt="Präzisionsfertigung mit CNC-Maschine"></div><div class="ia-home-card-body"><div class="ia-home-card-icon">⌘</div><h3>Berufe entdecken</h3><p>Erkunde verschiedene Berufsfelder und entdecke spannende Tätigkeiten und Arbeitswelten.</p><span>Berufswelten entdecken →</span></div></article></a>
       <a class="ia-home-navlink" href="plattform.html#unternehmen"><article class="ia-home-card ia-card-company"><div class="ia-card-art"><img src="images/unternehmen.jpg" alt="Modernes Ausbildungsunternehmen"></div><div class="ia-home-card-body"><div class="ia-home-card-icon">▦</div><h3>Unternehmen</h3><p>Lerne Ausbildungsbetriebe kennen und erhalte Einblicke in ihre Arbeitswelt und Ausbildungsangebote.</p><span>Unternehmen kennenlernen →</span></div></article></a>
+    </div>
+  </section>
+  <section class="ia-home-video" id="imagefilm">
+    <div class="ia-home-section-head">
+      <div class="ia-home-eyebrow">DAS IST INDUSTRYAI</div>
+      <h2>Eine Idee. Neue Wege. Mehr Möglichkeiten.</h2>
+      <p>Wir möchten zeigen, wie moderne Berufsorientierung und Nachwuchsgewinnung zusammenfinden. Unser kurzer Unternehmensfilm wird INDUSTRYAI, unsere Lösungen und unsere Vision vorstellen.</p>
+    </div>
+    <div class="ia-video-placeholder">
+      <div class="ia-video-play" aria-hidden="true">▶</div>
+      <h3>Unser INDUSTRYAI-Imagefilm</h3>
+      <p>Der Unternehmensfilm ist in Vorbereitung und wird hier direkt auf der Startseite eingebunden.</p>
     </div>
   </section>
   <section class="ia-home-mission" id="vision">
