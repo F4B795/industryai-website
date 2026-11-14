@@ -1,16 +1,19 @@
 
 /*
  * INDUSTRYAI – Dynamic Career Campus
- * Version 1.0
+ * Version 2.0
  *
  * Lädt individuelle Berufsprofile anhand der URL:
  * beruf.html?id=zerspanungsmechaniker
+ *
+ * Ergänzt die Detaildaten aus beruf-details.js.
  */
 
 (function () {
   "use strict";
 
   const database = window.IndustryAICareers;
+  const detailsDatabase = window.IndustryAICareerDetails;
 
   const elements = {
     title: document.getElementById("career-title"),
@@ -21,7 +24,17 @@
     conditions: document.getElementById("career-conditions"),
     training: document.getElementById("career-training"),
     error: document.getElementById("career-error"),
-    main: document.getElementById("career-campus")
+    main: document.getElementById("career-campus"),
+
+    prerequisites: document.getElementById("career-prerequisites"),
+    learning: document.getElementById("career-learning"),
+    furtherTraining: document.getElementById("career-further-training"),
+    careerPaths: document.getElementById("career-paths"),
+
+    prerequisitesSection: document.getElementById("career-prerequisites-section"),
+    learningSection: document.getElementById("career-learning-section"),
+    furtherTrainingSection: document.getElementById("career-further-training-section"),
+    careerPathsSection: document.getElementById("career-paths-section")
   };
 
   const params = new URLSearchParams(window.location.search);
@@ -47,7 +60,6 @@
     "Versand": "Versand",
     "Homeoffice": "Homeoffice",
     "Studio": "Studio",
-    "im Freien": "Im Freien",
     "Verkaufsfläche": "Verkaufsfläche",
     "Gewächshaus": "Gewächshaus",
     "Labor": "Labor",
@@ -64,7 +76,6 @@
     "Kindergarten": "Kindergarten",
     "Schule": "Schule",
     "Jugendeinrichtung": "Jugendeinrichtung",
-    "Baustelle": "Baustelle",
     "Kundenbereich": "Kundenbereich",
     "Salon": "Salon",
     "Gartenbaubetrieb": "Gartenbaubetrieb"
@@ -92,6 +103,7 @@
     const element = document.createElement(tag);
 
     if (className) element.className = className;
+
     if (text !== undefined && text !== null) {
       element.textContent = text;
     }
@@ -127,6 +139,7 @@
     if (!training.durationMonths) return type;
 
     const years = training.durationMonths / 12;
+
     const duration = years.toLocaleString("de-DE", {
       maximumFractionDigits: 1
     });
@@ -148,14 +161,50 @@
     return levelNames[value] || "Je nach Betrieb unterschiedlich";
   }
 
+  function renderList(element, items, fallback) {
+    if (!element) return;
+
+    element.innerHTML = "";
+
+    if (!Array.isArray(items) || !items.length) {
+      element.appendChild(createElement("li", "", fallback));
+      return;
+    }
+
+    items.forEach(function (item) {
+      element.appendChild(createElement("li", "", item));
+    });
+  }
+
+  function renderDetailSection(section, list, items, fallback) {
+    if (!section || !list) return;
+
+    if (!Array.isArray(items) || !items.length) {
+      section.hidden = true;
+      return;
+    }
+
+    section.hidden = false;
+    renderList(list, items, fallback);
+  }
+
   function renderCareer(career) {
     document.title = career.name + " entdecken | INDUSTRYAI";
 
+    const details = detailsDatabase &&
+      detailsDatabase.careers &&
+      detailsDatabase.careers[career.id];
+
     elements.title.textContent = career.name;
+
     elements.intro.textContent =
-      "Entdecke den Beruf " + career.name +
-      ", seine typischen Tätigkeiten, das Arbeitsumfeld " +
-      "und mögliche Ausbildungswege.";
+      details && details.intro
+        ? details.intro
+        : "Entdecke den Beruf " + career.name +
+          ", seine typischen Tätigkeiten, das Arbeitsumfeld " +
+          "und mögliche Ausbildungswege.";
+
+    elements.overview.innerHTML = "";
 
     addOverviewCard(
       "BERUFSFELD",
@@ -174,12 +223,18 @@
     addOverviewCard(
       "ARBEITSUMGEBUNG",
       "Arbeitsorte",
-      formatLocations(career.workingConditions && career.workingConditions.locations)
+      formatLocations(
+        career.workingConditions &&
+        career.workingConditions.locations
+      )
     );
 
     addOverviewCard(
       "KÖRPERLICHE AKTIVITÄT",
-      formatLevel(career.workingConditions && career.workingConditions.physicalActivity),
+      formatLevel(
+        career.workingConditions &&
+        career.workingConditions.physicalActivity
+      ),
       "Die tatsächliche Belastung hängt vom Betrieb und Einsatzbereich ab."
     );
 
@@ -239,18 +294,44 @@
     elements.conditions.innerHTML = "";
 
     conditionCards.forEach(function (item) {
-      addConditionCard(item);
-    });
-
-    function addConditionCard(item) {
       const card = createElement("article", "info-card");
+
       card.appendChild(createElement("small", "", item.label));
       card.appendChild(createElement("h3", "", item.value));
       card.appendChild(createElement("p", "", item.description));
+
       elements.conditions.appendChild(card);
-    }
+    });
 
     elements.training.textContent = formatTraining(career.training);
+
+    renderDetailSection(
+      elements.prerequisitesSection,
+      elements.prerequisites,
+      details && details.prerequisites,
+      "Weitere Angaben folgen."
+    );
+
+    renderDetailSection(
+      elements.learningSection,
+      elements.learning,
+      details && details.learning,
+      "Weitere Angaben folgen."
+    );
+
+    renderDetailSection(
+      elements.furtherTrainingSection,
+      elements.furtherTraining,
+      details && details.furtherTraining,
+      "Weitere Angaben folgen."
+    );
+
+    renderDetailSection(
+      elements.careerPathsSection,
+      elements.careerPaths,
+      details && details.careerPaths,
+      "Weitere Angaben folgen."
+    );
   }
 
   if (
