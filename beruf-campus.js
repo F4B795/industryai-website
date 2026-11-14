@@ -187,6 +187,57 @@
     }
   }
 
+  function renderAdjacentCareers(career) {
+    const related = database.careers
+      .filter(function (item) {
+        return item.id !== career.id && item.category === career.category;
+      })
+      .slice(0, 4);
+
+    const section = createElement("section", "section");
+    section.appendChild(createElement("div", "eyebrow", "BERUFLICHE WECHSELWEGE"));
+    section.appendChild(createElement("h2", "", "Welche anderen Wege könnten zu dir passen?"));
+
+    const panel = createElement("div", "content-panel");
+    panel.appendChild(createElement(
+      "p",
+      "muted",
+      "Wenn du bereits Erfahrung mitbringst oder dich neu orientieren möchtest, können verwandte Tätigkeitsfelder ein sinnvoller Ausgangspunkt sein. Die folgenden Berufe gehören zum gleichen Berufsfeld und dienen als erste Vergleichsmöglichkeiten."
+    ));
+
+    if (related.length) {
+      const grid = createElement("div", "info-grid");
+      related.forEach(function (item) {
+        const card = createElement("article", "info-card");
+        card.appendChild(createElement("small", "", "VERWANDTES BERUFSFELD"));
+        card.appendChild(createElement("h3", "", item.name));
+        card.appendChild(createElement(
+          "p",
+          "",
+          item.dayToDay || (Array.isArray(item.activities) ? item.activities.slice(0, 2).join(" · ") : "Weitere Tätigkeiten in diesem Berufsfeld kennenlernen.")
+        ));
+        const link = createElement("a", "button", "Berufsprofil ansehen →");
+        link.href = "beruf.html?id=" + encodeURIComponent(item.id);
+        card.appendChild(link);
+        grid.appendChild(card);
+      });
+      panel.appendChild(grid);
+    } else {
+      panel.appendChild(createElement("p", "muted", "Weitere verwandte Berufsprofile werden ergänzt."));
+    }
+
+    panel.appendChild(createElement(
+      "p",
+      "muted",
+      "Wichtig: Ein Wechsel ist nicht automatisch ohne weitere Qualifikation möglich. Anerkennung von Vorerfahrung, erforderliche Abschlüsse und betriebliche Anforderungen müssen im Einzelfall geprüft werden."
+    ));
+
+    section.appendChild(panel);
+    const cta = elements.main.querySelector(".campus-cta");
+    if (cta) elements.main.insertBefore(section, cta);
+    else elements.main.appendChild(section);
+  }
+
   function renderExtendedDetails(details) {
     if (!details) return;
 
@@ -324,6 +375,7 @@
     elements.training.textContent = formatTraining(career.training);
 
     renderExtendedDetails(careerDetails);
+    renderAdjacentCareers(career);
   }
 
   if (
