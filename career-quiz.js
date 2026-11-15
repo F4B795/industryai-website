@@ -660,11 +660,47 @@
       });
     });
 
+    // Selbsteinschätzung (Fragen 13–22) je Dimension auf 0–100 normieren.
+    // Bei zwei Fragen zur Dimension L wird der Mittelwert verwendet.
+    const selfRatings = {};
+    dimensions.forEach(function (dimension) {
+      selfRatings[dimension] = [];
+    });
+
+    questions.filter(function (question) {
+      return question.category === "selbstbild";
+    }).forEach(function (question) {
+      const answer = answers[question.id];
+      if (answer === undefined || answer === null) return;
+
+      const rating = Number(answer);
+      if (rating < 1 || rating > 5) return;
+
+      selfRatings[question.dimension].push((rating - 1) * 25);
+    });
+
+    // Beide Perspektiven fließen ein: Alltagssituationen 60 %, Selbsteinschätzung 40 %.
+    // Fehlt eine der beiden Angaben, wird die vorhandene Perspektive verwendet.
     const profile = {};
     dimensions.forEach(function (dimension) {
-      profile[dimension] = maximum[dimension] > 0
-        ? Math.round(points[dimension] / maximum[dimension] * 100)
+      const behaviorScore = maximum[dimension] > 0
+        ? points[dimension] / maximum[dimension] * 100
         : null;
+      const selfScore = selfRatings[dimension].length
+        ? selfRatings[dimension].reduce(function (sum, value) {
+            return sum + value;
+          }, 0) / selfRatings[dimension].length
+        : null;
+
+      if (behaviorScore !== null && selfScore !== null) {
+        profile[dimension] = Math.round(behaviorScore * 0.6 + selfScore * 0.4);
+      } else if (behaviorScore !== null) {
+        profile[dimension] = Math.round(behaviorScore);
+      } else if (selfScore !== null) {
+        profile[dimension] = Math.round(selfScore);
+      } else {
+        profile[dimension] = null;
+      }
     });
 
     // Interessen-Tags sammeln.
