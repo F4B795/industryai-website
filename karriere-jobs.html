@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Entdecke berufliche Perspektiven, informiere dich über Tätigkeitsfelder und finde deinen nächsten Karriereschritt mit INDUSTRYAI.">
+<meta name="description" content="Finde mit INDUSTRYAI von der Berufsorientierung über passende Berufsfelder bis zum geeigneten Arbeitgeber und Job.">
 <title>Karriere & Jobs – INDUSTRYAI</title>
 <link rel="stylesheet" href="style.css">
 <style>
@@ -39,6 +39,16 @@
 .ia-career-cta p{max-width:700px;margin:0 auto 22px;color:#a9bac9;font-size:14px;line-height:1.8}
 .ia-career-cta a{display:inline-block;padding:14px 20px;border-radius:7px;background:#42d8ed;color:#071321;font-weight:700;font-size:13px}
 @media(max-width:700px){.ia-career-hero{padding:55px 6%}.ia-career-section{padding:48px 6%}.ia-career-paths,.ia-career-steps{grid-template-columns:1fr}.ia-career-path{padding:23px}.ia-career-cta{padding:48px 6%}}
+
+.ia-career-journey{grid-template-columns:repeat(5,minmax(0,1fr))}
+.ia-career-step{display:flex;flex-direction:column;align-items:flex-start}
+.ia-career-step a{margin-top:auto;padding-top:14px;color:#42d8ed;font-size:12px;font-weight:700}
+.ia-career-next-step{max-width:900px;margin:36px auto 0;padding:30px;border:1px solid rgba(66,216,237,.35);border-radius:13px;background:linear-gradient(145deg,#102b40,#0b1c2c);text-align:center}
+.ia-career-next-step h3{color:#f2f7fb;font:700 23px Manrope,sans-serif;margin:10px 0}
+.ia-career-next-step p{max-width:680px;margin:0 auto;color:#b6c7d6;font-size:14px;line-height:1.8}
+.ia-career-next-step .ia-career-actions{justify-content:center}
+@media(max-width:1050px){.ia-career-journey{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){.ia-career-journey{grid-template-columns:1fr}.ia-career-next-step{padding:24px 18px}}
 </style>
 </head>
 <body>
@@ -81,11 +91,14 @@
 <section class="ia-career-section alt">
 <div class="ia-career-inner">
 <div class="ia-career-heading"><div class="ia-career-eyebrow">INDUSTRY INTELLIGENCE – AUCH FÜR DEINEN WEG</div><h2>Von der Berufsorientierung bis zum passenden Job.</h2><p>Ein beruflicher Wechsel ist eine wichtige Entscheidung. Deshalb soll INDUSTRYAI mehr bieten als Stellenanzeigen: KI-gestützte Orientierung und verständliche Einblicke helfen dir, Tätigkeiten, Anforderungen und Arbeitgeber besser einzuordnen. Unternehmen erhalten im Gegenzug die Möglichkeit, sich als Arbeitgeber sichtbar zu machen.</p></div>
-<div class="ia-career-steps">
-<article class="ia-career-step"><strong>SCHRITT 01</strong><h3>Berufsfelder entdecken</h3><p>Informiere dich über Tätigkeiten, Anforderungen und unterschiedliche Arbeitsbereiche.</p></article>
-<article class="ia-career-step"><strong>SCHRITT 02</strong><h3>Einblicke erhalten</h3><p>Lerne Arbeitsplätze, Unternehmen und berufliche Perspektiven durch verständliche Inhalte und Medien kennen.</p></article>
-<article class="ia-career-step"><strong>SCHRITT 03</strong><h3>Perspektiven vergleichen</h3><p>Prüfe, welche Wege zu deinen Interessen, Fähigkeiten und deiner aktuellen Lebenssituation passen.</p></article>
+<div class="ia-career-steps ia-career-journey">
+<article class="ia-career-step"><strong>SCHRITT 01 · ORIENTIEREN</strong><h3>Erkenne deine Stärken.</h3><p>Finde heraus, was dich interessiert, was dir liegt und welche Arbeitsweisen zu dir passen könnten.</p><a href="berufscheck.html">Berufscheck starten →</a></article>
+<article class="ia-career-step"><strong>SCHRITT 02 · ENTDECKEN</strong><h3>Lerne Berufsfelder kennen.</h3><p>Entdecke unterschiedliche Branchen, Tätigkeiten und Ausbildungs- oder Entwicklungsmöglichkeiten.</p><a href="berufe-entdecken.html">Berufswelten entdecken →</a></article>
+<article class="ia-career-step"><strong>SCHRITT 03 · VERSTEHEN</strong><h3>Erhalte echte Einblicke.</h3><p>Informiere dich über Aufgaben, Arbeitsumgebungen, Anforderungen und den Alltag in verschiedenen Berufen.</p><a href="berufe-entdecken.html">Berufe kennenlernen →</a></article>
+<article class="ia-career-step"><strong>SCHRITT 04 · VERGLEICHEN</strong><h3>Finde passende Arbeitgeber.</h3><p>Lerne Betriebe kennen, vergleiche ihre Arbeitswelten und prüfe, welche Unternehmenskultur zu dir passt.</p><a href="unternehmen.html">Unternehmen kennenlernen →</a></article>
+<article class="ia-career-step"><strong>SCHRITT 05 · DURCHSTARTEN</strong><h3>Finde deinen nächsten Schritt.</h3><p>Entdecke passende Ausbildungsplätze und Stellenangebote und nimm den nächsten Schritt in Richtung Bewerbung.</p><a href="unternehmen.html">Zu den Unternehmensprofilen →</a></article>
 </div>
+<div class="ia-career-next-step"><div class="ia-career-eyebrow">DEIN WEG BEGINNT HIER</div><h3>Du musst noch nicht wissen, welcher Job zu dir passt.</h3><p>Starte mit deinen Interessen und Stärken. INDUSTRYAI soll dich Schritt für Schritt von der ersten Orientierung bis zum passenden Arbeitgeber begleiten.</p><div class="ia-career-actions"><a href="berufscheck.html">Jetzt Berufscheck starten ↗</a><a href="berufe-entdecken.html">Berufswelten erkunden ↗</a></div></div>
 <div class="ia-career-note"><strong>Hinweis zum aktuellen Entwicklungsstand:</strong> Die Jobvermittlung und eine Datenbank mit aktuellen Stellenangeboten sind noch nicht freigeschaltet. Diese Seite bildet die geplante Ausrichtung ab. Die vollständige Begleitung von der Berufsorientierung bis zur Jobvermittlung wird schrittweise aufgebaut. Sobald Unternehmen ihre Profile und Stellenangebote veröffentlichen können, werden hier konkrete Möglichkeiten ergänzt.</div>
 </div>
 </section>
