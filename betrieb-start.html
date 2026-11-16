@@ -115,7 +115,7 @@
 <button class="onboard-button" type="button" id="copy-draft">Entwurf kopieren</button>
 <button class="onboard-button secondary" type="button" id="reset-draft">Eingaben zurücksetzen</button>
 </div>
-<div id="copy-status" role="status"></div>
+<div id="preview-copy-status" role="status"></div>
 <div class="onboard-notice">Nach dem Absenden prüfen wir Ihre Angaben und melden uns über die angegebene geschäftliche E-Mail-Adresse. Eine Veröffentlichung erfolgt nicht automatisch.</div>
 </aside>
 </div>
@@ -141,7 +141,11 @@
   const link=document.getElementById("preview-website");link.textContent=website?"Website: "+website:"";
  }
  ids.forEach(id=>document.getElementById(id).addEventListener("input",update));
- document.getElementById("company-profile-form").addEventListener("submit",event=>{
+ const form=document.getElementById("company-profile-form");
+ form.addEventListener("invalid",()=>{
+  document.querySelector("#company-profile-form #copy-status").textContent="Bitte füllen Sie alle Pflichtfelder aus und bestätigen Sie die Datenschutzhinweise.";
+ },true);
+ form.addEventListener("submit",event=>{
   const action=document.getElementById("company-profile-form").getAttribute("action");
   if(!action || action.includes("PASTE_WEB_APP_URL")){event.preventDefault();document.querySelector("#company-profile-form #copy-status").textContent="Die Online-Übermittlung ist noch nicht aktiviert. Bitte versuchen Sie es später erneut.";return;}
   document.getElementById("submit-profile").disabled=true;
@@ -155,7 +159,13 @@
   if(event.data.success){status.textContent="Vielen Dank. Ihre Profilanfrage wurde an INDUSTRYAI übermittelt. Wir melden uns bei Ihnen.";}
   else{status.textContent="Die Übermittlung ist fehlgeschlagen. Bitte versuchen Sie es erneut oder kontaktieren Sie uns per E-Mail.";}
 });
- document.getElementById("reset-draft").addEventListener("click",()=>{ids.forEach(id=>{const el=document.getElementById(id);if(el.type==="checkbox")el.checked=false;else el.value="";});document.querySelector("#company-profile-form #copy-status").textContent="";document.getElementById("privacy-consent").checked=false;update();});\n
+ document.querySelectorAll("#reset-draft").forEach(button=>button.addEventListener("click",()=>{
+  ids.forEach(id=>{document.getElementById(id).value="";});
+  document.getElementById("privacy-consent").checked=false;
+  document.querySelector("#company-profile-form #copy-status").textContent="";
+  update();
+ }));
+
  update();
 })();
 </script>
