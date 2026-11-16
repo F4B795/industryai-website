@@ -142,6 +142,26 @@
       }
     }
 
+
+    /* Leistungen für Unternehmen */
+    .ia-services{padding:76px 7%;background:linear-gradient(180deg,#0a1928,#071321)}
+    .ia-services-inner{max-width:1200px;margin:0 auto}
+    .ia-services-head{max-width:780px;margin:0 auto 34px;text-align:center}
+    .ia-services-kicker{color:#42d8ed;font-size:11px;font-weight:700;letter-spacing:2.5px;margin-bottom:12px}
+    .ia-services-head h2{color:#f2f7fb;font:800 clamp(28px,3.8vw,44px)/1.18 Manrope,sans-serif;margin:0 auto 13px}
+    .ia-services-head p{color:#b6c7d6;font-size:14px;line-height:1.8}
+    .ia-services-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+    .ia-service-card{display:flex;gap:18px;padding:25px;border:1px solid #25445b;border-radius:12px;background:linear-gradient(145deg,#11283c,#0b1c2c)}
+    .ia-service-number{flex:0 0 42px;height:42px;display:grid;place-items:center;border:1px solid rgba(66,216,237,.55);border-radius:9px;color:#42d8ed;font:700 13px Manrope,sans-serif}
+    .ia-service-content h3{color:#f2f7fb;font:700 18px Manrope,sans-serif;margin:0 0 8px}
+    .ia-service-content p{color:#b6c7d6;font-size:13px;line-height:1.7;margin:0 0 12px}
+    .ia-service-content a{color:#42d8ed;font-size:12px;font-weight:700}
+    .ia-service-status{display:inline-block;margin-top:2px;color:#9eb3c4;font-size:10px;letter-spacing:.5px;text-transform:uppercase}
+    .ia-services-cta{text-align:center;margin-top:30px}
+    .ia-services-cta a{display:inline-block;padding:12px 19px;border:1px solid #42d8ed;border-radius:6px;color:#42d8ed;font-size:13px;font-weight:700}
+    .ia-services-cta a:hover{background:#42d8ed;color:#061421}
+    @media(max-width:700px){.ia-services{padding:58px 6%}.ia-services-grid{grid-template-columns:1fr}.ia-service-card{padding:21px 18px;gap:14px}}
+
   </style>
 </head>
 <body>
@@ -190,6 +210,54 @@
       <a class="ia-home-navlink" href="unternehmen.html"><article class="ia-home-card ia-card-company"><div class="ia-card-art"><img src="images/unternehmen.jpg" alt="Modernes Ausbildungsunternehmen"></div><div class="ia-home-card-body"><div class="ia-home-card-icon">▦</div><h3>Unternehmen</h3><p>Lerne Ausbildungsbetriebe kennen und erhalte Einblicke in ihre Arbeitswelt und Ausbildungsangebote.</p><span>Unternehmen kennenlernen →</span></div></article></a>
     </div>
   </section>
+
+  <section class="ia-services" id="leistungen">
+    <div class="ia-services-inner">
+      <div class="ia-services-head">
+        <div class="ia-services-kicker">INDUSTRYAI FÜR UNTERNEHMEN</div>
+        <h2>Nachwuchs gewinnen. Arbeitgeber sichtbar machen.</h2>
+        <p>Wir unterstützen Unternehmen dabei, ihre Recruiting-Möglichkeiten besser zu verstehen, ihre Arbeitswelt überzeugend zu präsentieren und passende Menschen zu erreichen.</p>
+      </div>
+      <div class="ia-services-grid">
+        <article class="ia-service-card">
+          <div class="ia-service-number">01</div>
+          <div class="ia-service-content">
+            <h3>Recruiting-Check & Potenzialanalyse</h3>
+            <p>Wir betrachten Ihren Auftritt zur Nachwuchsgewinnung und zeigen, wo Sie junge Talente besser erreichen und Ihren Bewerbungsprozess verbessern können.</p>
+            <a href="recruiting-check.html">Recruiting-Check starten →</a>
+          </div>
+        </article>
+        <article class="ia-service-card">
+          <div class="ia-service-number">02</div>
+          <div class="ia-service-content">
+            <h3>Digitales Unternehmensprofil</h3>
+            <p>Präsentieren Sie Ihren Betrieb, Ihr Team, Ihre Arbeitsplätze und Ihre Ausbildungsberufe an einem zentralen Ort – mit Einblicken, die über eine klassische Stellenanzeige hinausgehen.</p>
+            <a href="unternehmen.html">Unternehmen präsentieren →</a>
+          </div>
+        </article>
+        <article class="ia-service-card">
+          <div class="ia-service-number">03</div>
+          <div class="ia-service-content">
+            <h3>Ausbildungsplätze & Jobs sichtbar machen</h3>
+            <p>Stellen Sie Ausbildungsangebote, Praktika und offene Positionen mit Aufgaben, Anforderungen und direkten Informationen zum Bewerbungsweg vor.</p>
+            <a href="karriere-jobs.html">Karriere & Jobs entdecken →</a>
+          </div>
+        </article>
+        <article class="ia-service-card">
+          <div class="ia-service-number">04</div>
+          <div class="ia-service-content">
+            <h3>Unternehmens- & Recruiting-Analyse</h3>
+            <p>Wir bauen die Analyse öffentlich verfügbarer Unternehmens- und Karriereinformationen aus, um Ansatzpunkte für eine gezieltere Nachwuchs- und Fachkräftegewinnung zu erkennen.</p>
+            <span class="ia-service-status">Wird aktuell weiterentwickelt</span>
+          </div>
+        </article>
+      </div>
+      <div class="ia-services-cta">
+        <a href="unternehmen.html">Möglichkeiten für Ihr Unternehmen ansehen ↗</a>
+      </div>
+    </div>
+  </section>
+
   <section class="ia-home-video" id="imagefilm">
     <div class="ia-home-section-head">
       <div class="ia-home-eyebrow">DAS IST INDUSTRYAI</div>
