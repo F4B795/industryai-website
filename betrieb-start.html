@@ -148,7 +148,7 @@
   document.querySelector("#company-profile-form #copy-status").textContent="Ihre Profilanfrage wird übermittelt …";
  });
  window.addEventListener("message",event=>{
-  if(event.origin!=="https://script.google.com" || !event.data || event.data.type!=="industryai-form-result")return;
+  if(!/^https:\/\/(script\.google\.com|script\.googleusercontent\.com)$/.test(event.origin) || !event.data || event.data.type!=="industryai-form-result")return;
   const status=document.querySelector("#company-profile-form #copy-status");
   const button=document.getElementById("submit-profile");
   button.disabled=false;
