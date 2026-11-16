@@ -2491,3 +2491,42 @@ main .career-page-intro h1 {
   }
 }
 
+
+
+/* INDUSTRYAI – globale Navigations- und Überschriftenkorrektur */
+header nav{gap:8px;font-size:11px;white-space:nowrap}
+header nav a{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-height:35px;padding:8px 10px;border:1px solid rgba(66,216,237,.22);
+  border-radius:7px;background:rgba(14,39,57,.48);color:#d5e2ec;
+  line-height:1.2;transition:background .2s ease,border-color .2s ease,color .2s ease,transform .2s ease;
+}
+header nav a:hover{color:#42d8ed;border-color:rgba(66,216,237,.75);background:rgba(66,216,237,.09);transform:translateY(-1px)}
+header nav a[aria-current="page"],header nav a.active{
+  color:#42d8ed;border-color:rgba(66,216,237,.75);background:rgba(66,216,237,.12)
+}
+header nav a.nav-button{border-color:#42d8ed;background:rgba(66,216,237,.08);color:#42d8ed}
+header nav a.nav-button:hover{background:#42d8ed;color:#061421}
+@media(max-width:1100px) and (min-width:801px){
+  header{padding-left:4%;padding-right:4%}
+  header nav{gap:5px;font-size:10px}
+  header nav a{padding:7px 7px}
+}
+@media(max-width:800px){
+  header nav{gap:8px 10px!important}
+  header nav a{min-height:32px;padding:7px 9px}
+}
+/* Abschnittsüberschriften über alle Seiten zentrieren und optisch ausbalancieren */
+.ia-subpage-intro h1,.ia-career-hero h1,.ia-about-hero h1,
+.ia-campus-pathways h2,.ia-campus-final h2,.ia-career-section h2,
+.ia-business-next h2,.ia-business-copy h2,.ia-services-head h2,
+.ia-services-head,.ia-business-next,.ia-campus-heading,.ia-vision-heading{
+  text-align:center;
+}
+.ia-subpage-intro h1,.ia-career-hero h1,.ia-about-hero h1,
+.ia-campus-pathways h2,.ia-campus-final h2,.ia-career-section h2,
+.ia-business-next h2,.ia-services-head h2{
+  margin-left:auto;margin-right:auto;text-wrap:balance;
+}
+.ia-business-copy{margin-left:auto;margin-right:auto}
+.ia-business-copy p{margin-left:auto;margin-right:auto}
