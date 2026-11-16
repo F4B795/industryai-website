@@ -2556,3 +2556,16 @@ header nav a.nav-button:hover{background:#42d8ed!important;color:#061421!importa
   header nav{width:100%!important;justify-content:center!important;flex-wrap:wrap!important;gap:8px 10px!important;padding:5px 0 9px!important}
   header nav a{min-height:32px!important;padding:7px 9px!important}
 }
+
+
+/* Recruiting-Check nur auf der eigenen Seite hervorheben */
+header nav a.nav-button:not([aria-current="page"]){
+  border-color:rgba(66,216,237,.2)!important;
+  background:rgba(14,39,57,.48)!important;
+  color:#d5e2ec!important;
+}
+header nav a.nav-button[aria-current="page"]{
+  border-color:#42d8ed!important;
+  background:rgba(66,216,237,.12)!important;
+  color:#42d8ed!important;
+}
