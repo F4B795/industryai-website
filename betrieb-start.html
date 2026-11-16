@@ -65,7 +65,7 @@
 </div></section>
 <div class="onboard-wrap">
 <section class="onboard-panel">
-<form id="company-profile-form" action="PASTE_WEB_APP_URL_HERE" method="post" target="industryai-submit-frame">
+<form id="company-profile-form" action="https://script.google.com/macros/s/AKfycbwja19X4EUiy3tm4hCzT_C8QVi1JnTIscs3UGrlQV_jwdTqeJVrnR72PE2xG9IYKVA/exec" method="post" target="industryai-submit-frame">
 <div class="onboard-label">SCHRITT 1 · BETRIEB</div>
 <h2>Die wichtigsten Unternehmensdaten</h2>
 <p>Beginnen Sie mit den Basisinformationen. Pflichtfelder sind bewusst auf das Nötigste begrenzt.</p>
@@ -143,11 +143,19 @@
  ids.forEach(id=>document.getElementById(id).addEventListener("input",update));
  document.getElementById("company-profile-form").addEventListener("submit",event=>{
   const action=document.getElementById("company-profile-form").getAttribute("action");
-  if(!action || action.includes("PASTE_WEB_APP_URL")){event.preventDefault();document.getElementById("copy-status").textContent="Die Online-Übermittlung ist noch nicht aktiviert. Bitte versuchen Sie es später erneut.";return;}
+  if(!action || action.includes("PASTE_WEB_APP_URL")){event.preventDefault();document.querySelector("#company-profile-form #copy-status").textContent="Die Online-Übermittlung ist noch nicht aktiviert. Bitte versuchen Sie es später erneut.";return;}
   document.getElementById("submit-profile").disabled=true;
-  document.getElementById("copy-status").textContent="Ihre Profilanfrage wird übermittelt …";
+  document.querySelector("#company-profile-form #copy-status").textContent="Ihre Profilanfrage wird übermittelt …";
  });
- window.addEventListener("message",event=>{\n  if(!event.data || event.data.type!=="industryai-form-result")return;\n  const status=document.getElementById("copy-status");\n  const button=document.getElementById("submit-profile");\n  button.disabled=false;\n  if(event.data.success){status.textContent="Vielen Dank. Ihre Profilanfrage wurde an INDUSTRYAI übermittelt. Wir melden uns bei Ihnen.";}\n  else{status.textContent="Die Übermittlung ist fehlgeschlagen. Bitte versuchen Sie es erneut oder kontaktieren Sie uns per E-Mail.";}\n });\n document.getElementById("reset-draft").addEventListener("click",()=>{ids.forEach(id=>{const el=document.getElementById(id);if(el.type==="checkbox")el.checked=false;else el.value="";});document.getElementById("copy-status").textContent="";document.getElementById("privacy-consent").checked=false;update();});\n
+ window.addEventListener("message",event=>{
+  if(event.origin!=="https://script.google.com" || !event.data || event.data.type!=="industryai-form-result")return;
+  const status=document.querySelector("#company-profile-form #copy-status");
+  const button=document.getElementById("submit-profile");
+  button.disabled=false;
+  if(event.data.success){status.textContent="Vielen Dank. Ihre Profilanfrage wurde an INDUSTRYAI übermittelt. Wir melden uns bei Ihnen.";}
+  else{status.textContent="Die Übermittlung ist fehlgeschlagen. Bitte versuchen Sie es erneut oder kontaktieren Sie uns per E-Mail.";}
+});
+ document.getElementById("reset-draft").addEventListener("click",()=>{ids.forEach(id=>{const el=document.getElementById(id);if(el.type==="checkbox")el.checked=false;else el.value="";});document.querySelector("#company-profile-form #copy-status").textContent="";document.getElementById("privacy-consent").checked=false;update();});\n
  update();
 })();
 </script>
