@@ -175,6 +175,42 @@
     header nav a[href="index.html"]{border-color:#42d8ed;background:rgba(66,216,237,.12);color:#42d8ed}
     header nav a[href="recruiting-check.html"]{border-color:#42d8ed;background:rgba(66,216,237,.08);color:#42d8ed}
     @media(max-width:1100px) and (min-width:801px){header{padding-left:4%;padding-right:4%}header nav{gap:5px;font-size:10px}header nav a{padding:7px 7px}}
+
+/* Leistungs-Kacheln: gleiche Bildkarten-Optik wie die Plattformbereiche */
+.ia-services-grid.ia-services-three{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.ia-services-three .ia-service-card{
+  position:relative;display:flex;flex-direction:column;justify-content:flex-end;gap:0;
+  min-height:270px;height:270px;padding:0;overflow:hidden;border:1px solid rgba(66,216,237,.58);
+  border-radius:12px;background:#0a2030;transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease
+}
+.ia-services-three .ia-service-card:before{
+  content:"";position:absolute;inset:0 0 38% 0;z-index:0;
+  background:radial-gradient(circle at 72% 38%,rgba(66,216,237,.34),transparent 30%),linear-gradient(135deg,#17445c,#0a1b2b 75%);
+  border-bottom:1px solid rgba(66,216,237,.16)
+}
+.ia-services-three .ia-service-card:nth-child(2):before{
+  background:radial-gradient(ellipse at 68% 42%,rgba(66,216,237,.3),transparent 34%),linear-gradient(135deg,#123b54,#091a2a 78%)
+}
+.ia-services-three .ia-service-card:nth-child(3):before{
+  background:radial-gradient(ellipse at 65% 35%,rgba(66,216,237,.3),transparent 32%),linear-gradient(135deg,#1b3d56,#091a2a 78%)
+}
+.ia-services-three .ia-service-number{
+  position:absolute;z-index:2;top:15px;left:15px;flex:none;width:38px;height:38px;
+  border:1px solid rgba(66,216,237,.75);border-radius:9px;background:rgba(5,23,36,.82);
+  color:#42d8ed;font-size:12px;backdrop-filter:blur(5px)
+}
+.ia-services-three .ia-service-content{
+  position:relative;z-index:1;width:100%;padding:17px 20px 18px;
+  background:linear-gradient(180deg,rgba(7,19,33,.88),#0b2031 26%);flex:1;
+  display:flex;flex-direction:column;justify-content:flex-end
+}
+.ia-services-three .ia-service-content h3{font-size:17px;margin:0 0 7px}
+.ia-services-three .ia-service-content p{font-size:12px;line-height:1.55;margin:0 0 10px;color:#c2d1dd}
+.ia-services-three .ia-service-content a{font-size:11px;align-self:flex-start}
+.ia-services-three .ia-service-card:hover{transform:translateY(-5px);border-color:#42d8ed;box-shadow:0 14px 32px rgba(0,180,220,.13)}
+@media(max-width:900px){.ia-services-grid.ia-services-three{grid-template-columns:repeat(2,minmax(0,1fr))}.ia-services-three .ia-service-card{height:250px;min-height:250px}}
+@media(max-width:600px){.ia-services-grid.ia-services-three{grid-template-columns:1fr}.ia-services-three .ia-service-card{height:235px;min-height:235px}}
+
 </style>
 </head>
 <body>
