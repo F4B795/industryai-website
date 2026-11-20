@@ -210,6 +210,27 @@
 @media(max-width:900px){.ia-services-grid.ia-services-three{grid-template-columns:repeat(2,minmax(0,1fr))}.ia-services-three .ia-service-card{height:250px;min-height:250px}}
 @media(max-width:600px){.ia-services-grid.ia-services-three{grid-template-columns:1fr}.ia-services-three .ia-service-card{height:235px;min-height:235px}}
 
+
+    /* Leistungskacheln im Bildkarten-Stil der Plattformbereiche */
+    .ia-services-image-cards{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+    .ia-services-image-cards .ia-service-image-card{
+      position:relative;display:block;min-height:230px;height:230px;padding:0;overflow:hidden;
+      border:1px solid rgba(66,216,237,.55);border-radius:12px;background:#0a2030;
+      text-decoration:none;transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease
+    }
+    .ia-services-image-cards .ia-service-art{position:absolute;inset:0;height:100%;overflow:hidden}
+    .ia-services-image-cards .ia-service-art img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .45s ease}
+    .ia-services-image-cards .ia-service-art:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(4,16,27,.9),rgba(4,16,27,.58) 58%,rgba(4,16,27,.12)),linear-gradient(0deg,rgba(4,16,27,.78),transparent 78%)}
+    .ia-services-image-cards .ia-service-card-body{position:absolute;inset:0;z-index:1;display:flex;flex-direction:column;justify-content:flex-end;padding:18px 20px}
+    .ia-services-image-cards .ia-service-icon{position:absolute;top:14px;left:15px;width:34px;height:34px;display:grid;place-items:center;border:1px solid rgba(66,216,237,.75);border-radius:8px;background:rgba(5,23,36,.78);color:#42d8ed;font-size:19px}
+    .ia-services-image-cards .ia-service-card-body h3{margin:0 0 7px;color:#f2f7fb;font:700 17px Manrope,sans-serif}
+    .ia-services-image-cards .ia-service-card-body p{margin:0 0 11px;color:#d5e0e9;font-size:12px;line-height:1.55}
+    .ia-services-image-cards .ia-service-link{color:#42d8ed;font-size:11px;font-weight:700}
+    .ia-services-image-cards .ia-service-image-card:hover{transform:translateY(-4px);border-color:#42d8ed;box-shadow:0 12px 30px rgba(0,180,220,.13)}
+    .ia-services-image-cards .ia-service-image-card:hover .ia-service-art img{transform:scale(1.06)}
+    @media(max-width:900px){.ia-services-image-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(max-width:600px){.ia-services-image-cards{grid-template-columns:1fr}.ia-services-image-cards .ia-service-image-card{height:205px;min-height:205px}}
+
 </style>
 </head>
 <body>
@@ -268,28 +289,34 @@
         <h2>Digitale Stärke. Sichtbarkeit. Die richtigen Menschen.</h2>
         <p>Wir unterstützen Unternehmen dabei, professionell aufzutreten, ihre Arbeitgebermarke zu stärken und fundierte Entscheidungen für Marketing und Recruiting zu treffen.</p>
       </div>
-      <div class="ia-services-grid ia-services-three">
-        <article class="ia-service-card">
-          <div class="ia-service-number">01</div><div class="ia-service-content">
+      <div class="ia-services-grid ia-services-three ia-services-image-cards">
+        <a class="ia-service-card ia-service-image-card" href="leistungen.html#digital">
+          <div class="ia-service-art"><img src="images/unternehmen.jpg" alt="Moderner Unternehmensauftritt"></div>
+          <div class="ia-service-card-body">
+            <span class="ia-service-icon">✧</span>
             <h3>Digitaler Unternehmensauftritt</h3>
-            <p>Websites erstellen oder verbessern, Social-Media-Kanäle gestalten und Unternehmen mit Bildern, Videos und klarer Kommunikation sichtbar machen.</p>
-            <a href="leistungen.html#digital">Leistung ansehen →</a>
+            <p>Websites und Social-Media-Auftritte professionell gestalten und Unternehmen mit Bildern, Videos und klarer Kommunikation sichtbar machen.</p>
+            <span class="ia-service-link">Leistung ansehen →</span>
           </div>
-        </article>
-        <article class="ia-service-card">
-          <div class="ia-service-number">02</div><div class="ia-service-content">
+        </a>
+        <a class="ia-service-card ia-service-image-card" href="leistungen.html#recruiting">
+          <div class="ia-service-art"><img src="images/recruiting-check.jpg" alt="Digitales Recruiting und Bewerbergewinnung"></div>
+          <div class="ia-service-card-body">
+            <span class="ia-service-icon">◇</span>
             <h3>Mitarbeitergewinnung</h3>
-            <p>Recruiting-Auftritte optimieren, Stellenanzeigen verbessern, Ausbildungsmarketing stärken und passende Bewerber besser erreichen.</p>
-            <a href="leistungen.html#recruiting">Leistung ansehen →</a>
+            <p>Recruiting-Auftritte optimieren, Stellenanzeigen verbessern und Ausbildungsmarketing gezielt stärken.</p>
+            <span class="ia-service-link">Leistung ansehen →</span>
           </div>
-        </article>
-        <article class="ia-service-card">
-          <div class="ia-service-number">03</div><div class="ia-service-content">
+        </a>
+        <a class="ia-service-card ia-service-image-card" href="leistungen.html#analyse">
+          <div class="ia-service-art"><img src="images/berufe-entdecken.jpg" alt="Industrielle Fertigung als Beispiel für Unternehmensanalyse"></div>
+          <div class="ia-service-card-body">
+            <span class="ia-service-icon">⌕</span>
             <h3>Unternehmensanalyse</h3>
-            <p>Öffentliche Unternehmens- und Karriereinformationen auswerten, Potenziale erkennen und konkrete Handlungsempfehlungen ableiten.</p>
-            <a href="leistungen.html#analyse">Leistung ansehen →</a>
+            <p>Öffentliche Unternehmens- und Karriereinformationen auswerten, Potenziale erkennen und konkrete Empfehlungen ableiten.</p>
+            <span class="ia-service-link">Leistung ansehen →</span>
           </div>
-        </article>
+        </a>
       </div>
       <div class="ia-services-cta"><a href="leistungen.html">Alle Leistungen für Unternehmen entdecken ↗</a></div>
     </div>
