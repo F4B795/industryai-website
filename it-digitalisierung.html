@@ -501,6 +501,185 @@
       .job, .job-link .job { transition: none; }
     }
 
+  
+    /* Gemeinsame Bedien- und Responsive-Standards aller Campus-Welten */
+    header {
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    header nav {
+      display: flex;
+      flex: 1 1 620px;
+      justify-content: flex-end;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px 8px;
+      min-width: 0;
+    }
+
+    header nav a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 40px;
+      padding: 9px 11px;
+      border: 1px solid transparent;
+      border-radius: 7px;
+      color: #c5d5e3;
+      font-size: 13px;
+      line-height: 1.35;
+      transition: color .18s ease, background .18s ease, border-color .18s ease;
+    }
+
+    header nav a:hover,
+    header nav a:focus-visible {
+      color: var(--sector-accent);
+      border-color: var(--sector-border);
+      background: var(--sector-soft);
+    }
+
+    header nav a[aria-current="page"] {
+      color: var(--sector-accent);
+      border-color: var(--sector-border);
+      background: var(--sector-soft);
+    }
+
+    header nav a.nav-button {
+      color: #071524;
+      border-color: var(--sector-accent);
+      background: var(--sector-accent);
+      font-weight: 700;
+    }
+
+    header nav a.nav-button:hover,
+    header nav a.nav-button:focus-visible {
+      color: #071524;
+      border-color: var(--sector-hover);
+      background: var(--sector-hover);
+    }
+
+    .section, .hero, .jobs, .info-grid, .feature, .experience,
+    .industry-challenge, .lab-link, .job, .info-card {
+      min-width: 0;
+    }
+
+    .jobs, .info-grid {
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
+    }
+
+    .job-link {
+      min-width: 0;
+      height: 100%;
+    }
+
+    .job-link .job {
+      height: 100%;
+    }
+
+    .job h3, .job p, .info-card p, .muted {
+      overflow-wrap: break-word;
+    }
+
+    button, .lab-link-button {
+      min-height: 44px;
+    }
+
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid #ffffff;
+      outline-offset: 3px;
+    }
+
+    @media (max-width: 760px) {
+      header {
+        align-items: stretch;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      header nav {
+        flex: 1 1 auto;
+        width: 100%;
+        justify-content: flex-start;
+        gap: 5px;
+      }
+
+      header nav a {
+        min-height: 42px;
+        padding: 9px 10px;
+      }
+
+      .hero {
+        padding: 66px 20px 52px;
+      }
+
+      .section {
+        padding: 30px 18px 58px;
+      }
+
+      .feature-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 22px;
+      }
+
+      .feature, .experience, .industry-challenge {
+        padding: 22px;
+      }
+
+      .section-title {
+        font-size: clamp(24px, 5vw, 29px);
+      }
+    }
+
+    @media (max-width: 420px) {
+      header nav a {
+        font-size: 12px;
+        padding: 8px 9px;
+      }
+
+      .hero {
+        padding: 54px 16px 42px;
+      }
+
+      .section {
+        padding-right: 15px;
+        padding-left: 15px;
+      }
+
+      .eyebrow {
+        font-size: 10px;
+        letter-spacing: 2px;
+      }
+
+      .job, .info-card, .scenario, .challenge {
+        padding: 18px;
+      }
+
+      .answers button, .industry-answer {
+        min-height: 48px;
+        overflow-wrap: anywhere;
+      }
+
+      .lab-link {
+        align-items: stretch;
+      }
+
+      .lab-link-button {
+        width: 100%;
+        text-align: center;
+        white-space: normal;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+    }
+
   </style>
 </head>
 
@@ -508,7 +687,7 @@
 
 <header style="height:auto;min-height:78px;padding:14px 7%;gap:14px;flex-wrap:wrap">
 <a href="index.html" class="logo" style="display:flex;align-items:center;gap:10px"><span>INDUSTRY<span style="color:#42d8ed">AI</span></span></a>
-<nav>
+<nav aria-label="Hauptnavigation">
 <a href="index.html">Startseite</a>
 <a href="berufscheck.html">Berufscheck</a>
 <a href="berufe-entdecken.html" aria-current="page">Berufe entdecken</a>
