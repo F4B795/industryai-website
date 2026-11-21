@@ -95,14 +95,12 @@ function doPost(e) {
 }
 
 // Öffentliche Schnittstelle: gibt ausschließlich freigegebene Profile zurück.
-function doGet() {
+function doGet(e) {
+  const callback = e && e.parameter ? String(e.parameter.callback || "") : "";
   try {
     const sheet = getDatabaseSheet();
     const values = sheet.getDataRange().getValues();
-    if (values.length < 2) {
-      return jsonOutput({ schemaVersion: 1, entries: [] });
-    }
-    const headers = values[0].map(String);
+    const headers = values.length ? values[0].map(String) : [];
     const entries = values.slice(1)
       .map(row => {
         const item = {};
@@ -126,11 +124,27 @@ function doGet() {
         apprenticeships: String(item.apprenticeships || ""),
         jobs: String(item.jobs || "")
       }));
-    return jsonOutput({ schemaVersion: 1, entries: entries });
+    return directoryOutput({ schemaVersion: 1, entries: entries }, callback);
   } catch (err) {
     console.error(err.stack || err);
-    return jsonOutput({ schemaVersion: 1, entries: [], error: "directory_unavailable" });
+    return directoryOutput({ schemaVersion: 1, entries: [], error: "directory_unavailable" }, callback);
   }
+}
+
+function directoryOutput(data, callback) {
+  const json = JSON.stringify(data);
+  // JSONP erlaubt den Abruf von der GitHub-Pages-Domain ohne CORS-Freigabe.
+  if (callback) {
+    if (!/^[A-Za-z_$][0-9A-Za-z_$]*$/.test(callback)) {
+      throw new Error("Ungültiger JSONP-Callback.");
+    }
+    return ContentService
+      .createTextOutput(callback + "(" + json + ");")
+      .setMimeType(ContentService.MimeType.JAVASCRIPT);
+  }
+  return ContentService
+    .createTextOutput(json)
+    .setMimeType(ContentService.MimeType.JSON);
 }
 
 // Einmal manuell im Apps-Script-Editor ausführen.
