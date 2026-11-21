@@ -29,7 +29,7 @@
       "fachinformatiker-anwendungsentwicklung": { training: 1281, region: "Deutschland", trainingSource: "https://www.bibb.de/dienst/publikationen/download/20846" },
       "fachinformatiker-systemintegration": { training: 1281, median: 5189, q1: 4101, q3: 6741, region: "Deutschland", source: "https://web.arbeitsagentur.de/entgeltatlas/beruf/7847", trainingSource: "https://www.bibb.de/dienst/publikationen/download/20846" },
       "mediengestalter": {},
-      "bauzeichner": { training: 942, region: "Deutschland", trainingSource: "https://www.bibb.de/dienst/publikationen/download/20846" },
+      "bauzeichner": { training: 942, region: "Deutschland", trainingSource: "https://www.bibb.de/dienst/publikationen/download/20846", note: "BIBB-Ausbildungsvergütung 2025 bezieht sich auf den Vorgängerberuf Bauzeichner/in; für die neue Ausbildungsordnung ab 01.08.2026 ist dies kein gesondert ausgewiesener Wert." },
       "gestalter-visuelles-marketing": { median: 3327, q1: 2772, q3: 3898, region: "Deutschland", source: "https://web.arbeitsagentur.de/entgeltatlas/beruf/27541" },
       "koch": { training: 1223, median: 3018, q1: 2563, q3: 3581, region: "Deutschland", source: "https://web.arbeitsagentur.de/entgeltatlas/beruf/3722", trainingSource: "https://www.bibb.de/dienst/publikationen/download/20846" },
       "baecker": { training: 1106, region: "Deutschland", trainingSource: "https://www.bibb.de/dienst/publikationen/download/20846" },
