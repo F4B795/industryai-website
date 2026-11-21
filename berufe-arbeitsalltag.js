@@ -161,6 +161,72 @@
       { stage: "Service koordinieren", detail: "Bestellungen aufnehmen, Speisen und Getränke servieren und bei Veranstaltungen mit Küche und weiteren Bereichen zusammenarbeiten." },
       { stage: "Abrechnung und Nachbereitung", detail: "Rechnungen erstellen, Feedback aufnehmen, Räume und Arbeitsmittel nachbereiten und den nächsten Service vorbereiten." }
     ],
+    "fotograf": [
+      { stage: "Auftrag und Bildidee klären", detail: "Briefing, Verwendungszweck, Zielgruppe und gewünschte Bildsprache mit Auftraggebern abstimmen und das Shooting planen." },
+      { stage: "Shooting vorbereiten", detail: "Kamera, Objektive, Licht und Hintergrund auswählen, Aufnahmeort vorbereiten und Motive sowie Bildaufbau festlegen." },
+      { stage: "Fotografieren", detail: "Aufnahmen erstellen, Perspektiven und Belichtung anpassen und die Bildauswahl während des Shootings kontrollieren." },
+      { stage: "Bilder bearbeiten und liefern", detail: "Geeignete Aufnahmen auswählen, digital bearbeiten, für den vorgesehenen Einsatz exportieren und geordnet bereitstellen." }
+    ],
+    "landwirt": [
+      { stage: "Betrieb und Wetterlage prüfen", detail: "Anstehende Arbeiten, Wetterbedingungen und betriebliche Abläufe prüfen und Maschinen, Geräte oder Materialien vorbereiten." },
+      { stage: "Tiere oder Pflanzen versorgen", detail: "Je nach Betrieb Tiere füttern und Ställe kontrollieren oder Pflanzenbestände pflegen und Maßnahmen im Pflanzenbau durchführen." },
+      { stage: "Feld- und Betriebsarbeiten erledigen", detail: "Maschinen einsetzen, Flächen bearbeiten, Ernte- oder Pflegearbeiten ausführen und dabei Umwelt- und Sicherheitsvorgaben beachten." },
+      { stage: "Kontrollieren und dokumentieren", detail: "Bestände und Arbeitsergebnisse prüfen, notwendige Aufzeichnungen führen und Geräte sowie Arbeitsbereiche für den nächsten Einsatz vorbereiten." }
+    ],
+    "gaertner": [
+      { stage: "Aufträge und Pflanzenbestand prüfen", detail: "Arbeitsaufträge, Witterung und Zustand der Pflanzen oder Flächen prüfen und benötigte Werkzeuge sowie Materialien bereitstellen." },
+      { stage: "Pflanzen und Flächen pflegen", detail: "Je nach Fachrichtung pflanzen, schneiden, bewässern, Boden bearbeiten oder Grünanlagen und Gehölze pflegen." },
+      { stage: "Gestalten und umsetzen", detail: "Pflanzungen, Wege oder Außenanlagen nach Plan anlegen und dabei Standortbedingungen sowie Kundenwünsche berücksichtigen." },
+      { stage: "Qualität und Pflege kontrollieren", detail: "Arbeitsergebnisse prüfen, Pflanzen fachgerecht versorgen und Geräte reinigen sowie sicher verstauen." }
+    ],
+    "fachkraft-lagerlogistik": [
+      { stage: "Wareneingang bearbeiten", detail: "Lieferungen entgegennehmen, Waren und Begleitpapiere abgleichen und sichtbare Schäden oder Abweichungen dokumentieren." },
+      { stage: "Waren einlagern", detail: "Artikel kennzeichnen, Lagerplätze zuordnen und Waren mit geeigneten Fördermitteln unter Beachtung der Sicherheitsregeln einlagern." },
+      { stage: "Aufträge kommissionieren", detail: "Artikel anhand von Auftragslisten oder digitalen Systemen zusammenstellen, Mengen prüfen und Sendungen für den Versand vorbereiten." },
+      { stage: "Versand und Bestände kontrollieren", detail: "Waren verpacken und verladen, Bestandsdaten pflegen und Lagerbereiche ordentlich sowie sicher halten." }
+    ],
+    "berufskraftfahrer": [
+      { stage: "Fahrt vorbereiten", detail: "Tour, Lieferpapiere und Verkehrsbedingungen prüfen sowie Fahrzeug und Ladungssicherung im vorgeschriebenen Umfang kontrollieren." },
+      { stage: "Fahrzeug sicher führen", detail: "Die geplante Route unter Beachtung von Verkehrsregeln, Lenk- und Ruhezeiten sowie betrieblichen Vorgaben fahren." },
+      { stage: "Laden und ausliefern", detail: "Je nach Einsatz Ladung übernehmen, sichern, transportieren und Waren an den vorgesehenen Übergabestellen abliefern." },
+      { stage: "Fahrt abschließen", detail: "Liefernachweise und Fahrzeugunterlagen bearbeiten, Auffälligkeiten melden und das Fahrzeug für den nächsten Einsatz vorbereiten." }
+    ],
+    "fachkraft-veranstaltungstechnik": [
+      { stage: "Veranstaltung planen", detail: "Technische Anforderungen, Ablaufplan und Veranstaltungsort prüfen und Material- sowie Personalbedarf mit dem Team abstimmen." },
+      { stage: "Technik aufbauen", detail: "Bühnen-, Licht-, Ton- oder Videotechnik nach Plan installieren und Leitungen sowie Arbeitsbereiche sicher organisieren." },
+      { stage: "Probe und Durchführung", detail: "Technische Funktionen testen, Proben begleiten und während der Veranstaltung die zuständigen Systeme bedienen und überwachen." },
+      { stage: "Abbau und Dokumentation", detail: "Technik geordnet und sicher abbauen, Material kontrollieren und Besonderheiten für kommende Veranstaltungen dokumentieren." }
+    ],
+    "industriekaufmann": [
+      { stage: "Aufgaben und Vorgänge prüfen", detail: "Offene Bestellungen, Kundenanfragen oder interne Vorgänge sichten und Prioritäten mit dem jeweiligen Fachbereich abstimmen." },
+      { stage: "Kaufmännische Prozesse bearbeiten", detail: "Je nach Abteilung Angebote vergleichen, Bestellungen bearbeiten, Rechnungen prüfen oder Kundenaufträge begleiten." },
+      { stage: "Mit Abteilungen kommunizieren", detail: "Informationen mit Einkauf, Vertrieb, Produktion, Lager und Rechnungswesen austauschen und Abläufe koordinieren." },
+      { stage: "Daten und Ergebnisse dokumentieren", detail: "Vorgänge im Warenwirtschafts- oder ERP-System pflegen, Kennzahlen vorbereiten und offene Aufgaben nachverfolgen." }
+    ],
+    "kaufmann-einzelhandel": [
+      { stage: "Verkaufsfläche vorbereiten", detail: "Warenbestand und Präsentation prüfen, Regale auffüllen und sicherstellen, dass Preise und Kennzeichnungen stimmen." },
+      { stage: "Kunden beraten", detail: "Kundenwünsche ermitteln, Produkte erklären und bei Auswahl, Verfügbarkeit oder Reklamationen unterstützen." },
+      { stage: "Waren und Kasse bearbeiten", detail: "Verkäufe abwickeln, Waren annehmen oder nachfüllen und Bestände sowie Verkaufsaktionen im Blick behalten." },
+      { stage: "Tagesgeschäft organisieren", detail: "Verkaufsfläche ordnen, Bestellungen oder Inventuraufgaben bearbeiten und Informationen im Team weitergeben." }
+    ],
+    "steuerfachangestellter": [
+      { stage: "Unterlagen sichten", detail: "Belege, Kontoauszüge und Mandanteninformationen auf Vollständigkeit prüfen und fehlende Angaben gezielt anfordern." },
+      { stage: "Daten erfassen und zuordnen", detail: "Geschäftsvorfälle nach Vorgaben erfassen, Belege zuordnen und Buchungen für die weitere Bearbeitung vorbereiten." },
+      { stage: "Steuerliche Vorgänge vorbereiten", detail: "Bei Finanzbuchführungen, Steuererklärungen oder Lohnabrechnungen mitarbeiten und Fristen sowie Plausibilität beachten." },
+      { stage: "Ergebnisse abstimmen", detail: "Rückfragen mit Mandanten oder Kollegen klären, Arbeitsschritte dokumentieren und Unterlagen für die Prüfung durch befugte Fachkräfte vorbereiten." }
+    ],
+    "chemielaborant": [
+      { stage: "Versuch vorbereiten", detail: "Arbeitsanweisung und Sicherheitsinformationen prüfen, Chemikalien und Geräte auswählen und den Arbeitsplatz vorbereiten." },
+      { stage: "Proben und Lösungen bearbeiten", detail: "Proben vorbereiten, Lösungen nach Vorgabe herstellen und chemische oder physikalische Untersuchungen durchführen." },
+      { stage: "Messungen auswerten", detail: "Messgeräte bedienen, Ergebnisse erfassen und Messwerte auf Plausibilität sowie mögliche Abweichungen prüfen." },
+      { stage: "Dokumentieren und reinigen", detail: "Versuchsabläufe und Ergebnisse nachvollziehbar dokumentieren und Geräte sowie Arbeitsplatz nach Laborvorschriften reinigen." }
+    ],
+    "friseur": [
+      { stage: "Kundenwunsch besprechen", detail: "Beratungswünsche, Haarzustand und gewünschtes Ergebnis besprechen und geeignete Leistungen sowie Pflegeprodukte erläutern." },
+      { stage: "Arbeitsplatz vorbereiten", detail: "Werkzeuge, Geräte und Produkte bereitstellen und den Arbeitsplatz nach Hygiene- und Betriebsregeln vorbereiten." },
+      { stage: "Haare behandeln und gestalten", detail: "Haare waschen, schneiden, föhnen oder stylen und – entsprechend Ausbildung und Kundenwunsch – Farb- oder Umformungsarbeiten durchführen." },
+      { stage: "Ergebnis und Folgetermin", detail: "Ergebnis mit dem Kunden abstimmen, Pflegehinweise geben, Arbeitsplatz reinigen und Termine oder Kundeninformationen bearbeiten." }
+    ],
   };
 
   Object.keys(workdays).forEach(function (id) {
