@@ -302,6 +302,11 @@
     panel.appendChild(createElement("h3", "", "Wie kommst du in diesen Beruf?"));
     panel.appendChild(createElement("p", "muted", data.accessNote));
 
+    if (careerDetails && careerDetails.accessRequirements) {
+      panel.appendChild(createElement("h4", "", "Formale Zugangsvoraussetzungen"));
+      panel.appendChild(createElement("p", "muted", careerDetails.accessRequirements));
+    }
+
     if (careerDetails && Array.isArray(careerDetails.prerequisites) && careerDetails.prerequisites.length) {
       panel.appendChild(createElement("p", "muted", "Hilfreiche Fähigkeiten und Interessen für diesen Beruf:"));
       const skills = document.createElement("ul");
