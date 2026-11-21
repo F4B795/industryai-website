@@ -94,7 +94,7 @@
     },
 
     "mediengestalter": {
-      intro: "Mediengestalter/innen Digital und Print gestalten visuelle Medien für unterschiedliche Kommunikationskanäle. Sie entwickeln Layouts, bearbeiten Bilder, erstellen digitale Inhalte und setzen Kundenwünsche in gestalterische Konzepte um.",
+      intro: "Mediengestalter/innen Digital und Print planen, gestalten und realisieren Medienprodukte für digitale und gedruckte Kanäle. Je nach Fachrichtung liegt der Schwerpunkt auf Designkonzeption, Digitalmedien, Printmedien oder Projektmanagement. Dazu gehören kreative Entwürfe, die technische Umsetzung, Produktionsplanung und – abhängig von der Fachrichtung – Kundenberatung und Projektorganisation.",
       prerequisites: [
         "Interesse an Gestaltung, Medien und Kommunikation",
         "Kreativität und Sinn für Ästhetik",
@@ -104,17 +104,17 @@
         "Bereitschaft, mit Designsoftware zu arbeiten"
       ],
       learning: [
-        "Gestaltungskonzepte entwickeln",
-        "Layouts und Grafiken erstellen",
-        "Bilder und digitale Inhalte bearbeiten",
-        "Typografie und Farbgestaltung einsetzen",
-        "Digitale Medien und Druckprodukte vorbereiten",
-        "Gestaltungssoftware professionell nutzen",
-        "Kundenwünsche analysieren und umsetzen",
-        "Dateien für verschiedene Medienformate optimieren"
+        "In der Fachrichtung Designkonzeption Zielgruppen analysieren und Gestaltungskonzepte entwickeln",
+        "In Digitalmedien digitale Medienprodukte gestalten, umsetzen und auf Benutzerfreundlichkeit prüfen",
+        "In Printmedien Druckprodukte gestalten und Produktionsdaten für die Herstellung vorbereiten",
+        "Im Projektmanagement Kunden beraten, Angebote kalkulieren und Medienprojekte planen und koordinieren",
+        "Layouts, Grafiken und Bildmaterial mediengerecht bearbeiten",
+        "Typografie, Farbgestaltung und Gestaltungssoftware professionell einsetzen",
+        "Medienrechtliche Vorgaben, Barrierefreiheit und Qualitätsstandards berücksichtigen",
+        "Dateien und Medienbestandteile für die jeweiligen Ausgabeformate optimieren"
       ],
       furtherTraining: [
-        "Spezialisierung auf Digitalmedien oder Print",
+        "Spezialisierung auf Designkonzeption, Digitalmedien, Printmedien oder Projektmanagement",
         "Weiterbildung in Webdesign und UX/UI-Design",
         "Art Direction",
         "Fachwirt/in für Medien",
