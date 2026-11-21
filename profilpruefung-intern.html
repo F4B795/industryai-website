@@ -97,7 +97,7 @@ function render(){
   approve.addEventListener("click",async()=>{
    if(!confirm("Dieses Unternehmensprofil öffentlich in der Unternehmenswelt freigeben? Kontaktdaten und interne Notizen werden nicht veröffentlicht."))return;
    approve.disabled=true;
-   const publicProfile={submission_id:r.id,name:r.company_name,location:r.location||"",category:(r.sector||"").toLocaleLowerCase("de"),category_label:r.sector||"",description:r.description||"",apprenticeships:r.apprenticeships||"",jobs:r.jobs||"",workplace:r.workplace||"",technology:r.technology||"",benefits:r.benefits||"",culture:r.culture||"",development:r.development||"",website:r.website||"",profile_url:"unternehmen-profil.html?id="+encodeURIComponent(r.id),tag:"UNTERNEHMEN",is_published:true};
+   const publicProfile={submission_id:r.id,name:r.company_name,location:r.location||"",category:(r.sector||"").toLocaleLowerCase("de"),category_label:r.sector||"",description:r.description||"",apprenticeships:r.apprenticeships||"",jobs:r.jobs||"",workplace:r.workplace||"",technology:r.technology||"",benefits:r.benefits||"",culture:r.culture||"",development:r.development||"",website:r.website||"",media:r.media||"",profile_url:"unternehmen-profil.html?id="+encodeURIComponent(r.id),tag:"UNTERNEHMEN",is_published:true};
    const {error:publishError}=await client.from("company_public_profiles").upsert(publicProfile,{onConflict:"submission_id"});
    if(publishError){approve.disabled=false;say("Veröffentlichung fehlgeschlagen: "+publishError.message);return}
    const {error:updateError}=await client.from("company_submissions").update({status:"Freigegeben",internal_note:note.value,updated_at:new Date().toISOString()}).eq("id",r.id);
