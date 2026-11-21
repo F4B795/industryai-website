@@ -619,7 +619,7 @@
       </div>
       <p id="health-text" class="scenario-question"></p>
       <div id="health-answers" class="answers"></div>
-      <div id="health-result" aria-live="polite" style="min-height:28px;margin-top:18px;line-height:1.6"></div>
+      <div id="health-result" aria-live="polite" style="min-height:28px;margin-top:18px;line-height:1.6;color:var(--sector-accent)"></div>
       <button class="reset-button" id="health-restart" type="button" hidden>Challenge erneut starten</button>
     </div>
 
@@ -714,7 +714,7 @@
     question.answers.forEach(function(answer, index) {
       const button = document.createElement("button");
       button.type = "button";
-      button.className = "health-answer";
+      button.className = "answer";
       button.textContent = String.fromCharCode(65 + index) + ": " + answer;
       button.addEventListener("click", function() {
         checkAnswer(index);
