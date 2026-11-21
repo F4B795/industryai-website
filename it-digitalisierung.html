@@ -673,7 +673,7 @@
       </div>
       <p class="question" id="it-text"></p>
       <div class="answers" id="it-answers"></div>
-      <div id="it-result" aria-live="polite"></div>
+      <div id="it-result" aria-live="polite" style="min-height:55px;margin-top:20px;line-height:1.7;color:var(--sector-accent)"></div>
       <button class="restart-button" id="it-restart" type="button" hidden>Challenge erneut starten</button>
     </div>
   </div>
@@ -760,7 +760,7 @@
     question.answers.forEach(function(answer, index) {
       const button = document.createElement("button");
       button.type = "button";
-      button.className = "it-answer";
+      button.className = "answer-button";
       button.textContent = String.fromCharCode(65 + index) + ": " + answer;
       button.addEventListener("click", function() {
         checkAnswer(index);
