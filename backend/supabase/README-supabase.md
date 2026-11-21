@@ -21,7 +21,7 @@ The SQL enables Row Level Security (RLS). Anonymous visitors can insert a new su
 
 ## Applied in the current INDUSTRYAI project (2026-11-21)\n\nThe Supabase project `industryai-backend` now has the three tables, RLS policies, the initial administrator record, public profile content columns, and the hardened private admin helper. Migration 002 and migration 003 were applied through the Supabase connector. Keep this GitHub folder as the source-controlled record of the schema and migrations.\n\n## Not connected yet
 
-The live website code is now configured to submit company profile requests to `company_submissions`, authenticate an administrator in the review page, and read only approved public records from `company_public_profiles`. The deployment and end-to-end browser flow still require live testing before collecting real personal data.
+The website code includes the Supabase submission flow, authenticated admin review, and public approved-profile directory. However, public intake is deliberately disabled in both the browser configuration and database grants/policies until the privacy notice, retention rules, and server-side anti-spam protection are complete. Do not collect real personal data yet.
 
 Before switching the live workflow, the next implementation steps are:
 - configure the public submission form to insert only into `company_submissions`;
