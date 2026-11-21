@@ -702,5 +702,54 @@ window.IndustryAICareers = {
       interestTags: ["kreativ", "gestaltung", "menschen", "kommunikation", "handwerk"],
       valuesTags: ["kreativitaet", "teamwork", "abwechslung"]
     }
+    ,
+    {
+      id: "fachinformatiker-daten-prozessanalyse",
+      name: "Fachinformatiker/in – Daten- und Prozessanalyse",
+      category: "IT, Technik & Digitalisierung",
+      training: { type: "dual", durationMonths: 36 },
+      profile: { T: 2, A: 4, S: 2, K: 4, C: 2, O: 4, N: 0, B: 2, L: 4 },
+      workingConditions: {
+        locations: ["Büro", "beim Kunden", "Homeoffice"],
+        physicalActivity: "low", peopleContact: "medium",
+        teamwork: "mixed", routine: "mixed",
+        shiftWork: "rare", timePressure: "variable",
+        precision: "very_high", responsibility: "high"
+      },
+      activities: [
+        "Arbeits- und Geschäftsprozesse informationstechnisch analysieren",
+        "Daten auswerten und Verbesserungspotenziale erkennen",
+        "Digitale Prozesse optimieren und Aufgaben automatisieren",
+        "Daten aufbereiten und für Anwendungen bereitstellen",
+        "IT-Sicherheit und Datenschutz berücksichtigen"
+      ],
+      dayToDay: "Du untersuchst Daten und digitale Abläufe und entwickelst Lösungen, damit Prozesse effizienter und sicherer werden.",
+      interestTags: ["daten", "analyse", "logik", "digital", "prozesse", "programmieren"],
+      valuesTags: ["entwicklung", "struktur", "qualitaet", "verantwortung", "technik"]
+    },
+    {
+      id: "fachinformatiker-digitale-vernetzung",
+      name: "Fachinformatiker/in – Digitale Vernetzung",
+      category: "IT, Technik & Digitalisierung",
+      training: { type: "dual", durationMonths: 36 },
+      profile: { T: 4, A: 4, S: 2, K: 3, C: 1, O: 4, N: 0, B: 3, L: 4 },
+      workingConditions: {
+        locations: ["Büro", "Produktion", "beim Kunden"],
+        physicalActivity: "medium", peopleContact: "medium",
+        teamwork: "mixed", routine: "mixed",
+        shiftWork: "possible", timePressure: "variable",
+        precision: "very_high", responsibility: "high"
+      },
+      activities: [
+        "IT-Systeme, Maschinen und technische Anlagen vernetzen",
+        "Netzwerkkomponenten und Betriebssysteme installieren und konfigurieren",
+        "Datenaustausch zwischen Systemen einrichten und testen",
+        "Vernetzte Systeme überwachen und optimieren",
+        "Schwachstellen erkennen und Störungen beheben"
+      ],
+      dayToDay: "Du verbindest digitale Systeme und technische Anlagen, damit Daten zuverlässig und sicher ausgetauscht werden.",
+      interestTags: ["netzwerke", "technik", "maschinen", "digital", "elektronik", "probleme_loesen"],
+      valuesTags: ["technik", "entwicklung", "sicherheit", "verantwortung"]
+    }
   ]
 };
