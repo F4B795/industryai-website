@@ -84,7 +84,7 @@
         { text: "Ich versuche, zwischen beiden zu vermitteln.", scores: { S: 2, K: 2 } },
         { text: "Ich suche nach den Ursachen des Konflikts.", scores: { A: 2, O: 1 } },
         { text: "Ich schlage einen konkreten Kompromiss vor.", scores: { K: 2, B: 1 } },
-        { text: "Ich halte mich zunächst zurück und beobachte.", scores: { A: 1, O: 1 } }
+        { text: "Ich achte darauf, wie es den Beteiligten geht, bevor ich mich einmische.", scores: { S: 1 } }
       ]
     },
     {
@@ -116,7 +116,7 @@
       options: [
         { text: "Ich spreche sie an und nehme sie mit auf.", scores: { S: 2, K: 2 } },
         { text: "Ich erkläre ihr, wie bei uns alles funktioniert.", scores: { K: 2, O: 1 } },
-        { text: "Ich beobachte erst einmal, wie sie sich einfügt.", scores: { A: 1, S: 1 } },
+        { text: "Ich achte darauf, wie die Gruppe miteinander umgeht, bevor ich mich einbringe.", scores: { S: 2 } },
         { text: "Ich schlage eine gemeinsame Aktivität vor.", scores: { S: 1, C: 1, B: 1 } }
       ]
     },
@@ -147,9 +147,9 @@
       title: "Du möchtest eine persönliche Herausforderung meistern.",
       type: "single",
       options: [
-        { text: "Ich setze mir einen Plan und arbeite ihn ab.", scores: { O: 2, L: 1 } },
+        { text: "Ich setze mir einen Plan und arbeite ihn Schritt für Schritt ab.", scores: { O: 2 } },
         { text: "Ich stürze mich hinein und lerne unterwegs.", scores: { B: 2, L: 1 } },
-        { text: "Ich hole mir Tipps und Unterstützung.", scores: { K: 1, S: 1, L: 1 } },
+        { text: "Ich hole mir Tipps und Unterstützung von anderen.", scores: { K: 1, S: 1 } },
         { text: "Ich suche meinen eigenen Weg.", scores: { C: 2, A: 1 } }
       ]
     },
