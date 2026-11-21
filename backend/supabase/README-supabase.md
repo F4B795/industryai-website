@@ -8,10 +8,11 @@ Supabase-Projekt: `industryai-backend`
 Region: `eu-west-1` (West EU, Irland)  
 Projektstatus: `ACTIVE_HEALTHY`
 
-Drei Tabellen sind vorhanden und RLS ist aktiviert:
+Vier Tabellen sind vorhanden und RLS ist aktiviert:
 - `company_submissions`: private Unternehmensanfragen einschließlich Ansprechpartner und interner Prüfanmerkungen.
 - `industryai_admins`: Allowlist der Administrator-Benutzer-UUIDs.
 - `company_public_profiles`: ausschließlich ausdrücklich freigegebene öffentliche Profilangaben.
+- `contact_messages`: private Nachrichten aus dem öffentlichen Kontaktformular; nur das freigeschaltete Admin-Konto kann sie lesen, bearbeiten oder löschen.
 
 Ein Administrator ist in `industryai_admins` eingetragen. Die Admin-Hilfsfunktion liegt im nicht exponierten Schema `private`. Die interne Review-Seite authentifiziert den Benutzer und prüft zusätzlich dessen UUID in `industryai_admins`.
 
@@ -112,3 +113,45 @@ Noch nicht abgeschlossen:
 - Publishable Keys sind für Browser-Code gedacht, aber nur zusammen mit RLS und minimalen Grants.
 - Admin-Berechtigung basiert ausschließlich auf der serverseitig verwalteten Tabelle `industryai_admins`, nicht auf editierbaren User-Metadaten.
 - Keine echten Unternehmens- oder Ansprechpartnerdaten für Tests verwenden, solange die öffentliche Einreichung nicht ausdrücklich freigegeben ist.
+
+
+## Edge Function: Kontaktformular
+
+Die Edge Function `contact-message-submit` ist deployed und aktiv (Version 1, `verify_jwt=false`). Sie akzeptiert ausschließlich Anfragen von `https://industryai.github.io` mit dem projektbezogenen Publishable Key und prüft serverseitig:
+- Pflichtfelder, E-Mail-Format, Längen und JSON-Requestgröße
+- Honeypot-Feld gegen einfache automatisierte Einsendungen
+- Cloudflare-Turnstile-Token mit Hostname `industryai.github.io` und Action `contact_message_submit`
+- Anfragelimits je IP-Adresse (HMAC-Kennung, 5 pro Stunde) und E-Mail-Adresse (HMAC-Kennung, 3 pro Tag)
+- Einfügung ausschließlich über den serverseitigen Service-Role-Client in `contact_messages`
+
+Im Rate-Limit-Speicher werden keine Klartext-IP-Adressen oder Klartext-E-Mail-Adressen abgelegt. Die rohe IP wird für die Turnstile-Überprüfung an Cloudflare weitergegeben. Es wird keine automatische Bestätigungs- oder Benachrichtigungs-E-Mail versendet; Nachrichten werden manuell im Adminbereich bearbeitet.
+
+### Kontakt-Retention
+
+Die Migrationen `006_contact_messages.sql` und `007_contact_message_retention.sql` wurden im Supabase-Projekt angewendet.
+- Bearbeitete Kontaktanfragen: automatische Löschung sechs Monate nach `processed_at`.
+- Nicht bearbeitete Kontaktanfragen: automatische Löschung spätestens zwölf Monate nach `created_at`.
+- HMAC-geschützte Rate-Limit-Kennungen: Löschung nach 30 Tagen.
+- `pg_cron` führt die Wartungsfunktion täglich aus.
+- Die Wartungsfunktion liegt im nicht exponierten Schema `private`; `anon` und `authenticated` dürfen sie nicht ausführen.
+
+Der Adminbereich `profilpruefung-intern.html` zeigt zusätzlich den Kontakt-Posteingang. Nachrichten können dort gelesen, als bearbeitet markiert, wieder geöffnet und gelöscht werden. Die Absender-E-Mail ist für eine manuelle Antwort anklickbar.
+
+### Öffentliche Kontaktannahme
+
+`kontakt.html` nutzt die Edge Function `contact-message-submit`. Turnstile wird erst nach dem ausdrücklichen Klick auf „Bot-Schutz aktivieren“ geladen. Die Kontaktanfrage wird danach per HTTPS an Supabase übermittelt und nicht öffentlich zugänglich gemacht.
+
+## Impressum und Datenschutzhinweise
+
+Die Seiten `impressum.html`, `kontakt.html` und `datenschutz.html` sind vorhanden und über die Footer der öffentlichen Seiten erreichbar. Das Impressum nennt die natürliche Person als Anbieter, deren ladungsfähige Anschrift, die Projektbezeichnung INDUSTRYAI, die E-Mail-Adresse und das Online-Kontaktformular.
+
+Die Datenschutzhinweise beschreiben den tatsächlich eingerichteten Kontakt-Posteingang, Turnstile, Supabase, GitHub Pages, die optionale Admin-CDN-Abhängigkeit, die Löschfristen und die derzeit deaktivierten Unternehmens- und Recruiting-Kontaktformulare. Die öffentlichen Seiten laden keine Google Fonts, keine Analytics- oder Werbe-Pixel und keine YouTube-Embeds.
+
+## Noch offene Produktivprüfungen
+
+- Den echten Browser-Ablauf des Kontaktformulars auf der veröffentlichten GitHub-Pages-Seite mit einer Testnachricht und gültigem Turnstile-Token testen.
+- Die Nachricht im Adminbereich mit dem berechtigten Konto öffnen, den Status ändern und anschließend die Testnachricht löschen.
+- Die Erreichbarkeit des veröffentlichten E-Mail-Postfachs `industryaisupport@gmail.com` praktisch prüfen. Eine Kontaktseite ersetzt keine erreichbare E-Mail-Adresse.
+- Den öffentlichen Unternehmensprofil-Einreichungstest mit gültigem und ungültigem Turnstile-Token kontrolliert durchführen, wenn Datenschutz- und Sicherheitsfreigabe vorliegen. Bis dahin bleiben Browser- und Server-Schalter `false`.
+- Keine automatische E-Mail-Benachrichtigung an den Betreiber ist derzeit eingerichtet. Für zeitnahe Bearbeitung muss der Admin-Posteingang regelmäßig geprüft werden.
+- Die Anbieterbedingungen und Auftragsverarbeitungsvereinbarungen der tatsächlich genutzten Dienste (insbesondere Supabase, Cloudflare, GitHub und Google/Gmail) vor produktiver Datenerhebung prüfen.
