@@ -150,29 +150,41 @@
   }
 
   function interestScore(userTags, careerTags) {
-    const user = expandTags(userTags, INTEREST_ALIASES);
-    const career = expandTags(careerTags, INTEREST_ALIASES);
+    const user = unique(userTags || []);
+    const career = unique(careerTags || []);
+    const expandedCareer = expandTags(career, INTEREST_ALIASES);
 
     if (!user.length || !career.length) {
       return { score: null, matched: [], missing: [] };
     }
 
-    const matched = user.filter(function (tag) {
-      return career.includes(tag);
+    let total = 0;
+    const matched = [];
+    const missing = [];
+
+    user.forEach(function (tag) {
+      if (career.includes(tag)) {
+        total += 100;
+        matched.push(tag);
+        return;
+      }
+
+      const related = (INTEREST_ALIASES[tag] || []).some(function (alias) {
+        return expandedCareer.includes(alias);
+      });
+
+      if (related) {
+        total += 50;
+        matched.push(tag + " (verwandt)");
+      } else {
+        missing.push(tag);
+      }
     });
 
-    const score = clamp(
-      Math.round((matched.length / user.length) * 100),
-      0,
-      100
-    );
-
     return {
-      score: score,
-      matched: unique(matched),
-      missing: user.filter(function (tag) {
-        return !career.includes(tag);
-      })
+      score: clamp(Math.round(total / user.length), 0, 100),
+      matched: matched,
+      missing: missing
     };
   }
 
