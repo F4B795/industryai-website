@@ -155,7 +155,7 @@ window.IndustryAICareers = {
       name: "Tischler/in",
       category: "Technik, Industrie & Handwerk",
       training: { type: "dual", durationMonths: 36 },
-      profile: { T: 4, A: 2, S: 2, K: 2, C: 4, O: 2, N: 1, B: 3, L: 3 },
+      profile: { T: 4, A: 2, S: 2, K: 2, C: 4, O: 3, N: 1, B: 3, L: 3 },
       workingConditions: {
         locations: ["Werkstatt", "beim Kunden", "Baustelle"],
         physicalActivity: "medium", peopleContact: "medium",
@@ -661,7 +661,7 @@ window.IndustryAICareers = {
       name: "Chemielaborant/in",
       category: "Naturwissenschaften & Forschung",
       training: { type: "dual", durationMonths: 42 },
-      profile: { T: 3, A: 4, S: 1, K: 2, C: 2, O: 4, N: 2, B: 2, L: 4 },
+      profile: { T: 3, A: 4, S: 1, K: 2, C: 2, O: 4, N: 4, B: 2, L: 4 },
       workingConditions: {
         locations: ["Labor", "Produktion"],
         physicalActivity: "low", peopleContact: "low",
@@ -684,7 +684,7 @@ window.IndustryAICareers = {
       name: "Friseur/in",
       category: "Gesundheit, Soziales & Menschen",
       training: { type: "dual", durationMonths: 36 },
-      profile: { T: 2, A: 1, S: 4, K: 4, C: 4, O: 2, N: 0, B: 3, L: 3 },
+      profile: { T: 2, A: 1, S: 4, K: 4, C: 4, O: 3, N: 0, B: 3, L: 3 },
       workingConditions: {
         locations: ["Salon", "beim Kunden"],
         physicalActivity: "medium", peopleContact: "very_high",
@@ -732,7 +732,7 @@ window.IndustryAICareers = {
       name: "Fachinformatiker/in – Digitale Vernetzung",
       category: "IT, Technik & Digitalisierung",
       training: { type: "dual", durationMonths: 36 },
-      profile: { T: 4, A: 4, S: 2, K: 3, C: 1, O: 4, N: 0, B: 3, L: 4 },
+      profile: { T: 4, A: 4, S: 2, K: 3, C: 2, O: 4, N: 0, B: 3, L: 4 },
       workingConditions: {
         locations: ["Büro", "Produktion", "beim Kunden"],
         physicalActivity: "medium", peopleContact: "medium",
