@@ -460,7 +460,7 @@
         { text: "Industriekaufmann/-frau", value: "industriekaufmann" },
         { text: "Kaufmann/-frau im Einzelhandel", value: "kaufmann-einzelhandel" },
         { text: "Steuerfachangestellte/r", value: "steuerfachangestellter" },
-        { text: "Bauzeichner/in", value: "bauzeichner" },
+        { text: "Bautechnische/r Konstrukteur/in (früher Bauzeichner/in)", value: "bauzeichner" },
         { text: "Chemielaborant/in", value: "chemielaborant" },
         { text: "Friseur/in", value: "friseur" },
         { text: "Einen anderen Beruf", value: "anderer-beruf" },
