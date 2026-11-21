@@ -167,10 +167,39 @@
   if(event.data.success){status.textContent="Vielen Dank. Ihre Profilanfrage wurde übermittelt. Bitte prüfen Sie auch den Posteingang von industryaisupport@gmail.com.";}
   else{status.textContent="Der Server konnte die Anfrage nicht verarbeiten. Bitte prüfen Sie die Berechtigungen des Apps-Script-Projekts.";}
 });
+ function buildDraft(){
+  const labels={
+   "company-name":"Unternehmen","company-location":"Standort","company-sector":"Branche",
+   "company-website":"Website","company-description":"Unternehmensbeschreibung",
+   "company-apprenticeships":"Ausbildungsberufe und Praktika","company-jobs":"Offene Stellen",
+   "company-media":"Mögliche Einblicke","contact-person":"Ansprechpartner",
+   "contact-email":"Geschäftliche E-Mail","contact-phone":"Telefon"
+  };
+  return Object.entries(labels).map(([id,label])=>label+":\n"+(get(id)||"Keine Angabe")).join("\n\n");
+ }
+ document.getElementById("copy-draft").addEventListener("click",async()=>{
+  const status=document.getElementById("preview-copy-status");
+  const draft="INDUSTRYAI – Unternehmensprofil-Entwurf\n\n"+buildDraft();
+  try{
+   if(navigator.clipboard && window.isSecureContext){
+    await navigator.clipboard.writeText(draft);
+   }else{
+    const helper=document.createElement("textarea");
+    helper.value=draft;helper.style.position="fixed";helper.style.opacity="0";
+    document.body.appendChild(helper);helper.select();
+    const copied=document.execCommand("copy");helper.remove();
+    if(!copied)throw new Error("Kopieren nicht verfügbar");
+   }
+   status.textContent="Der Profilentwurf wurde kopiert. Sie können ihn jetzt in ein Dokument oder eine E-Mail einfügen.";
+  }catch(error){
+   status.textContent="Kopieren war nicht möglich. Bitte versuchen Sie es in einem anderen Browser.";
+  }
+ });
  document.querySelectorAll("#reset-draft").forEach(button=>button.addEventListener("click",()=>{
   ids.forEach(id=>{document.getElementById(id).value="";});
   document.getElementById("privacy-consent").checked=false;
   document.querySelector("#company-profile-form #copy-status").textContent="";
+  document.getElementById("preview-copy-status").textContent="";
   update();
  }));
 
