@@ -9,40 +9,49 @@ Region: `eu-west-1` (West EU, Irland)
 Projektstatus: `ACTIVE_HEALTHY`
 
 Drei Tabellen sind vorhanden und RLS ist aktiviert:
-- `company_submissions`: private Unternehmensanfragen inkl. Ansprechpartner und interner Prüfanmerkungen.
+- `company_submissions`: private Unternehmensanfragen einschließlich Ansprechpartner und interner Prüfanmerkungen.
 - `industryai_admins`: Allowlist der Administrator-Benutzer-UUIDs.
 - `company_public_profiles`: ausschließlich ausdrücklich freigegebene öffentliche Profilangaben.
 
-Der Administrator `industryaisupport@gmail.com` ist eingetragen. Die Admin-Hilfsfunktion liegt im nicht exponierten Schema `private`. Die interne Review-Seite authentifiziert den Benutzer und prüft zusätzlich dessen UUID in `industryai_admins`.
+Ein Administrator ist in `industryai_admins` eingetragen. Die Admin-Hilfsfunktion liegt im nicht exponierten Schema `private`. Die interne Review-Seite authentifiziert den Benutzer und prüft zusätzlich dessen UUID in `industryai_admins`.
 
 ## Edge Function: öffentliche Profilanfrage
 
-Das Cloudflare Turnstile-Widget `INDUSTRYAI Profilanfrage` wurde am 21.11.2026 direkt im verbundenen Cloudflare-Konto erstellt. Modus: `managed`; erlaubter Hostname: `industryai.github.io`; Region: `world`. Der öffentliche Sitekey ist in `js/supabase-config.js` eingetragen. Der private Secret Key wurde nicht in GitHub oder Browser-Code gespeichert.\n\nDie Edge Function `company-profile-submit` ist in Supabase deployed und aktiv (Version 2). Sie ist für den öffentlichen Browseraufruf mit `verify_jwt=false` konfiguriert; die Funktion prüft selbst:
-- exakten Website-Origin `https://industryai.github.io`;
-- den projektbezogenen Publishable Key im `apikey`-Header;
-- ein gültiges Cloudflare Turnstile-Token mit erwartetem Hostname und Action;
-- Eingabegrößen, Pflichtfelder, E-Mail-Format und HTTP(S)-Website-URLs;
-- serverseitige Anfragelimits: 5 Anfragen pro IP-Hash und Stunde, 3 pro E-Mail-Hash und Tag.
+Das Cloudflare-Turnstile-Widget `INDUSTRYAI Profilanfrage` ist im verbundenen Cloudflare-Konto eingerichtet:
+- Modus: `managed`
+- erlaubter Hostname: `industryai.github.io`
+- Region: `world`
+- öffentlicher Sitekey: in `js/supabase-config.js`
+- privater Secret Key: ausschließlich als Supabase-Edge-Function-Secret, nicht in GitHub oder Browser-Code
 
-Die Einreichung verwendet den Supabase Secret Key ausschließlich innerhalb der Edge Function. Dieser Schlüssel wird nicht in den Browser ausgeliefert. Die Funktion schreibt nur die erlaubten Profildaten in `company_submissions`; Status und interne Notizen werden nicht vom Browser angenommen.
+Der Cloudflare-Secret-Fingerprint wurde mit dem in Supabase gespeicherten Secret-Fingerprint abgeglichen. Der Secret-Wert selbst wird nicht ausgegeben oder in Dateien gespeichert.
 
-### Rate-Limit-Datenschutz
+Die Edge Function `company-profile-submit` ist in Supabase deployed und aktiv (Version 3). Sie ist für den öffentlichen Browseraufruf mit `verify_jwt=false` konfiguriert; die Funktion führt ihre eigene Prüfung durch:
+- exakter Website-Origin `https://industryai.github.io`
+- projektbezogener Publishable Key im `apikey`-Header
+- gültiges Cloudflare-Turnstile-Token mit erwartetem Hostname und erwarteter Action
+- Eingabegrößen, Pflichtfelder, E-Mail-Format und HTTP(S)-Website-URLs
+- serverseitige Anfragelimits auf Basis von HMAC-geschützten IP- und E-Mail-Kennungen
 
-Die Edge Function bildet HMAC-SHA-256-Hashes aus IP-Adresse bzw. normalisierter E-Mail-Adresse. In `private.company_profile_rate_limits` werden nur diese Schlüssel-Hashes, Zeitfenster und Zähler gespeichert – keine Klartext-IP und keine Klartext-E-Mail. Alte Zeitfenster werden gelegentlich bereinigt (älter als 30 Tage). Die HMAC-Geheimkomponente gehört ausschließlich in Edge Function Secrets.
+Die Funktion verwendet den Supabase Secret Key ausschließlich serverseitig. Sie schreibt nur die ausdrücklich erlaubten Profildaten in `company_submissions`; Status und interne Notizen werden nicht vom Browser angenommen.
 
-### Benötigte Edge Function Secrets
+### Edge Function Secrets
 
-Diese drei Variablen müssen im Supabase Dashboard unter **Edge Functions → Secrets** gesetzt werden:
-- `CLOUDFLARE_TURNSTILE_SECRET_KEY`: Cloudflare Turnstile Secret Key.
-- `INDUSTRYAI_RATE_LIMIT_HMAC_SECRET`: zufälliger Geheimwert mit mindestens 32 Zeichen.
-- `INDUSTRYAI_PUBLIC_SUBMISSIONS_ENABLED`: aktuell `false`; nur nach vollständiger Datenschutz- und Sicherheitfreigabe bewusst auf `true` setzen.
+Die folgenden drei benutzerdefinierten Secrets sind im Supabase-Projekt angelegt:
+- `CLOUDFLARE_TURNSTILE_SECRET_KEY`
+- `INDUSTRYAI_RATE_LIMIT_HMAC_SECRET`
+- `INDUSTRYAI_PUBLIC_SUBMISSIONS_ENABLED`
 
-Supabase stellt der Edge Function die Standardvariable `SUPABASE_SECRET_KEYS` bereit. Der Secret Key wird daraus serverseitig gelesen und darf niemals in GitHub oder Browser-Code erscheinen.
+Der aktuelle Server-Schalter ist `false`. Sein SHA-256-Fingerprint wurde mit dem bekannten Fingerprint des Textwerts `false` abgeglichen. Die Edge Function lehnt öffentliche Einreichungen deshalb weiterhin ab.
+
+Der HMAC-Secret-Wert wird von Supabase nicht im Klartext zurückgegeben. Seine Mindestlänge wird durch die Edge Function auf mindestens 32 Zeichen geprüft. Da der Server-Schalter derzeit vor dieser Prüfung abbricht, ist diese Laufzeitprüfung noch offen und muss bei einem kontrollierten Funktionstest nachgeholt werden.
+
+Supabase stellt der Edge Function die Standardvariable `SUPABASE_SECRET_KEYS` bereit. Der zugehörige Secret Key darf niemals in GitHub oder Browser-Code erscheinen.
 
 ## Website-Dateien
 
 - `js/supabase-config.js`: öffentliche Projekt-URL, Publishable Key, Turnstile-Sitekey und browserseitiger Einreichungsschalter.
-- `betrieb-start.html`: Profilformular, Honeypot, Turnstile-Widget und Aufruf der Edge Function; öffentlicher Versand bleibt derzeit deaktiviert.
+- `betrieb-start.html`: Profilformular, Honeypot, Turnstile-Widget und Aufruf der Edge Function; öffentlicher Versand bleibt deaktiviert.
 - `backend/supabase/functions/company-profile-submit/index.ts`: serverseitige Validierung, Turnstile, HMAC-Rate-Limits und private Datenbankeinfügung.
 - `profilpruefung-intern.html`: Supabase-Auth, Admin-Allowlist, Prüfstatus, interne Notizen und manuelle Veröffentlichung.
 - `unternehmenswelt.html`: lädt nur Datensätze mit `is_published = true`.
@@ -56,32 +65,42 @@ Die Datenbankbasis und die Migrationen 002–004 wurden im Supabase-Projekt ange
 
 Die öffentliche Einreichung ist zweifach geschlossen:
 - Browser-Schalter: `window.INDUSTRYAI_SUBMISSIONS_ENABLED = false`.
-- Server-Schalter: `INDUSTRYAI_PUBLIC_SUBMISSIONS_ENABLED` muss als Edge Function Secret explizit `true` sein; aktuell ist es nicht aktiviert.
+- Server-Schalter: `INDUSTRYAI_PUBLIC_SUBMISSIONS_ENABLED = false`.
 - Auf Datenbankebene haben weder `anon` noch `authenticated` INSERT-Rechte auf `company_submissions`. Nur `service_role` besitzt INSERT/SELECT.
-- Die Funktion lehnt Einreichungen ab, wenn Cloudflare Turnstile und HMAC-Secret nicht konfiguriert sind.
 
-Daher dürfen bis zur vollständigen Einrichtung keine echten Unternehmens- oder Ansprechpartnerdaten eingegeben werden. Der lokale Entwurfsdownload bleibt möglich und überträgt keine Daten.
-
-## Noch erforderlich vor dem produktiven Start
-
-1. Cloudflare Turnstile-Widget für Hostname `industryai.github.io` erstellen (Widget-Modus „Managed“). Den Sitekey in `js/supabase-config.js` eintragen; den Secret Key ausschließlich in Supabase Edge Function Secrets speichern.
-2. `INDUSTRYAI_RATE_LIMIT_HMAC_SECRET` als zufälligen Geheimwert (mindestens 32 Zeichen) in Supabase Edge Function Secrets hinterlegen.
-3. `INDUSTRYAI_PUBLIC_SUBMISSIONS_ENABLED` zunächst auf `false` lassen.
-4. Datenschutzerklärung rechtlich vervollständigen: Verantwortlicher und Anschrift, Rechtsgrundlage, Empfänger/Auftragsverarbeitung, Cloudflare-Turnstile-Verarbeitung einschließlich IP-Übermittlung, Speicherfristen, Löschverfahren und Betroffenenrechte.
-5. Serverseitige Edge Function mit gültigem Turnstile-Token und anschließend mit ungültigem/abgelaufenem Token im Browser testen.
-6. Admin-Flow erneut testen: Anfrage empfangen, Status ändern, freigeben, öffentliche Anzeige kontrollieren, Kontakt- und interne Notizfelder auf Nichtveröffentlichung prüfen.
-7. Erst nach diesen Schritten Server-Schalter und anschließend Browser-Schalter bewusst auf `true` setzen.
+Bis zur vollständigen Datenschutz- und Sicherheitsfreigabe dürfen über das Formular keine echten Unternehmens- oder Ansprechpartnerdaten gesammelt werden. Der lokale Entwurfsdownload bleibt möglich und überträgt keine Daten.
 
 ## Verifizierte Tests
 
-- Edge Function `company-profile-submit` ist deployed und `ACTIVE`.
-- HMAC-Rate-Limit-RPC ist nur für `service_role` ausführbar; eine Testausführung im Rollback wurde erfolgreich durchgeführt.
-- `service_role` besitzt INSERT/SELECT auf `company_submissions`; `anon` und `authenticated` besitzen kein INSERT-Recht.
-- `private.company_profile_rate_limits` ist RLS-geschützt und nicht für normale Rollen lesbar.
-- Ein vollständiger echter Browser-Test der Turnstile-Verifikation und des Formularversands steht noch aus, da Sitekey und Secrets noch nicht eingerichtet sind.
+Am 21.11.2026 wurden folgende Prüfungen ausgeführt:
+- Edge Function `company-profile-submit` ist deployed und `ACTIVE`, Version 3.
+- Cloudflare-Widget ist vorhanden und auf `industryai.github.io` beschränkt.
+- Der Cloudflare-Secret-Fingerprint stimmt mit dem in Supabase gespeicherten Fingerprint überein.
+- Der Server-Schalter entspricht dem Wert `false`; die öffentliche Einreichung bleibt geschlossen.
+- Die HMAC-Rate-Limit-RPC ist nur für `service_role` ausführbar. In einer zurückgerollten Testtransaktion wurde eine erste Anfrage erlaubt und die zweite bei Limit 1 abgelehnt.
+- In zurückgerollten RLS-Testtransaktionen konnte das Allowlist-Admin-Konto einen künstlichen internen Testdatensatz sehen; ein nicht freigeschaltetes Konto erhielt null sichtbare Datensätze.
+- In einer zurückgerollten öffentlichen Profil-Testtransaktion war ein Profil mit `is_published=true` sichtbar; ein Profil mit `is_published=false` blieb verborgen.
+- Die Testtransaktionen wurden zurückgerollt. Es verblieben keine Testdatensätze.
+
+Noch nicht abgeschlossen:
+- Live-Browser-Test des Turnstile-Widgets auf der veröffentlichten Website.
+- Laufzeitprüfung des HMAC-Secrets und serverseitige Ablehnung eines ungültigen bzw. abgelaufenen Tokens.
+- kontrollierter Ende-zu-Ende-Test einer fiktiven Anfrage, des Admin-Review-Ablaufs und der öffentlichen Profilansicht.
+- rechtliche Vervollständigung und Prüfung der Datenschutzerklärung.
+
+## Noch erforderlich vor dem produktiven Start
+
+1. Datenschutzseite vervollständigen: verantwortliche Stelle und vollständige Anschrift, Kontakt, Rechtsgrundlage, Empfänger/Auftragsverarbeitung, Turnstile- und Hosting-Informationen, Speicher- und Löschfristen sowie Betroffenenrechte.
+2. Turnstile im Browser auf der veröffentlichten Website prüfen.
+3. Nach Datenschutzfreigabe einen kontrollierten Funktionstest mit dem Server-Schalter nur vorübergehend aktivieren: gültiger Token, ungültiger/abgelaufener Token und HMAC-Laufzeitprüfung.
+4. Eine ausschließlich fiktive Testanfrage empfangen und im Adminbereich prüfen.
+5. Statusänderung, interne Notizen, manuelle Veröffentlichung, öffentliche Unternehmensliste und Profil-Detailseite prüfen. Dabei sicherstellen, dass Ansprechpartnerdaten und interne Notizen nicht veröffentlicht werden.
+6. Nach dem Test alle Testdaten entfernen und beide Einreichungsschalter bis zur endgültigen Freigabe wieder auf `false` belassen.
+7. Erst nach ausdrücklicher Datenschutz- und Sicherheitsfreigabe den Server- und anschließend den Browser-Schalter für den Produktivbetrieb aktivieren.
 
 ## Sicherheitsregeln
 
 - Niemals einen `sb_secret_`- oder Service-Role-Key in HTML, JavaScript, GitHub oder andere öffentliche Dateien eintragen.
 - Publishable Keys sind für Browser-Code gedacht, aber nur zusammen mit RLS und minimalen Grants.
 - Admin-Berechtigung basiert ausschließlich auf der serverseitig verwalteten Tabelle `industryai_admins`, nicht auf editierbaren User-Metadaten.
+- Keine echten Unternehmens- oder Ansprechpartnerdaten für Tests verwenden, solange die öffentliche Einreichung nicht ausdrücklich freigegeben ist.
