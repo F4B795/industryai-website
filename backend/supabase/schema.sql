@@ -282,3 +282,69 @@ grant execute on function public.industryai_is_admin() to authenticated;
 -- First admin bootstrap (run only after creating the admin user in Supabase Auth):
 -- insert into public.industryai_admins(user_id)
 -- values ('PASTE_AUTH_USER_UUID_HERE');
+
+
+-- Private contact inbox (migration 006)
+-- INDUSTRYAI – private contact message inbox
+create table if not exists public.contact_messages (
+  id uuid primary key default gen_random_uuid(),
+  created_at timestamptz not null default now(),
+  name text not null check (char_length(name) between 2 and 120),
+  email text not null check (char_length(email) between 5 and 254),
+  subject text not null check (char_length(subject) between 2 and 160),
+  message text not null check (char_length(message) between 10 and 5000),
+  status text not null default 'Eingegangen'
+    check (status = any (array['Eingegangen'::text, 'Bearbeitet'::text])),
+  processed_at timestamptz
+);
+
+create index if not exists contact_messages_created_at_idx
+  on public.contact_messages (created_at desc);
+create index if not exists contact_messages_status_idx
+  on public.contact_messages (status, created_at desc);
+
+alter table public.contact_messages enable row level security;
+
+revoke all on table public.contact_messages from public, anon, authenticated;
+grant select, delete on table public.contact_messages to authenticated;
+grant update (status, processed_at) on table public.contact_messages to authenticated;
+grant all on table public.contact_messages to service_role;
+
+drop policy if exists "admins manage contact messages" on public.contact_messages;
+create policy "admins manage contact messages"
+  on public.contact_messages
+  for all
+  to authenticated
+  using (private.industryai_is_admin())
+  with check (private.industryai_is_admin());
+
+-- Daily retention cleanup (migration 007)
+-- INDUSTRYAI – automatic cleanup for the private contact inbox and HMAC rate-limit keys
+create extension if not exists pg_cron;
+
+create or replace function private.purge_industryai_expired_data()
+returns void
+language plpgsql
+security definer
+set search_path = pg_catalog, public, private
+as $$
+begin
+  delete from public.contact_messages
+  where
+    (status = 'Bearbeitet' and processed_at < now() - interval '6 months')
+    or
+    (status = 'Eingegangen' and created_at < now() - interval '12 months');
+
+  delete from private.company_profile_rate_limits
+  where window_started_at < now() - interval '30 days';
+end;
+$$;
+
+revoke all on function private.purge_industryai_expired_data() from public, anon, authenticated;
+
+select cron.schedule(
+  'industryai-contact-retention-cleanup',
+  '30 3 * * *',
+  'select private.purge_industryai_expired_data();'
+);
+
