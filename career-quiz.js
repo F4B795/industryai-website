@@ -440,6 +440,8 @@
         { text: "Elektroniker/in für Betriebstechnik", value: "elektroniker-betriebstechnik" },
         { text: "Fachinformatiker/in Anwendungsentwicklung", value: "fachinformatiker-anwendungsentwicklung" },
         { text: "Fachinformatiker/in Systemintegration", value: "fachinformatiker-systemintegration" },
+        { text: "Fachinformatiker/in – Daten- und Prozessanalyse", value: "fachinformatiker-daten-prozessanalyse" },
+        { text: "Fachinformatiker/in – Digitale Vernetzung", value: "fachinformatiker-digitale-vernetzung" },
         { text: "Mediengestalter/in", value: "mediengestalter" },
         { text: "Fotograf/in", value: "fotograf" },
         { text: "Gestalter/in für visuelles Marketing", value: "gestalter-visuelles-marketing" },
