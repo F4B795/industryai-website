@@ -598,13 +598,11 @@
         <h2>Was würdest du tun?</h2>
 
         <p class="muted">
-          Stell dir vor, du arbeitest in einer medizinischen Praxis.
-          Eine Patientin wirkt bei ihrer Ankunft nervös und unsicher.
+          Du lernst typische Situationen aus Praxis, Pflege und Teamarbeit kennen. Dabei geht es um Datenschutz, sachliche Dokumentation, verantwortungsvolles Handeln und klare Übergaben.
         </p>
 
         <p class="muted">
-          Wie gehst du mit dieser Situation um?
-          Wähle die Antwort, die deiner Meinung nach am besten passt.
+          Wähle jeweils die beste Antwort. Nach jeder Entscheidung erhältst du eine Erklärung und am Ende eine kurze Auswertung.
         </p>
       </div>
 
@@ -615,36 +613,14 @@
     </div>
 
     <div class="scenario">
-      <h3>Deine Praxis-Challenge</h3>
-
-      <p class="scenario-question">
-        Eine Patientin wartet auf ihre Untersuchung und macht
-        einen besorgten Eindruck. Was ist eine sinnvolle erste Reaktion?
-      </p>
-
-      <div class="answers">
-
-        <button class="answer" type="button" data-answer="wrong">
-          A: Die Situation ignorieren und einfach mit der nächsten Aufgabe weitermachen.
-        </button>
-
-        <button class="answer" type="button" data-answer="correct">
-          B: Ruhig auf die Patientin zugehen, zuhören und ihr erklären, wie es weitergeht.
-        </button>
-
-        <button class="answer" type="button" data-answer="wrong">
-          C: Ohne weitere Erklärung sofort mit der Untersuchung beginnen.
-        </button>
-
+      <div class="challenge-header" style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+        <h3 id="health-title">Situation 01</h3>
+        <span id="health-progress" class="challenge-tag">SITUATION 1 VON 4</span>
       </div>
-
-      <div id="scenario-result" aria-live="polite">
-        Wähle eine Antwort aus.
-      </div>
-
-      <button class="reset-button" id="scenario-reset" type="button">
-        Aufgabe wiederholen
-      </button>
+      <p id="health-text" class="scenario-question"></p>
+      <div id="health-answers" class="answers"></div>
+      <div id="health-result" aria-live="polite" style="min-height:28px;margin-top:18px;line-height:1.6"></div>
+      <button class="reset-button" id="health-restart" type="button" hidden>Challenge erneut starten</button>
     </div>
 
     <p class="notice">
@@ -715,39 +691,107 @@
 </footer>
 
 <script>
-  const answerButtons = document.querySelectorAll(".answer");
-  const scenarioResult = document.getElementById("scenario-result");
-  const resetButton = document.getElementById("scenario-reset");
+  const questions = [{"title":"Situation 01 – Vertrauliche Informationen","question":"Eine Besucherin fragt dich am Empfang, welche Diagnose ein anderer Patient erhalten hat. Wie reagierst du?","answers":["Du gibst kurz Auskunft, weil die Besucherin freundlich fragt.","Du erklärst höflich, dass du keine persönlichen Patientendaten weitergeben darfst, und verweist auf die zuständige Ansprechperson.","Du nennst nur die Zimmernummer und den Namen, aber keine Diagnose."],"correct":1,"explanation":"Gesundheitsdaten sind besonders vertraulich. Informationen dürfen nur befugten Personen und im zulässigen Rahmen zugänglich gemacht werden. Freundlichkeit ist kein Grund, Datenschutzregeln zu umgehen."},{"title":"Situation 02 – Sachliche Dokumentation","question":"Nach einem Gespräch sollst du eine kurze Notiz für das Team festhalten. Was gehört in eine professionelle Dokumentation?","answers":["Beobachtbare Fakten, relevante Aussagen und den Zeitpunkt – ohne Vermutungen oder Wertungen.","Deine persönliche Einschätzung, warum sich die Person vermutlich so verhält.","Eine möglichst kurze Notiz, auch wenn wichtige Einzelheiten fehlen."],"correct":0,"explanation":"Dokumentation sollte nachvollziehbar, sachlich, zeitnah und auf das Wesentliche beschränkt sein. Vermutungen und abwertende Bewertungen gehören nicht hinein."},{"title":"Situation 03 – Dringende Veränderung","question":"Eine betreute Person meldet plötzlich eine deutliche Verschlechterung ihres Zustands. Du bist noch in der Ausbildung. Was ist richtig?","answers":["Du wartest ab, ob sich die Situation von selbst wieder beruhigt.","Du versuchst eigenständig eine Behandlung festzulegen.","Du informierst unverzüglich die zuständige Fachkraft und folgst den geltenden Abläufen."],"correct":2,"explanation":"Eine deutliche oder akute Veränderung muss unverzüglich an qualifiziertes Personal weitergegeben werden. Eigene Kompetenzen und Zuständigkeiten müssen beachtet werden."},{"title":"Situation 04 – Übergabe im Team","question":"Du übergibst Informationen an die nächste Schicht. Wie stellst du sicher, dass wichtige Informationen ankommen?","answers":["Du erwähnst nur außergewöhnliche Ereignisse und lässt den Rest weg.","Du gibst relevante, überprüfte Informationen strukturiert und über den vorgesehenen vertraulichen Weg weiter.","Du erzählst alles informell im Aufenthaltsraum, damit es möglichst viele hören."],"correct":1,"explanation":"Eine gute Übergabe ist strukturiert, vollständig genug für die weitere Arbeit und auf relevante Fakten konzentriert. Vertrauliche Informationen gehören ausschließlich in geeignete Kommunikationswege."}];
+  let currentQuestion = 0;
+  let score = 0;
 
-  answerButtons.forEach(function(button) {
-    button.addEventListener("click", function() {
+  const questionTitle = document.getElementById("health-title");
+  const questionText = document.getElementById("health-text");
+  const answerOptions = document.getElementById("health-answers");
+  const challengeResult = document.getElementById("health-result");
+  const challengeProgress = document.getElementById("health-progress");
+  const restartButton = document.getElementById("health-restart");
 
-      answerButtons.forEach(function(answer) {
-        answer.disabled = true;
+  function showQuestion() {
+    const question = questions[currentQuestion];
+    questionTitle.textContent = question.title;
+    questionText.textContent = question.question;
+    challengeProgress.textContent =
+      "SITUATION " + (currentQuestion + 1) + " VON " + questions.length;
+    challengeResult.textContent = "";
+    answerOptions.innerHTML = "";
+
+    question.answers.forEach(function(answer, index) {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "health-answer";
+      button.textContent = String.fromCharCode(65 + index) + ": " + answer;
+      button.addEventListener("click", function() {
+        checkAnswer(index);
       });
+      answerOptions.appendChild(button);
+    });
+  }
 
-      if (button.dataset.answer === "correct") {
-        button.classList.add("correct");
+  function checkAnswer(selected) {
+    const question = questions[currentQuestion];
+    const buttons = answerOptions.querySelectorAll("button");
 
-        scenarioResult.textContent =
-          "Richtig! Eine ruhige und verständnisvolle Kommunikation kann Sicherheit vermitteln. Zuhören und verständlich informieren sind wichtige Fähigkeiten in medizinischen und sozialen Berufen.";
-      } else {
+    buttons.forEach(function(button, index) {
+      button.disabled = true;
+      if (index === question.correct) button.classList.add("correct");
+      if (index === selected && selected !== question.correct) {
         button.classList.add("wrong");
-
-        scenarioResult.textContent =
-          "Diese Reaktion wäre nicht ideal. In einer solchen Situation ist es wichtig, die Unsicherheit wahrzunehmen, zuzuhören und verständlich zu informieren. Die passende Antwort ist B.";
       }
     });
-  });
 
-  resetButton.addEventListener("click", function() {
-    answerButtons.forEach(function(button) {
-      button.disabled = false;
-      button.classList.remove("correct", "wrong");
+    if (selected === question.correct) {
+      score++;
+      challengeResult.textContent = "Richtig! " + question.explanation;
+    } else {
+      challengeResult.textContent =
+        "Noch nicht ganz. " + question.explanation;
+    }
+
+    const nextButton = document.createElement("button");
+    nextButton.type = "button";
+    nextButton.className = "reset-button";
+    nextButton.textContent =
+      currentQuestion === questions.length - 1
+        ? "Auswertung anzeigen"
+        : "Nächste Situation";
+    nextButton.addEventListener("click", function() {
+      currentQuestion++;
+      if (currentQuestion < questions.length) {
+        showQuestion();
+      } else {
+        showFinalResult();
+      }
     });
+    answerOptions.appendChild(nextButton);
+  }
 
-    scenarioResult.textContent = "Wähle eine Antwort aus.";
-  });
+  function showFinalResult() {
+    questionTitle.textContent = "Challenge abgeschlossen";
+    questionText.textContent =
+      "Du hast " + score + " von " + questions.length +
+      " Situationen richtig gelöst.";
+    challengeProgress.textContent = "ERGEBNIS";
+    answerOptions.innerHTML = "";
+
+    if (score === questions.length) {
+      challengeResult.textContent =
+        "Sehr gut! Alle vier Entscheidungen waren richtig. Du hast wichtige Grundlagen für verantwortungsvolles Arbeiten in diesem Bereich erkannt.";
+    } else if (score >= 2) {
+      challengeResult.textContent =
+        "Gute Grundlage: " + score + " von " + questions.length +
+        " richtig. Lies die Erklärungen zu den übrigen Situationen und probiere es erneut.";
+    } else {
+      challengeResult.textContent =
+        "Hier ist noch Lernpotenzial. Nutze die Erklärungen, um die Situationen besser einzuordnen, und starte anschließend einen neuen Versuch.";
+    }
+    restartButton.hidden = false;
+  }
+
+  function restartChallenge() {
+    currentQuestion = 0;
+    score = 0;
+    restartButton.hidden = true;
+    showQuestion();
+  }
+
+  restartButton.addEventListener("click", restartChallenge);
+  showQuestion();
 </script>
 
 </body>
