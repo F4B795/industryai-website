@@ -216,6 +216,7 @@
 
     const locationAliases = {
       "Draußen": ["im Freien"],
+      "beim Kunden": ["Kundenstandorte", "Kundenbereich", "unterwegs"],
       "Gesundheitswesen": [
         "Krankenhaus",
         "Pflegeeinrichtung",
@@ -226,8 +227,8 @@
         "Tierarztpraxis",
         "Tierklinik"
       ],
-      "Bäckerei": ["Küche", "Gastronomie"],
-      "Konditorei": ["Küche", "Gastronomie"],
+      "Bäckerei": ["Küche", "Gastronomie", "Backstube", "Konditorei"],
+      "Konditorei": ["Küche", "Gastronomie", "Backstube", "Bäckerei"],
       "Restaurant": ["Gastronomie"],
       "Café": ["Gastronomie", "Verkaufsfläche"]
     };
