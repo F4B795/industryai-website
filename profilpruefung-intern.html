@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>INDUSTRYAI – Interne Profilprüfung</title>
+<style>
+:root{color-scheme:dark;--bg:#0b1220;--panel:#121e30;--line:#26364c;--text:#edf3fb;--muted:#aab8ca;--accent:#54c5b5;--warn:#e8bd67}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.55 system-ui,-apple-system,Segoe UI,sans-serif}
+header{padding:28px max(20px,calc((100% - 1100px)/2));border-bottom:1px solid var(--line);background:#0e1929}
+header a{color:var(--accent);text-decoration:none;font-size:13px}h1{font-size:clamp(25px,4vw,36px);margin:12px 0 4px}h2{font-size:20px;margin:0 0 12px}p{color:var(--muted);margin:6px 0}
+main{max-width:1100px;margin:26px auto;padding:0 18px 50px}.notice{border:1px solid #725d32;background:#2a2418;color:#f4dfb5;padding:14px 16px;border-radius:12px;margin-bottom:20px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;margin:16px 0}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}button,.file-label{border:0;border-radius:9px;padding:10px 14px;background:var(--accent);color:#071b1a;font-weight:700;cursor:pointer;font:inherit}button.secondary,.file-label.secondary{background:#26374d;color:var(--text);border:1px solid #3a4d65}button.danger{background:#47272c;color:#ffdfe2;border:1px solid #754047}
+input[type=file]{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.stat{padding:12px;border:1px solid var(--line);border-radius:10px}.stat strong{display:block;font-size:25px}.stat span{color:var(--muted);font-size:13px}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap}.toolbar input,.toolbar select,.review select,.review textarea{background:#0c1726;border:1px solid #34465e;border-radius:8px;color:var(--text);padding:10px;font:inherit}.toolbar input{flex:1;min-width:180px}
+.entry{border:1px solid var(--line);border-radius:12px;padding:16px;margin:12px 0}.entry-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.entry h3{margin:0;font-size:18px}.meta{font-size:13px;color:var(--muted)}.pill{font-size:12px;border:1px solid #52647b;border-radius:30px;padding:3px 9px;white-space:nowrap}
+.review{display:grid;grid-template-columns:minmax(180px,1fr) minmax(220px,2fr);gap:10px;margin-top:14px}.review label{display:grid;gap:5px;color:var(--muted);font-size:13px}.review textarea{min-height:68px;resize:vertical}
+.details{margin-top:12px;border-top:1px solid var(--line);padding-top:10px}.details summary{cursor:pointer;color:var(--accent)}.details pre{white-space:pre-wrap;overflow-wrap:anywhere;color:#d4dfed;font:13px/1.5 ui-monospace,monospace}
+.empty{text-align:center;padding:30px;color:var(--muted)}#status{min-height:24px;color:var(--accent)}
+@media(max-width:650px){.stats{grid-template-columns:repeat(2,1fr)}.review{grid-template-columns:1fr}.entry-head{display:block}.pill{display:inline-block;margin-top:8px}}
+</style>
+</head>
+<body>
+<header><a href="index.html">← Zur INDUSTRYAI-Website</a><h1>Interne Profilprüfung</h1><p>Lokale Arbeitsoberfläche zur Sichtung eingegangener Unternehmensprofile.</p></header>
+<main>
+<div class="notice"><strong>Wichtiger Hinweis:</strong> Diese Seite ist nicht durch einen Login geschützt. Importierte Daten werden ausschließlich im lokalen Browser dieses Geräts gespeichert. Verwenden Sie sie nicht auf gemeinsam genutzten Geräten. Es gibt keine Verbindung zur öffentlichen Unternehmensdatenbank und keine automatische Veröffentlichung.</div>
+<section class="panel">
+<h2>Profilanfragen importieren</h2><p>Wählen Sie die .txt-Datei aus, die das Unternehmen seiner E-Mail beigefügt hat. Mehrere Dateien können gemeinsam importiert werden.</p>
+<div class="actions"><label class="file-label" for="file-input">Textdateien auswählen</label><input id="file-input" type="file" accept=".txt,text/plain" multiple><button class="secondary" id="export-all">Prüfarchiv exportieren</button></div>
+<p id="status" role="status" aria-live="polite"></p>
+</section>
+<section class="panel"><h2>Prüfungsübersicht</h2><div class="stats">
+<div class="stat"><strong id="count-all">0</strong><span>Gesamt</span></div><div class="stat"><strong id="count-new">0</strong><span>Eingegangen</span></div><div class="stat"><strong id="count-check">0</strong><span>In Prüfung</span></div><div class="stat"><strong id="count-approved">0</strong><span>Freigegeben</span></div>
+</div></section>
+<section class="panel"><div class="toolbar"><input id="search" type="search" placeholder="Unternehmen oder Standort suchen"><select id="filter"><option value="">Alle Status</option><option>Eingegangen</option><option>In Prüfung</option><option>Rückfrage</option><option>Freigegeben</option><option>Abgelehnt</option></select></div>
+<div id="entries"><div class="empty">Noch keine Profilanfragen importiert.</div></div></section>
+</main>
+<script>
+(function(){
+"use strict";
+const STORAGE_KEY="industryai_profile_review_v1";
+const labels={"Unternehmen":"name","Standort":"location","Branche":"sector","Website":"website","Unternehmensbeschreibung":"description","Ausbildungsberufe und Praktika":"apprenticeships","Offene Stellen":"jobs","Mögliche Einblicke":"media","Arbeitsumgebung":"workplace","Maschinen und Technologien":"technology","Mitarbeiterangebote":"benefits","Unternehmenskultur":"culture","Entwicklungsmöglichkeiten":"development","Ansprechpartner":"contactPerson","Geschäftliche E-Mail-Adresse":"contactEmail"};
+const statuses=["Eingegangen","In Prüfung","Rückfrage","Freigegeben","Abgelehnt"];
+let records=load();
+function load(){try{const x=JSON.parse(localStorage.getItem(STORAGE_KEY)||"[]");return Array.isArray(x)?x:[]}catch(e){return[]}}
+function save(){localStorage.setItem(STORAGE_KEY,JSON.stringify(records))}
+function parse(text){
+ const data={};const lines=text.replace(/^\uFEFF/,"").split(/\r?\n/);
+ let current="";
+ for(const line of lines){
+  const match=line.match(/^([^:\n]{2,90}):\s*$/);
+  if(match&&Object.prototype.hasOwnProperty.call(labels,match[1])){current=labels[match[1]];data[current]="";continue}
+  if(current){data[current]+=(data[current]?"\n":"")+line}
+ }
+ Object.keys(data).forEach(k=>data[k]=data[k].trim());
+ if(!data.name)throw new Error("Unternehmensname fehlt oder das Dateiformat wird nicht erkannt.");
+ return data;
+}
+function esc(v){return String(v||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function render(){
+ const q=document.getElementById("search").value.trim().toLocaleLowerCase("de");
+ const f=document.getElementById("filter").value;
+ const counts={"Eingegangen":0,"In Prüfung":0,"Rückfrage":0,"Freigegeben":0,"Abgelehnt":0};
+ records.forEach(r=>counts[r.status]=(counts[r.status]||0)+1);
+ document.getElementById("count-all").textContent=records.length;
+ document.getElementById("count-new").textContent=counts["Eingegangen"];
+ document.getElementById("count-check").textContent=counts["In Prüfung"]+counts["Rückfrage"];
+ document.getElementById("count-approved").textContent=counts["Freigegeben"];
+ const host=document.getElementById("entries");host.replaceChildren();
+ const shown=records.filter(r=>(!f||r.status===f)&&(!q||(r.data.name+" "+(r.data.location||"")).toLocaleLowerCase("de").includes(q)));
+ if(!shown.length){host.innerHTML='<div class="empty">Keine passenden Profilanfragen vorhanden.</div>';return}
+ shown.forEach(r=>{
+  const el=document.createElement("article");el.className="entry";
+  const head=document.createElement("div");head.className="entry-head";
+  const title=document.createElement("div");title.innerHTML='<h3>'+esc(r.data.name)+'</h3><div class="meta">'+esc(r.data.location||"Standort nicht angegeben")+' · '+esc(r.data.sector||"Branche nicht angegeben")+'</div>';
+  const pill=document.createElement("span");pill.className="pill";pill.textContent=r.status;
+  head.append(title,pill);el.append(head);
+  const review=document.createElement("div");review.className="review";
+  const statusLabel=document.createElement("label");statusLabel.textContent="Prüfstatus";
+  const select=document.createElement("select");statuses.forEach(s=>{const o=document.createElement("option");o.value=s;o.textContent=s;select.append(o)});select.value=r.status;
+  select.addEventListener("change",()=>{r.status=select.value;r.updatedAt=new Date().toISOString();save();render()});statusLabel.append(select);
+  const noteLabel=document.createElement("label");noteLabel.textContent="Interne Notiz / Rückfrage";
+  const note=document.createElement("textarea");note.value=r.note||"";note.placeholder="Prüfpunkte, fehlende Angaben oder Rückfragen …";
+  note.addEventListener("change",()=>{r.note=note.value;r.updatedAt=new Date().toISOString();save()});noteLabel.append(note);
+  review.append(statusLabel,noteLabel);el.append(review);
+  const details=document.createElement("details");details.className="details";const summary=document.createElement("summary");summary.textContent="Eingereichte Angaben anzeigen";details.append(summary);
+  const pre=document.createElement("pre");pre.textContent=Object.entries(r.data).map(([k,v])=>k+": "+(v||"Keine Angabe")).join("\n");details.append(pre);el.append(details);
+  const actions=document.createElement("div");actions.className="actions";
+  const remove=document.createElement("button");remove.className="danger";remove.textContent="Eintrag lokal löschen";remove.addEventListener("click",()=>{if(confirm("Diesen Eintrag aus diesem Browser löschen?")){records=records.filter(x=>x.id!==r.id);save();render()}});actions.append(remove);el.append(actions);
+  host.append(el);
+ });
+}
+document.getElementById("file-input").addEventListener("change",async e=>{
+ const files=Array.from(e.target.files||[]);let added=0,failed=[];
+ for(const file of files){try{const data=parse(await file.text());const key=(data.name+"|"+(data.contactEmail||"")).toLocaleLowerCase("de");
+  if(records.some(r=>r.key===key)){failed.push(file.name+": bereits importiert");continue}
+  records.unshift({id:crypto.randomUUID?crypto.randomUUID():String(Date.now())+Math.random(),key,data,status:"Eingegangen",note:"",createdAt:new Date().toISOString()});added++;
+ }catch(err){failed.push(file.name+": "+err.message)}}
+ save();render();document.getElementById("status").textContent=added+" Profil(e) importiert."+(failed.length?" Nicht importiert: "+failed.join(" | "):"");e.target.value="";
+});
+document.getElementById("search").addEventListener("input",render);
+document.getElementById("filter").addEventListener("change",render);
+document.getElementById("export-all").addEventListener("click",()=>{
+ const blob=new Blob([JSON.stringify({exportedAt:new Date().toISOString(),records},null,2)],{type:"application/json"});
+ const url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="industryai-profilpruefung-archiv.json";a.click();URL.revokeObjectURL(url);
+ document.getElementById("status").textContent="Prüfarchiv wurde heruntergeladen. Die Datei enthält auch Ansprechpartner und interne Notizen.";
+});
+render();
+})();
+</script>
+</body>
+</html>
