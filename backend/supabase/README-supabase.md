@@ -156,3 +156,6 @@ Die Datenschutzhinweise beschreiben den tatsächlich eingerichteten Kontakt-Post
 - Den öffentlichen Unternehmensprofil-Einreichungstest mit gültigem und ungültigem Turnstile-Token kontrolliert durchführen, wenn Datenschutz- und Sicherheitsfreigabe vorliegen. Bis dahin bleiben Browser- und Server-Schalter `false`.
 - Keine automatische E-Mail-Benachrichtigung an den Betreiber ist derzeit eingerichtet. Für zeitnahe Bearbeitung muss der Admin-Posteingang regelmäßig geprüft werden.
 - Die Anbieterbedingungen und Auftragsverarbeitungsvereinbarungen der tatsächlich genutzten Dienste (insbesondere Supabase, Cloudflare, GitHub und Google/Gmail) vor produktiver Datenerhebung prüfen.
+
+
+Migration `008_contact_message_state_integrity.sql` enforces that a message marked `Bearbeitet` must have a `processed_at` timestamp (and an open `Eingegangen` message has none). This keeps the retention rule deterministic. The SECURITY DEFINER retention function now uses `search_path = pg_catalog` only and remains non-executable by `anon` and `authenticated`.
