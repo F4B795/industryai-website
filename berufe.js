@@ -545,7 +545,7 @@ window.IndustryAICareers = {
       id: "erzieher",
       name: "Erzieher/in",
       category: "Gesundheit, Soziales & Menschen",
-      training: { type: "school_based", durationMonths: 36 },
+      training: { type: "school_based", durationMonths: null, durationNote: "Vollzeit 2–4 Jahre; Teilzeit 2–6 Jahre (je nach Bundesland und Bildungsgang)" },
       profile: { T: 1, A: 2, S: 4, K: 4, C: 3, O: 3, N: 1, B: 4, L: 4 },
       workingConditions: {
         locations: ["Kindergarten", "Schule", "Jugendeinrichtung"],
