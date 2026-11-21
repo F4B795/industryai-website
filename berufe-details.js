@@ -306,7 +306,7 @@ window.IndustryAICareerDetails = {
     },
 
     "pflegefachfrau": {
-      intro: "Pflegefachfrauen und Pflegefachmänner betreuen und versorgen Menschen aller Altersgruppen. Sie unterstützen bei der Körperpflege und Mobilität, beobachten den Gesundheitszustand, führen pflegerische Maßnahmen durch und arbeiten eng mit Ärzten und anderen Berufsgruppen zusammen.",
+      intro: "Pflegefachfrauen und Pflegefachmänner pflegen und betreuen Menschen aller Altersstufen in der Kranken-, Kinderkranken- und Altenpflege. Sie erheben den individuellen Pflegebedarf, planen, organisieren und steuern den Pflegeprozess, führen pflegerische Maßnahmen durch und setzen ärztlich angeordnete Maßnahmen um. Sie beraten Pflegebedürftige und Angehörige, dokumentieren die Pflege und wirken an der Qualitätssicherung mit.",
       accessRequirements: "Rechtlich erforderlich ist in der Regel ein mittlerer Schulabschluss oder ein gleichwertiger Abschluss. Mit Hauptschulabschluss ist der Zugang unter den zusätzlichen Voraussetzungen des § 11 Pflegeberufegesetz möglich, zum Beispiel mit einer mindestens zweijährigen abgeschlossenen Berufsausbildung oder einer qualifizierenden mindestens einjährigen Pflegeassistenz- bzw. Pflegehelferausbildung. Außerdem müssen die gesundheitliche Eignung, die erforderlichen Deutschkenntnisse und die persönliche Zuverlässigkeit vorliegen. Die Pflegeschule prüft die Nachweise.",
       prerequisites: [
         "Interesse an Menschen und medizinischen Themen",
@@ -317,14 +317,14 @@ window.IndustryAICareerDetails = {
         "Ausreichende Deutschkenntnisse für Dokumentation und Kommunikation"
       ],
       learning: [
-        "Pflegebedarf erkennen und Pflege planen",
-        "Menschen bei Körperpflege, Ernährung und Bewegung unterstützen",
-        "Vitalzeichen wie Blutdruck, Puls und Temperatur messen",
-        "Medikamente nach ärztlicher Anordnung verabreichen",
-        "Wunden versorgen und pflegerische Maßnahmen durchführen",
-        "Gesundheitszustände beobachten und Veränderungen weitergeben",
-        "Pflegemaßnahmen dokumentieren",
-        "Angehörige beraten und begleiten"
+        "Individuellen Pflegebedarf erheben und den Pflegeprozess planen, organisieren und steuern",
+        "Menschen bei Körperpflege, Ernährung, Mobilität und im Alltag unterstützen",
+        "Vitalzeichen wie Blutdruck, Puls und Temperatur messen und Veränderungen beobachten",
+        "Ärztlich angeordnete Maßnahmen durchführen, zum Beispiel Medikamente verabreichen und Wunden versorgen",
+        "Bei diagnostischen und therapeutischen Maßnahmen assistieren",
+        "Pflegeverlauf und durchgeführte Maßnahmen dokumentieren",
+        "Pflegebedürftige und Angehörige beraten und zur Selbstständigkeit anleiten",
+        "Pflegequalität überprüfen und weiterentwickeln; die Verantwortung für die vorbehaltenen Aufgaben des Pflegeprozesses liegt bei entsprechend erlaubnisberechtigten Pflegefachpersonen"
       ],
       furtherTraining: [
         "Fachweiterbildung für Intensivpflege und Anästhesie",
@@ -344,7 +344,7 @@ window.IndustryAICareerDetails = {
     },
 
     "medizinische-fachangestellte": {
-      intro: "Medizinische Fachangestellte organisieren den Praxisablauf und unterstützen Ärzte bei Untersuchungen und Behandlungen. Sie empfangen Patienten, dokumentieren medizinische Daten, führen einfache diagnostische Tätigkeiten durch und kümmern sich um Verwaltung und Abrechnung.",
+      intro: "Medizinische Fachangestellte organisieren den Praxisablauf und unterstützen Ärztinnen und Ärzte bei Untersuchungen und Behandlungen, zum Beispiel bei EKG, Röntgen oder Endoskopie. Sie betreuen Patientinnen und Patienten, legen Verbände an, bereiten Spritzen vor, nehmen Blut ab und führen Laborarbeiten durch. Außerdem dokumentieren Behandlungen, rechnen Leistungen ab und informieren über Möglichkeiten der Vor- und Nachsorge.",
       prerequisites: [
         "Interesse an Medizin und Gesundheit",
         "Freundlicher und respektvoller Umgang mit Menschen",
@@ -356,12 +356,12 @@ window.IndustryAICareerDetails = {
       learning: [
         "Patienten empfangen und Termine koordinieren",
         "Praxisabläufe organisieren",
-        "Bei Untersuchungen und Behandlungen assistieren",
-        "Blut abnehmen und Laborproben vorbereiten",
-        "Blutdruck und weitere Vitalwerte messen",
-        "Patientendaten dokumentieren und verwalten",
-        "Hygiene- und Qualitätsvorschriften einhalten",
-        "Abrechnung und Verwaltung kennenlernen"
+        "Bei Untersuchungen und Behandlungen assistieren, zum Beispiel bei EKG, Röntgen und Endoskopie",
+        "Verbände anlegen sowie Spritzen vorbereiten und Blut abnehmen",
+        "Laborproben vorbereiten und Laborarbeiten durchführen",
+        "Patientendaten und Behandlungsabläufe dokumentieren",
+        "Patientinnen und Patienten zu Vor- und Nachsorge informieren",
+        "Hygiene, Instrumentenpflege, Abrechnung und Praxisverwaltung übernehmen"
       ],
       furtherTraining: [
         "Fachwirt/in für ambulante medizinische Versorgung",
@@ -380,7 +380,7 @@ window.IndustryAICareerDetails = {
     },
 
     "tiermedizinische-fachangestellte": {
-      intro: "Tiermedizinische Fachangestellte betreuen Tiere und ihre Halter in Tierarztpraxen und Tierkliniken. Sie assistieren bei Untersuchungen und Behandlungen, bereiten Eingriffe vor, versorgen Tiere und übernehmen organisatorische Aufgaben.",
+      intro: "Tiermedizinische Fachangestellte betreuen Tiere vor, während und nach Behandlungen in Tierarztpraxen und Tierkliniken. Sie assistieren bei Untersuchungen und Eingriffen, fertigen Röntgenaufnahmen an, führen Laborarbeiten aus und betreuen Tiere auf der Krankenstation. Außerdem beraten sie Tierhalter zu Haltung, Krankheitsvorbeugung und Rehabilitation und organisieren die Praxisabläufe.",
       prerequisites: [
         "Interesse an Tieren und medizinischen Themen",
         "Einfühlungsvermögen gegenüber Tieren und Menschen",
@@ -390,14 +390,14 @@ window.IndustryAICareerDetails = {
         "Körperliche und psychische Belastbarkeit"
       ],
       learning: [
-        "Tiere aufnehmen und ihre Halter betreuen",
-        "Bei Untersuchungen und Behandlungen assistieren",
-        "Tiere fachgerecht halten und sichern",
-        "Instrumente und Behandlungsräume vorbereiten",
-        "Laborproben vorbereiten und einfache Untersuchungen durchführen",
-        "Bei Operationen assistieren und Tiere nachversorgen",
-        "Hygiene- und Desinfektionsmaßnahmen durchführen",
-        "Patientendaten dokumentieren und Termine organisieren"
+        "Tiere und ihre Halter aufnehmen und betreuen",
+        "Bei Untersuchungen und Behandlungen assistieren und Röntgenaufnahmen anfertigen",
+        "Tiere fachgerecht halten, sichern und auf Eingriffe vorbereiten",
+        "Laborproben bearbeiten und Laboruntersuchungen durchführen",
+        "Tiere auf der Krankenstation betreuen und nach Eingriffen versorgen",
+        "Bei Notfällen Erste Hilfe leisten",
+        "Hygienevorschriften einhalten und die tierärztliche Apotheke verwalten",
+        "Behandlungsverläufe dokumentieren, Termine koordinieren und Leistungen abrechnen"
       ],
       furtherTraining: [
         "Spezialisierung auf bestimmte Tierarten oder Fachgebiete",
