@@ -55,3 +55,6 @@ revoke all on function public.consume_company_profile_rate_limit(text, integer, 
   from public, anon, authenticated;
 grant execute on function public.consume_company_profile_rate_limit(text, integer, integer)
   to service_role;
+
+-- Only the server-side Edge Function role may insert and read back new submissions.
+grant insert, select on table public.company_submissions to service_role;
