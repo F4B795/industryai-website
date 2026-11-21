@@ -92,20 +92,21 @@ Am 21.11.2026 wurden folgende Prüfungen ausgeführt:
 - Die Testtransaktionen wurden zurückgerollt. Es verblieben keine Testdatensätze.
 
 Noch nicht abgeschlossen:
-- Live-Browser-Test des Turnstile-Widgets auf der veröffentlichten Website.
-- Laufzeitprüfung des HMAC-Secrets und serverseitige Ablehnung eines ungültigen bzw. abgelaufenen Tokens.
-- kontrollierter Ende-zu-Ende-Test einer fiktiven Anfrage, des Admin-Review-Ablaufs und der öffentlichen Profilansicht.
-- rechtliche Vervollständigung und Prüfung der Datenschutzerklärung.
+- Live-Browser-Test des Kontaktformulars mit gültigem Turnstile-Token und Kontrolle des Nachrichteneingangs im Adminbereich.
+- Laufzeitprüfung der Kontakt-Edge-Function mit gültigem und ungültigem bzw. abgelaufenem Turnstile-Token.
+- kontrollierter Ende-zu-Ende-Test der Unternehmensprofil-Anfrage und öffentlichen Profilansicht; diese Funktion bleibt bis dahin ausgeschaltet.
+- abschließende rechtliche Prüfung der Datenschutzhinweise und der Vertrags-/Auftragsverarbeitungsbedingungen der eingesetzten Anbieter.
+- praktische Prüfung, ob das veröffentlichte E-Mail-Postfach erreichbar ist und eingehende Nachrichten beantwortet werden können.
 
 ## Noch erforderlich vor dem produktiven Start
 
-1. Datenschutzseite vervollständigen: verantwortliche Stelle und vollständige Anschrift, Kontakt, Rechtsgrundlage, Empfänger/Auftragsverarbeitung, Turnstile- und Hosting-Informationen, Speicher- und Löschfristen sowie Betroffenenrechte.
-2. Turnstile im Browser auf der veröffentlichten Website prüfen.
-3. Nach Datenschutzfreigabe einen kontrollierten Funktionstest mit dem Server-Schalter nur vorübergehend aktivieren: gültiger Token, ungültiger/abgelaufener Token und HMAC-Laufzeitprüfung.
-4. Eine ausschließlich fiktive Testanfrage empfangen und im Adminbereich prüfen.
-5. Statusänderung, interne Notizen, manuelle Veröffentlichung, öffentliche Unternehmensliste und Profil-Detailseite prüfen. Dabei sicherstellen, dass Ansprechpartnerdaten und interne Notizen nicht veröffentlicht werden.
-6. Nach dem Test alle Testdaten entfernen und beide Einreichungsschalter bis zur endgültigen Freigabe wieder auf `false` belassen.
-7. Erst nach ausdrücklicher Datenschutz- und Sicherheitsfreigabe den Server- und anschließend den Browser-Schalter für den Produktivbetrieb aktivieren.
+1. Die veröffentlichten Datenschutzhinweise und die tatsächlichen Anbieter-/Auftragsverarbeitungsbedingungen (Supabase, Cloudflare, GitHub und Google/Gmail) abschließend prüfen.
+2. Die Erreichbarkeit des veröffentlichten E-Mail-Postfachs `industryaisupport@gmail.com` praktisch prüfen.
+3. Das Kontaktformular auf der veröffentlichten Seite mit einer gültigen Turnstile-Prüfung testen; die Nachricht im Adminbereich prüfen, als bearbeitet markieren und danach den Testdatensatz löschen.
+4. Für die Unternehmensprofil-Anfrage einen kontrollierten Test mit dem Server-Schalter nur vorübergehend aktivieren: gültiger Token, ungültiger/abgelaufener Token und HMAC-Laufzeitprüfung.
+5. Eine ausschließlich fiktive Profilanfrage empfangen und den Admin-Review-Ablauf testen. Die Veröffentlichung darf erst nach einer dokumentierten gesonderten Zustimmung des Unternehmens erfolgen.
+6. Statusänderungen, interne Notizen, manuelle Veröffentlichung, öffentliche Unternehmensliste und Profil-Detailseite prüfen. Dabei sicherstellen, dass Ansprechpartnerdaten und interne Notizen nie veröffentlicht werden.
+7. Nach dem Test alle Testdaten entfernen und beide Unternehmensprofil-Schalter bis zur ausdrücklichen Freigabe wieder auf `false` belassen.
 
 ## Sicherheitsregeln
 
