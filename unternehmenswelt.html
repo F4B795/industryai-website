@@ -130,28 +130,39 @@
    document.head.appendChild(script);
   });
  }
- Promise.all([
-  fetch("data/unternehmen.json").then(response=>{
+ // Lokale Musterprofile unabhängig von der Live-Datenquelle laden.
+ fetch("data/unternehmen.json")
+  .then(response=>{
    if(!response.ok)throw new Error("Musterprofil konnte nicht geladen werden");
    return response.json();
-  }),
-  loadPublishedProfiles()
- ])
- .then(([demoData,liveData])=>{
-  const demos=Array.isArray(demoData.entries)?demoData.entries.filter(item=>item&&item.status==="demo"):[];
-  const published=Array.isArray(liveData.entries)?liveData.entries.filter(item=>item&&item.status==="published"):[];
-  const visibleEntries=demos.concat(published);
-  grid.querySelectorAll(".uw-card").forEach(card=>card.remove());
-  grid.insertAdjacentHTML("afterbegin",visibleEntries.map(renderCard).join(""));
-  cards=Array.from(grid.querySelectorAll(".uw-card"));
-  loading.remove();
-  filter();
- })
- .catch(error=>{
-  loading.textContent="Die Unternehmensprofile konnten gerade nicht geladen werden. Bitte laden Sie die Seite erneut.";
-  results.textContent="Datenquelle nicht erreichbar.";
-  console.error("INDUSTRYAI Unternehmenswelt:",error);
- });
+  })
+  .then(demoData=>{
+   const demos=Array.isArray(demoData.entries)?demoData.entries.filter(item=>item&&item.status==="demo"):[];
+   grid.querySelectorAll(".uw-card").forEach(card=>card.remove());
+   grid.insertAdjacentHTML("afterbegin",demos.map(renderCard).join(""));
+   cards=Array.from(grid.querySelectorAll(".uw-card"));
+   loading.remove();
+   filter();
+
+   // Live-Profile ergänzen, sobald die Google-Datenquelle antwortet.
+   loadPublishedProfiles()
+    .then(liveData=>{
+     const published=Array.isArray(liveData.entries)?liveData.entries.filter(item=>item&&item.status==="published"):[];
+     if(published.length){
+      grid.insertAdjacentHTML("beforeend",published.map(renderCard).join(""));
+      cards=Array.from(grid.querySelectorAll(".uw-card"));
+      filter();
+     }
+    })
+    .catch(error=>{
+     console.warn("INDUSTRYAI Live-Unternehmensprofile derzeit nicht verfügbar. Musterprofile bleiben sichtbar.",error);
+    });
+  })
+  .catch(error=>{
+   loading.textContent="Das Musterprofil konnte gerade nicht geladen werden. Bitte laden Sie die Seite erneut.";
+   results.textContent="Lokale Beispieldaten nicht erreichbar.";
+   console.error("INDUSTRYAI Unternehmenswelt:",error);
+  });
 })();
 </script>
 </body></html>
