@@ -131,7 +131,7 @@
     },
 
     "bauzeichner": {
-      intro: "Bautechnische Konstrukteure und Konstrukteurinnen (früher Bauzeichner/innen) erstellen digitale Planungsunterlagen und technische Konstruktionen für Gebäude und Infrastruktur. Sie arbeiten mit CAD- und BIM-Methoden, entwickeln Modelle und Zeichnungen und berücksichtigen technische, konstruktive und baurechtliche Vorgaben.",
+      intro: "Bautechnische Konstrukteure und Konstrukteurinnen erstellen digitale Planungsunterlagen und technische Konstruktionen. Die Ausbildung hat drei Fachrichtungen: Architektur, Ingenieurbau sowie Tief-, Verkehrswege- und Landschaftsbau. Je nach Fachrichtung planen sie Gebäude und Bauteile, Ingenieurbauwerke oder Infrastrukturanlagen. Dabei arbeiten sie mit CAD-Systemen und BIM-Modellen und stimmen ihre Unterlagen mit den weiteren Projektbeteiligten ab.",
       prerequisites: [
         "Interesse an Architektur, Bauwesen und Technik",
         "Räumliches Vorstellungsvermögen",
@@ -141,12 +141,12 @@
         "Interesse an CAD-Programmen und digitalem Zeichnen"
       ],
       learning: [
-        "Digitale Planungsunterlagen und technische Konstruktionen erstellen",
-        "CAD- und BIM-Software einsetzen",
-        "Digitale 3D-Bauwerksmodelle bearbeiten",
-        "Konstruktive Details und Bauteile ausarbeiten",
-        "Mengen und technische Daten aus Modellen ableiten",
-        "Planungs- und Ausführungsunterlagen erstellen",
+        "Technische Zeichnungen, Modelle und Planungsunterlagen erstellen",
+        "CAD- und BIM-Software einsetzen und digitale Bauwerksmodelle bearbeiten",
+        "In der Fachrichtung Architektur Grundrisse, Bauteile und Gebäude planen",
+        "Im Ingenieurbau Konstruktionen und technische Bauwerke ausarbeiten",
+        "Im Tief-, Verkehrswege- und Landschaftsbau unter anderem Straßen, Wege, Kanalisationen und Grünanlagen planen",
+        "Konstruktive Details sowie technische Daten und Mengen ausarbeiten",
         "Technische, baurechtliche und nachhaltigkeitsbezogene Vorgaben berücksichtigen",
         "Mit Architekten, Ingenieuren und weiteren Projektbeteiligten zusammenarbeiten"
       ],
