@@ -71,8 +71,10 @@
         <input id="contact-company-website" name="company_website" type="text" tabindex="-1" autocomplete="off">
       </div>
       <div>
+        <p style="color:#b9c9d8;font-size:12px;line-height:1.7">Der Bot-Schutz wird nicht automatisch geladen. Aktivieren Sie ihn erst, wenn Sie die Nachricht absenden möchten. Beim Laden werden technische Sicherheitsdaten an Cloudflare übermittelt; Einzelheiten stehen in den <a href="datenschutz.html" target="_blank" rel="noopener">Datenschutzhinweisen</a>.</p>
+        <button class="contact-submit" id="activate-turnstile" type="button">Bot-Schutz aktivieren</button>
         <div id="turnstile-widget"></div>
-        <p id="turnstile-status" class="contact-status" role="status" aria-live="polite">Bot-Schutz wird geladen …</p>
+        <p id="turnstile-status" class="contact-status" role="status" aria-live="polite">Bot-Schutz noch nicht geladen.</p>
         <p style="color:#8299ad;font-size:11px;line-height:1.6">Beim Laden des Bot-Schutzes verarbeitet Cloudflare technische Sicherheitsdaten. Details stehen in den <a href="datenschutz.html" target="_blank" rel="noopener">Datenschutzhinweisen</a>.</p>
       </div>
       <p class="contact-notice">* Pflichtfelder. Mit dem Absenden werden Name, E-Mail-Adresse, Betreff und Nachricht zur Bearbeitung Ihrer Anfrage gespeichert. Bitte übermitteln Sie keine besonderen Kategorien personenbezogener Daten oder vertraulichen Informationen, die für die Anfrage nicht erforderlich sind. Einzelheiten zu Zweck, Rechtsgrundlage, Empfängern und Löschfristen finden Sie in der <a href="datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a>.</p>
@@ -103,8 +105,10 @@
   const status=document.getElementById("contact-status");
   const captchaStatus=document.getElementById("turnstile-status");
   const siteKey=window.INDUSTRYAI_TURNSTILE_SITE_KEY||"";
+  const activateCaptcha=document.getElementById("activate-turnstile");
   let token="";
   let widgetId=null;
+  let captchaLoading=false;
 
   function setCaptchaStatus(message){captchaStatus.textContent=message}
   function updateSubmit(){
@@ -116,15 +120,24 @@
     updateSubmit();
   }
   function loadTurnstile(){
+    if(captchaLoading)return;
     if(!siteKey){
       setCaptchaStatus("Der Bot-Schutz ist nicht konfiguriert. Bitte schreiben Sie direkt per E-Mail.");
+      activateCaptcha.disabled=false;
       return;
     }
+    captchaLoading=true;
+    activateCaptcha.disabled=true;
+    activateCaptcha.textContent="Bot-Schutz wird geladen …";
+    setCaptchaStatus("Cloudflare-Bot-Schutz wird geladen …");
     const script=document.createElement("script");
     script.src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
     script.async=true;script.defer=true;
     script.onload=function(){
       if(!window.turnstile){
+        captchaLoading=false;
+        activateCaptcha.disabled=false;
+        activateCaptcha.textContent="Bot-Schutz erneut laden";
         setCaptchaStatus("Der Bot-Schutz konnte nicht geladen werden.");
         return;
       }
@@ -134,6 +147,7 @@
         theme:"dark",
         callback:function(value){
           token=value;
+          activateCaptcha.hidden=true;
           setCaptchaStatus("Bot-Schutz erfolgreich bestätigt.");
           updateSubmit();
         },
@@ -144,12 +158,16 @@
         },
         "error-callback":function(){
           token="";
-          setCaptchaStatus("Die Prüfung ist fehlgeschlagen. Bitte Seite neu laden.");
+          setCaptchaStatus("Die Prüfung ist fehlgeschlagen. Bitte Seite neu laden oder den Bot-Schutz erneut laden.");
           updateSubmit();
         }
       });
+      activateCaptcha.hidden=true;
     };
     script.onerror=function(){
+      captchaLoading=false;
+      activateCaptcha.disabled=false;
+      activateCaptcha.textContent="Bot-Schutz erneut laden";
       setCaptchaStatus("Der Bot-Schutz ist nicht erreichbar. Nutzen Sie bitte den direkten E-Mail-Kontakt.");
     };
     document.head.appendChild(script);
@@ -200,7 +218,7 @@
     }
   });
 
-  loadTurnstile();
+  activateCaptcha.addEventListener("click",loadTurnstile);
   updateSubmit();
 })();
 </script>
