@@ -93,6 +93,10 @@ Deno.serve(async (req: Request) => {
     return jsonResponse({ success: false, error: "invalid_api_key" }, 401);
   }
 
+  if (Deno.env.get("INDUSTRYAI_PUBLIC_SUBMISSIONS_ENABLED") !== "true") {
+    return jsonResponse({ success: false, error: "submission_temporarily_disabled" }, 503);
+  }
+
   const turnstileSecret = Deno.env.get("CLOUDFLARE_TURNSTILE_SECRET_KEY") ?? "";
   const rateLimitSecret = Deno.env.get("INDUSTRYAI_RATE_LIMIT_HMAC_SECRET") ?? "";
   if (!adminClient || !turnstileSecret || rateLimitSecret.length < 32) {
