@@ -26,6 +26,7 @@
 <section class="profile-card"><h2>Über das Unternehmen</h2><p id="profile-description" class="profile-section"></p><img id="profile-image" class="profile-image" alt="" hidden></section>
 <section class="profile-card" id="training-section" hidden><h2>Ausbildung und Praktika</h2><p id="profile-training" class="profile-section"></p></section>
 <section class="profile-card" id="jobs-section" hidden><h2>Offene Stellen</h2><p id="profile-jobs" class="profile-section"></p></section>
+<section class="profile-card" id="media-section" hidden><h2>Einblicke und Medien</h2><p id="profile-media" class="profile-section"></p></section>
 <section class="profile-card" id="workplace-section" hidden><h2>Arbeitsumgebung</h2><p id="profile-workplace" class="profile-section"></p></section>
 <section class="profile-card" id="technology-section" hidden><h2>Maschinen und Technologien</h2><p id="profile-technology" class="profile-section"></p></section>
 <section class="profile-card" id="benefits-section" hidden><h2>Mitarbeiterangebote</h2><p id="profile-benefits" class="profile-section"></p></section>
@@ -53,6 +54,7 @@ try{
  if(data.image){$("profile-image").src=data.image;$("profile-image").alt=data.image_alt||("Einblick in "+data.name);$("profile-image").hidden=false}
  showField("training-section","profile-training",data.apprenticeships);
  showField("jobs-section","profile-jobs",data.jobs);
+ showField("media-section","profile-media",data.media);
  showField("workplace-section","profile-workplace",data.workplace);
  showField("technology-section","profile-technology",data.technology);
  showField("benefits-section","profile-benefits",data.benefits);
