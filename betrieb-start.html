@@ -133,7 +133,6 @@
     <a href="kontakt.html">Kontakt</a>
     <a href="impressum.html">Impressum</a>
   </div></footer>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="js/supabase-config.js"></script>
 <script>
 (function(){
@@ -166,18 +165,13 @@
  }
  const form=document.getElementById("company-profile-form");
  const submitButton=document.getElementById("submit-profile");
- let supabaseClient=null;
- try{
-  if(window.supabase&&window.INDUSTRYAI_SUPABASE_URL&&window.INDUSTRYAI_SUPABASE_PUBLISHABLE_KEY){
-   supabaseClient=window.supabase.createClient(window.INDUSTRYAI_SUPABASE_URL,window.INDUSTRYAI_SUPABASE_PUBLISHABLE_KEY);
-  }
- }catch(error){console.error("INDUSTRYAI Supabase initialisation:",error);}
+ const apiConfigured=!!(window.INDUSTRYAI_SUPABASE_URL&&window.INDUSTRYAI_SUPABASE_PUBLISHABLE_KEY);
 
  let turnstileWidgetId=null;
  let turnstileToken="";
  const turnstileSiteKey=window.INDUSTRYAI_TURNSTILE_SITE_KEY||"";
  function updateSubmissionButton(){
-  const enabled=window.INDUSTRYAI_SUBMISSIONS_ENABLED===true&&!!supabaseClient&&!!turnstileSiteKey;
+  const enabled=window.INDUSTRYAI_SUBMISSIONS_ENABLED===true&&apiConfigured&&!!turnstileSiteKey;
   submitButton.disabled=!enabled||!turnstileToken;
   if(!enabled)submitButton.textContent="Einreichung vorübergehend deaktiviert";
   else if(!turnstileToken)submitButton.textContent="Bitte Bot-Schutz bestätigen";
@@ -189,6 +183,11 @@
   updateSubmissionButton();
  }
  function loadTurnstile(){
+  if(window.INDUSTRYAI_SUBMISSIONS_ENABLED!==true){
+   setText("turnstile-status","Die öffentliche Einreichung ist derzeit deaktiviert. Der Bot-Schutz wird deshalb nicht geladen und es werden keine Formulardaten übertragen.");
+   updateSubmissionButton();
+   return;
+  }
   if(!turnstileSiteKey){
    setText("turnstile-status","Der öffentliche Turnstile-Sitekey fehlt noch. Die Einreichung bleibt deaktiviert.");
    updateSubmissionButton();
@@ -236,7 +235,7 @@
  form.addEventListener("submit",async event=>{
   event.preventDefault();
   if(!form.reportValidity())return;
-  if(window.INDUSTRYAI_SUBMISSIONS_ENABLED!==true||!supabaseClient||!turnstileToken){
+  if(window.INDUSTRYAI_SUBMISSIONS_ENABLED!==true||!apiConfigured||!turnstileToken){
    setText("copy-status","Die öffentliche Einreichung ist bis zur vollständigen Einrichtung von Datenschutz und Bot-Schutz deaktiviert.");
    return;
   }
@@ -261,19 +260,21 @@
   submitButton.textContent="Wird sicher übermittelt …";
   setText("copy-status","Ihre Anfrage wird übermittelt. Bitte schließen Sie diese Seite nicht.");
   try{
-   const {data,error}=await supabaseClient.functions.invoke("company-profile-submit",{
-    body:{
+   const response=await fetch(window.INDUSTRYAI_SUPABASE_URL+"/functions/v1/company-profile-submit",{
+    method:"POST",
+    headers:{
+     "Content-Type":"application/json",
+     "apikey":window.INDUSTRYAI_SUPABASE_PUBLISHABLE_KEY
+    },
+    body:JSON.stringify({
      ...payload,
      company_fax:get("company-fax"),
      turnstile_token:turnstileToken
-    }
+    })
    });
-   if(error){
-    const httpStatus=error.context?.status;
-    if(httpStatus===429)throw new Error("RATE_LIMIT");
-    throw error;
-   }
-   if(!data||data.success!==true)throw new Error("SUBMISSION_FAILED");
+   const data=await response.json().catch(()=>({success:false,error:"invalid_response"}));
+   if(response.status===429)throw new Error("RATE_LIMIT");
+   if(!response.ok||!data||data.success!==true)throw new Error(data.error||"SUBMISSION_FAILED");
    form.reset();
    setText("copy-status","Vielen Dank. Ihre Unternehmensprofil-Anfrage ist bei INDUSTRYAI eingegangen und wird manuell geprüft. Eine Veröffentlichung erfolgt erst nach Freigabe.");
    update();
