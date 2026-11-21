@@ -1,69 +1,87 @@
 # INDUSTRYAI – Supabase backend
 
-Die Website liegt auf GitHub Pages. Supabase stellt die PostgreSQL-Datenbank und Authentifizierung bereit. Die öffentlichen Seiten verwenden ausschließlich den Publishable Key; privilegierte Datenbankzugriffe werden durch Grants und Row Level Security (RLS) begrenzt.
-
-## Datenmodell
-
-- `company_submissions`: private Profilanfragen einschließlich Ansprechpartner, geschäftlicher E-Mail-Adresse und interner Prüfanmerkungen.
-- `industryai_admins`: explizite Freigabeliste der Administrator-Benutzer-UUIDs.
-- `company_public_profiles`: ausschließlich die Angaben, die nach manueller Prüfung zur Veröffentlichung freigegeben wurden. Die Tabelle enthält keine Kontaktperson und keine Kontakt-E-Mail-Adresse.
+Die Website liegt auf GitHub Pages. Supabase stellt PostgreSQL, Authentifizierung und die serverseitige Formularannahme bereit.
 
 ## Aktueller Projektstand – 21.11.2026
 
 Supabase-Projekt: `industryai-backend`  
 Region: `eu-west-1` (West EU, Irland)  
-Status beim letzten Check: `ACTIVE_HEALTHY`
+Projektstatus: `ACTIVE_HEALTHY`
 
-Die drei Tabellen sind vorhanden und RLS ist auf allen drei Tabellen aktiviert. Der Administrator `industryaisupport@gmail.com` ist in `industryai_admins` eingetragen. Die Admin-Prüffunktion liegt im nicht öffentlich exponierten Schema `private`. Die Security Advisor-Warnungen für die zuvor öffentlich ausführbare Admin-Funktion und die automatische RLS-Funktion wurden behoben.
+Drei Tabellen sind vorhanden und RLS ist aktiviert:
+- `company_submissions`: private Unternehmensanfragen inkl. Ansprechpartner und interner Prüfanmerkungen.
+- `industryai_admins`: Allowlist der Administrator-Benutzer-UUIDs.
+- `company_public_profiles`: ausschließlich ausdrücklich freigegebene öffentliche Profilangaben.
 
-Die Datenbankmigrationen 002, 003 und 004 wurden am 21.11.2026 im Projekt angewendet:
-- `002_public_company_profile_fields_and_function_security`
-- `003_move_admin_helper_to_private_and_harden_function_access`
-- `004_disable_public_submissions_until_privacy_and_anti_spam_ready`
+Der Administrator `industryaisupport@gmail.com` ist eingetragen. Die Admin-Hilfsfunktion liegt im nicht exponierten Schema `private`. Die interne Review-Seite authentifiziert den Benutzer und prüft zusätzlich dessen UUID in `industryai_admins`.
 
-## Sicherheitsmodell
+## Edge Function: öffentliche Profilanfrage
 
-- Nicht angemeldete Besucher dürfen private Einreichungen weder lesen noch einsehen.
-- Nur angemeldete Benutzer, deren UUID in `industryai_admins` steht, dürfen Anfragen lesen, prüfen und bearbeiten.
-- Nur Administratoren dürfen Datensätze in `company_public_profiles` erstellen oder ändern.
-- Die öffentliche Unternehmenswelt kann nur Datensätze lesen, bei denen `is_published = true` ist.
-- Bei Veröffentlichung werden nur freigegebene Unternehmensangaben kopiert. Ansprechpartner und interne Notizen bleiben privat.
-- Der Publishable Key ist für Browser-Code vorgesehen. **Ein `sb_secret_`- oder Service-Role-Key darf niemals in HTML, JavaScript, GitHub oder andere öffentliche Dateien aufgenommen werden.**
+Die Edge Function `company-profile-submit` ist in Supabase deployed und aktiv (Version 2). Sie ist für den öffentlichen Browseraufruf mit `verify_jwt=false` konfiguriert; die Funktion prüft selbst:
+- exakten Website-Origin `https://industryai.github.io`;
+- den projektbezogenen Publishable Key im `apikey`-Header;
+- ein gültiges Cloudflare Turnstile-Token mit erwartetem Hostname und Action;
+- Eingabegrößen, Pflichtfelder, E-Mail-Format und HTTP(S)-Website-URLs;
+- serverseitige Anfragelimits: 5 Anfragen pro IP-Hash und Stunde, 3 pro E-Mail-Hash und Tag.
 
-## Öffentliche Einreichung derzeit bewusst deaktiviert
+Die Einreichung verwendet den Supabase Secret Key ausschließlich innerhalb der Edge Function. Dieser Schlüssel wird nicht in den Browser ausgeliefert. Die Funktion schreibt nur die erlaubten Profildaten in `company_submissions`; Status und interne Notizen werden nicht vom Browser angenommen.
 
-Die Supabase-Anbindung im Unternehmensformular ist vorbereitet, aber die Einreichung ist vorerst geschlossen:
-- `window.INDUSTRYAI_SUBMISSIONS_ENABLED = false` in `js/supabase-config.js`.
-- Die Einfüge-Berechtigung und die öffentliche Einreichungs-RLS-Policy wurden zusätzlich direkt in der Datenbank entzogen.
-- Der lokale Entwurfsdownload bleibt möglich und überträgt keine Daten.
+### Rate-Limit-Datenschutz
 
-Das ist beabsichtigt. Vor dem Sammeln echter Ansprechpartnerdaten müssen die Datenschutzhinweise vervollständigt, Rechtsgrundlage und Löschfristen festgelegt und ein serverseitiger Spam-Schutz eingerichtet werden. Eine bloße Deaktivierung des Formularbuttons wäre nicht ausreichend; deshalb wurde auch der Datenbankzugriff geschlossen.
+Die Edge Function bildet HMAC-SHA-256-Hashes aus IP-Adresse bzw. normalisierter E-Mail-Adresse. In `private.company_profile_rate_limits` werden nur diese Schlüssel-Hashes, Zeitfenster und Zähler gespeichert – keine Klartext-IP und keine Klartext-E-Mail. Alte Zeitfenster werden gelegentlich bereinigt (älter als 30 Tage). Die HMAC-Geheimkomponente gehört ausschließlich in Edge Function Secrets.
+
+### Benötigte Edge Function Secrets
+
+Diese drei Variablen müssen im Supabase Dashboard unter **Edge Functions → Secrets** gesetzt werden:
+- `CLOUDFLARE_TURNSTILE_SECRET_KEY`: Cloudflare Turnstile Secret Key.
+- `INDUSTRYAI_RATE_LIMIT_HMAC_SECRET`: zufälliger Geheimwert mit mindestens 32 Zeichen.
+- `INDUSTRYAI_PUBLIC_SUBMISSIONS_ENABLED`: aktuell `false`; nur nach vollständiger Datenschutz- und Sicherheitfreigabe bewusst auf `true) setzen.
+
+Supabase stellt der Edge Function die Standardvariable `SUPABASE_SECRET_KEYS` bereit. Der Secret Key wird daraus serverseitig gelesen und darf niemals in GitHub oder Browser-Code erscheinen.
 
 ## Website-Dateien
 
-- `js/supabase-config.js`: öffentliche Projekt-URL, Publishable Key und Einreichungs-Schalter.
-- `betrieb-start.html`: Unternehmensprofil-Formular und lokaler Entwurfsdownload; Datenbankübermittlung erst nach bewusster Aktivierung.
-- `profilpruefung-intern.html`: Supabase-Auth-Login, Admin-Allowlist-Prüfung, Anfragenliste, Status, Notizen und explizite Veröffentlichung.
-- `unternehmenswelt.html`: öffentliche Liste freigegebener Unternehmensprofile.
-- `unternehmen-profil.html`: öffentliche Detailseite eines freigegebenen Profils.
+- `js/supabase-config.js`: öffentliche Projekt-URL, Publishable Key, Turnstile-Sitekey und browserseitiger Einreichungsschalter.
+- `betrieb-start.html`: Profilformular, Honeypot, Turnstile-Widget und Aufruf der Edge Function; öffentlicher Versand bleibt derzeit deaktiviert.
+- `backend/supabase/functions/company-profile-submit/index.ts`: serverseitige Validierung, Turnstile, HMAC-Rate-Limits und private Datenbankeinfügung.
+- `profilpruefung-intern.html`: Supabase-Auth, Admin-Allowlist, Prüfstatus, interne Notizen und manuelle Veröffentlichung.
+- `unternehmenswelt.html`: lädt nur Datensätze mit `is_published = true).
+- `unternehmen-profil.html`: Detailseite eines freigegebenen Profils.
 
-## Neue Umgebung einrichten
+## Datenbankmigrationen und Änderungen
 
-1. Supabase-Projekt erstellen.
-2. `backend/supabase/schema.sql` im SQL Editor ausführen.
-3. Administrator in Authentication → Users anlegen bzw. einladen.
-4. Dessen UUID als ersten Eintrag in `industryai_admins` eintragen.
-5. Projekt-URL und Publishable Key in `js/supabase-config.js` eintragen. Niemals einen Secret Key verwenden.
-6. Für bereits bestehende Projekte nur die noch nicht ausgeführten Migrationen aus `backend/supabase/migrations/` anwenden. Bereits ausgeführte Migrationen nicht erneut manuell verändern.
+Die Datenbankbasis und die Migrationen 002–004 wurden im Supabase-Projekt angewendet. Die HMAC-Rate-Limit-Tabelle, die service-role-only RPC-Funktion und die INSERT/SELECT-Rechte der Edge Function wurden danach direkt über den Supabase SQL-Zugang angelegt. Der vollständige Wiederaufbau-SQL-Stand ist in `schema.sql` und der entsprechende Delta-Stand in `migrations/005_company_profile_rate_limits.sql` dokumentiert.
 
-## Vor dem produktiven Start noch erforderlich
+## Öffentliche Einreichung derzeit bewusst deaktiviert
 
-- Vollständige, rechtlich geprüfte Datenschutzerklärung mit verantwortlicher Stelle, Anschrift, Rechtsgrundlage, Empfängern/Auftragsverarbeitern, Speicherdauer und Betroffenenrechten.
-- Serverseitiger Spam-Schutz mit Rate Limiting und CAPTCHA/Challenge; keine öffentliche direkte Tabellen-Einfügung als endgültiger Produktivweg.
-- Festgelegte Lösch- und Aufbewahrungsregeln für nicht freigegebene Anfragen.
-- Browser-End-to-End-Test: Admin-Anmeldung, Allowlist-Sperre für normale Benutzer, private Anfrage, Statusänderung, Veröffentlichung, öffentliche Sichtbarkeit und Ausschluss von Kontaktdaten.
-- Auth-Sicherheitseinstellungen regelmäßig prüfen. Der Supabase Security Advisor meldet derzeit noch deaktivierten Schutz gegen bekannte kompromittierte Passwörter; laut Supabase-Dokumentation ist diese Funktion Pro-Tarifen und höher vorbehalten.
+Die öffentliche Einreichung ist zweifach geschlossen:
+- Browser-Schalter: `window.INDUSTRYAI_SUBMISSIONS_ENABLED = false).
+- Server-Schalter: `INDUSTRYAI_PUBLIC_SUBMISSIONS_ENABLED` muss als Edge Function Secret explizit `true) sein; aktuell ist es nicht aktiviert.
+- Auf Datenbankebene haben weder `anon` noch `authenticated` INSERT-Rechte auf `company_submissions`. Nur `service_role` besitzt INSERT/SELECT.
+- Die Funktion lehnt Einreichungen ab, wenn Cloudflare Turnstile und HMAC-Secret nicht konfiguriert sind.
 
-## Testhinweis
+Daher dürfen bis zur vollständigen Einrichtung keine echten Unternehmens- oder Ansprechpartnerdaten eingegeben werden. Der lokale Entwurfsdownload bleibt möglich und überträgt keine Daten.
 
-Es wurden Datenbankrechte, RLS-Tabellen, Admin-Funktion und die Einreichungsberechtigungen direkt über die Supabase-Verbindung geprüft. Ein anonymer Test-INSERT wurde innerhalb einer Transaktion ausgeführt und zurückgerollt. Die Website wurde noch nicht vollständig in einem echten Browser-End-to-End-Test durchgeklickt. Bis dahin keine echten Unternehmens- oder Ansprechpartnerdaten eingeben.
+## Noch erforderlich vor dem produktiven Start
+
+1. Cloudflare Turnstile-Widget für Hostname `industryai.github.io` erstellen (Widget-Modus „Managed“). Den Sitekey in `js/supabase-config.js` eintragen; den Secret Key ausschließlich in Supabase Edge Function Secrets speichern.
+2. `INDUSTRYAI_RATE_LIMIT_HMAC_SECRET` als zufälligen Geheimwert (mindestens 32 Zeichen) in Supabase Edge Function Secrets hinterlegen.
+3. `INDUSTRYAI_PUBLIC_SUBMISSIONS_ENABLED` zunächst auf `false` lassen.
+4. Datenschutzerklärung rechtlich vervollständigen: Verantwortlicher und Anschrift, Rechtsgrundlage, Empfänger/Auftragsverarbeitung, Cloudflare-Turnstile-Verarbeitung einschließlich IP-Übermittlung, Speicherfristen, Löschverfahren und Betroffenenrechte.
+5. Serverseitige Edge Function mit gültigem Turnstile-Token und anschließend mit ungültigem/abgelaufenem Token im Browser testen.
+6. Admin-Flow erneut testen: Anfrage empfangen, Status ändern, freigeben, öffentliche Anzeige kontrollieren, Kontakt- und interne Notizfelder auf Nichtveröffentlichung prüfen.
+7. Erst nach diesen Schritten Server-Schalter und anschließend Browser-Schalter bewusst auf `true` setzen.
+
+## Verifizierte Tests
+
+- Edge Function `company-profile-submit` ist deployed und `ACTIVE`.
+- HMAC-Rate-Limit-RPC ist nur für `service_role` ausführbar; eine Testausführung im Rollback wurde erfolgreich durchgeführt.
+- `service_role` besitzt INSERT/SELECT auf `company_submissions`; `anon` und `authenticated` besitzen kein INSERT-Recht.
+- `private.company_profile_rate_limits` ist RLS-geschützt und nicht für normale Rollen lesbar.
+- Ein vollständiger echter Browser-Test der Turnstile-Verifikation und des Formularversands steht noch aus, da Sitekey und Secrets noch nicht eingerichtet sind.
+
+## Sicherheitsregeln
+
+- Niemals einen `sb_secret_`- oder Service-Role-Key in HTML, JavaScript, GitHub oder andere öffentliche Dateien eintragen.
+- Publishable Keys sind für Browser-Code gedacht, aber nur zusammen mit RLS und minimalen Grants.
+- Admin-Berechtigung basiert ausschließlich auf der serverseitig verwalteten Tabelle `industryai_admins`, nicht auf editierbaren User-Metadaten.
