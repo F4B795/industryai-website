@@ -182,8 +182,9 @@
         "Produkte und Marken visuell präsentieren",
         "Farben, Materialien und Beleuchtung einsetzen",
         "Dekorationen und Präsentationselemente herstellen",
-        "Gestaltungsarbeiten planen und kalkulieren",
-        "Mit Kunden und Auftraggebern zusammenarbeiten",
+        "Gestaltungsarbeiten planen und kalkulieren sowie Material- und Kostenangebote erstellen",
+        "Kosten- und Angebotskalkulationen durchführen und den Erfolg umgesetzter Gestaltungsmaßnahmen kontrollieren",
+        "Mit Kunden und Auftraggebern zusammenarbeiten und Gestaltungskonzepte präsentieren",
         "Trends und Zielgruppen berücksichtigen"
       ],
       furtherTraining: [
