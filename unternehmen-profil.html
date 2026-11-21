@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Unternehmensprofil auf INDUSTRYAI – Einblicke in Arbeitswelt, Ausbildung und offene Stellen.">
+<title>Unternehmensprofil – INDUSTRYAI</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.profile-hero{padding:58px 7%;background:linear-gradient(125deg,#071321,#102b42);text-align:center}
+.profile-hero>div{max-width:900px;margin:auto}.profile-eyebrow{color:#42d8ed;font-size:11px;font-weight:700;letter-spacing:2px}
+.profile-hero h1{font:800 clamp(32px,5vw,52px)/1.15 Manrope,sans-serif;margin:12px 0}
+.profile-hero p{color:#b6c7d6;line-height:1.8}.profile-wrap{max-width:1000px;margin:auto;padding:35px 6% 70px}
+.profile-card{background:#0d2234;border:1px solid rgba(66,216,237,.2);border-radius:14px;padding:25px;margin:18px 0}
+.profile-card h2{margin:0 0 12px;font-size:22px}.profile-card p,.profile-card li{color:#c1d0dd;line-height:1.8}
+.profile-meta{color:#42d8ed!important;font-size:13px}.profile-image{width:100%;max-height:420px;object-fit:cover;border-radius:12px;margin-top:20px}
+.profile-section{white-space:pre-line}.profile-back{display:inline-block;color:#42d8ed;text-decoration:none;margin:20px 0}
+#profile-error{color:#f2c0a7;text-align:center;padding:45px 15px}
+@media(max-width:600px){.profile-card{padding:18px}}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="nav-container"><a class="logo" href="index.html">INDUSTRYAI</a><nav><a href="unternehmenswelt.html">Unternehmenswelt</a><a href="berufe-entdecken.html">Berufe entdecken</a></nav></div></header>
+<section class="profile-hero"><div><div class="profile-eyebrow">UNTERNEHMEN ERLEBEN</div><h1 id="profile-name">Unternehmensprofil</h1><p id="profile-meta">INDUSTRYAI – Einblicke in Unternehmen und berufliche Möglichkeiten.</p></div></section>
+<main class="profile-wrap">
+<div id="profile-content" hidden>
+<section class="profile-card"><h2>Über das Unternehmen</h2><p id="profile-description" class="profile-section"></p><img id="profile-image" class="profile-image" alt="" hidden></section>
+<section class="profile-card" id="training-section" hidden><h2>Ausbildung und Praktika</h2><p id="profile-training" class="profile-section"></p></section>
+<section class="profile-card" id="jobs-section" hidden><h2>Offene Stellen</h2><p id="profile-jobs" class="profile-section"></p></section>
+<section class="profile-card" id="workplace-section" hidden><h2>Arbeitsumgebung</h2><p id="profile-workplace" class="profile-section"></p></section>
+<section class="profile-card" id="technology-section" hidden><h2>Maschinen und Technologien</h2><p id="profile-technology" class="profile-section"></p></section>
+<section class="profile-card" id="benefits-section" hidden><h2>Mitarbeiterangebote</h2><p id="profile-benefits" class="profile-section"></p></section>
+<section class="profile-card" id="culture-section" hidden><h2>Unternehmenskultur</h2><p id="profile-culture" class="profile-section"></p></section>
+<section class="profile-card" id="development-section" hidden><h2>Entwicklungsmöglichkeiten</h2><p id="profile-development" class="profile-section"></p></section>
+<section class="profile-card" id="website-section" hidden><h2>Website</h2><p id="profile-website"></p></section>
+</div>
+<div id="profile-error" role="status">Unternehmensprofil wird geladen …</div>
+<a class="profile-back" href="unternehmenswelt.html">← Zur Unternehmenswelt</a>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="js/supabase-config.js"></script>
+<script>
+(async function(){
+"use strict";
+const $=id=>document.getElementById(id),params=new URLSearchParams(location.search),submissionId=params.get("id");
+function showField(section,field,value){if(value){$(field).textContent=value;$(section).hidden=false}}
+if(!submissionId||!/^[0-9a-f-]{36}$/i.test(submissionId)){$("profile-error").textContent="Dieses Unternehmensprofil ist nicht verfügbar.";return}
+try{
+ const client=window.supabase.createClient(window.INDUSTRYAI_SUPABASE_URL,window.INDUSTRYAI_SUPABASE_PUBLISHABLE_KEY);
+ const {data,error}=await client.from("company_public_profiles").select("*").eq("submission_id",submissionId).eq("is_published",true).maybeSingle();
+ if(error)throw error;if(!data)throw new Error("Profil nicht gefunden");
+ document.title=data.name+" – INDUSTRYAI";$("profile-name").textContent=data.name;
+ $("profile-meta").textContent=[data.category_label||data.category,data.location].filter(Boolean).join(" · ")||"Unternehmensprofil auf INDUSTRYAI";
+ $("profile-description").textContent=data.description||"Dieses Unternehmen stellt sich auf INDUSTRYAI vor.";
+ if(data.image){$("profile-image").src=data.image;$("profile-image").alt=data.image_alt||("Einblick in "+data.name);$("profile-image").hidden=false}
+ showField("training-section","profile-training",data.apprenticeships);
+ showField("jobs-section","profile-jobs",data.jobs);
+ showField("workplace-section","profile-workplace",data.workplace);
+ showField("technology-section","profile-technology",data.technology);
+ showField("benefits-section","profile-benefits",data.benefits);
+ showField("culture-section","profile-culture",data.culture);
+ showField("development-section","profile-development",data.development);
+ if(data.website){const a=document.createElement("a");a.href=data.website;a.target="_blank";a.rel="noopener noreferrer";a.textContent="Unternehmenswebsite öffnen";$("profile-website").append(a);$("website-section").hidden=false}
+ $("profile-content").hidden=false;$("profile-error").hidden=true;
+}catch(error){console.error("INDUSTRYAI public company profile:",error);$("profile-error").textContent="Dieses Unternehmensprofil konnte nicht geladen werden oder ist nicht öffentlich freigegeben."}
+})();
+</script>
+</body></html>
