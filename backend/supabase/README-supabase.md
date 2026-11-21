@@ -75,6 +75,8 @@ Bis zur vollständigen Datenschutz- und Sicherheitsfreigabe dürfen über das Fo
 Am 21.11.2026 wurden folgende Prüfungen ausgeführt:
 - Edge Function `company-profile-submit` ist deployed und `ACTIVE`, Version 3.
 - Cloudflare-Widget ist vorhanden und auf `industryai.github.io` beschränkt.
+- Der Live-Browser-Test auf `betrieb-start.html` hat am 21.11.2026 das Laden des Widgets und den erfolgreichen Client-Callback bestätigt. Dies belegt noch nicht die serverseitige Token-Verifikation.
+- Im Formular wurde ein CSS-Fehler behoben, durch den das Honeypot-Feld sichtbar war. Das Feld wird nun per korrigierter CSS-Regel außerhalb des sichtbaren Bereichs gehalten.
 - Der Cloudflare-Secret-Fingerprint stimmt mit dem in Supabase gespeicherten Fingerprint überein.
 - Der Server-Schalter entspricht dem Wert `false`; die öffentliche Einreichung bleibt geschlossen.
 - Die HMAC-Rate-Limit-RPC ist nur für `service_role` ausführbar. In einer zurückgerollten Testtransaktion wurde eine erste Anfrage erlaubt und die zweite bei Limit 1 abgelehnt.
