@@ -35,7 +35,7 @@ Die Edge Function bildet HMAC-SHA-256-Hashes aus IP-Adresse bzw. normalisierter 
 Diese drei Variablen müssen im Supabase Dashboard unter **Edge Functions → Secrets** gesetzt werden:
 - `CLOUDFLARE_TURNSTILE_SECRET_KEY`: Cloudflare Turnstile Secret Key.
 - `INDUSTRYAI_RATE_LIMIT_HMAC_SECRET`: zufälliger Geheimwert mit mindestens 32 Zeichen.
-- `INDUSTRYAI_PUBLIC_SUBMISSIONS_ENABLED`: aktuell `false`; nur nach vollständiger Datenschutz- und Sicherheitfreigabe bewusst auf `true) setzen.
+- `INDUSTRYAI_PUBLIC_SUBMISSIONS_ENABLED`: aktuell `false`; nur nach vollständiger Datenschutz- und Sicherheitfreigabe bewusst auf `true` setzen.
 
 Supabase stellt der Edge Function die Standardvariable `SUPABASE_SECRET_KEYS` bereit. Der Secret Key wird daraus serverseitig gelesen und darf niemals in GitHub oder Browser-Code erscheinen.
 
@@ -45,7 +45,7 @@ Supabase stellt der Edge Function die Standardvariable `SUPABASE_SECRET_KEYS` be
 - `betrieb-start.html`: Profilformular, Honeypot, Turnstile-Widget und Aufruf der Edge Function; öffentlicher Versand bleibt derzeit deaktiviert.
 - `backend/supabase/functions/company-profile-submit/index.ts`: serverseitige Validierung, Turnstile, HMAC-Rate-Limits und private Datenbankeinfügung.
 - `profilpruefung-intern.html`: Supabase-Auth, Admin-Allowlist, Prüfstatus, interne Notizen und manuelle Veröffentlichung.
-- `unternehmenswelt.html`: lädt nur Datensätze mit `is_published = true).
+- `unternehmenswelt.html`: lädt nur Datensätze mit `is_published = true`.
 - `unternehmen-profil.html`: Detailseite eines freigegebenen Profils.
 
 ## Datenbankmigrationen und Änderungen
@@ -55,8 +55,8 @@ Die Datenbankbasis und die Migrationen 002–004 wurden im Supabase-Projekt ange
 ## Öffentliche Einreichung derzeit bewusst deaktiviert
 
 Die öffentliche Einreichung ist zweifach geschlossen:
-- Browser-Schalter: `window.INDUSTRYAI_SUBMISSIONS_ENABLED = false).
-- Server-Schalter: `INDUSTRYAI_PUBLIC_SUBMISSIONS_ENABLED` muss als Edge Function Secret explizit `true) sein; aktuell ist es nicht aktiviert.
+- Browser-Schalter: `window.INDUSTRYAI_SUBMISSIONS_ENABLED = false`.
+- Server-Schalter: `INDUSTRYAI_PUBLIC_SUBMISSIONS_ENABLED` muss als Edge Function Secret explizit `true` sein; aktuell ist es nicht aktiviert.
 - Auf Datenbankebene haben weder `anon` noch `authenticated` INSERT-Rechte auf `company_submissions`. Nur `service_role` besitzt INSERT/SELECT.
 - Die Funktion lehnt Einreichungen ab, wenn Cloudflare Turnstile und HMAC-Secret nicht konfiguriert sind.
 
