@@ -157,13 +157,13 @@
     // --------------------------------------------------
     // 13–22: SELBSTEINSCHÄTZUNG
     // --------------------------------------------------
-    { id: 13, category: "selbstbild", title: "Ich bleibe auch an einer schwierigen Aufgabe dran.", type: "scale", dimension: "L" },
+    { id: 13, category: "selbstbild", title: "Ich nutze Rückmeldungen und Fehler, um mein Wissen und Vorgehen zu verbessern.", type: "scale", dimension: "L" },
     { id: 14, category: "selbstbild", title: "Ich erkenne gerne logische Zusammenhänge und löse knifflige Probleme.", type: "scale", dimension: "A" },
     { id: 15, category: "selbstbild", title: "Ich merke schnell, wenn andere Menschen Unterstützung brauchen.", type: "scale", dimension: "S" },
     { id: 16, category: "selbstbild", title: "Ich kann meine Gedanken und Ideen gut erklären.", type: "scale", dimension: "K" },
     { id: 17, category: "selbstbild", title: "Ich entwickle gerne eigene Ideen und kreative Lösungen.", type: "scale", dimension: "C" },
     { id: 18, category: "selbstbild", title: "Ich plane gerne und behalte Aufgaben und Termine im Blick.", type: "scale", dimension: "O" },
-    { id: 19, category: "selbstbild", title: "Ich interessiere mich für Natur, Tiere und Umwelt.", type: "scale", dimension: "N" },
+    { id: 19, category: "selbstbild", title: "Ich interessiere mich für Tiere, Pflanzen, Umwelt und naturwissenschaftliche Zusammenhänge.", type: "scale", dimension: "N" },
     { id: 20, category: "selbstbild", title: "Wenn etwas Unerwartetes passiert, finde ich meistens einen Weg damit umzugehen.", type: "scale", dimension: "B" },
     { id: 21, category: "selbstbild", title: "Ich probiere gerne neue Dinge aus und lerne neue Fähigkeiten.", type: "scale", dimension: "L" },
     { id: 22, category: "selbstbild", title: "Ich arbeite gerne praktisch mit Werkzeugen, Geräten oder Materialien.", type: "scale", dimension: "T" },
