@@ -124,7 +124,9 @@
       types[training.type] ||
       "Ausbildungsweg nicht näher angegeben";
 
-    if (!training.durationMonths) return type;
+    if (!training.durationMonths) {
+      return training.durationNote ? type + " · " + training.durationNote : type;
+    }
 
     const years = training.durationMonths / 12;
 
