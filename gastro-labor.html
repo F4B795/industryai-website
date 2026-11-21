@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Interaktives Gastronomie-Lernlabor von INDUSTRYAI: Küchenorganisation, Warenkunde, Hygiene und Gästekommunikation.">
+<title>Gastronomie-Lernlabor | INDUSTRYAI</title>
+<style>
+*{box-sizing:border-box}
+:root{--accent:#f4a261;--soft:rgba(244,162,97,.13);--line:rgba(244,162,97,.48)}
+body{margin:0;background:#071524;color:#f2f7fc;font-family:Arial,sans-serif;line-height:1.65}
+a{color:inherit;text-decoration:none}
+header{padding:18px 6%;border-bottom:1px solid #294960;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.logo{font-size:19px;font-weight:bold;letter-spacing:2px}.logo span,.back,.eyebrow{color:var(--accent)}
+.back{font-size:14px}
+main{max-width:1120px;margin:auto;padding:48px 22px 75px}
+.eyebrow{font-size:11px;font-weight:bold;letter-spacing:3px}
+h1{font-size:clamp(34px,5vw,54px);line-height:1.12;margin:14px 0}
+h1 span{color:var(--accent)}
+.intro,.muted{color:#b7c8d8;max-width:800px}
+.intro{font-size:16px;line-height:1.8}
+.notice{margin:24px 0;padding:16px 19px;border:1px solid #80552f;background:#30251f;border-radius:9px;color:#f3d5b9;font-size:13px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:30px}
+.station{padding:23px;border:1px solid var(--line);border-radius:13px;background:linear-gradient(145deg,var(--soft),#0b1d2e 78%);min-width:0}
+.station-number{color:var(--accent);font-size:11px;font-weight:bold;letter-spacing:2px}
+.station h2{font-size:21px;margin:9px 0}
+.station p{color:#b7c8d8;font-size:14px}
+.question{color:#f2f7fc!important;font-weight:bold;line-height:1.55}
+.answers{display:grid;gap:9px;margin-top:17px}
+.answer{width:100%;padding:12px 14px;text-align:left;border:1px solid #594632;border-radius:8px;background:#1d2a35;color:#eef6fb;font:inherit;font-size:14px;cursor:pointer}
+.answer:hover:not(:disabled),.answer:focus-visible{border-color:var(--accent);background:var(--soft)}
+.answer:disabled{cursor:default;opacity:.9}
+.answer.correct{border-color:#39c98a;background:#123a34}
+.answer.wrong{border-color:#e27a7a;background:#42252c}
+.feedback{min-height:62px;margin-top:14px;color:var(--accent);font-size:13px;line-height:1.6}
+.score{margin-top:25px;padding:22px;border:1px solid var(--line);border-radius:12px;background:#0b1d2e}
+.score strong{color:var(--accent)}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
+button.primary{padding:13px 18px;border:0;border-radius:7px;background:var(--accent);color:#071524;font-weight:bold;cursor:pointer}
+button.primary:hover{background:#ffc18d}
+.secondary{display:inline-block;padding:13px 18px;border-radius:7px;background:#294960}
+footer{text-align:center;padding:28px;border-top:1px solid #20394e;color:#91a7ba;font-size:13px}
+footer a{color:var(--accent)}
+@media(max-width:720px){main{padding:36px 16px 55px}.grid{grid-template-columns:1fr}header{padding:16px 5%}.station{padding:19px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header>
+<a href="index.html" class="logo"><span>INDUSTRY<span style="color:#42d8ed">AI</span></span></a>
+<a class="back" href="gastronomie.html">← Gastronomie & Lebensmittel</a>
+</header>
+<main>
+<div class="eyebrow">INDUSTRYAI CAMPUS · INTERAKTIVES LERNLABOR</div>
+<h1>Küche organisieren. <span>Qualität sichern.</span></h1>
+<p class="intro">In einer professionellen Küche zählen gute Vorbereitung, klare Abläufe und ein sorgfältiger Umgang mit Lebensmitteln. In vier kurzen Stationen probierst du typische Denk- und Entscheidungssituationen aus Küche, Warenkunde und Gästeservice aus.</p>
+<div class="notice"><strong>Hinweis:</strong> Dieses Lernlabor dient der Berufsorientierung und ersetzt keine Ausbildung oder betrieblichen Hygieneanweisungen. In der Praxis gelten die aktuellen Vorgaben des Betriebs und die einschlägigen Lebensmittelhygiene-Regeln. Bei Unsicherheit fragst du die verantwortliche Fachkraft.</div>
+<section class="grid" aria-label="Interaktive Gastronomie-Lernstationen">
+<article class="station" data-station="0">
+<div class="station-number">STATION 01 · KÜCHENORGANISATION</div>
+<h2>Mise en place planen</h2>
+<p>Ein Mittagsservice steht bevor. Für ein Gericht müssen Gemüse vorbereitet, Zutaten abgewogen und der Arbeitsplatz eingerichtet werden.</p>
+<p class="question">Was beschreibt „Mise en place“ am besten?</p>
+<div class="answers">
+<button class="answer" data-correct="false">Erst während der Bestellung nach Zutaten und Werkzeugen suchen.</button>
+<button class="answer" data-correct="true">Arbeitsplatz, Zutaten und benötigte Arbeitsmittel vor dem Service vorbereiten.</button>
+<button class="answer" data-correct="false">Alle Speisen vollständig fertig garen, bevor Bestellungen eingehen.</button>
+</div>
+<div class="feedback" aria-live="polite">Wähle eine Antwort.</div>
+</article>
+<article class="station" data-station="1">
+<div class="station-number">STATION 02 · WARENKUNDE</div>
+<h2>Waren richtig annehmen</h2>
+<p>Eine Lieferung mit kühlpflichtigen Produkten kommt an. Du sollst bei der Warenannahme mithelfen.</p>
+<p class="question">Worauf achtest du besonders?</p>
+<div class="answers">
+<button class="answer" data-correct="true">Lieferung, Zustand, Kennzeichnung und vorgeschriebene Temperaturvorgaben prüfen und Auffälligkeiten melden.</button>
+<button class="answer" data-correct="false">Die Ware unabhängig von Zustand und Temperatur sofort einlagern.</button>
+<button class="answer" data-correct="false">Beschädigte Verpackungen grundsätzlich neu zukleben und die Ware verwenden.</button>
+</div>
+<div class="feedback" aria-live="polite">Wähle eine Antwort.</div>
+</article>
+<article class="station" data-station="2">
+<div class="station-number">STATION 03 · ARBEITSABLÄUFE & HYGIENE</div>
+<h2>Arbeitsplatz sauber halten</h2>
+<p>Während der Vorbereitung wechselst du zwischen unterschiedlichen Lebensmitteln und Arbeitsschritten.</p>
+<p class="question">Wie verhinderst du, dass Lebensmittel durch Arbeitsgeräte oder Flächen verunreinigt werden?</p>
+<div class="answers">
+<button class="answer" data-correct="false">Ein Schneidebrett für alle Zutaten verwenden und nur am Ende reinigen.</button>
+<button class="answer" data-correct="true">Arbeitsbereiche und Geräte passend zu den Lebensmitteln trennen und nach Hygieneplan reinigen.</button>
+<button class="answer" data-correct="false">Arbeitsflächen nur dann reinigen, wenn sichtbare Rückstände vorhanden sind.</button>
+</div>
+<div class="feedback" aria-live="polite">Wähle eine Antwort.</div>
+</article>
+<article class="station" data-station="3">
+<div class="station-number">STATION 04 · GÄSTESERVICE</div>
+<h2>Allergene sicher kommunizieren</h2>
+<p>Ein Gast fragt, ob ein Dessert ein bestimmtes Allergen enthält. Du bist dir bei einer Zutat nicht sicher.</p>
+<p class="question">Wie reagierst du professionell?</p>
+<div class="answers">
+<button class="answer" data-correct="false">Du gibst eine schnelle Einschätzung ab, damit der Service weitergeht.</button>
+<button class="answer" data-correct="true">Du prüfst die verlässlichen Zutaten- und Allergeninformationen und fragst bei Bedarf die zuständige Person.</button>
+<button class="answer" data-correct="false">Du sagst, dass Spuren grundsätzlich unbedenklich sind.</button>
+</div>
+<div class="feedback" aria-live="polite">Wähle eine Antwort.</div>
+</article>
+</section>
+<section class="score" aria-live="polite">
+<div class="eyebrow">DEIN LERNSTAND</div>
+<p><strong id="score-value">0 von 4 Stationen richtig</strong></p>
+<p class="muted" id="score-message">Bearbeite die vier Stationen. Nach jeder Antwort erhältst du eine kurze Erklärung.</p>
+<div class="actions">
+<button class="primary" id="reset-all" type="button">Alle Aufgaben zurücksetzen</button>
+<a class="secondary" href="gastronomie.html">Zurück zur Gastronomie-Welt</a>
+</div>
+</section>
+</main>
+<footer>INDUSTRYAI · Die Zukunft der Berufsorientierung<br><br><a href="datenschutz.html">Datenschutz</a></footer>
+<script>
+(function(){
+ const stations=Array.from(document.querySelectorAll(".station"));
+ const scoreValue=document.getElementById("score-value");
+ const scoreMessage=document.getElementById("score-message");
+ const explanations=[
+  "Richtig. Mise en place bedeutet, den Arbeitsplatz, Zutaten und Arbeitsmittel so vorzubereiten, dass der Service strukturiert ablaufen kann.",
+  "Richtig. Bei der Warenannahme werden unter anderem Zustand, Kennzeichnung und die vorgeschriebenen Temperaturvorgaben kontrolliert. Auffälligkeiten gehören gemeldet.",
+  "Richtig. Getrennte Arbeitsbereiche und die Reinigung nach dem betrieblichen Hygieneplan helfen, Kreuzkontaminationen zu vermeiden.",
+  "Richtig. Bei Fragen zu Allergenen sind verlässliche Informationen entscheidend. Vermutungen oder ungesicherte Zusagen können gefährlich sein."
+ ];
+ const corrections=[
+  "Nicht ganz. Mise en place ist die Vorbereitung von Arbeitsplatz, Zutaten und Arbeitsmitteln vor dem Service.",
+  "Nicht ganz. Prüfe Zustand, Kennzeichnung und die vorgeschriebenen Temperaturvorgaben. Melde Auffälligkeiten, statt sie zu übergehen.",
+  "Nicht ganz. Arbeitsbereiche und Geräte müssen passend getrennt und gemäß Hygieneplan gereinigt werden.",
+  "Nicht ganz. Gib keine Vermutungen ab. Prüfe die Informationen und hole bei Unsicherheit die zuständige Person hinzu."
+ ];
+ function update(){
+  const done=stations.filter(s=>s.dataset.answered==="true");
+  const correct=done.filter(s=>s.dataset.correct==="true").length;
+  scoreValue.textContent=correct+" von 4 Stationen richtig";
+  scoreMessage.textContent=done.length===4
+   ?(correct===4?"Alle Stationen richtig gelöst. Du hast wichtige Grundlagen aus Küchenorganisation, Warenkunde und Service kennengelernt.":"Alle Stationen bearbeitet. Lies die Rückmeldungen und versuche es anschließend erneut.")
+   :done.length+" von 4 Stationen bearbeitet.";
+ }
+ stations.forEach((station,index)=>{
+  station.querySelectorAll(".answer").forEach(button=>{
+   button.addEventListener("click",()=>{
+    if(station.dataset.answered==="true") return;
+    const ok=button.dataset.correct==="true";
+    station.dataset.answered="true";
+    station.dataset.correct=String(ok);
+    station.querySelectorAll(".answer").forEach(option=>{
+     option.disabled=true;
+     if(option.dataset.correct==="true") option.classList.add("correct");
+    });
+    if(!ok) button.classList.add("wrong");
+    station.querySelector(".feedback").textContent=ok?explanations[index]:corrections[index];
+    update();
+   });
+  });
+ });
+ document.getElementById("reset-all").addEventListener("click",()=>{
+  stations.forEach(station=>{
+   delete station.dataset.answered;
+   delete station.dataset.correct;
+   station.querySelectorAll(".answer").forEach(button=>{
+    button.disabled=false;
+    button.classList.remove("correct","wrong");
+   });
+   station.querySelector(".feedback").textContent="Wähle eine Antwort.";
+  });
+  update();
+ });
+})();
+</script>
+</body>
+</html>
