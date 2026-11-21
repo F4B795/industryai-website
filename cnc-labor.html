@@ -104,6 +104,14 @@ footer{text-align:center;padding:30px;border-top:1px solid #294960;color:#91a7ba
 .roughness-feedback:empty{display:none}
 .roughness-form button:focus-visible,.roughness-form input:focus-visible{outline:2px solid white;outline-offset:3px}
 
+
+.tool-geometry{margin:20px 0;padding:16px;background:#091b2b;border:1px solid #294960;border-radius:10px;overflow-x:auto}
+.tool-geometry svg{display:block;width:100%;min-width:320px;max-width:680px;height:auto;margin:auto}
+.tool-geometry-note{color:#91a7ba;font-size:12px;line-height:1.6;margin-top:10px}
+.tool-feedback{margin-top:16px;padding:16px;border-left:3px solid #42d8ed;background:#091b2b;color:#c5d5e3;line-height:1.7}
+.tool-feedback:empty{display:none}
+.tool-geometry-form button:focus-visible,.tool-geometry-form input:focus-visible{outline:2px solid white;outline-offset:3px}
+
 </style>
 </head>
 <body>
@@ -322,8 +330,75 @@ footer{text-align:center;padding:30px;border-top:1px solid #294960;color:#91a7ba
   </section>
 
 
+
+  <section class="panel quiz" aria-labelledby="tool-geometry-title" style="margin-top:22px">
+    <h2 id="tool-geometry-title">8. Werkzeuggeometrie und Spanbildung</h2>
+    <p class="quiz-intro">Beim Drehen beeinflusst die Geometrie des Werkzeugs, wie der Werkstoff getrennt wird und wie der Span abfließt. Lerne die grundlegenden Bereiche eines einschneidigen Drehwerkzeugs kennen.</p>
+    <div class="tool-geometry">
+      <svg viewBox="0 0 660 350" role="img" aria-labelledby="tool-geometry-svg-title tool-geometry-svg-desc">
+        <title id="tool-geometry-svg-title">Schematische Darstellung eines Drehwerkzeugs mit Spanbildung</title>
+        <desc id="tool-geometry-svg-desc">Ein Werkstück liegt rechts. Die Werkzeugschneide trennt Material. Beschriftet sind Schneide, Spanfläche, Freifläche und Span.</desc>
+        <defs>
+          <marker id="tool-arrow" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+            <path d="M0 0 L8 4 L0 8 Z" fill="#42d8ed"/>
+          </marker>
+        </defs>
+        <rect x="355" y="195" width="260" height="95" rx="5" fill="#8299a8" stroke="#d4e3eb" stroke-width="2"/>
+        <path d="M355 195 Q340 242 355 290" fill="none" stroke="#42d8ed" stroke-width="2"/>
+        <path d="M355 195 L355 290" stroke="#d4e3eb" stroke-width="2" stroke-dasharray="5 5"/>
+        <path d="M75 290 L260 290 L355 195 L320 290 Z" fill="#526d80" stroke="#d4e3eb" stroke-width="2"/>
+        <path d="M260 290 L355 195 L320 290 Z" fill="#42d8ed" opacity=".28"/>
+        <path d="M355 195 Q330 160 347 130 Q363 104 392 112 Q420 120 415 147 Q408 169 382 177" fill="none" stroke="#f1b85b" stroke-width="10" stroke-linecap="round"/>
+        <path d="M355 195 L420 110" stroke="#42d8ed" stroke-width="2.5" marker-end="url(#tool-arrow)"/>
+        <g fill="#f2f7fc" font-family="Arial,sans-serif" font-size="14">
+          <text x="430" y="82">Span</text>
+          <text x="445" y="176">Werkstück</text>
+          <text x="82" y="320">Werkzeugkörper</text>
+          <text x="220" y="145">Spanfläche</text>
+          <text x="125" y="218">Freifläche</text>
+          <text x="355" y="220" fill="#42d8ed" font-weight="bold">Schneide</text>
+        </g>
+        <g fill="none" stroke="#42d8ed" stroke-width="1.5">
+          <path d="M430 88 L390 119"/>
+          <path d="M438 181 L500 195"/>
+          <path d="M218 151 L330 175"/>
+          <path d="M190 222 L315 242"/>
+          <path d="M380 218 L362 198"/>
+        </g>
+        <path d="M365 190 Q380 170 397 157" fill="none" stroke="#f1b85b" stroke-width="2" stroke-dasharray="4 4"/>
+        <text x="28" y="35" fill="#91a7ba" font-family="Arial,sans-serif" font-size="12">Schematischer Schnitt – nicht maßstabsgetreu</text>
+      </svg>
+      <p class="tool-geometry-note">Die Skizze zeigt das Grundprinzip vereinfacht. Reale Werkzeuggeometrien besitzen unter anderem definierte Span- und Freiwinkel sowie weitere Schneidenbereiche. Diese Darstellung ist keine technische Werkzeugzeichnung.</p>
+    </div>
+    <div class="explanation">
+      **Schneide:** Bereich, an dem der Werkstoff getrennt wird.<br>
+      **Spanfläche:** Fläche, über die der entstehende Span abläuft.<br>
+      **Freifläche:** Fläche hinter der Schneide, die dem Werkstück gegenüberliegt und die Reibung an der bearbeiteten Oberfläche begrenzen soll.<br>
+      **Span:** Abgetrennter Werkstoff, der während der Bearbeitung abgeführt wird.
+    </div>
+    <form id="tool-geometry-exercise" class="tool-geometry-form">
+      <fieldset class="quiz-question">
+        <legend>Frage 1: Über welche Werkzeugfläche läuft der Span ab?</legend>
+        <label class="quiz-option"><input type="radio" name="chip-face" value="clearance" required> Über die Freifläche</label>
+        <label class="quiz-option"><input type="radio" name="chip-face" value="rake"> Über die Spanfläche</label>
+        <label class="quiz-option"><input type="radio" name="chip-face" value="body"> Über den Werkzeugkörper</label>
+      </fieldset>
+      <fieldset class="quiz-question">
+        <legend>Frage 2: Welche Aufgabe hat die Schneide?</legend>
+        <label class="quiz-option"><input type="radio" name="cutting-edge" value="separate" required> Sie trennt den Werkstoff und bildet den Span.</label>
+        <label class="quiz-option"><input type="radio" name="cutting-edge" value="cool"> Sie kühlt das Werkstück.</label>
+        <label class="quiz-option"><input type="radio" name="cutting-edge" value="clamp"> Sie spannt das Werkstück ein.</label>
+      </fieldset>
+      <div class="quiz-actions">
+        <button type="submit">Wissen überprüfen</button>
+        <button type="button" id="tool-geometry-restart" class="secondary" hidden>Übung wiederholen</button>
+      </div>
+      <div id="tool-geometry-feedback" class="tool-feedback" role="status" aria-live="polite"></div>
+    </form>
+  </section>
+
   <section class="panel quiz" aria-labelledby="roughness-title" style="margin-top:22px">
-    <h2 id="roughness-title">7. Oberflächenqualität und Rauheit (Ra)</h2>
+    <h2 id="roughness-title">8. Oberflächenqualität und Rauheit (Ra)</h2>
     <p class="quiz-intro">Nach dem Drehen wird nicht nur das Maß geprüft. Auch die Oberfläche kann eine wichtige Anforderung sein. Der Mittenrauwert Ra beschreibt vereinfacht die mittlere Abweichung des Rauheitsprofils von seiner Mittellinie. Ein kleinerer Ra-Wert bedeutet im Allgemeinen eine feinere Oberfläche.</p>
     <div class="explanation">
       **Ra** wird üblicherweise in Mikrometern (µm) angegeben. Der geforderte Wert hängt vom Bauteil, seiner Funktion und der technischen Zeichnung ab. Eine kleinere Zahl ist nicht automatisch für jedes Bauteil besser oder erforderlich.
@@ -374,7 +449,7 @@ footer{text-align:center;padding:30px;border-top:1px solid #294960;color:#91a7ba
   </section>
 
   <section class="panel quiz" aria-labelledby="quiz-title">
-    <h2 id="quiz-title">8. Dein CNC-Wissenstest</h2>
+    <h2 id="quiz-title">9. Dein CNC-Wissenstest</h2>
     <p class="quiz-intro">Prüfe, was du aus der Simulation mitgenommen hast. Wähle pro Frage eine Antwort und lass dir anschließend die Lösungen erklären.</p>
     <form id="cnc-quiz">
       <fieldset class="quiz-question">
@@ -742,6 +817,53 @@ footer{text-align:center;padding:30px;border-top:1px solid #294960;color:#91a7ba
     summary.textContent=score===2
       ?"Gut erkannt. Du kennst jetzt die grundlegende Bedeutung des Kennwerts Ra."
       :"Merke: Ein kleinerer Ra-Wert steht im Allgemeinen für eine feinere Oberfläche. Die konkrete Anforderung ergibt sich aus Zeichnung und Bauteilfunktion.";
+    feedback.appendChild(summary);
+    restart.hidden=false;
+    form.querySelectorAll('input[type="radio"]').forEach(function(input){input.disabled=true;});
+    form.querySelector('button[type="submit"]').disabled=true;
+  });
+  restart.addEventListener("click",function(){
+    form.reset();
+    form.querySelectorAll('input[type="radio"]').forEach(function(input){input.disabled=false;});
+    form.querySelector('button[type="submit"]').disabled=false;
+    feedback.replaceChildren();
+    restart.hidden=true;
+  });
+})();
+</script>
+
+
+<script>
+(function(){
+  "use strict";
+  const form=document.getElementById("tool-geometry-exercise");
+  const feedback=document.getElementById("tool-geometry-feedback");
+  const restart=document.getElementById("tool-geometry-restart");
+  if(!form||!feedback||!restart)return;
+  const questions=[
+    {name:"chip-face",answer:"rake",explanation:"Der Span läuft über die Spanfläche ab. Ihre Ausführung beeinflusst unter anderem Spanfluss und Spanbildung."},
+    {name:"cutting-edge",answer:"separate",explanation:"An der Schneide wird der Werkstoff getrennt. Dabei entsteht der Span, der vom Werkstück abgeführt wird."}
+  ];
+  form.addEventListener("submit",function(event){
+    event.preventDefault();
+    if(!form.reportValidity())return;
+    const data=new FormData(form);
+    let score=0;
+    feedback.replaceChildren();
+    const heading=document.createElement("h3");
+    questions.forEach(function(item,index){
+      const correct=data.get(item.name)===item.answer;
+      if(correct)score++;
+      const line=document.createElement("p");
+      line.textContent="Frage "+(index+1)+": "+(correct?"Richtig. ":"Nicht richtig. ")+item.explanation;
+      feedback.appendChild(line);
+    });
+    heading.textContent="Dein Ergebnis: "+score+" von 2 richtig";
+    feedback.prepend(heading);
+    const summary=document.createElement("p");
+    summary.textContent=score===2
+      ?"Gut. Du kannst die wichtigsten Bereiche des Drehwerkzeugs zuordnen."
+      :"Wiederhole die Beschreibungen von Schneide, Spanfläche und Freifläche und versuche es erneut.";
     feedback.appendChild(summary);
     restart.hidden=false;
     form.querySelectorAll('input[type="radio"]').forEach(function(input){input.disabled=true;});
