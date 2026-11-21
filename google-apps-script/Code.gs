@@ -16,9 +16,13 @@ function doPost(e) {
     const p = (e && e.parameter) || {};
     if (p.websiteConfirm) return resultPage(true);
 
-    const required = ["companyName", "contactPerson", "contactEmail", "privacyConsent"];
+    const required = ["companyName", "contactPerson", "contactEmail"];
     if (required.some(k => !String(p[k] || "").trim())) {
       throw new Error("Pflichtfelder fehlen.");
+    }
+    // Serverseitige Prüfung: Eine Anfrage wird nur mit explizitem Checkbox-Wert angenommen.
+    if (String(p.privacyConsent || "").trim() !== "yes") {
+      throw new Error("Die Datenschutzeinwilligung fehlt.");
     }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(p.contactEmail).trim())) {
       throw new Error("Ungültige E-Mail-Adresse.");
