@@ -80,6 +80,11 @@
 <div class="onboard-field"><label for="company-jobs">Welche offenen Stellen möchten Sie besetzen?</label><textarea id="company-jobs" name="jobs" maxlength="3000" placeholder="Ein Job pro Zeile, z. B.&#10;CNC-Dreher/in (Vollzeit)&#10;Mechatroniker/in (Vollzeit)&#10;Mitarbeiter/in im Kundenservice (Teilzeit)"></textarea><span class="onboard-hint">Gern mit Jobtitel, Arbeitszeitmodell, Standort oder gewünschtem Starttermin.</span></div>
 <div class="onboard-label" style="margin-top:28px">SCHRITT 4 · EINBLICKE</div>
 <div class="onboard-field"><label for="company-media">Welche Einblicke könnten Sie zeigen?</label><textarea id="company-media" name="media" maxlength="2000" placeholder="z. B. kurze Videos, Teamvorstellung, Maschinen, Werkstatt, Projekte, Azubi-Alltag"></textarea></div>
+<div class="onboard-field"><label for="company-workplace">Wie sieht die Arbeitsumgebung aus?</label><textarea id="company-workplace" name="workplace" maxlength="2000" placeholder="z. B. Produktionshalle, Büro, Werkstatt, Außendienst, Teamarbeit, Schichtbetrieb"></textarea></div>
+<div class="onboard-field"><label for="company-technology">Welche Maschinen, Technologien oder Werkzeuge nutzen Sie?</label><textarea id="company-technology" name="technology" maxlength="2000" placeholder="z. B. CNC-Drehmaschinen, Robotik, CAD/CAM, moderne IT-Systeme, Spezialwerkzeuge"></textarea></div>
+<div class="onboard-field"><label for="company-benefits">Welche Mitarbeiterangebote und Zusatzleistungen bieten Sie?</label><textarea id="company-benefits" name="benefits" maxlength="2000" placeholder="z. B. Weiterbildung, Zuschüsse, Jobrad, Kantine, flexible Arbeitszeiten"></textarea></div>
+<div class="onboard-field"><label for="company-culture">Was zeichnet Ihre Unternehmenskultur aus?</label><textarea id="company-culture" name="culture" maxlength="2000" placeholder="z. B. Teamzusammenhalt, flache Hierarchien, persönliche Betreuung, kurze Entscheidungswege"></textarea></div>
+<div class="onboard-field"><label for="company-development">Welche Entwicklungs- und Aufstiegsmöglichkeiten gibt es?</label><textarea id="company-development" name="development" maxlength="2000" placeholder="z. B. Weiterbildungen, Spezialisierungen, Meister-/Technikerförderung, interne Karrierewege"></textarea></div>
 <div class="onboard-label" style="margin-top:28px">IHRE KONTAKTDATEN</div>
 <div class="onboard-field"><label for="contact-person">Ansprechpartner *</label><input id="contact-person" name="contactPerson" type="text" maxlength="120" autocomplete="name" placeholder="Vor- und Nachname" required></div>
 <div class="onboard-field"><label for="contact-email">Geschäftliche E-Mail-Adresse *</label><input id="contact-email" name="contactEmail" type="email" maxlength="180" autocomplete="email" placeholder="name@unternehmen.de" required></div>
@@ -109,6 +114,11 @@
 <ul id="preview-jobs"><li>Hier erscheinen Ihre offenen Stellen.</li></ul>
 <h3 style="font-size:17px;margin-top:22px">Einblicke in den Betrieb</h3>
 <p id="preview-media">Hier können später Videos, Bilder und Einblicke in den Arbeitsalltag eingebunden werden.</p>
+<h3 style="font-size:17px;margin-top:22px">Arbeitsumgebung</h3><p id="preview-workplace">Noch keine Angaben.</p>
+<h3 style="font-size:17px;margin-top:22px">Maschinen und Technologien</h3><p id="preview-technology">Noch keine Angaben.</p>
+<h3 style="font-size:17px;margin-top:22px">Mitarbeiterangebote</h3><p id="preview-benefits">Noch keine Angaben.</p>
+<h3 style="font-size:17px;margin-top:22px">Unternehmenskultur</h3><p id="preview-culture">Noch keine Angaben.</p>
+<h3 style="font-size:17px;margin-top:22px">Entwicklungsmöglichkeiten</h3><p id="preview-development">Noch keine Angaben.</p>
 <p id="preview-website" style="margin-top:14px"></p>
 </div>
 <div class="onboard-actions">
@@ -123,7 +133,7 @@
 <footer><a href="index.html" class="logo">INDUSTRY<span>AI</span></a><p>Deine Zukunft. Deine Möglichkeiten.</p><p>© 2026 INDUSTRYAI</p><div class="ia-footer-links"><a href="index.html">Startseite</a><a href="berufe-entdecken.html">Berufe entdecken</a><a href="unternehmenswelt.html">Unternehmenswelt</a><a href="unternehmen.html">Für Unternehmen</a><a href="datenschutz.html">Datenschutz</a></div></footer>
 <script>
 (function(){
- const ids=["company-name","company-location","company-sector","company-website","company-description","company-apprenticeships","company-jobs","company-media","contact-person","contact-email","contact-phone"];
+ const ids=["company-name","company-location","company-sector","company-website","company-description","company-apprenticeships","company-jobs","company-media","company-workplace","company-technology","company-benefits","company-culture","company-development","contact-person","contact-email","contact-phone"];
  const get=id=>document.getElementById(id).value.trim();
  const text=(id,value)=>document.getElementById(id).textContent=value;
  function update(){
@@ -138,6 +148,11 @@
   const vacancies=openJobs.split(/\n|,/).map(x=>x.trim()).filter(Boolean);
   (vacancies.length?vacancies:["Hier erscheinen Ihre offenen Stellen."]).forEach(job=>{const li=document.createElement("li");li.textContent=job;jobList.appendChild(li);});
   text("preview-media",media||"Hier können später Videos, Bilder und Einblicke in den Arbeitsalltag eingebunden werden.");
+  text("preview-workplace",get("company-workplace")||"Noch keine Angaben.");
+  text("preview-technology",get("company-technology")||"Noch keine Angaben.");
+  text("preview-benefits",get("company-benefits")||"Noch keine Angaben.");
+  text("preview-culture",get("company-culture")||"Noch keine Angaben.");
+  text("preview-development",get("company-development")||"Noch keine Angaben.");
   const link=document.getElementById("preview-website");link.textContent=website?"Website: "+website:"";
  }
  ids.forEach(id=>document.getElementById(id).addEventListener("input",update));
@@ -172,7 +187,7 @@
    "company-name":"Unternehmen","company-location":"Standort","company-sector":"Branche",
    "company-website":"Website","company-description":"Unternehmensbeschreibung",
    "company-apprenticeships":"Ausbildungsberufe und Praktika","company-jobs":"Offene Stellen",
-   "company-media":"Mögliche Einblicke","contact-person":"Ansprechpartner",
+   "company-media":"Mögliche Einblicke","company-workplace":"Arbeitsumgebung","company-technology":"Maschinen und Technologien","company-benefits":"Mitarbeiterangebote","company-culture":"Unternehmenskultur","company-development":"Entwicklungsmöglichkeiten","contact-person":"Ansprechpartner",
    "contact-email":"Geschäftliche E-Mail","contact-phone":"Telefon"
   };
   return Object.entries(labels).map(([id,label])=>label+":\n"+(get(id)||"Keine Angabe")).join("\n\n");
