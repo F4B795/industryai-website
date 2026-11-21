@@ -760,7 +760,7 @@
     question.answers.forEach(function(answer, index) {
       const button = document.createElement("button");
       button.type = "button";
-      button.className = "answer-button";
+      button.className = "answer";
       button.textContent = String.fromCharCode(65 + index) + ": " + answer;
       button.addEventListener("click", function() {
         checkAnswer(index);
