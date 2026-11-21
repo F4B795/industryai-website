@@ -342,6 +342,10 @@ $$;
 
 revoke all on function private.purge_industryai_expired_data() from public, anon, authenticated;
 
+select cron.unschedule(jobid)
+from cron.job
+where jobname = 'industryai-contact-retention-cleanup';
+
 select cron.schedule(
   'industryai-contact-retention-cleanup',
   '30 3 * * *',
