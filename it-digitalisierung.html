@@ -643,8 +643,7 @@
         </p>
 
         <p class="muted">
-          In dieser Mini-Aufgabe soll ein Programm prüfen,
-          ob eine Person mindestens 18 Jahre alt ist.
+          Die folgenden Situationen zeigen weitere Aufgaben aus dem IT-Alltag: Kontosicherheit, Umgang mit verdächtigen Nachrichten, Anforderungsanalyse und Zusammenarbeit im Entwicklungsteam.
         </p>
       </div>
 
@@ -668,34 +667,14 @@
     </div>
 
     <div class="challenge">
-      <h3>Die Programmier-Challenge</h3>
-
-      <p class="question">
-        Welche Bedingung ist richtig, wenn ein Programm prüfen soll,
-        ob eine Person mindestens 18 Jahre alt ist?
-      </p>
-
-      <div class="answers">
-        <button class="answer" type="button" data-answer="wrong">
-          A: alter = 18
-        </button>
-
-        <button class="answer" type="button" data-answer="correct">
-          B: alter >= 18
-        </button>
-
-        <button class="answer" type="button" data-answer="wrong">
-          C: alter < 18
-        </button>
+      <div class="challenge-header">
+        <h3 id="it-title">Situation 01</h3>
+        <span class="challenge-tag" id="it-progress">SITUATION 1 VON 4</span>
       </div>
-
-      <div id="challenge-result" aria-live="polite">
-        Wähle eine Antwort aus.
-      </div>
-
-      <button class="reset-button" id="challenge-reset" type="button">
-        Aufgabe wiederholen
-      </button>
+      <p class="question" id="it-text"></p>
+      <div class="answers" id="it-answers"></div>
+      <div id="it-result" aria-live="polite"></div>
+      <button class="restart-button" id="it-restart" type="button" hidden>Challenge erneut starten</button>
     </div>
   </div>
 </section>
@@ -758,39 +737,107 @@
 </footer>
 
 <script>
-  const answerButtons = document.querySelectorAll(".answer");
-  const challengeResult = document.getElementById("challenge-result");
-  const resetButton = document.getElementById("challenge-reset");
+  const questions = [{"title":"Situation 01 – Kontosicherheit","question":"Ein Kollege bittet dich, ihm dein persönliches Passwort zu schicken, damit er schnell eine Aufgabe erledigen kann. Was machst du?","answers":["Du schickst es ihm und änderst es später wieder.","Du verweigerst die Weitergabe und schlägst einen freigegebenen Zugriffsweg oder ein eigenes Benutzerkonto vor.","Du schreibst das Passwort auf einen Zettel und legst ihn an seinen Arbeitsplatz."],"correct":1,"explanation":"Persönliche Zugangsdaten dürfen nicht geteilt werden. Zugriffe sollten über individuelle Konten und die vorgesehenen Berechtigungsverfahren vergeben werden."},{"title":"Situation 02 – Verdächtige E-Mail","question":"Du erhältst eine unerwartete E-Mail mit einem Link und der Aufforderung, dich sofort anzumelden. Absender und Nachricht wirken ungewöhnlich. Was ist sinnvoll?","answers":["Du klickst auf den Link, um zu prüfen, wohin er führt.","Du antwortest und fragst den Absender nach dem Passwort.","Du öffnest den Link nicht, prüfst den Vorgang über einen bekannten Kontaktweg und meldest die Nachricht nach internen Regeln."],"correct":2,"explanation":"Unerwartete Anmeldelinks können Teil eines Phishing-Versuchs sein. Nicht anklicken oder Daten eingeben; stattdessen über einen bekannten Kanal verifizieren und den vorgesehenen Meldeweg nutzen."},{"title":"Situation 03 – Anforderungen verstehen","question":"Ein Team bittet dich um eine neue Funktion für eine interne Anwendung. Die Beschreibung lautet nur: „Das soll einfacher werden.“ Was ist dein nächster Schritt?","answers":["Du klärst mit den späteren Nutzern, welches Problem gelöst werden soll und welche konkreten Anforderungen bestehen.","Du beginnst sofort mit einer beliebigen Gestaltung.","Du übernimmst ungeprüft die erste Idee einer einzelnen Person."],"correct":0,"explanation":"Vor der Umsetzung müssen Problem, Nutzergruppe und Anforderungen verstanden werden. Rückfragen und abgestimmte Kriterien verhindern, dass am Bedarf vorbei entwickelt wird."},{"title":"Situation 04 – Änderungen nachvollziehbar halten","question":"Du arbeitest an einer bestehenden Anwendung und hast eine kleine Änderung erfolgreich getestet. Wie gehst du in einem Teamprojekt sinnvoll weiter vor?","answers":["Du ersetzt direkt die Dateien im Produktivsystem, ohne jemanden zu informieren.","Du sicherst die Änderung nachvollziehbar im Versionsverwaltungssystem und beschreibst kurz, was geändert wurde.","Du überschreibst die bisherige Version und löschst alle älteren Stände."],"correct":1,"explanation":"Versionsverwaltung dokumentiert Änderungen und erleichtert Zusammenarbeit sowie Wiederherstellung. Kleine, nachvollziehbar beschriebene Änderungen lassen sich besser prüfen und zuordnen."}];
+  let currentQuestion = 0;
+  let score = 0;
 
-  answerButtons.forEach(function(button) {
-    button.addEventListener("click", function() {
+  const questionTitle = document.getElementById("it-title");
+  const questionText = document.getElementById("it-text");
+  const answerOptions = document.getElementById("it-answers");
+  const challengeResult = document.getElementById("it-result");
+  const challengeProgress = document.getElementById("it-progress");
+  const restartButton = document.getElementById("it-restart");
 
-      answerButtons.forEach(function(answer) {
-        answer.disabled = true;
+  function showQuestion() {
+    const question = questions[currentQuestion];
+    questionTitle.textContent = question.title;
+    questionText.textContent = question.question;
+    challengeProgress.textContent =
+      "SITUATION " + (currentQuestion + 1) + " VON " + questions.length;
+    challengeResult.textContent = "";
+    answerOptions.innerHTML = "";
+
+    question.answers.forEach(function(answer, index) {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "it-answer";
+      button.textContent = String.fromCharCode(65 + index) + ": " + answer;
+      button.addEventListener("click", function() {
+        checkAnswer(index);
       });
+      answerOptions.appendChild(button);
+    });
+  }
 
-      if (button.dataset.answer === "correct") {
-        button.classList.add("correct");
+  function checkAnswer(selected) {
+    const question = questions[currentQuestion];
+    const buttons = answerOptions.querySelectorAll("button");
 
-        challengeResult.textContent =
-          "Richtig! >= bedeutet größer oder gleich. Damit werden alle Alterswerte ab 18 erfasst.";
-      } else {
+    buttons.forEach(function(button, index) {
+      button.disabled = true;
+      if (index === question.correct) button.classList.add("correct");
+      if (index === selected && selected !== question.correct) {
         button.classList.add("wrong");
-
-        challengeResult.textContent =
-          "Nicht ganz. Gesucht ist eine Bedingung, die 18 und alle höheren Zahlen berücksichtigt. Die richtige Antwort ist B: alter >= 18.";
       }
     });
-  });
 
-  resetButton.addEventListener("click", function() {
-    answerButtons.forEach(function(button) {
-      button.disabled = false;
-      button.classList.remove("correct", "wrong");
+    if (selected === question.correct) {
+      score++;
+      challengeResult.textContent = "Richtig! " + question.explanation;
+    } else {
+      challengeResult.textContent =
+        "Noch nicht ganz. " + question.explanation;
+    }
+
+    const nextButton = document.createElement("button");
+    nextButton.type = "button";
+    nextButton.className = "reset-button";
+    nextButton.textContent =
+      currentQuestion === questions.length - 1
+        ? "Auswertung anzeigen"
+        : "Nächste Situation";
+    nextButton.addEventListener("click", function() {
+      currentQuestion++;
+      if (currentQuestion < questions.length) {
+        showQuestion();
+      } else {
+        showFinalResult();
+      }
     });
+    answerOptions.appendChild(nextButton);
+  }
 
-    challengeResult.textContent = "Wähle eine Antwort aus.";
-  });
+  function showFinalResult() {
+    questionTitle.textContent = "Challenge abgeschlossen";
+    questionText.textContent =
+      "Du hast " + score + " von " + questions.length +
+      " Situationen richtig gelöst.";
+    challengeProgress.textContent = "ERGEBNIS";
+    answerOptions.innerHTML = "";
+
+    if (score === questions.length) {
+      challengeResult.textContent =
+        "Sehr gut! Alle vier Entscheidungen waren richtig. Du hast wichtige Grundlagen für verantwortungsvolles Arbeiten in diesem Bereich erkannt.";
+    } else if (score >= 2) {
+      challengeResult.textContent =
+        "Gute Grundlage: " + score + " von " + questions.length +
+        " richtig. Lies die Erklärungen zu den übrigen Situationen und probiere es erneut.";
+    } else {
+      challengeResult.textContent =
+        "Hier ist noch Lernpotenzial. Nutze die Erklärungen, um die Situationen besser einzuordnen, und starte anschließend einen neuen Versuch.";
+    }
+    restartButton.hidden = false;
+  }
+
+  function restartChallenge() {
+    currentQuestion = 0;
+    score = 0;
+    restartButton.hidden = true;
+    showQuestion();
+  }
+
+  restartButton.addEventListener("click", restartChallenge);
+  showQuestion();
 </script>
 
 </body>
