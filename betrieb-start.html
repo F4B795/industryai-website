@@ -151,6 +151,7 @@
    link.append("Website: ",anchor);
   }
  }
+ document.getElementById("company-profile-form").addEventListener("submit",event=>event.preventDefault());
  ids.forEach(id=>{
   const field=document.getElementById(id);
   field.addEventListener("input",update);
