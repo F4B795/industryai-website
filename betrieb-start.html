@@ -184,10 +184,13 @@
   updateSubmissionButton();
  }
  function loadTurnstile(){
-  if(window.INDUSTRYAI_SUBMISSIONS_ENABLED!==true||!turnstileSiteKey){
-   setText("turnstile-status","Der Bot-Schutz wird noch eingerichtet. Die öffentliche Einreichung bleibt bis dahin deaktiviert.");
+  if(!turnstileSiteKey){
+   setText("turnstile-status","Der öffentliche Turnstile-Sitekey fehlt noch. Die Einreichung bleibt deaktiviert.");
    updateSubmissionButton();
    return;
+  }
+  if(window.INDUSTRYAI_SUBMISSIONS_ENABLED!==true){
+   setText("turnstile-status","Turnstile ist eingebunden und kann getestet werden. Der Versand von Profilanfragen bleibt unabhängig davon deaktiviert.");
   }
   const script=document.createElement("script");
   script.src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
@@ -223,7 +226,7 @@
  }
  loadTurnstile();
  if(window.INDUSTRYAI_SUBMISSIONS_ENABLED!==true){
-  setText("copy-status","Die Datenbank ist angebunden. Öffentliche Einreichungen bleiben bis zur Einrichtung und Prüfung von Datenschutz und Bot-Schutz deaktiviert. Bitte keine echten personenbezogenen Daten eingeben.");
+  setText("copy-status","Die Datenbank und der Bot-Schutz sind vorbereitet. Öffentliche Einreichungen bleiben bis zur Datenschutz- und Sicherheitsfreigabe deaktiviert. Bitte keine echten personenbezogenen Daten eingeben.");
  }
  form.addEventListener("submit",async event=>{
   event.preventDefault();
