@@ -240,6 +240,36 @@
     else elements.main.appendChild(section);
   }
 
+  function renderWorkday(workday) {
+    if (!Array.isArray(workday) || !workday.length) return;
+
+    const section = createElement("section", "section");
+    section.appendChild(createElement("div", "eyebrow", "EIN TYPISCHER ARBEITSABLAUF"));
+    section.appendChild(createElement("h2", "", "So kann ein Arbeitstag aussehen"));
+
+    const panel = createElement("div", "content-panel");
+    panel.appendChild(createElement(
+      "p",
+      "muted",
+      "Die folgenden Stationen zeigen einen beispielhaften Ablauf. Reihenfolge und Aufgaben unterscheiden sich je nach Betrieb, Auftrag und Einsatzbereich."
+    ));
+
+    const grid = createElement("div", "info-grid");
+    workday.forEach(function (item, index) {
+      const card = createElement("article", "info-card");
+      card.appendChild(createElement("small", "", "STATION " + (index + 1)));
+      card.appendChild(createElement("h3", "", item.stage));
+      card.appendChild(createElement("p", "", item.detail));
+      grid.appendChild(card);
+    });
+    panel.appendChild(grid);
+    section.appendChild(panel);
+
+    const cta = elements.main.querySelector(".campus-cta");
+    if (cta) elements.main.insertBefore(section, cta);
+    else elements.main.appendChild(section);
+  }
+
   function renderExtendedDetails(details) {
     if (!details) return;
 
@@ -494,6 +524,7 @@
 
     elements.training.textContent = formatTraining(career.training);
 
+    renderWorkday(careerDetails && careerDetails.workday);
     renderExtendedDetails(careerDetails);
     renderAccessAndSalary(career, careerDetails);
     renderAdjacentCareers(career);
