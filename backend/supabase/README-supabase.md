@@ -19,9 +19,9 @@ The SQL enables Row Level Security (RLS). Anonymous visitors can insert a new su
 5. In Project Settings → API, note the Project URL and the publishable/anon key. These are intended for browser use when protected by the RLS policies. **Never put the service-role key in website JavaScript, GitHub, or any public file.**
 6. Keep the Project URL and publishable key private until we configure the frontend. They are not passwords, but should be configured deliberately.
 
-## Not connected yet
+## Applied in the current INDUSTRYAI project (2026-11-21)\n\nThe Supabase project `industryai-backend` now has the three tables, RLS policies, the initial administrator record, public profile content columns, and the hardened private admin helper. Migration 002 and migration 003 were applied through the Supabase connector. Keep this GitHub folder as the source-controlled record of the schema and migrations.\n\n## Not connected yet
 
-The live website still uses the current email-based manual submission flow and the existing public directory feed. This schema is not deployed or connected to the site. The internal local review page is also still local-only. No records are being transferred to Supabase at this stage.
+The live website code is now configured to submit company profile requests to `company_submissions`, authenticate an administrator in the review page, and read only approved public records from `company_public_profiles`. The deployment and end-to-end browser flow still require live testing before collecting real personal data.
 
 Before switching the live workflow, the next implementation steps are:
 - configure the public submission form to insert only into `company_submissions`;
