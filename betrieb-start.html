@@ -206,6 +206,7 @@
  });
  document.querySelectorAll(".reset-draft").forEach(button=>button.addEventListener("click",()=>{
   ids.forEach(id=>{document.getElementById(id).value="";});
+  document.getElementById("privacy-consent").checked=false;
   document.getElementById("copy-status").textContent="";
   document.getElementById("preview-copy-status").textContent="";
   update();
