@@ -64,6 +64,15 @@ footer{text-align:center;padding:30px;border-top:1px solid #294960;color:#91a7ba
 .quiz-actions button.secondary{margin-left:0}
 .quiz button:focus-visible,.quiz-option input:focus-visible{outline:2px solid #fff;outline-offset:3px}
 @media(max-width:420px){.quiz-question{padding:14px}.quiz-actions button{width:100%}}
+
+.drawing-wrap{margin:20px 0;padding:14px;background:#091b2b;border:1px solid #294960;border-radius:10px;overflow-x:auto}
+.drawing-wrap svg{display:block;width:100%;min-width:300px;max-width:650px;margin:auto;height:auto}
+.drawing-note{color:#91a7ba;font-size:12px;line-height:1.6;margin-top:10px}
+.drawing-form{margin-top:22px}
+.drawing-feedback{margin-top:18px;padding:18px;border-left:3px solid #42d8ed;background:#091b2b;color:#c5d5e3;line-height:1.7}
+.drawing-feedback:empty{display:none}
+.drawing-feedback h3{color:#42d8ed;margin:0 0 10px}
+.drawing-form button:focus-visible,.drawing-form input:focus-visible{outline:2px solid white;outline-offset:3px}
 </style>
 </head>
 <body>
@@ -142,6 +151,63 @@ footer{text-align:center;padding:30px;border-top:1px solid #294960;color:#91a7ba
   <section class="panel" style="margin-top:22px">
     <h2>3. Was passiert bei der Bearbeitung?</h2>
     <p class="intro" id="learning">Wähle deine Einstellungen und starte die Simulation, um die einzelnen Schritte kennenzulernen.</p>
+  </section>
+
+
+  <section class="panel quiz" aria-labelledby="drawing-title">
+    <h2 id="drawing-title">4. Technische Zeichnung verstehen</h2>
+    <p class="quiz-intro">In der CNC-Fertigung werden Werkstücke nach technischen Zeichnungen gefertigt. Lies die Maße in der vereinfachten Skizze und beantworte anschließend zwei Fragen.</p>
+    <div class="drawing-wrap">
+      <svg viewBox="0 0 640 300" role="img" aria-labelledby="drawing-svg-title drawing-svg-desc">
+        <title id="drawing-svg-title">Vereinfachte Maßskizze eines zylindrischen Werkstücks</title>
+        <desc id="drawing-svg-desc">Ein zylindrisches Werkstück mit 60 Millimeter Länge und 30 Millimeter Durchmesser. Maßlinien zeigen Länge und Durchmesser.</desc>
+        <defs>
+          <marker id="dim-arrow" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto-start-reverse">
+            <path d="M0 0 L7 3.5 L0 7" fill="none" stroke="#42d8ed" stroke-width="1"/>
+          </marker>
+        </defs>
+        <g fill="none" stroke="#d4e3eb" stroke-width="2">
+          <path d="M130 105 H440 V195 H130 Z"/>
+          <path d="M130 105 Q105 150 130 195" stroke="#42d8ed"/>
+          <path d="M440 105 Q465 150 440 195" stroke="#d4e3eb"/>
+          <path d="M130 150 H440" stroke="#6b8799" stroke-dasharray="7 6" stroke-width="1.3"/>
+        </g>
+        <g fill="none" stroke="#42d8ed" stroke-width="1.5">
+          <path d="M130 85 V55 M440 85 V55"/>
+          <path d="M130 65 H440" marker-start="url(#dim-arrow)" marker-end="url(#dim-arrow)"/>
+          <path d="M470 105 H515 M470 195 H515"/>
+          <path d="M505 105 V195" marker-start="url(#dim-arrow)" marker-end="url(#dim-arrow)"/>
+        </g>
+        <g fill="#42d8ed" font-family="Arial,sans-serif" font-size="18" font-weight="bold">
+          <text x="285" y="48" text-anchor="middle">60 mm</text>
+          <text x="530" y="155">Ø 30 mm</text>
+        </g>
+        <g fill="#91a7ba" font-family="Arial,sans-serif" font-size="13">
+          <text x="285" y="225" text-anchor="middle">Zylindrisches Werkstück · Seitenansicht</text>
+          <text x="285" y="250" text-anchor="middle">Maßangaben in Millimetern</text>
+        </g>
+      </svg>
+      <p class="drawing-note">Vereinfachte Maßskizze zur Berufsorientierung. Sie ist keine normgerechte Fertigungszeichnung und enthält nicht alle Angaben, die für eine reale Fertigung erforderlich wären.</p>
+    </div>
+    <form id="drawing-exercise" class="drawing-form">
+      <fieldset class="quiz-question">
+        <legend>Frage 1: Wie lang ist das Werkstück?</legend>
+        <label class="quiz-option"><input type="radio" name="length" value="30" required> 30 mm</label>
+        <label class="quiz-option"><input type="radio" name="length" value="60"> 60 mm</label>
+        <label class="quiz-option"><input type="radio" name="length" value="90"> 90 mm</label>
+      </fieldset>
+      <fieldset class="quiz-question">
+        <legend>Frage 2: Was bedeutet das Zeichen Ø 30 mm?</legend>
+        <label class="quiz-option"><input type="radio" name="diameter" value="radius" required> Der Radius beträgt 30 mm.</label>
+        <label class="quiz-option"><input type="radio" name="diameter" value="diameter"> Der Durchmesser beträgt 30 mm.</label>
+        <label class="quiz-option"><input type="radio" name="diameter" value="length"> Die Länge beträgt 30 mm.</label>
+      </fieldset>
+      <div class="quiz-actions">
+        <button type="submit">Maße überprüfen</button>
+        <button type="button" id="drawing-restart" class="secondary" hidden>Übung wiederholen</button>
+      </div>
+      <div id="drawing-feedback" class="drawing-feedback" role="status" aria-live="polite"></div>
+    </form>
   </section>
 
   <section class="panel quiz" aria-labelledby="quiz-title">
@@ -323,6 +389,57 @@ footer{text-align:center;padding:30px;border-top:1px solid #294960;color:#91a7ba
       ?"Alle Fragen richtig beantwortet. Du hast die Grundlagen aus dieser Simulation verstanden."
       :"Schau dir die Erklärungen an und wiederhole den Test, wenn du möchtest.";
     feedback.appendChild(summary);
+    restart.hidden=false;
+    form.querySelectorAll('input[type="radio"]').forEach(function(input){input.disabled=true;});
+    form.querySelector('button[type="submit"]').disabled=true;
+  });
+
+  restart.addEventListener("click",function(){
+    form.reset();
+    form.querySelectorAll('input[type="radio"]').forEach(function(input){input.disabled=false;});
+    form.querySelector('button[type="submit"]').disabled=false;
+    feedback.replaceChildren();
+    restart.hidden=true;
+  });
+})();
+</script>
+
+
+<script>
+(function(){
+  "use strict";
+  const form=document.getElementById("drawing-exercise");
+  const feedback=document.getElementById("drawing-feedback");
+  const restart=document.getElementById("drawing-restart");
+  if(!form||!feedback||!restart)return;
+
+  form.addEventListener("submit",function(event){
+    event.preventDefault();
+    if(!form.reportValidity())return;
+    const data=new FormData(form);
+    const lengthCorrect=data.get("length")==="60";
+    const diameterCorrect=data.get("diameter")==="diameter";
+    const score=Number(lengthCorrect)+Number(diameterCorrect);
+    feedback.replaceChildren();
+
+    const heading=document.createElement("h3");
+    heading.textContent="Dein Ergebnis: "+score+" von 2 richtig";
+    feedback.appendChild(heading);
+
+    const lengthText=document.createElement("p");
+    lengthText.textContent=(lengthCorrect?"Richtig. ":"Noch nicht richtig. ")+"Die Maßlinie über dem Werkstück zeigt eine Länge von 60 mm.";
+    feedback.appendChild(lengthText);
+
+    const diameterText=document.createElement("p");
+    diameterText.textContent=(diameterCorrect?"Richtig. ":"Noch nicht richtig. ")+"Das Zeichen Ø steht für den Durchmesser. Das Werkstück hat also einen Durchmesser von 30 mm.";
+    feedback.appendChild(diameterText);
+
+    const summary=document.createElement("p");
+    summary.textContent=score===2
+      ?"Sehr gut. Du kannst die beiden grundlegenden Maße in dieser Skizze richtig ablesen."
+      :"Lies die Maßlinien noch einmal: Die waagerechte Maßlinie beschreibt die Länge, Ø bezeichnet den Durchmesser.";
+    feedback.appendChild(summary);
+
     restart.hidden=false;
     form.querySelectorAll('input[type="radio"]').forEach(function(input){input.disabled=true;});
     form.querySelector('button[type="submit"]').disabled=true;
