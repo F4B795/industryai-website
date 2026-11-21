@@ -13,7 +13,10 @@ function doPost(e) {
       ["Unternehmen", p.companyName], ["Standort", p.location], ["Branche", p.sector],
       ["Website", p.website], ["Beschreibung", p.description],
       ["Ausbildungsberufe / Praktika", p.apprenticeships], ["Offene Stellen", p.jobs],
-      ["Mögliche Einblicke", p.media], ["Ansprechpartner", p.contactPerson],
+      ["Mögliche Einblicke", p.media], ["Arbeitsumgebung", p.workplace],
+      ["Maschinen und Technologien", p.technology], ["Mitarbeiterangebote", p.benefits],
+      ["Unternehmenskultur", p.culture], ["Entwicklungsmöglichkeiten", p.development],
+      ["Ansprechpartner", p.contactPerson],
       ["E-Mail", p.contactEmail], ["Telefon", p.contactPhone]
     ];
     const body = fields.map(([label, value]) => label + ":\n" + clean(value) + "\n").join("\n");
