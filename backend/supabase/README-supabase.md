@@ -70,6 +70,12 @@ Die öffentliche Einreichung ist zweifach geschlossen:
 
 Bis zur vollständigen Datenschutz- und Sicherheitsfreigabe dürfen über das Formular keine echten Unternehmens- oder Ansprechpartnerdaten gesammelt werden. Der lokale Entwurfsdownload bleibt möglich und überträgt keine Daten.
 
+## Pilotphase und echte Unternehmensinteressen
+
+INDUSTRYAI soll in der aktuellen Entwicklungsphase echte, unverbindliche Unternehmensinteressen für die Pilotphase erfassen können. Die Interessensbekundung ist kostenlos und stellt weder eine Bestellung noch einen kostenpflichtigen Auftrag dar. Eine Veröffentlichung eines Unternehmensprofils erfolgt ausschließlich nach gesonderter ausdrücklicher Freigabe des Unternehmens. Der Text auf `betrieb-start.html` wurde entsprechend angepasst.
+
+Wichtig: Das inhaltliche Angebot einer kostenlosen Pilotphase hebt Impressums- oder Datenschutzpflichten nicht automatisch auf. Die Website ist dauerhaft auf Unternehmenspräsentation und Gewinnung von Interessenten ausgerichtet. Vor der tatsächlichen Online-Annahme von personenbezogenen Ansprechpartnerdaten müssen Anbieterkennzeichnung und vollständige Datenschutzinformationen vorliegen. Der öffentliche Formularversand bleibt bis dahin auf Browser- und Serverseite deaktiviert.
+
 ## Verifizierte Tests
 
 Am 21.11.2026 wurden folgende Prüfungen ausgeführt:
