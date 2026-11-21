@@ -348,10 +348,10 @@
       career.workingConditions &&
       career.workingConditions.locations &&
       career.workingConditions.locations.some(function (location) {
-        return ["Büro", "Homeoffice", "Rechenzentrum"].includes(location);
+        return ["Büro", "Homeoffice", "Rechenzentrum", "Studio"].includes(location);
       })
     ) {
-      notes.push("Ein Teil der Arbeit kann überwiegend am Bildschirm stattfinden.");
+      notes.push("Bildschirmarbeit kann zum Berufsalltag gehören.");
     }
 
     if (
@@ -392,7 +392,12 @@
 
     if (
       selected.includes("krankheit") &&
-      career.category === "Gesundheit, Soziales & Menschen"
+      (
+        career.category === "Gesundheit, Soziales & Menschen" ||
+        (conditions.locations || []).some(function (location) {
+          return ["Tierarztpraxis", "Tierklinik"].includes(location);
+        })
+      )
     ) {
       notes.push("Je nach Einsatzbereich kann Kontakt mit Krankheit, Verletzungen oder Pflege erforderlich sein.");
     }
