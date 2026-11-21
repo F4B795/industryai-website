@@ -131,7 +131,7 @@
     },
 
     "bauzeichner": {
-      intro: "Bauzeichner/innen erstellen technische Zeichnungen und digitale Baupläne für Gebäude, Straßen und andere Bauwerke. Sie arbeiten mit CAD-Software, setzen Entwürfe von Architekten und Ingenieuren um und berücksichtigen technische sowie baurechtliche Vorgaben.",
+      intro: "Bautechnische Konstrukteure und Konstrukteurinnen (früher Bauzeichner/innen) erstellen digitale Planungsunterlagen und technische Konstruktionen für Gebäude und Infrastruktur. Sie arbeiten mit CAD- und BIM-Methoden, entwickeln Modelle und Zeichnungen und berücksichtigen technische, konstruktive und baurechtliche Vorgaben.",
       prerequisites: [
         "Interesse an Architektur, Bauwesen und Technik",
         "Räumliches Vorstellungsvermögen",
@@ -141,14 +141,14 @@
         "Interesse an CAD-Programmen und digitalem Zeichnen"
       ],
       learning: [
-        "Technische Zeichnungen und Baupläne erstellen",
-        "CAD-Programme bedienen",
-        "Grundrisse, Schnitte und Ansichten zeichnen",
-        "Bauteile und Materialien kennenlernen",
-        "Maße und technische Angaben eintragen",
-        "Bauunterlagen und Planungsdaten bearbeiten",
-        "Technische und baurechtliche Vorgaben berücksichtigen",
-        "Mit Architekten, Ingenieuren und Bauunternehmen zusammenarbeiten"
+        "Digitale Planungsunterlagen und technische Konstruktionen erstellen",
+        "CAD- und BIM-Software einsetzen",
+        "Digitale 3D-Bauwerksmodelle bearbeiten",
+        "Konstruktive Details und Bauteile ausarbeiten",
+        "Mengen und technische Daten aus Modellen ableiten",
+        "Planungs- und Ausführungsunterlagen erstellen",
+        "Technische, baurechtliche und nachhaltigkeitsbezogene Vorgaben berücksichtigen",
+        "Mit Architekten, Ingenieuren und weiteren Projektbeteiligten zusammenarbeiten"
       ],
       furtherTraining: [
         "Techniker/in Bautechnik",
@@ -159,7 +159,7 @@
       ],
       careerPaths: [
         "CAD-Konstrukteur/in",
-        "Bauzeichner/in mit Spezialisierung auf Architektur oder Ingenieurbau",
+        "Bautechnische/r Konstrukteur/in mit Spezialisierung auf Architektur, Ingenieurbau oder Tief-, Verkehrswege- und Landschaftsbau",
         "BIM-Konstrukteur/in",
         "Mitarbeit in Planungs- und Ingenieurbüros",
         "Weiterentwicklung in technische Planung und Projektkoordination"
