@@ -89,6 +89,12 @@ Am 21.11.2026 wurden folgende Prüfungen ausgeführt:
 - Die HMAC-Rate-Limit-RPC ist nur für `service_role` ausführbar. In einer zurückgerollten Testtransaktion wurde eine erste Anfrage erlaubt und die zweite bei Limit 1 abgelehnt.
 - In zurückgerollten RLS-Testtransaktionen konnte das Allowlist-Admin-Konto einen künstlichen internen Testdatensatz sehen; ein nicht freigeschaltetes Konto erhielt null sichtbare Datensätze.
 - In einer zurückgerollten öffentlichen Profil-Testtransaktion war ein Profil mit `is_published=true` sichtbar; ein Profil mit `is_published=false` blieb verborgen.
+- Die Edge Function `contact-message-submit` ist deployed und `ACTIVE`, Version 1.
+- Ein zurückgerollter RLS-Test für `contact_messages` bestätigte: das Allowlist-Admin-Konto kann den künstlichen Testeintrag lesen und Status/Verarbeitungszeit aktualisieren; ein anderes angemeldetes Konto sieht null Zeilen. Die Tabellenrechte für Löschen und die notwendigen Statusspalten wurden geprüft.
+- Ein zurückgerollter Testdatensatz wurde verwendet, um zu prüfen, dass die Datenbank den Statuswechsel `Bearbeitet` zusammen mit `processed_at` zulässt. Der Datensatz wurde nicht gespeichert.
+- Die automatische Löschroutine ist mit aktivem Cronjob eingerichtet; der SECURITY DEFINER-Job ist auf `search_path = pg_catalog` beschränkt.
+- Die aktuellen Tabellenstände betragen 0 Unternehmensanfragen, 0 öffentliche Unternehmensprofile und 0 Kontaktanfragen. Anonyme Besucher besitzen weder SELECT- noch INSERT-Rechte auf `contact_messages`.
+- Die Footer-Links Kontakt, Datenschutz und Impressum wurden auf allen 23 öffentlichen HTML-Seiten geprüft.
 - Die Testtransaktionen wurden zurückgerollt. Es verblieben keine Testdatensätze.
 
 Noch nicht abgeschlossen:
