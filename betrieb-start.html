@@ -159,6 +159,7 @@
  }
  const form=document.getElementById("company-profile-form");
  const submitButton=document.getElementById("submit-profile");
+ if(!window.INDUSTRYAI_SUBMISSIONS_ENABLED){submitButton.disabled=true;submitButton.textContent="Einreichung vorübergehend deaktiviert";setText("copy-status","Die Datenbankverbindung ist vorbereitet. Die öffentliche Einreichung bleibt bis zur Vervollständigung der Datenschutzhinweise und des Spam-Schutzes deaktiviert. Bitte keine echten personenbezogenen Daten eingeben.");}
  let supabaseClient=null;
  try{
   if(window.supabase&&window.INDUSTRYAI_SUPABASE_URL&&window.INDUSTRYAI_SUPABASE_PUBLISHABLE_KEY){
@@ -168,6 +169,7 @@
  form.addEventListener("submit",async event=>{
   event.preventDefault();
   if(!form.reportValidity())return;
+  if(!window.INDUSTRYAI_SUBMISSIONS_ENABLED){setText("copy-status","Die öffentliche Einreichung ist bis zur Datenschutz- und Spam-Schutz-Prüfung deaktiviert.");return;}
   if(!supabaseClient){
    setText("copy-status","Die sichere Verbindung konnte nicht geladen werden. Bitte versuchen Sie es später erneut oder laden Sie den Entwurf herunter.");
    return;
