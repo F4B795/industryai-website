@@ -64,7 +64,7 @@
 </div>
 <p class="uw-results" id="uw-results" aria-live="polite">1 Eintrag – einschließlich Musterprofil</p>
 <div class="uw-grid" id="uw-grid">
-<a class="uw-card" data-sector="industrie und technik" data-search="mustertechnik gmbh musterstadt industrie und technik metall produktion zerspanungsmechaniker cnc" href="betrieb-profil.html"><img src="images/Photorealistic_premium_corporate_website_background_photogra%20(1).png" alt="Beispielhafte industrielle Fertigung mit Mitarbeitenden"><div class="uw-card-body"><span class="uw-tag">MUSTERPROFIL · BEISPIEL</span><h3>Mustertechnik GmbH</h3><p>Ein beispielhaftes Unternehmensprofil aus der industriellen Fertigung. Die Angaben und Angebote sind fiktiv und dienen nur zur Demonstration.</p><span class="uw-link">Musterprofil ansehen ↗</span></div></a>
+<p class="uw-results" id="uw-loading" aria-live="polite">Unternehmensprofile werden geladen …</p>
 <div class="uw-empty" id="uw-empty"><strong>Keine passenden Unternehmen gefunden.</strong>Ändern Sie Ihre Suchbegriffe oder wählen Sie eine andere Branche.</div>
 </div>
 <div class="uw-note"><strong>Ihr Unternehmen soll hier erscheinen?</strong><br>Wir erstellen gemeinsam mit Ihnen einen Profilentwurf. Veröffentlicht wird ein Unternehmensprofil erst nach Ihrer Freigabe.<br><a class="ia-button-primary" style="display:inline-block;margin-top:14px" href="unternehmen.html">Informationen für Unternehmen ↗</a></div>
@@ -75,26 +75,59 @@
 (function(){
  const search=document.getElementById("uw-search");
  const sector=document.getElementById("uw-sector");
- const cards=Array.from(document.querySelectorAll("#uw-grid .uw-card"));
+ const grid=document.getElementById("uw-grid");
  const results=document.getElementById("uw-results");
  const empty=document.getElementById("uw-empty");
+ const loading=document.getElementById("uw-loading");
+ let cards=[];
+ const escapeHTML=value=>String(value??"").replace(/[&<>"']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char]));
+ function renderCard(company){
+  const isDemo=company.status==="demo";
+  const name=escapeHTML(company.name);
+  const href=escapeHTML(company.profile||"#");
+  const image=escapeHTML(company.image||"");
+  const alt=escapeHTML(company.imageAlt||"Unternehmensbild");
+  const category=escapeHTML(company.category||"");
+  const location=escapeHTML(company.location||"");
+  const description=escapeHTML(company.description||"");
+  const tag=escapeHTML(company.tag||(isDemo?"MUSTERPROFIL · BEISPIEL":"UNTERNEHMEN"));
+  const action=isDemo?"Musterprofil ansehen ↗":"Unternehmensprofil ansehen ↗";
+  return '<a class="uw-card" data-sector="'+category+'" data-search="'+escapeHTML([company.name,company.location,company.categoryLabel,company.description].join(" "))+'" href="'+href+'">'+
+   (image?'<img src="'+image+'" alt="'+alt+'" loading="lazy">':'')+
+   '<div class="uw-card-body"><span class="uw-tag">'+tag+'</span><h3>'+name+'</h3>'+
+   (location?'<p><strong>Standort:</strong> '+location+'</p>':'')+
+   '<p>'+description+'</p><span class="uw-link">'+action+'</span></div></a>';
+ }
  function filter(){
   const query=search.value.trim().toLocaleLowerCase("de");
   const selected=sector.value;
   let visible=0;
   cards.forEach(card=>{
    const haystack=(card.dataset.search||card.textContent).toLocaleLowerCase("de");
-   const matchesQuery=!query||haystack.includes(query);
-   const matchesSector=!selected||card.dataset.sector===selected;
-   const show=matchesQuery&&matchesSector;
+   const show=(!query||haystack.includes(query))&&(!selected||card.dataset.sector===selected);
    card.hidden=!show;
    if(show)visible++;
   });
-  results.textContent=visible+" "+(visible===1?"Eintrag":"Einträge")+" gefunden – Musterprofile sind ausdrücklich gekennzeichnet.";
+  results.textContent=visible+" "+(visible===1?"Eintrag":"Einträge")+" gefunden. Musterprofile sind ausdrücklich gekennzeichnet.";
   empty.style.display=visible?"none":"block";
  }
  search.addEventListener("input",filter);
  sector.addEventListener("change",filter);
+ fetch("data/unternehmen.json")
+  .then(response=>{if(!response.ok)throw new Error("Daten konnten nicht geladen werden");return response.json();})
+  .then(data=>{
+   const entries=Array.isArray(data.entries)?data.entries:[];
+   const visibleEntries=entries.filter(item=>item&&["published","demo"].includes(item.status));
+   grid.querySelectorAll(".uw-card").forEach(card=>card.remove());
+   grid.insertAdjacentHTML("afterbegin",visibleEntries.map(renderCard).join(""));
+   cards=Array.from(grid.querySelectorAll(".uw-card"));
+   loading.remove();
+   filter();
+  })
+  .catch(()=>{
+   loading.textContent="Die Unternehmensprofile konnten gerade nicht geladen werden. Bitte laden Sie die Seite erneut.";
+   results.textContent="Datenquelle nicht erreichbar.";
+  });
 })();
 </script>
 </body></html>
