@@ -37,7 +37,7 @@
 <div id="profile-error" role="status">Unternehmensprofil wird geladen …</div>
 <a class="profile-back" href="unternehmenswelt.html">← Zur Unternehmenswelt</a>
 </main>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="js/supabase-config.js"></script>
+<script src="js/supabase-config.js"></script>
 <script>
 (async function(){
 "use strict";
@@ -45,9 +45,16 @@ const $=id=>document.getElementById(id),params=new URLSearchParams(location.sear
 function showField(section,field,value){if(value){$(field).textContent=value;$(section).hidden=false}}
 if(!submissionId||!/^[0-9a-f-]{36}$/i.test(submissionId)){$("profile-error").textContent="Dieses Unternehmensprofil ist nicht verfügbar.";return}
 try{
- const client=window.supabase.createClient(window.INDUSTRYAI_SUPABASE_URL,window.INDUSTRYAI_SUPABASE_PUBLISHABLE_KEY);
- const {data,error}=await client.from("company_public_profiles").select("*").eq("submission_id",submissionId).eq("is_published",true).maybeSingle();
- if(error)throw error;if(!data)throw new Error("Profil nicht gefunden");
+ const base=window.INDUSTRYAI_SUPABASE_URL,key=window.INDUSTRYAI_SUPABASE_PUBLISHABLE_KEY;
+ if(!base||!key)throw new Error("Profildienst ist nicht konfiguriert.");
+ const query=new URLSearchParams({select:"*",submission_id:"eq."+submissionId,is_published:"eq.true",limit:"1"});
+ const response=await fetch(base+"/rest/v1/company_public_profiles?"+query.toString(),{
+  headers:{apikey:key,Authorization:"Bearer "+key},
+  cache:"no-store"
+ });
+ if(!response.ok)throw new Error("Profildienst antwortet nicht ("+response.status+").");
+ const profiles=await response.json(),data=Array.isArray(profiles)?profiles[0]:null;
+ if(!data)throw new Error("Profil nicht gefunden");
  document.title=data.name+" – INDUSTRYAI";$("profile-name").textContent=data.name;
  $("profile-meta").textContent=[data.category_label||data.category,data.location].filter(Boolean).join(" · ")||"Unternehmensprofil auf INDUSTRYAI";
  $("profile-description").textContent=data.description||"Dieses Unternehmen stellt sich auf INDUSTRYAI vor.";
