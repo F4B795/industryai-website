@@ -176,6 +176,269 @@
       .section h2 { font-size: clamp(23px, 6vw, 29px); }
       .info-card { min-width: 0; overflow-wrap: anywhere; }
     }
+
+    /* CAMPUS-PROFIL – überarbeitete visuelle Hierarchie */
+    #career-campus {
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse at 88% 3%, rgba(66,216,237,.09), transparent 34%),
+        #071524;
+    }
+
+    #career-campus .hero {
+      position: relative;
+      max-width: 1180px;
+      padding-top: 96px;
+      padding-bottom: 82px;
+      isolation: isolate;
+    }
+
+    #career-campus .hero::before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      top: 62px;
+      right: 28px;
+      width: min(34vw, 340px);
+      aspect-ratio: 1;
+      border: 1px solid rgba(66,216,237,.12);
+      border-radius: 50%;
+      box-shadow: 0 0 0 34px rgba(66,216,237,.025), 0 0 0 68px rgba(66,216,237,.018);
+      pointer-events: none;
+    }
+
+    #career-campus .hero .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 13px;
+      border: 1px solid rgba(66,216,237,.28);
+      border-radius: 30px;
+      background: rgba(66,216,237,.06);
+      letter-spacing: 2px;
+    }
+
+    #career-campus .hero h1 {
+      max-width: 850px;
+      margin-top: 26px;
+      font-size: clamp(42px, 6.5vw, 76px);
+      letter-spacing: -2px;
+      text-wrap: balance;
+    }
+
+    #career-campus .hero .intro {
+      max-width: 780px;
+      font-size: clamp(16px, 1.8vw, 19px);
+      line-height: 1.85;
+    }
+
+    #career-campus > .section {
+      max-width: 1180px;
+      padding-top: 54px;
+      padding-bottom: 68px;
+      border-top: 1px solid rgba(128,173,201,.12);
+    }
+
+    #career-campus > .section > .eyebrow {
+      margin-bottom: 13px;
+      letter-spacing: 2.3px;
+    }
+
+    #career-campus > .section > h2 {
+      max-width: 850px;
+      margin: 0 0 24px;
+      font-size: clamp(27px, 3.5vw, 39px);
+      line-height: 1.2;
+      letter-spacing: -.7px;
+      text-wrap: balance;
+    }
+
+    #career-campus .info-grid {
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 235px), 1fr));
+      gap: 18px;
+      margin-top: 28px;
+    }
+
+    #career-campus .info-card {
+      position: relative;
+      min-width: 0;
+      padding: 25px;
+      border: 1px solid rgba(91,145,177,.34);
+      border-radius: 15px;
+      background: linear-gradient(145deg, rgba(20,47,68,.96), rgba(10,28,44,.98));
+      box-shadow: 0 12px 30px rgba(0,0,0,.12);
+      transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease;
+    }
+
+    #career-campus .info-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(66,216,237,.65);
+      box-shadow: 0 16px 34px rgba(0,0,0,.2);
+    }
+
+    #career-campus .info-card small {
+      display: block;
+      color: #55ddec;
+      font-size: 10px;
+      line-height: 1.5;
+      letter-spacing: 1.35px;
+    }
+
+    #career-campus .info-card h3 {
+      color: #f4f8fb;
+      font-size: 19px;
+      line-height: 1.35;
+      margin: 13px 0 10px;
+      overflow-wrap: anywhere;
+    }
+
+    #career-campus .info-card p {
+      color: #b7c8d8;
+      font-size: 14px;
+      line-height: 1.75;
+      overflow-wrap: anywhere;
+    }
+
+    #career-campus .content-panel {
+      padding: clamp(21px, 3.5vw, 34px);
+      border: 1px solid rgba(91,145,177,.3);
+      border-radius: 17px;
+      background: linear-gradient(145deg, rgba(16,39,59,.96), rgba(9,26,42,.98));
+      box-shadow: 0 16px 38px rgba(0,0,0,.12);
+    }
+
+    #career-campus .content-panel > .muted {
+      max-width: 920px;
+      font-size: 15px;
+      line-height: 1.85;
+    }
+
+    #career-campus .content-panel ul {
+      margin-top: 20px;
+      padding-left: 0;
+      list-style: none;
+    }
+
+    #career-campus .content-panel li {
+      position: relative;
+      margin: 0;
+      padding: 11px 8px 11px 29px;
+      border-bottom: 1px solid rgba(128,173,201,.1);
+      color: #d1deea;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    #career-campus .content-panel li:last-child {
+      border-bottom: 0;
+    }
+
+    #career-campus .content-panel li::before {
+      content: "";
+      position: absolute;
+      top: 19px;
+      left: 5px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #42d8ed;
+      box-shadow: 0 0 0 4px rgba(66,216,237,.1);
+    }
+
+    #career-campus .campus-cta {
+      position: relative;
+      padding: 76px 25px;
+      border-top: 1px solid rgba(66,216,237,.18);
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(66,216,237,.12), transparent 60%),
+        linear-gradient(145deg, #102b40, #071524);
+    }
+
+    #career-campus .campus-cta h2 {
+      max-width: 760px;
+      margin: 17px auto;
+      font-size: clamp(28px, 4vw, 43px);
+      line-height: 1.2;
+      text-wrap: balance;
+    }
+
+    #career-campus .campus-cta p {
+      max-width: 720px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    #career-campus .button {
+      min-height: 48px;
+      padding: 15px 25px;
+      border: 1px solid #42d8ed;
+      border-radius: 8px;
+      box-shadow: 0 8px 24px rgba(66,216,237,.13);
+      transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
+    }
+
+    #career-campus .button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(66,216,237,.2);
+    }
+
+    #career-campus a:focus-visible {
+      outline: 3px solid #fff;
+      outline-offset: 4px;
+    }
+
+    @media (max-width: 650px) {
+      #career-campus .hero {
+        padding: 58px 20px 50px;
+      }
+
+      #career-campus .hero::before {
+        top: 34px;
+        right: -105px;
+        width: 230px;
+        opacity: .65;
+      }
+
+      #career-campus .hero h1 {
+        font-size: clamp(36px, 10vw, 49px);
+        letter-spacing: -1.2px;
+      }
+
+      #career-campus > .section {
+        padding: 35px 20px 46px;
+      }
+
+      #career-campus .info-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 13px;
+        margin-top: 20px;
+      }
+
+      #career-campus .info-card {
+        padding: 21px;
+      }
+
+      #career-campus .content-panel {
+        padding: 20px 17px;
+      }
+
+      #career-campus .campus-cta {
+        padding: 55px 20px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #career-campus .info-card,
+      #career-campus .button {
+        transition: none;
+      }
+
+      #career-campus .info-card:hover,
+      #career-campus .button:hover {
+        transform: none;
+      }
+    }
+
   </style>
 </head>
 
