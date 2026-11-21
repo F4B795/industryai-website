@@ -1,4 +1,4 @@
-import { createClient } from "npm:@supabase/supabase-js@2";
+import { createClient } from "npm:@supabase/supabase-js@2.119.2";
 
 const ALLOWED_ORIGIN = "https://industryai.github.io";
 const EXPECTED_HOSTNAME = "industryai.github.io";
