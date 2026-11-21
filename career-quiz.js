@@ -931,20 +931,19 @@ function showResults(result) {
       const fill = document.createElement("div");
       fill.className = "career-score-fill";
 
-      if (value === null || value === undefined) {
-        fill.style.width = "0%";
-        fill.style.opacity = "0.25";
-      } else {
-        fill.style.width = Math.max(0, Math.min(100, value)) + "%";
-      }
-
-      track.appendChild(fill);
-      row.appendChild(track);
-
       const score = document.createElement("span");
       score.className = "career-score-value";
-      score.textContent =
-        value === null || value === undefined ? "–" : value + " %";
+
+      if (value === null || value === undefined) {
+        track.hidden = true;
+        score.textContent = "Nicht bewertet";
+      } else {
+        fill.style.width = Math.max(0, Math.min(100, value)) + "%";
+        track.appendChild(fill);
+        score.textContent = value + " %";
+      }
+
+      row.appendChild(track);
       row.appendChild(score);
 
       section.appendChild(row);
