@@ -255,7 +255,8 @@
       });
     });
 
-    return matches.length ? 100 : 30;
+    const matchRate = matches.length / user.length;
+    return Math.round(30 + matchRate * 70);
   }
 
   function conditionScore(preferences, conditions) {
