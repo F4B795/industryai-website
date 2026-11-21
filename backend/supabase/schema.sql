@@ -88,12 +88,9 @@ alter table public.industryai_admins enable row level security;
 alter table public.company_submissions enable row level security;
 alter table public.company_public_profiles enable row level security;
 
--- Anonymous visitors may submit new profiles, but cannot choose review status
--- or read any submission. Admins may review and update all submissions.
+-- Public intake stays closed until privacy, anti-spam and retention controls
+-- are complete. Enable later with a dedicated server-side submission flow.
 drop policy if exists "public submit company profile" on public.company_submissions;
-create policy "public submit company profile"
-on public.company_submissions for insert to anon, authenticated
-with check (status = 'Eingegangen' and internal_note = '');
 
 drop policy if exists "admins read submissions" on public.company_submissions;
 create policy "admins read submissions"
@@ -124,7 +121,6 @@ using (public.industryai_is_admin())
 with check (public.industryai_is_admin());
 
 grant usage on schema public to anon, authenticated;
-grant insert on public.company_submissions to anon, authenticated;
 grant select, update on public.company_submissions to authenticated;
 grant select on public.company_public_profiles to anon, authenticated;
 grant insert, update, delete on public.company_public_profiles to authenticated;
