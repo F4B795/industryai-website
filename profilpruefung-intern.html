@@ -104,7 +104,14 @@ function renderMessages(){
     const h=document.createElement("h3");h.textContent=message.subject;
     const meta=document.createElement("div");meta.className="message-meta";
     const date=new Date(message.created_at);
-    meta.textContent=[message.name,message.email,date.toLocaleString("de-DE")].filter(Boolean).join(" · ");
+    const sender=document.createElement("span");
+    sender.textContent=[message.name,date.toLocaleString("de-DE")].filter(Boolean).join(" · ");
+    const emailLink=document.createElement("a");
+    emailLink.href="mailto:"+encodeURIComponent(message.email)+"?subject="+encodeURIComponent("Re: "+message.subject);
+    emailLink.textContent=message.email;
+    emailLink.style.color="var(--accent)";
+    emailLink.style.textDecoration="underline";
+    meta.append(sender," · ",emailLink);
     title.append(h,meta);
     const pill=document.createElement("span");pill.className="pill";pill.textContent=message.status;
     head.append(title,pill);article.append(head);
