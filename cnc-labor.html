@@ -73,6 +73,19 @@ footer{text-align:center;padding:30px;border-top:1px solid #294960;color:#91a7ba
 .drawing-feedback:empty{display:none}
 .drawing-feedback h3{color:#42d8ed;margin:0 0 10px}
 .drawing-form button:focus-visible,.drawing-form input:focus-visible{outline:2px solid white;outline-offset:3px}
+
+.caliper-visual{margin:20px 0;padding:18px;background:#091b2b;border:1px solid #294960;border-radius:10px;overflow:hidden}
+.caliper-visual svg{display:block;width:100%;max-width:650px;height:auto;margin:auto}
+.caliper-readout{margin:14px auto 0;padding:12px 18px;width:max-content;max-width:100%;border:1px solid #42d8ed;border-radius:8px;background:#071524;color:#42d8ed;font-size:clamp(24px,5vw,34px);font-weight:bold;font-variant-numeric:tabular-nums}
+.caliper-note{color:#91a7ba;font-size:12px;line-height:1.6;margin-top:10px}
+.caliper-task{margin-top:18px;padding:18px;border:1px solid #294960;border-radius:9px;background:#091b2b}
+.caliper-task p{color:#c5d5e3;line-height:1.7}
+.caliper-task input[type=range]{margin:12px 0;accent-color:#42d8ed}
+.caliper-feedback{margin-top:16px;padding:16px;border-left:3px solid #42d8ed;background:#091b2b;color:#c5d5e3;line-height:1.7}
+.caliper-feedback:empty{display:none}
+.caliper-task button:focus-visible,.caliper-task input:focus-visible{outline:2px solid white;outline-offset:3px}
+@media(max-width:420px){.caliper-task{padding:14px}.caliper-task button{width:100%;margin-left:0}}
+
 </style>
 </head>
 <body>
@@ -154,6 +167,44 @@ footer{text-align:center;padding:30px;border-top:1px solid #294960;color:#91a7ba
   </section>
 
 
+
+  <section class="panel quiz" aria-labelledby="caliper-title" style="margin-top:22px">
+    <h2 id="caliper-title">5. Messen mit dem Messschieber</h2>
+    <p class="quiz-intro">Ein Werkstück ist mit einem Nenndurchmesser von 30,0 mm vorgegeben. Verstelle den Messschieber und übe, einen Messwert abzulesen. Ziel dieser Übung ist ein angezeigter Wert von 30,0 mm.</p>
+    <div class="caliper-visual">
+      <svg viewBox="0 0 620 190" role="img" aria-labelledby="caliper-svg-title caliper-svg-desc">
+        <title id="caliper-svg-title">Schematische digitale Messschieber-Simulation</title>
+        <desc id="caliper-svg-desc">Ein Werkstück liegt zwischen einer festen und einer verschiebbaren Messschnabelbacke. Die Öffnung verändert sich mit dem Schieberegler.</desc>
+        <rect x="55" y="92" width="510" height="22" rx="5" fill="#8299a8" stroke="#d4e3eb" stroke-width="2"/>
+        <g stroke="#071524" stroke-width="1.5">
+          <path d="M90 92v-12 M110 92v-7 M130 92v-12 M150 92v-7 M170 92v-12 M190 92v-7 M210 92v-12 M230 92v-7 M250 92v-12 M270 92v-7 M290 92v-12 M310 92v-7 M330 92v-12 M350 92v-7 M370 92v-12 M390 92v-7 M410 92v-12 M430 92v-7 M450 92v-12 M470 92v-7 M490 92v-12 M510 92v-7 M530 92v-12"/>
+        </g>
+        <rect id="caliper-part" x="154" y="56" width="206" height="36" rx="5" fill="#42d8ed" opacity=".8" stroke="#d4e3eb" stroke-width="2"/>
+        <path d="M145 35 V135 H165 V90" fill="none" stroke="#d4e3eb" stroke-width="9" stroke-linejoin="round"/>
+        <g id="caliper-moving-jaw" transform="translate(0 0)">
+          <path d="M360 35 V135 H340 V90" fill="none" stroke="#42d8ed" stroke-width="9" stroke-linejoin="round"/>
+          <rect x="335" y="115" width="50" height="18" rx="4" fill="#526d80"/>
+        </g>
+        <rect x="245" y="18" width="130" height="35" rx="5" fill="#071524" stroke="#42d8ed"/>
+        <text x="310" y="41" text-anchor="middle" fill="#42d8ed" font-size="15" font-family="Arial,sans-serif">DIGITAL</text>
+        <text x="145" y="158" text-anchor="middle" fill="#91a7ba" font-size="12" font-family="Arial,sans-serif">Feste Backe</text>
+        <text x="360" y="158" text-anchor="middle" fill="#91a7ba" font-size="12" font-family="Arial,sans-serif">Bewegliche Backe</text>
+      </svg>
+      <div class="caliper-readout" id="caliper-readout" aria-live="polite">27,5 mm</div>
+      <p class="caliper-note">Schematische Darstellung eines digitalen Messschiebers. Die Grafik ist nicht maßstabsgetreu und ersetzt kein reales Messmittel.</p>
+    </div>
+    <div class="caliper-task">
+      <label for="caliper-slider">Messschnabelöffnung einstellen: <strong class="value" id="caliper-slider-value">27,5 mm</strong></label>
+      <input id="caliper-slider" type="range" min="25" max="35" step="0.1" value="27.5">
+      <p>Aufgabe: Stelle die Anzeige auf <strong>30,0 mm</strong> ein. Für diese Lernaufgabe gilt ein Übungsbereich von 29,9 bis 30,1 mm.</p>
+      <div class="quiz-actions">
+        <button type="button" id="caliper-check">Messwert prüfen</button>
+        <button type="button" id="caliper-reset" class="secondary">Zurücksetzen</button>
+      </div>
+      <div id="caliper-feedback" class="caliper-feedback" role="status" aria-live="polite"></div>
+    </div>
+  </section>
+
   <section class="panel quiz" aria-labelledby="drawing-title">
     <h2 id="drawing-title">4. Technische Zeichnung verstehen</h2>
     <p class="quiz-intro">In der CNC-Fertigung werden Werkstücke nach technischen Zeichnungen gefertigt. Lies die Maße in der vereinfachten Skizze und beantworte anschließend zwei Fragen.</p>
@@ -211,7 +262,7 @@ footer{text-align:center;padding:30px;border-top:1px solid #294960;color:#91a7ba
   </section>
 
   <section class="panel quiz" aria-labelledby="quiz-title">
-    <h2 id="quiz-title">4. Dein CNC-Wissenstest</h2>
+    <h2 id="quiz-title">6. Dein CNC-Wissenstest</h2>
     <p class="quiz-intro">Prüfe, was du aus der Simulation mitgenommen hast. Wähle pro Frage eine Antwort und lass dir anschließend die Lösungen erklären.</p>
     <form id="cnc-quiz">
       <fieldset class="quiz-question">
@@ -452,6 +503,50 @@ footer{text-align:center;padding:30px;border-top:1px solid #294960;color:#91a7ba
     feedback.replaceChildren();
     restart.hidden=true;
   });
+})();
+</script>
+
+
+<script>
+(function(){
+  "use strict";
+  const slider=document.getElementById("caliper-slider");
+  const readout=document.getElementById("caliper-readout");
+  const sliderValue=document.getElementById("caliper-slider-value");
+  const movingJaw=document.getElementById("caliper-moving-jaw");
+  const part=document.getElementById("caliper-part");
+  const feedback=document.getElementById("caliper-feedback");
+  const check=document.getElementById("caliper-check");
+  const reset=document.getElementById("caliper-reset");
+  if(!slider||!readout||!sliderValue||!movingJaw||!part||!feedback||!check||!reset)return;
+
+  function format(value){return Number(value).toLocaleString("de-DE",{minimumFractionDigits:1,maximumFractionDigits:1})+" mm";}
+  function update(){
+    const value=Number(slider.value);
+    const position=360+(value-27.5)*12;
+    movingJaw.setAttribute("transform","translate("+(position-360)+" 0)");
+    part.setAttribute("width",String(position-154));
+    readout.textContent=format(value);
+    sliderValue.textContent=format(value);
+    feedback.replaceChildren();
+  }
+  slider.addEventListener("input",update);
+  check.addEventListener("click",function(){
+    const value=Number(slider.value);
+    const heading=document.createElement("strong");
+    if(value>=29.9&&value<=30.1){
+      heading.textContent="Messaufgabe richtig gelöst.";
+      feedback.replaceChildren(heading,document.createTextNode(" Deine Anzeige liegt im vorgegebenen Übungsbereich von 29,9 bis 30,1 mm. Der Zielwert beträgt 30,0 mm."));
+    }else{
+      heading.textContent="Noch nicht im Zielbereich.";
+      feedback.replaceChildren(heading,document.createTextNode(" Deine Anzeige beträgt "+format(value)+". Verstelle den Schieber weiter in Richtung 30,0 mm und prüfe erneut."));
+    }
+  });
+  reset.addEventListener("click",function(){
+    slider.value="27.5";
+    update();
+  });
+  update();
 })();
 </script>
 
