@@ -113,21 +113,45 @@
  }
  search.addEventListener("input",filter);
  sector.addEventListener("change",filter);
- fetch("data/unternehmen.json")
-  .then(response=>{if(!response.ok)throw new Error("Daten konnten nicht geladen werden");return response.json();})
-  .then(data=>{
-   const entries=Array.isArray(data.entries)?data.entries:[];
-   const visibleEntries=entries.filter(item=>item&&["published","demo"].includes(item.status));
-   grid.querySelectorAll(".uw-card").forEach(card=>card.remove());
-   grid.insertAdjacentHTML("afterbegin",visibleEntries.map(renderCard).join(""));
-   cards=Array.from(grid.querySelectorAll(".uw-card"));
-   loading.remove();
-   filter();
-  })
-  .catch(()=>{
-   loading.textContent="Die Unternehmensprofile konnten gerade nicht geladen werden. Bitte laden Sie die Seite erneut.";
-   results.textContent="Datenquelle nicht erreichbar.";
+ const API_URL="https://script.google.com/macros/s/AKfycbwja19X4EUiy3tm4hCzT_C8QVi1JnTIscs3UGrlQV_jwdTqeJVrnR72PE2xG9IYKVA/exec";
+ function loadPublishedProfiles(){
+  return new Promise((resolve,reject)=>{
+   const callbackName="industryaiDirectoryCallback";
+   const timeout=window.setTimeout(()=>{cleanup();reject(new Error("Zeitüberschreitung beim Laden der Unternehmensprofile."));},12000);
+   function cleanup(){
+    window.clearTimeout(timeout);
+    delete window[callbackName];
+    if(script.parentNode)script.parentNode.removeChild(script);
+   }
+   window[callbackName]=data=>{cleanup();resolve(data);};
+   const script=document.createElement("script");
+   script.onerror=()=>{cleanup();reject(new Error("Die öffentliche Unternehmensdatenbank ist nicht erreichbar."));};
+   script.src=API_URL+"?callback="+callbackName+"&v="+Date.now();
+   document.head.appendChild(script);
   });
+ }
+ Promise.all([
+  fetch("data/unternehmen.json").then(response=>{
+   if(!response.ok)throw new Error("Musterprofil konnte nicht geladen werden");
+   return response.json();
+  }),
+  loadPublishedProfiles()
+ ])
+ .then(([demoData,liveData])=>{
+  const demos=Array.isArray(demoData.entries)?demoData.entries.filter(item=>item&&item.status==="demo"):[];
+  const published=Array.isArray(liveData.entries)?liveData.entries.filter(item=>item&&item.status==="published"):[];
+  const visibleEntries=demos.concat(published);
+  grid.querySelectorAll(".uw-card").forEach(card=>card.remove());
+  grid.insertAdjacentHTML("afterbegin",visibleEntries.map(renderCard).join(""));
+  cards=Array.from(grid.querySelectorAll(".uw-card"));
+  loading.remove();
+  filter();
+ })
+ .catch(error=>{
+  loading.textContent="Die Unternehmensprofile konnten gerade nicht geladen werden. Bitte laden Sie die Seite erneut.";
+  results.textContent="Datenquelle nicht erreichbar.";
+  console.error("INDUSTRYAI Unternehmenswelt:",error);
+ });
 })();
 </script>
 </body></html>
