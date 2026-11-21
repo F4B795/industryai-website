@@ -85,8 +85,12 @@
 <div class="onboard-field"><label for="company-benefits">Welche Mitarbeiterangebote und Zusatzleistungen bieten Sie?</label><textarea id="company-benefits" name="benefits" maxlength="2000" placeholder="z. B. Weiterbildung, Zuschüsse, Jobrad, Kantine, flexible Arbeitszeiten"></textarea></div>
 <div class="onboard-field"><label for="company-culture">Was zeichnet Ihre Unternehmenskultur aus?</label><textarea id="company-culture" name="culture" maxlength="2000" placeholder="z. B. Teamzusammenhalt, flache Hierarchien, persönliche Betreuung, kurze Entscheidungswege"></textarea></div>
 <div class="onboard-field"><label for="company-development">Welche Entwicklungs- und Aufstiegsmöglichkeiten gibt es?</label><textarea id="company-development" name="development" maxlength="2000" placeholder="z. B. Weiterbildungen, Spezialisierungen, Meister-/Technikerförderung, interne Karrierewege"></textarea></div>
-<div class="onboard-notice"><strong>Datenschutz:</strong> Ihre Eingaben werden ausschließlich in Ihrem Browser verarbeitet. Es findet keine automatische Übermittlung an INDUSTRYAI statt. Speichern oder kopieren Sie den Entwurf und senden Sie ihn bei Interesse selbst per E-Mail. Veröffentlicht wird nichts ohne vorherige Prüfung und Abstimmung.</div>
-<div class="onboard-actions"><button class="onboard-button" type="button" id="download-draft">Profilentwurf herunterladen</button><button class="onboard-button secondary reset-draft" type="button">Eingaben zurücksetzen</button></div>
+<div class="onboard-label" style="margin-top:28px">ANSPRECHPARTNER</div>
+<div class="onboard-field"><label for="contact-person">Ansprechpartner *</label><input id="contact-person" type="text" maxlength="120" autocomplete="name" placeholder="Vor- und Nachname" required></div>
+<div class="onboard-field"><label for="contact-email">Geschäftliche E-Mail-Adresse *</label><input id="contact-email" type="email" maxlength="180" autocomplete="email" placeholder="name@unternehmen.de" required></div>
+<div class="onboard-field"><label style="display:flex;gap:10px;align-items:flex-start;font-weight:400"><input id="privacy-consent" type="checkbox" required style="width:auto;margin-top:3px"><span>Ich habe die <a href="datenschutz.html" target="_blank" rel="noopener">Datenschutzhinweise</a> gelesen und möchte die Profilanfrage selbst per E-Mail an INDUSTRYAI senden. Mir ist bekannt, dass die Angaben erst mit dem Versand meiner E-Mail übermittelt werden. *</span></label></div>
+<div class="onboard-notice"><strong>So funktioniert die Anfrage:</strong> Ihre Angaben bleiben bis zum selbst ausgelösten E-Mail-Versand in Ihrem Browser. Beim Vorbereiten wird eine Textdatei heruntergeladen und Ihr E-Mail-Programm mit einer Nachricht an industryaisupport@gmail.com geöffnet. Bitte hängen Sie die heruntergeladene Datei an und senden Sie die E-Mail selbst ab. Jedes Profil wird anschließend manuell geprüft; eine Veröffentlichung erfolgt nur nach gesonderter Freigabe und Abstimmung.</div>
+<div class="onboard-actions"><button class="onboard-button" type="button" id="download-draft">Profilanfrage per E-Mail vorbereiten</button><button class="onboard-button secondary reset-draft" type="button">Eingaben zurücksetzen</button></div>
 <p id="copy-status" role="status" aria-live="polite"></p>
 </form>
 
@@ -124,7 +128,7 @@
 <footer><a href="index.html" class="logo">INDUSTRY<span>AI</span></a><p>Deine Zukunft. Deine Möglichkeiten.</p><p>© 2026 INDUSTRYAI</p><div class="ia-footer-links"><a href="index.html">Startseite</a><a href="berufe-entdecken.html">Berufe entdecken</a><a href="unternehmenswelt.html">Unternehmenswelt</a><a href="unternehmen.html">Für Unternehmen</a><a href="datenschutz.html">Datenschutz</a></div></footer>
 <script>
 (function(){
- const ids=["company-name","company-location","company-sector","company-website","company-description","company-apprenticeships","company-jobs","company-media","company-workplace","company-technology","company-benefits","company-culture","company-development"];
+ const ids=["company-name","company-location","company-sector","company-website","company-description","company-apprenticeships","company-jobs","company-media","company-workplace","company-technology","company-benefits","company-culture","company-development","contact-person","contact-email"];
  const get=id=>document.getElementById(id).value.trim();
  const setText=(id,value)=>document.getElementById(id).textContent=value;
  function update(){
@@ -164,7 +168,7 @@
    "company-apprenticeships":"Ausbildungsberufe und Praktika","company-jobs":"Offene Stellen",
    "company-media":"Mögliche Einblicke","company-workplace":"Arbeitsumgebung",
    "company-technology":"Maschinen und Technologien","company-benefits":"Mitarbeiterangebote",
-   "company-culture":"Unternehmenskultur","company-development":"Entwicklungsmöglichkeiten"
+   "company-culture":"Unternehmenskultur","company-development":"Entwicklungsmöglichkeiten","contact-person":"Ansprechpartner","contact-email":"Geschäftliche E-Mail-Adresse"
   };
   return "INDUSTRYAI – UNTERNEHMENSPROFIL-ENTWURF\n\n"+
    Object.entries(labels).map(([id,label])=>label+":\n"+(get(id)||"Keine Angabe")).join("\n\n")+
@@ -184,12 +188,21 @@
   }catch(error){status.textContent="Kopieren war nicht möglich. Nutzen Sie bitte den Download-Button.";}
  });
  document.getElementById("download-draft").addEventListener("click",()=>{
-  const blob=new Blob([buildDraft()],{type:"text/plain;charset=utf-8"});
+  const form=document.getElementById("company-profile-form");
+  if(!form.reportValidity()){
+   document.getElementById("copy-status").textContent="Bitte ergänzen Sie die Pflichtfelder und bestätigen Sie die Datenschutzhinweise.";
+   return;
+  }
+  const draft=buildDraft();
+  const blob=new Blob([draft],{type:"text/plain;charset=utf-8"});
   const url=URL.createObjectURL(blob);const link=document.createElement("a");
   const safeName=(get("company-name")||"Unternehmensprofil").toLowerCase().replace(/[^a-z0-9äöüß-]+/gi,"-").replace(/^-|-$/g,"");
   link.href=url;link.download=(safeName||"unternehmensprofil")+"-entwurf.txt";
   document.body.appendChild(link);link.click();link.remove();URL.revokeObjectURL(url);
-  document.getElementById("copy-status").textContent="Der Profilentwurf wurde auf Ihrem Gerät als Textdatei gespeichert.";
+  document.getElementById("copy-status").textContent="Die Profilanfrage-Datei wurde heruntergeladen. Ihr E-Mail-Programm wird geöffnet. Bitte hängen Sie die Datei an und senden Sie die Nachricht selbst ab.";
+  const subject=encodeURIComponent("INDUSTRYAI – Unternehmensprofil zur Prüfung: "+get("company-name"));
+  const body=encodeURIComponent("Guten Tag INDUSTRYAI-Team,\n\nanbei sende ich meinen Unternehmensprofil-Entwurf zur Prüfung.\n\nUnternehmen: "+get("company-name")+"\nAnsprechpartner: "+get("contact-person")+"\nRückmeldung bitte an: "+get("contact-email")+"\n\nDie heruntergeladene Textdatei füge ich als Anlage bei.\n\nMit freundlichen Grüßen\n"+get("contact-person"));
+  window.location.href="mailto:industryaisupport@gmail.com?subject="+subject+"&body="+body;
  });
  document.querySelectorAll(".reset-draft").forEach(button=>button.addEventListener("click",()=>{
   ids.forEach(id=>{document.getElementById(id).value="";});
