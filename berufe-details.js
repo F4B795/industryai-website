@@ -307,6 +307,7 @@ window.IndustryAICareerDetails = {
 
     "pflegefachfrau": {
       intro: "Pflegefachfrauen und Pflegefachmänner betreuen und versorgen Menschen aller Altersgruppen. Sie unterstützen bei der Körperpflege und Mobilität, beobachten den Gesundheitszustand, führen pflegerische Maßnahmen durch und arbeiten eng mit Ärzten und anderen Berufsgruppen zusammen.",
+      accessRequirements: "Rechtlich erforderlich ist in der Regel ein mittlerer Schulabschluss oder ein gleichwertiger Abschluss. Mit Hauptschulabschluss ist der Zugang unter den zusätzlichen Voraussetzungen des § 11 Pflegeberufegesetz möglich, zum Beispiel mit einer mindestens zweijährigen abgeschlossenen Berufsausbildung oder einer qualifizierenden mindestens einjährigen Pflegeassistenz- bzw. Pflegehelferausbildung. Außerdem müssen die gesundheitliche Eignung, die erforderlichen Deutschkenntnisse und die persönliche Zuverlässigkeit vorliegen. Die Pflegeschule prüft die Nachweise.",
       prerequisites: [
         "Interesse an Menschen und medizinischen Themen",
         "Einfühlungsvermögen und respektvoller Umgang",
@@ -416,6 +417,7 @@ window.IndustryAICareerDetails = {
 
     "erzieher": {
       intro: "Erzieher/innen begleiten und fördern Kinder, Jugendliche oder Menschen mit Unterstützungsbedarf. Sie gestalten pädagogische Angebote, beobachten Entwicklungsprozesse, fördern soziale Fähigkeiten und arbeiten mit Eltern, Angehörigen und anderen Fachkräften zusammen.",
+      accessRequirements: "Die Ausbildung ist landesrechtlich geregelt. In der Regel wird ein mittlerer Bildungsabschluss vorausgesetzt; häufig kommen eine einschlägige berufliche Vorbildung oder eine förderliche praktische Tätigkeit hinzu. Die genauen Voraussetzungen unterscheiden sich nach Bundesland und Bildungsgang. Informiere dich deshalb bei der zuständigen Fachschule über den für dich passenden Zugangsweg.",
       prerequisites: [
         "Interesse an Menschen und ihrer Entwicklung",
         "Einfühlungsvermögen und Geduld",
