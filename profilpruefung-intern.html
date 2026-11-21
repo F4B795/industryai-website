@@ -53,6 +53,7 @@ const client=window.supabase.createClient(window.INDUSTRYAI_SUPABASE_URL,window.
 const $=id=>document.getElementById(id);
 let records=[];
 const statuses=["Eingegangen","In Prüfung","Rückfrage","Freigegeben","Abgelehnt"];
+const editableStatuses=["Eingegangen","In Prüfung","Rückfrage","Abgelehnt"];
 const columns=["company_name","location","sector","website","description","apprenticeships","jobs","media","workplace","technology","benefits","culture","development","contact_person","contact_email"];
 const labels={company_name:"Unternehmen",location:"Standort",sector:"Branche",website:"Website",description:"Unternehmensbeschreibung",apprenticeships:"Ausbildungsberufe und Praktika",jobs:"Offene Stellen",media:"Mögliche Einblicke",workplace:"Arbeitsumgebung",technology:"Maschinen und Technologien",benefits:"Mitarbeiterangebote",culture:"Unternehmenskultur",development:"Entwicklungsmöglichkeiten",contact_person:"Ansprechpartner",contact_email:"Geschäftliche E-Mail-Adresse"};
 function say(message,target="status"){$(target).textContent=message}
@@ -79,7 +80,7 @@ function render(){
   const pill=document.createElement("span");pill.className="pill";pill.textContent=r.status;head.append(title,pill);article.append(head);
   const controls=document.createElement("div");controls.className="review";
   const statusLabel=document.createElement("label");statusLabel.textContent="Prüfstatus";const select=document.createElement("select");
-  statuses.forEach(s=>{const o=document.createElement("option");o.value=s;o.textContent=s;select.append(o)});select.value=r.status;statusLabel.append(select);
+  editableStatuses.concat(r.status==="Freigegeben"?["Freigegeben"]:[]).forEach(s=>{const o=document.createElement("option");o.value=s;o.textContent=s;select.append(o)});select.value=r.status;statusLabel.append(select);
   const noteLabel=document.createElement("label");noteLabel.textContent="Interne Notiz / Rückfrage";const note=document.createElement("textarea");note.value=r.internal_note||"";note.placeholder="Interne Prüfpunkte …";noteLabel.append(note);
   controls.append(statusLabel,noteLabel);article.append(controls);
   const details=document.createElement("details");const summary=document.createElement("summary");summary.textContent="Alle eingereichten Angaben anzeigen";const pre=document.createElement("pre");
