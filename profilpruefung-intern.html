@@ -55,9 +55,14 @@ let records=[];
 const statuses=["Eingegangen","In Prüfung","Rückfrage","Freigegeben","Abgelehnt"];
 const editableStatuses=["Eingegangen","In Prüfung","Rückfrage","Abgelehnt"];
 const columns=["company_name","location","sector","website","description","apprenticeships","jobs","media","workplace","technology","benefits","culture","development","contact_person","contact_email"];
-const labels={company_name:"Unternehmen",location:"Standort",sector:"Branche",website:"Website",description:"Unternehmensbeschreibung",apprenticeships:"Ausbildungsberufe und Praktika",jobs:"Offene Stellen",media:"Mögliche Einblicke",workplace:"Arbeitsumgebung",technology:"Maschinen und Technologien",benefits:"Mitarbeiterangebote",culture:"Unternehmenskultur",development:"Entwicklungsmöglichkeiten",contact_person:"Ansprechpartner",contact_email:"Geschäftliche E-Mail-Adresse"};
+const labels={company_name:"Unternehmen",location:"Standort",sector:"Branche",website:"Website",description:"Unternehmensbeschreibung",apprenticeships:"Ausbildungsberufe und Praktika",jobs:"Offene Stellen",media:"Mögliche Einblicke",workplace:"Arbeitsumgebung",technology:"Maschinen und Technologien",benefits:"Mitarbeiterangebote",culture:"Unternehmenskultur",development:"Entwicklungsmöglichkeiten",media:"Medien und Einblicke",contact_person:"Ansprechpartner",contact_email:"Geschäftliche E-Mail-Adresse"};
 function say(message,target="status"){$(target).textContent=message}
-function showDashboard(user){$("login-panel").classList.add("hidden");$("dashboard").classList.remove("hidden");$("signed-in-as").textContent="Angemeldet: "+user.email;loadRecords()}
+async function showDashboard(user){
+ const {data,error}=await client.from("industryai_admins").select("user_id").eq("user_id",user.id).maybeSingle();
+ if(error||!data){await client.auth.signOut();showLogin();say("Dieses Konto besitzt keine Admin-Berechtigung.","login-status");return}
+ $("login-panel").classList.add("hidden");$("dashboard").classList.remove("hidden");
+ $("signed-in-as").textContent="Angemeldet: "+user.email;await loadRecords()
+}
 function showLogin(){$("dashboard").classList.add("hidden");$("login-panel").classList.remove("hidden")}
 async function loadRecords(){
  say("Anfragen werden geladen …");
