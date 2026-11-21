@@ -29,7 +29,7 @@
     K: "Kommunikation",
     C: "Kreativität",
     O: "Organisation",
-    N: "Natur und Umwelt",
+    N: "Naturwissenschaft, Natur und Umwelt",
     B: "Handeln und Situationen bewältigen",
     L: "Lernen und Entwicklung"
   };
