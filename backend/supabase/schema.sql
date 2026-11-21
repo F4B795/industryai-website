@@ -52,6 +52,7 @@ create table if not exists public.company_public_profiles (
   culture text not null default '',
   development text not null default '',
   website text not null default '',
+  media text not null default '',
   image text not null default '',
   image_alt text not null default '',
   profile_url text not null default '',
@@ -64,18 +65,24 @@ create index if not exists company_submissions_status_created_idx
 create index if not exists company_public_profiles_published_idx
   on public.company_public_profiles(is_published, published_at desc);
 
-create or replace function public.industryai_is_admin()
+create schema if not exists private;
+revoke all on schema private from public;
+grant usage on schema private to authenticated;
+
+create or replace function private.industryai_is_admin()
 returns boolean
 language sql
 stable
 security definer
 set search_path = ''
-as $$
+as $
   select exists (
     select 1 from public.industryai_admins a
     where a.user_id = (select auth.uid())
   );
-$$;
+$;
+revoke all on function private.industryai_is_admin() from public, anon;
+grant execute on function private.industryai_is_admin() to authenticated;
 
 alter table public.industryai_admins enable row level security;
 alter table public.company_submissions enable row level security;
@@ -91,7 +98,7 @@ with check (status = 'Eingegangen' and internal_note = '');
 drop policy if exists "admins read submissions" on public.company_submissions;
 create policy "admins read submissions"
 on public.company_submissions for select to authenticated
-using (public.industryai_is_admin());
+using (private.industryai_is_admin());
 
 drop policy if exists "admins update submissions" on public.company_submissions;
 create policy "admins update submissions"
