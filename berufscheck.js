@@ -312,7 +312,7 @@
 
     if (
       selected.includes("viel_kundenkontakt") &&
-      conditions.peopleContact === "very_high"
+      ["high", "very_high"].includes(conditions.peopleContact)
     ) {
       notes.push("Der Beruf beinhaltet häufig Kontakt mit Kunden, Patienten oder anderen Menschen.");
     }
@@ -321,7 +321,9 @@
       selected.includes("viel_bildschirm") &&
       career.workingConditions &&
       career.workingConditions.locations &&
-      career.workingConditions.locations.includes("Büro")
+      career.workingConditions.locations.some(function (location) {
+        return ["Büro", "Homeoffice", "Rechenzentrum"].includes(location);
+      })
     ) {
       notes.push("Ein Teil der Arbeit kann überwiegend am Bildschirm stattfinden.");
     }
