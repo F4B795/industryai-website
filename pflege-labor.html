@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Interaktive Berufsorientierung für Gesundheit und Pflege: Kommunikation, Hygiene, Beobachtung und Teamarbeit kennenlernen.">
+<title>Pflege-Lernlabor | INDUSTRYAI</title>
+<style>
+*{box-sizing:border-box}
+:root{--accent:#55d6b0;--soft:rgba(85,214,176,.12);--line:rgba(85,214,176,.42)}
+body{margin:0;background:#071524;color:#f2f7fc;font-family:Arial,sans-serif;line-height:1.65}
+a{color:inherit;text-decoration:none}
+header{padding:18px 6%;border-bottom:1px solid #294960;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.logo{font-size:19px;font-weight:bold;letter-spacing:2px}.logo span,.back,.eyebrow{color:var(--accent)}
+.back{font-size:14px}
+main{max-width:1120px;margin:auto;padding:48px 22px 75px}
+.eyebrow{font-size:11px;font-weight:bold;letter-spacing:3px}
+h1{font-size:clamp(34px,5vw,54px);line-height:1.12;margin:14px 0}
+h1 span{color:var(--accent)}
+.intro,.muted{color:#b7c8d8;max-width:780px}
+.intro{font-size:16px;line-height:1.8}
+.notice{margin:24px 0;padding:17px 19px;border:1px solid #7b6840;background:#2a2519;border-radius:9px;color:#e8d7a9;font-size:13px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:30px}
+.station{padding:23px;border:1px solid var(--line);border-radius:13px;background:linear-gradient(145deg,var(--soft),#0b1d2e 78%);min-width:0}
+.station-number{color:var(--accent);font-size:11px;font-weight:bold;letter-spacing:2px}
+.station h2{font-size:21px;margin:9px 0}
+.station p{color:#b7c8d8;font-size:14px}
+.question{color:#f2f7fc!important;font-weight:bold;line-height:1.55}
+.answers{display:grid;gap:9px;margin-top:17px}
+.answer{width:100%;padding:12px 14px;text-align:left;border:1px solid #36566d;border-radius:8px;background:#10283b;color:#eef6fb;font:inherit;font-size:14px;cursor:pointer}
+.answer:hover:not(:disabled),.answer:focus-visible{border-color:var(--accent);background:var(--soft)}
+.answer:disabled{cursor:default;opacity:.9}
+.answer.correct{border-color:#39c98a;background:#123a34}
+.answer.wrong{border-color:#e27a7a;background:#42252c}
+.feedback{min-height:62px;margin-top:14px;color:var(--accent);font-size:13px;line-height:1.6}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+button.primary,button.secondary{padding:13px 18px;border:0;border-radius:7px;font-weight:bold;cursor:pointer}
+button.primary{background:var(--accent);color:#071524}
+button.secondary{background:#294960;color:#fff}
+button.primary:hover{background:#9af0d2}
+.score{margin-top:25px;padding:22px;border:1px solid var(--line);border-radius:12px;background:#0b1d2e}
+.score strong{color:var(--accent)}
+footer{text-align:center;padding:28px;border-top:1px solid #20394e;color:#91a7ba;font-size:13px}
+footer a{color:var(--accent)}
+@media(max-width:720px){main{padding:36px 16px 55px}.grid{grid-template-columns:1fr}header{padding:16px 5%}.station{padding:19px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header>
+<a href="index.html" class="logo"><span>INDUSTRY<span style="color:#42d8ed">AI</span></span></a>
+<a class="back" href="gesundheit-pflege.html">← Gesundheit & Pflege</a>
+</header>
+<main>
+<div class="eyebrow">INDUSTRYAI CAMPUS · INTERAKTIVES LERNLABOR</div>
+<h1>Pflege erleben. <span>Entscheidungen verstehen.</span></h1>
+<p class="intro">Wie fühlt sich der Berufsalltag in Pflege und Betreuung an? In vier kurzen Situationen lernst du wichtige Grundlagen kennen: respektvolle Kommunikation, Hygiene, aufmerksame Beobachtung und Zusammenarbeit im Team. Lies die Situation und entscheide, wie du handeln würdest.</p>
+<div class="notice"><strong>Wichtiger Hinweis:</strong> Dieses Lernlabor dient ausschließlich der Berufsorientierung. Es ersetzt keine Ausbildung und keine Anweisung durch Fachpersonal. In realen Situationen gelten immer die Vorgaben der Einrichtung und die eigenen Qualifikations- und Verantwortungsbereiche. Bei Unsicherheit oder möglichen Gefährdungen holst du qualifiziertes Personal hinzu.</div>
+<section class="grid" aria-label="Interaktive Lernstationen">
+<article class="station" data-station="0">
+<div class="station-number">STATION 01 · KOMMUNIKATION</div>
+<h2>Respektvoll unterstützen</h2>
+<p>Eine Bewohnerin möchte vor dem Aufstehen wissen, was als Nächstes passiert. Sie wirkt unsicher.</p>
+<p class="question">Was ist eine gute erste Reaktion?</p>
+<div class="answers">
+<button class="answer" data-correct="false">Sie drängen, damit der Ablauf nicht aufgehalten wird.</button>
+<button class="answer" data-correct="true">Du stellst dich vor, erklärst ruhig den nächsten Schritt und fragst, ob sie bereit ist.</button>
+<button class="answer" data-correct="false">Du beginnst ohne Erklärung mit der Unterstützung.</button>
+</div>
+<div class="feedback" aria-live="polite">Wähle eine Antwort.</div>
+</article>
+<article class="station" data-station="1">
+<div class="station-number">STATION 02 · HYGIENE</div>
+<h2>Händehygiene beachten</h2>
+<p>Du wechselst von einer pflegerischen Tätigkeit zur nächsten und möchtest dabei hygienisch arbeiten.</p>
+<p class="question">Welche Aussage ist richtig?</p>
+<div class="answers">
+<button class="answer" data-correct="false">Einmalhandschuhe machen Händehygiene grundsätzlich überflüssig.</button>
+<button class="answer" data-correct="true">Händehygiene ist wichtig; Handschuhe ersetzen sie nicht und werden situationsgerecht verwendet.</button>
+<button class="answer" data-correct="false">Händehygiene ist nur zu Beginn der Schicht notwendig.</button>
+</div>
+<div class="feedback" aria-live="polite">Wähle eine Antwort.</div>
+</article>
+<article class="station" data-station="2">
+<div class="station-number">STATION 03 · BEOBACHTUNG</div>
+<h2>Veränderungen wahrnehmen</h2>
+<p>Eine Person wirkt heute deutlich erschöpfter als bei deinen bisherigen Begegnungen. Du bist noch in der Ausbildung.</p>
+<p class="question">Was ist in dieser Situation angemessen?</p>
+<div class="answers">
+<button class="answer" data-correct="true">Du nimmst die Veränderung ernst und gibst deine Beobachtung zeitnah an die zuständige Fachkraft weiter.</button>
+<button class="answer" data-correct="false">Du stellst selbst eine Diagnose und entscheidest allein über Maßnahmen.</button>
+<button class="answer" data-correct="false">Du ignorierst es, solange die Person nichts sagt.</button>
+</div>
+<div class="feedback" aria-live="polite">Wähle eine Antwort.</div>
+</article>
+<article class="station" data-station="3">
+<div class="station-number">STATION 04 · TEAMARBEIT</div>
+<h2>Eigene Grenzen erkennen</h2>
+<p>Eine Person benötigt Unterstützung beim Transfer. Du bist dir nicht sicher, wie dieser sicher durchgeführt wird.</p>
+<p class="question">Wie gehst du vor?</p>
+<div class="answers">
+<button class="answer" data-correct="false">Du versuchst es allein, um zu zeigen, dass du selbstständig bist.</button>
+<button class="answer" data-correct="false">Du ziehst die Person ohne Erklärung schnell hoch.</button>
+<button class="answer" data-correct="true">Du stoppst, erklärst deine Unsicherheit und bittest eine qualifizierte Person um Unterstützung.</button>
+</div>
+<div class="feedback" aria-live="polite">Wähle eine Antwort.</div>
+</article>
+</section>
+<section class="score" aria-live="polite">
+<div class="eyebrow">DEIN LERNSTAND</div>
+<p><strong id="score-value">0 von 4 Stationen richtig</strong></p>
+<p class="muted" id="score-message">Bearbeite die vier Stationen. Du erhältst nach jeder Antwort eine kurze Erklärung.</p>
+<div class="actions">
+<button class="primary" id="reset-all" type="button">Alle Aufgaben zurücksetzen</button>
+<a class="secondary" href="gesundheit-pflege.html" style="display:inline-block;padding:13px 18px;border-radius:7px">Zurück zur Berufswelt</a>
+</div>
+</section>
+</main>
+<footer>INDUSTRYAI · Die Zukunft der Berufsorientierung<br><br><a href="datenschutz.html">Datenschutz</a></footer>
+<script>
+(function(){
+  const stations=Array.from(document.querySelectorAll(".station"));
+  const scoreValue=document.getElementById("score-value");
+  const scoreMessage=document.getElementById("score-message");
+  const explanations=[
+    "Richtig. Eine verständliche Erklärung, eine ruhige Ansprache und das Einbeziehen der Person respektieren ihre Selbstbestimmung.",
+    "Richtig. Handschuhe sind kein Ersatz für Händehygiene. Welche Maßnahmen erforderlich sind, richtet sich nach Tätigkeit und Hygieneplan der Einrichtung.",
+    "Richtig. Beobachtungen sachlich und zeitnah weiterzugeben ist wichtig. Diagnosen und Entscheidungen gehören in den jeweiligen Verantwortungsbereich qualifizierter Fachkräfte.",
+    "Richtig. Eigene Grenzen zu erkennen und Unterstützung zu holen schützt die betreute Person und dich selbst. Transfers erfolgen nur nach Einweisung und den geltenden Vorgaben."
+  ];
+  const wrong=[
+    "Noch nicht ganz. Achte darauf, die Person einzubeziehen, verständlich zu informieren und ihre Zustimmung zu beachten.",
+    "Noch nicht ganz. Handschuhe ersetzen die Händehygiene nicht. Beachte die Hygienevorgaben der Einrichtung.",
+    "Noch nicht ganz. Wichtig ist, Veränderungen wahrzunehmen und an die zuständige Fachkraft weiterzugeben, statt selbst zu diagnostizieren.",
+    "Noch nicht ganz. Wenn du unsicher bist, führe den Transfer nicht allein durch. Hole qualifizierte Unterstützung."
+  ];
+  function updateScore(){
+    const done=stations.filter(s=>s.dataset.answered==="true");
+    const correct=done.filter(s=>s.dataset.correct==="true").length;
+    scoreValue.textContent=correct+" von 4 Stationen richtig";
+    scoreMessage.textContent=done.length===4
+      ? (correct===4?"Alle Stationen richtig gelöst. Du hast wichtige Grundlagen der Berufsorientierung kennengelernt.":"Du hast alle Stationen bearbeitet. Lies die Rückmeldungen und versuche es anschließend erneut.")
+      : done.length+" von 4 Stationen bearbeitet.";
+  }
+  stations.forEach((station,index)=>{
+    station.querySelectorAll(".answer").forEach(button=>{
+      button.addEventListener("click",()=>{
+        if(station.dataset.answered==="true") return;
+        const isCorrect=button.dataset.correct==="true";
+        station.dataset.answered="true";
+        station.dataset.correct=String(isCorrect);
+        station.querySelectorAll(".answer").forEach(option=>{
+          option.disabled=true;
+          if(option.dataset.correct==="true") option.classList.add("correct");
+        });
+        if(!isCorrect) button.classList.add("wrong");
+        station.querySelector(".feedback").textContent=isCorrect?explanations[index]:wrong[index];
+        updateScore();
+      });
+    });
+  });
+  document.getElementById("reset-all").addEventListener("click",()=>{
+    stations.forEach(station=>{
+      delete station.dataset.answered;
+      delete station.dataset.correct;
+      station.querySelectorAll(".answer").forEach(button=>{
+        button.disabled=false;
+        button.classList.remove("correct","wrong");
+      });
+      station.querySelector(".feedback").textContent="Wähle eine Antwort.";
+    });
+    updateScore();
+  });
+})();
+</script>
+</body>
+</html>
