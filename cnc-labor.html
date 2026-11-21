@@ -86,6 +86,16 @@ footer{text-align:center;padding:30px;border-top:1px solid #294960;color:#91a7ba
 .caliper-task button:focus-visible,.caliper-task input:focus-visible{outline:2px solid white;outline-offset:3px}
 @media(max-width:420px){.caliper-task{padding:14px}.caliper-task button{width:100%;margin-left:0}}
 
+
+.tolerance-table{width:100%;border-collapse:collapse;margin:18px 0;color:#c5d5e3}
+.tolerance-table th,.tolerance-table td{padding:12px;text-align:left;border-bottom:1px solid #294960}
+.tolerance-table th{color:#42d8ed;font-size:13px}
+.tolerance-table td{font-variant-numeric:tabular-nums}
+.tolerance-feedback{margin-top:18px;padding:18px;border-left:3px solid #42d8ed;background:#091b2b;color:#c5d5e3;line-height:1.7}
+.tolerance-feedback:empty{display:none}
+.tolerance-form button:focus-visible,.tolerance-form input:focus-visible{outline:2px solid white;outline-offset:3px}
+@media(max-width:420px){.tolerance-table th,.tolerance-table td{padding:9px 6px;font-size:13px}}
+
 </style>
 </head>
 <body>
@@ -205,6 +215,48 @@ footer{text-align:center;padding:30px;border-top:1px solid #294960;color:#91a7ba
     </div>
   </section>
 
+
+  <section class="panel quiz" aria-labelledby="tolerance-title" style="margin-top:22px">
+    <h2 id="tolerance-title">6. Maß- und Toleranzprüfung</h2>
+    <p class="quiz-intro">Ein Sollmaß allein reicht bei der Qualitätskontrolle nicht aus. Eine Toleranz legt fest, in welchem Bereich ein gemessenes Maß liegen darf. Für diese Übung gilt ausdrücklich ein vorgegebener Beispielbereich von 30,0 ± 0,1 mm.</p>
+    <div class="explanation">
+      **Unteres Grenzmaß:** 29,9 mm<br>
+      **Sollmaß:** 30,0 mm<br>
+      **Oberes Grenzmaß:** 30,1 mm<br>
+      Ein Messwert innerhalb dieser Grenzen liegt in dieser Übung innerhalb der Toleranz. Die Werte sind ein Lernbeispiel und keine Vorgabe für ein reales Bauteil.
+    </div>
+    <table class="tolerance-table">
+      <thead><tr><th>Prüfstück</th><th>Gemessener Durchmesser</th></tr></thead>
+      <tbody>
+        <tr><td>A</td><td>30,04 mm</td></tr>
+        <tr><td>B</td><td>29,86 mm</td></tr>
+        <tr><td>C</td><td>30,12 mm</td></tr>
+      </tbody>
+    </table>
+    <form id="tolerance-exercise" class="tolerance-form">
+      <fieldset class="quiz-question">
+        <legend>Prüfstück A: 30,04 mm – liegt das Maß innerhalb der Toleranz?</legend>
+        <label class="quiz-option"><input type="radio" name="partA" value="yes" required> Ja, innerhalb der Toleranz</label>
+        <label class="quiz-option"><input type="radio" name="partA" value="no"> Nein, außerhalb der Toleranz</label>
+      </fieldset>
+      <fieldset class="quiz-question">
+        <legend>Prüfstück B: 29,86 mm – liegt das Maß innerhalb der Toleranz?</legend>
+        <label class="quiz-option"><input type="radio" name="partB" value="yes" required> Ja, innerhalb der Toleranz</label>
+        <label class="quiz-option"><input type="radio" name="partB" value="no"> Nein, außerhalb der Toleranz</label>
+      </fieldset>
+      <fieldset class="quiz-question">
+        <legend>Prüfstück C: 30,12 mm – liegt das Maß innerhalb der Toleranz?</legend>
+        <label class="quiz-option"><input type="radio" name="partC" value="yes" required> Ja, innerhalb der Toleranz</label>
+        <label class="quiz-option"><input type="radio" name="partC" value="no"> Nein, außerhalb der Toleranz</label>
+      </fieldset>
+      <div class="quiz-actions">
+        <button type="submit">Prüfergebnis auswerten</button>
+        <button type="button" id="tolerance-restart" class="secondary" hidden>Übung wiederholen</button>
+      </div>
+      <div id="tolerance-feedback" class="tolerance-feedback" role="status" aria-live="polite"></div>
+    </form>
+  </section>
+
   <section class="panel quiz" aria-labelledby="drawing-title">
     <h2 id="drawing-title">4. Technische Zeichnung verstehen</h2>
     <p class="quiz-intro">In der CNC-Fertigung werden Werkstücke nach technischen Zeichnungen gefertigt. Lies die Maße in der vereinfachten Skizze und beantworte anschließend zwei Fragen.</p>
@@ -262,7 +314,7 @@ footer{text-align:center;padding:30px;border-top:1px solid #294960;color:#91a7ba
   </section>
 
   <section class="panel quiz" aria-labelledby="quiz-title">
-    <h2 id="quiz-title">6. Dein CNC-Wissenstest</h2>
+    <h2 id="quiz-title">7. Dein CNC-Wissenstest</h2>
     <p class="quiz-intro">Prüfe, was du aus der Simulation mitgenommen hast. Wähle pro Frage eine Antwort und lass dir anschließend die Lösungen erklären.</p>
     <form id="cnc-quiz">
       <fieldset class="quiz-question">
@@ -547,6 +599,54 @@ footer{text-align:center;padding:30px;border-top:1px solid #294960;color:#91a7ba
     update();
   });
   update();
+})();
+</script>
+
+
+<script>
+(function(){
+  "use strict";
+  const form=document.getElementById("tolerance-exercise");
+  const feedback=document.getElementById("tolerance-feedback");
+  const restart=document.getElementById("tolerance-restart");
+  if(!form||!feedback||!restart)return;
+  const checks=[
+    {name:"partA",answer:"yes",detail:"30,04 mm liegt zwischen 29,9 und 30,1 mm und ist innerhalb der Toleranz."},
+    {name:"partB",answer:"no",detail:"29,86 mm liegt unter dem unteren Grenzmaß von 29,9 mm und ist außerhalb der Toleranz."},
+    {name:"partC",answer:"no",detail:"30,12 mm liegt über dem oberen Grenzmaß von 30,1 mm und ist außerhalb der Toleranz."}
+  ];
+  form.addEventListener("submit",function(event){
+    event.preventDefault();
+    if(!form.reportValidity())return;
+    const data=new FormData(form);
+    let score=0;
+    feedback.replaceChildren();
+    const heading=document.createElement("h3");
+    checks.forEach(function(item,index){
+      const correct=data.get(item.name)===item.answer;
+      if(correct)score++;
+      const line=document.createElement("p");
+      line.textContent="Prüfstück "+String.fromCharCode(65+index)+": "+(correct?"Richtig. ":"Nicht richtig. ")+item.detail;
+      feedback.appendChild(line);
+    });
+    heading.textContent="Dein Ergebnis: "+score+" von 3 richtig";
+    feedback.prepend(heading);
+    const summary=document.createElement("p");
+    summary.textContent=score===3
+      ?"Alle drei Prüfstücke richtig beurteilt. Du hast die Grenzmaße korrekt angewendet."
+      :"Merke: Werte unter 29,9 mm oder über 30,1 mm liegen außerhalb des vorgegebenen Übungsbereichs.";
+    feedback.appendChild(summary);
+    restart.hidden=false;
+    form.querySelectorAll('input[type="radio"]').forEach(function(input){input.disabled=true;});
+    form.querySelector('button[type="submit"]').disabled=true;
+  });
+  restart.addEventListener("click",function(){
+    form.reset();
+    form.querySelectorAll('input[type="radio"]').forEach(function(input){input.disabled=false;});
+    form.querySelector('button[type="submit"]').disabled=false;
+    feedback.replaceChildren();
+    restart.hidden=true;
+  });
 })();
 </script>
 
