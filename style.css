@@ -1524,6 +1524,10 @@ section.hero.hero-modern .hero-visual svg {
     #071321;
 }
 
+.ia-check {
+  padding: 64px 7% 90px;
+}
+
 .ia-check-heading {
   max-width: 850px;
   margin: 0 auto 55px;
@@ -1676,12 +1680,45 @@ section.hero.hero-modern .hero-visual svg {
   margin: 22px 0;
 }
 
-#ia-result-tips ul {
-  padding-left: 22px;
+#ia-result-tips ul,
+#ia-result-tips ol {
+  padding-left: 24px;
 }
 
 #ia-result-tips li {
-  margin: 9px 0;
+  margin: 15px 0;
+  padding-left: 4px;
+}
+
+#ia-result-tips li > strong {
+  color: #f2f7fb;
+}
+
+#ia-result-tips li > span {
+  color: #42d8ed;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+#ia-result-tips li > p {
+  margin: 5px 0 0;
+}
+
+.ia-question label:focus-within {
+  outline: 2px solid #42d8ed;
+  outline-offset: 2px;
+}
+
+.ia-check-submit:focus-visible,
+.ia-check-restart:focus-visible {
+  outline: 3px solid #ffffff;
+  outline-offset: 3px;
+}
+
+.ia-contact-submit:disabled {
+  cursor: not-allowed;
+  opacity: .65;
+  transform: none;
 }
 
 .ia-check-restart {
