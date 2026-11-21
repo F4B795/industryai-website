@@ -562,7 +562,27 @@
             if (position !== -1) selected.splice(position, 1);
           }
 
+          if (question.id === 39) {
+            const selectedOption = question.options[index];
+            const noExperienceIndex = question.options.findIndex(function (option) {
+              return option.value === "keine";
+            });
+
+            if (selectedOption && selectedOption.value === "keine" && input.checked) {
+              selected.splice(0, selected.length, index);
+            } else if (noExperienceIndex !== -1 && input.checked) {
+              const noExperiencePosition = selected.indexOf(noExperienceIndex);
+              if (noExperiencePosition !== -1) selected.splice(noExperiencePosition, 1);
+            }
+          }
+
           answers[question.id] = selected;
+
+          if (question.id === 39) {
+            answerArea.querySelectorAll('input[type="checkbox"]').forEach(function (checkbox) {
+              checkbox.checked = selected.includes(Number(checkbox.value));
+            });
+          }
         } else {
           answers[question.id] = index;
         }
@@ -821,6 +841,42 @@ function showResults(result) {
     "Diese Empfehlungen basieren auf deinen Antworten. " +
     "Du siehst, welche Bereiche besonders gut zu deinen Angaben passen.";
   resultsContainer.appendChild(introduction);
+
+  const educationPath = getSelectedValue(37);
+  const educationQuestion = questions.find(function (question) {
+    return question.id === 37;
+  });
+  const educationOption = educationQuestion && educationQuestion.options.find(function (option) {
+    return option.value === educationPath;
+  });
+  const experienceOptions = getSelectedValues(39);
+
+  if (educationOption || experienceOptions.length) {
+    const additionalInfo = document.createElement("div");
+    additionalInfo.className = "career-score-details";
+    addText(additionalInfo, "h3", "Deine ergänzenden Angaben");
+
+    if (educationOption) {
+      addText(additionalInfo, "p", "Bevorzugter Bildungsweg: " + educationOption.text);
+    }
+
+    if (experienceOptions.length) {
+      addText(
+        additionalInfo,
+        "p",
+        "Bisherige Erfahrungen: " + experienceOptions.map(function (option) {
+          return option.text;
+        }).join(", ")
+      );
+    }
+
+    addText(
+      additionalInfo,
+      "p",
+      "Diese Angaben dienen deiner Orientierung und werden nicht als Eignungspunkte gewertet."
+    );
+    resultsContainer.appendChild(additionalInfo);
+  }
 
   const legend = document.createElement("div");
   legend.className = "career-score-details";
