@@ -29,7 +29,7 @@
 .preview-box p,.preview-box li{color:#c1cfda;font-size:13px;line-height:1.7}
 .preview-box ul{padding-left:20px;margin-top:10px}
 .onboard-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
-.onboard-button{border:0;border-radius:7px;padding:13px 17px;background:#42d8ed;color:#071321;font-weight:700;cursor:pointer}
+.onboard-button{border:0;border-radius:7px;padding:13px 17px;background:#42d8ed;color:#071321;font-weight:700;cursor:pointer}\n.onboard-button:disabled{opacity:.48;cursor:not-allowed;filter:saturate(.45)}\n.onboard-trap{position:absolute!important;left:-10000px!important;top:auto!important;width:1px!important;height:1px!important;overflow:hidden!important}
 .onboard-button.secondary{background:transparent;border:1px solid #42d8ed;color:#42d8ed}
 .onboard-notice{margin-top:18px;padding:13px 15px;border-left:3px solid #42d8ed;background:rgba(66,216,237,.07);color:#a9bacb;font-size:12px;line-height:1.7}
 #copy-status{color:#42d8ed;font-size:12px;margin-top:10px;min-height:18px}
@@ -88,8 +88,10 @@
 <div class="onboard-label" style="margin-top:28px">ANSPRECHPARTNER</div>
 <div class="onboard-field"><label for="contact-person">Ansprechpartner *</label><input id="contact-person" type="text" maxlength="120" autocomplete="name" placeholder="Vor- und Nachname" required></div>
 <div class="onboard-field"><label for="contact-email">Geschäftliche E-Mail-Adresse *</label><input id="contact-email" type="email" maxlength="180" autocomplete="email" placeholder="name@unternehmen.de" required></div>
+<div class="onboard-field"><label>Bot-Schutz</label><div id="turnstile-widget" aria-label="Cloudflare Turnstile Bot-Schutz"></div><span class="onboard-hint" id="turnstile-status" role="status" aria-live="polite">Der Bot-Schutz wird vor Aktivierung der Einreichung eingerichtet.</span></div>
+<div class="onboard-trap" aria-hidden="true"><label for="company-fax">Bitte nicht ausfüllen</label><input id="company-fax" name="companyFax" type="text" tabindex="-1" autocomplete="off"></div>
 <div class="onboard-field"><label style="display:flex;gap:10px;align-items:flex-start;font-weight:400"><input id="privacy-consent" type="checkbox" required style="width:auto;margin-top:3px"><span>Ich habe die <a href="datenschutz.html" target="_blank" rel="noopener">Datenschutzhinweise</a> gelesen und willige in die Übermittlung und Verarbeitung meiner Angaben zur Prüfung der Unternehmensprofil-Anfrage ein. *</span></label></div>
-<div class="onboard-notice"><strong>So funktioniert die Anfrage:</strong> Mit dem Absenden werden Ihre Angaben verschlüsselt über die Supabase-Schnittstelle an INDUSTRYAI übermittelt und zur Prüfung gespeichert. Ansprechpartner und Kontaktdaten sind nicht öffentlich sichtbar. Jedes Profil wird manuell geprüft; eine Veröffentlichung erfolgt nur nach gesonderter Freigabe und Abstimmung.</div>
+<div class="onboard-notice"><strong>So funktioniert die Anfrage:</strong> Ihre Angaben werden erst nach erfolgreicher Bot-Prüfung über eine serverseitige Schnittstelle an die interne Datenbank übermittelt. Ansprechpartner und Kontaktdaten bleiben intern. Jedes Profil wird manuell geprüft; eine Veröffentlichung erfolgt nur nach gesonderter Freigabe.</div>
 <div class="onboard-actions"><button class="onboard-button" type="submit" id="submit-profile">Profilanfrage sicher übermitteln</button><button class="onboard-button secondary" type="button" id="download-draft">Entwurf herunterladen</button><button class="onboard-button secondary reset-draft" type="button">Eingaben zurücksetzen</button></div>
 <p id="copy-status" role="status" aria-live="polite"></p>
 </form>
@@ -159,19 +161,75 @@
  }
  const form=document.getElementById("company-profile-form");
  const submitButton=document.getElementById("submit-profile");
- if(!window.INDUSTRYAI_SUBMISSIONS_ENABLED){submitButton.disabled=true;submitButton.textContent="Einreichung vorübergehend deaktiviert";setText("copy-status","Die Datenbankverbindung ist vorbereitet. Die öffentliche Einreichung bleibt bis zur Vervollständigung der Datenschutzhinweise und des Spam-Schutzes deaktiviert. Bitte keine echten personenbezogenen Daten eingeben.");}
  let supabaseClient=null;
  try{
   if(window.supabase&&window.INDUSTRYAI_SUPABASE_URL&&window.INDUSTRYAI_SUPABASE_PUBLISHABLE_KEY){
    supabaseClient=window.supabase.createClient(window.INDUSTRYAI_SUPABASE_URL,window.INDUSTRYAI_SUPABASE_PUBLISHABLE_KEY);
   }
  }catch(error){console.error("INDUSTRYAI Supabase initialisation:",error);}
+
+ let turnstileWidgetId=null;
+ let turnstileToken="";
+ const turnstileSiteKey=window.INDUSTRYAI_TURNSTILE_SITE_KEY||"";
+ function updateSubmissionButton(){
+  const enabled=window.INDUSTRYAI_SUBMISSIONS_ENABLED===true&&!!supabaseClient&&!!turnstileSiteKey;
+  submitButton.disabled=!enabled||!turnstileToken;
+  if(!enabled)submitButton.textContent="Einreichung vorübergehend deaktiviert";
+  else if(!turnstileToken)submitButton.textContent="Bitte Bot-Schutz bestätigen";
+  else submitButton.textContent="Profilanfrage sicher übermitteln";
+ }
+ function resetTurnstile(){
+  turnstileToken="";
+  if(turnstileWidgetId!==null&&window.turnstile)window.turnstile.reset(turnstileWidgetId);
+  updateSubmissionButton();
+ }
+ function loadTurnstile(){
+  if(window.INDUSTRYAI_SUBMISSIONS_ENABLED!==true||!turnstileSiteKey){
+   setText("turnstile-status","Der Bot-Schutz wird noch eingerichtet. Die öffentliche Einreichung bleibt bis dahin deaktiviert.");
+   updateSubmissionButton();
+   return;
+  }
+  const script=document.createElement("script");
+  script.src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+  script.async=true;script.defer=true;
+  script.onload=()=>{
+   if(!window.turnstile){setText("turnstile-status","Der Bot-Schutz konnte nicht geladen werden.");return}
+   turnstileWidgetId=window.turnstile.render("#turnstile-widget",{
+    sitekey:turnstileSiteKey,
+    action:"company_profile_submit",
+    theme:"dark",
+    callback:token=>{
+     turnstileToken=token;
+     setText("turnstile-status","Bot-Schutz erfolgreich bestätigt.");
+     updateSubmissionButton();
+    },
+    "expired-callback":()=>{
+     turnstileToken="";
+     setText("turnstile-status","Die Bot-Prüfung ist abgelaufen. Bitte erneut bestätigen.");
+     updateSubmissionButton();
+    },
+    "error-callback":()=>{
+     turnstileToken="";
+     setText("turnstile-status","Die Bot-Prüfung ist fehlgeschlagen. Bitte Seite neu laden.");
+     updateSubmissionButton();
+    }
+   });
+  };
+  script.onerror=()=>{
+   setText("turnstile-status","Der Bot-Schutz ist nicht erreichbar. Eine Einreichung ist derzeit nicht möglich.");
+   updateSubmissionButton();
+  };
+  document.head.appendChild(script);
+ }
+ loadTurnstile();
+ if(window.INDUSTRYAI_SUBMISSIONS_ENABLED!==true){
+  setText("copy-status","Die Datenbank ist angebunden. Öffentliche Einreichungen bleiben bis zur Einrichtung und Prüfung von Datenschutz und Bot-Schutz deaktiviert. Bitte keine echten personenbezogenen Daten eingeben.");
+ }
  form.addEventListener("submit",async event=>{
   event.preventDefault();
   if(!form.reportValidity())return;
-  if(!window.INDUSTRYAI_SUBMISSIONS_ENABLED){setText("copy-status","Die öffentliche Einreichung ist bis zur Datenschutz- und Spam-Schutz-Prüfung deaktiviert.");return;}
-  if(!supabaseClient){
-   setText("copy-status","Die sichere Verbindung konnte nicht geladen werden. Bitte versuchen Sie es später erneut oder laden Sie den Entwurf herunter.");
+  if(window.INDUSTRYAI_SUBMISSIONS_ENABLED!==true||!supabaseClient||!turnstileToken){
+   setText("copy-status","Die öffentliche Einreichung ist bis zur vollständigen Einrichtung von Datenschutz und Bot-Schutz deaktiviert.");
    return;
   }
   const payload={
@@ -195,17 +253,27 @@
   submitButton.textContent="Wird sicher übermittelt …";
   setText("copy-status","Ihre Anfrage wird übermittelt. Bitte schließen Sie diese Seite nicht.");
   try{
-   const {error}=await supabaseClient.from("company_submissions").insert(payload);
-   if(error)throw error;
+   const {data,error}=await supabaseClient.functions.invoke("company-profile-submit",{
+    body:{
+     ...payload,
+     company_fax:get("company-fax"),
+     turnstile_token:turnstileToken
+    }
+   });
+   if(error){
+    const httpStatus=error.context?.status;
+    if(httpStatus===429)throw new Error("RATE_LIMIT");
+    throw error;
+   }
+   if(!data||data.success!==true)throw new Error("SUBMISSION_FAILED");
    form.reset();
    setText("copy-status","Vielen Dank. Ihre Unternehmensprofil-Anfrage ist bei INDUSTRYAI eingegangen und wird manuell geprüft. Eine Veröffentlichung erfolgt erst nach Freigabe.");
    update();
   }catch(error){
    console.error("INDUSTRYAI profile submission:",error);
-   setText("copy-status","Die Übermittlung ist fehlgeschlagen. Ihre Angaben wurden nicht bestätigt. Bitte versuchen Sie es erneut oder nutzen Sie den Entwurf-Download.");
+   setText("copy-status",error.message==="RATE_LIMIT"?"Zu viele Versuche in kurzer Zeit. Bitte später erneut versuchen.":"Die Übermittlung ist fehlgeschlagen. Bitte prüfen Sie den Bot-Schutz und versuchen Sie es erneut oder laden Sie den Entwurf herunter.");
   }finally{
-   submitButton.disabled=false;
-   submitButton.textContent="Profilanfrage sicher übermitteln";
+   resetTurnstile();
   }
  });
  ids.forEach(id=>{
@@ -254,8 +322,10 @@
   document.getElementById("copy-status").textContent="";
   document.getElementById("preview-copy-status").textContent="";
   update();
+  resetTurnstile();
  }));
  update();
+ updateSubmissionButton();
 })();
 </script>
 </body>
