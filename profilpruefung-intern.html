@@ -1,115 +1,113 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
-<title>INDUSTRYAI – Interne Profilprüfung</title>
+<title>INDUSTRYAI – Admin für Unternehmensprofile</title>
 <style>
-:root{color-scheme:dark;--bg:#0b1220;--panel:#121e30;--line:#26364c;--text:#edf3fb;--muted:#aab8ca;--accent:#54c5b5;--warn:#e8bd67}
+:root{color-scheme:dark;--bg:#0b1220;--panel:#121e30;--line:#26364c;--text:#edf3fb;--muted:#aab8ca;--accent:#54c5b5}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.55 system-ui,-apple-system,Segoe UI,sans-serif}
-header{padding:28px max(20px,calc((100% - 1100px)/2));border-bottom:1px solid var(--line);background:#0e1929}
-header a{color:var(--accent);text-decoration:none;font-size:13px}h1{font-size:clamp(25px,4vw,36px);margin:12px 0 4px}h2{font-size:20px;margin:0 0 12px}p{color:var(--muted);margin:6px 0}
-main{max-width:1100px;margin:26px auto;padding:0 18px 50px}.notice{border:1px solid #725d32;background:#2a2418;color:#f4dfb5;padding:14px 16px;border-radius:12px;margin-bottom:20px}
-.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;margin:16px 0}
-.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}button,.file-label{border:0;border-radius:9px;padding:10px 14px;background:var(--accent);color:#071b1a;font-weight:700;cursor:pointer;font:inherit}button.secondary,.file-label.secondary{background:#26374d;color:var(--text);border:1px solid #3a4d65}button.danger{background:#47272c;color:#ffdfe2;border:1px solid #754047}
-input[type=file]{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.stat{padding:12px;border:1px solid var(--line);border-radius:10px}.stat strong{display:block;font-size:25px}.stat span{color:var(--muted);font-size:13px}
-.toolbar{display:flex;gap:10px;flex-wrap:wrap}.toolbar input,.toolbar select,.review select,.review textarea{background:#0c1726;border:1px solid #34465e;border-radius:8px;color:var(--text);padding:10px;font:inherit}.toolbar input{flex:1;min-width:180px}
-.entry{border:1px solid var(--line);border-radius:12px;padding:16px;margin:12px 0}.entry-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.entry h3{margin:0;font-size:18px}.meta{font-size:13px;color:var(--muted)}.pill{font-size:12px;border:1px solid #52647b;border-radius:30px;padding:3px 9px;white-space:nowrap}
-.review{display:grid;grid-template-columns:minmax(180px,1fr) minmax(220px,2fr);gap:10px;margin-top:14px}.review label{display:grid;gap:5px;color:var(--muted);font-size:13px}.review textarea{min-height:68px;resize:vertical}
-.details{margin-top:12px;border-top:1px solid var(--line);padding-top:10px}.details summary{cursor:pointer;color:var(--accent)}.details pre{white-space:pre-wrap;overflow-wrap:anywhere;color:#d4dfed;font:13px/1.5 ui-monospace,monospace}
-.empty{text-align:center;padding:30px;color:var(--muted)}#status{min-height:24px;color:var(--accent)}
-@media(max-width:650px){.stats{grid-template-columns:repeat(2,1fr)}.review{grid-template-columns:1fr}.entry-head{display:block}.pill{display:inline-block;margin-top:8px}}
+header{padding:25px max(18px,calc((100% - 1100px)/2));border-bottom:1px solid var(--line);background:#0e1929}
+header a{color:var(--accent);text-decoration:none;font-size:13px}h1{font-size:clamp(25px,4vw,34px);margin:10px 0 3px}
+main{max-width:1100px;margin:26px auto;padding:0 18px 55px}.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;margin:16px 0}
+h2{font-size:20px;margin:0 0 12px}p{color:var(--muted);margin:6px 0}
+label{display:grid;gap:6px;color:var(--muted);font-size:13px;margin:10px 0}
+input,select,textarea{width:100%;background:#0c1726;border:1px solid #34465e;border-radius:8px;color:var(--text);padding:11px;font:inherit}
+button{border:0;border-radius:9px;padding:10px 14px;background:var(--accent);color:#071b1a;font-weight:700;cursor:pointer;font:inherit}
+button.secondary{background:#26374d;color:var(--text);border:1px solid #3a4d65}button.danger{background:#47272c;color:#ffdfe2;border:1px solid #754047}button:disabled{opacity:.55;cursor:not-allowed}
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:12px}.login{max-width:480px;margin:50px auto}
+#status{min-height:24px;color:var(--accent)}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.stat{border:1px solid var(--line);border-radius:10px;padding:12px}.stat strong{display:block;font-size:24px}.stat span{font-size:13px;color:var(--muted)}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap}.toolbar input{flex:1;min-width:180px}.entry{border:1px solid var(--line);border-radius:12px;padding:16px;margin:12px 0}
+.entry-head{display:flex;justify-content:space-between;gap:12px}.entry h3{margin:0;font-size:18px}.meta{color:var(--muted);font-size:13px}.pill{font-size:12px;border:1px solid #52647b;border-radius:30px;padding:3px 9px;white-space:nowrap}
+.review{display:grid;grid-template-columns:minmax(170px,1fr) minmax(220px,2fr);gap:10px;margin-top:12px}
+details{border-top:1px solid var(--line);margin-top:12px;padding-top:10px}summary{cursor:pointer;color:var(--accent)}pre{white-space:pre-wrap;overflow-wrap:anywhere;color:#d4dfed;font:13px/1.5 ui-monospace,monospace}
+.hidden{display:none!important}.muted{color:var(--muted)}@media(max-width:650px){.stats{grid-template-columns:repeat(2,1fr)}.review{grid-template-columns:1fr}.entry-head{display:block}.pill{display:inline-block;margin-top:7px}}
 </style>
 </head>
 <body>
-<header><a href="index.html">← Zur INDUSTRYAI-Website</a><h1>Interne Profilprüfung</h1><p>Lokale Arbeitsoberfläche zur Sichtung eingegangener Unternehmensprofile.</p></header>
+<header><a href="index.html">← Zur INDUSTRYAI-Website</a><h1>Unternehmensprofile verwalten</h1><p>Geschützter Administrationsbereich – Anmeldung erforderlich.</p></header>
 <main>
-<div class="notice"><strong>Wichtiger Hinweis:</strong> Diese Seite ist nicht durch einen Login geschützt. Importierte Daten werden ausschließlich im lokalen Browser dieses Geräts gespeichert. Verwenden Sie sie nicht auf gemeinsam genutzten Geräten. Es gibt keine Verbindung zur öffentlichen Unternehmensdatenbank und keine automatische Veröffentlichung.</div>
-<section class="panel">
-<h2>Profilanfragen importieren</h2><p>Wählen Sie die .txt-Datei aus, die das Unternehmen seiner E-Mail beigefügt hat. Mehrere Dateien können gemeinsam importiert werden.</p>
-<div class="actions"><label class="file-label" for="file-input">Textdateien auswählen</label><input id="file-input" type="file" accept=".txt,text/plain" multiple><button class="secondary" id="export-all">Prüfarchiv exportieren</button></div>
-<p id="status" role="status" aria-live="polite"></p>
+<section id="login-panel" class="panel login">
+<h2>Admin-Anmeldung</h2><p>Melde dich mit dem zuvor angelegten Supabase-Benutzerkonto an.</p>
+<form id="login-form">
+<label>E-Mail-Adresse<input id="login-email" type="email" autocomplete="username" required value="industryaisupport@gmail.com"></label>
+<label>Passwort<input id="login-password" type="password" autocomplete="current-password" required></label>
+<div class="actions"><button id="login-button" type="submit">Anmelden</button></div>
+</form><p id="login-status" role="status" aria-live="polite"></p>
 </section>
-<section class="panel"><h2>Prüfungsübersicht</h2><div class="stats">
-<div class="stat"><strong id="count-all">0</strong><span>Gesamt</span></div><div class="stat"><strong id="count-new">0</strong><span>Eingegangen</span></div><div class="stat"><strong id="count-check">0</strong><span>In Prüfung</span></div><div class="stat"><strong id="count-approved">0</strong><span>Freigegeben</span></div>
-</div></section>
-<section class="panel"><div class="toolbar"><input id="search" type="search" placeholder="Unternehmen oder Standort suchen"><select id="filter"><option value="">Alle Status</option><option>Eingegangen</option><option>In Prüfung</option><option>Rückfrage</option><option>Freigegeben</option><option>Abgelehnt</option></select></div>
-<div id="entries"><div class="empty">Noch keine Profilanfragen importiert.</div></div></section>
+<section id="dashboard" class="hidden">
+<div class="panel"><div class="actions" style="justify-content:space-between;align-items:center"><div><h2>Prüfungsübersicht</h2><p id="signed-in-as"></p></div><button class="secondary" id="logout">Abmelden</button></div>
+<div class="stats">
+<div class="stat"><strong id="count-all">0</strong><span>Gesamt</span></div><div class="stat"><strong id="count-new">0</strong><span>Eingegangen</span></div><div class="stat"><strong id="count-check">0</strong><span>In Prüfung / Rückfrage</span></div><div class="stat"><strong id="count-approved">0</strong><span>Freigegeben</span></div>
+</div><p id="status" role="status" aria-live="polite"></p></div>
+<div class="panel"><div class="toolbar"><input id="search" type="search" placeholder="Unternehmen oder Standort suchen"><select id="filter"><option value="">Alle Status</option><option>Eingegangen</option><option>In Prüfung</option><option>Rückfrage</option><option>Freigegeben</option><option>Abgelehnt</option></select><button class="secondary" id="refresh">Aktualisieren</button></div>
+<div id="entries"><p class="muted">Anfragen werden geladen …</p></div></div>
+</section>
 </main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-config.js"></script>
 <script>
 (function(){
 "use strict";
-const STORAGE_KEY="industryai_profile_review_v1";
-const labels={"Unternehmen":"name","Standort":"location","Branche":"sector","Website":"website","Unternehmensbeschreibung":"description","Ausbildungsberufe und Praktika":"apprenticeships","Offene Stellen":"jobs","Mögliche Einblicke":"media","Arbeitsumgebung":"workplace","Maschinen und Technologien":"technology","Mitarbeiterangebote":"benefits","Unternehmenskultur":"culture","Entwicklungsmöglichkeiten":"development","Ansprechpartner":"contactPerson","Geschäftliche E-Mail-Adresse":"contactEmail"};
+const client=window.supabase.createClient(window.INDUSTRYAI_SUPABASE_URL,window.INDUSTRYAI_SUPABASE_PUBLISHABLE_KEY);
+const $=id=>document.getElementById(id);
+let records=[];
 const statuses=["Eingegangen","In Prüfung","Rückfrage","Freigegeben","Abgelehnt"];
-let records=load();
-function load(){try{const x=JSON.parse(localStorage.getItem(STORAGE_KEY)||"[]");return Array.isArray(x)?x:[]}catch(e){return[]}}
-function save(){localStorage.setItem(STORAGE_KEY,JSON.stringify(records))}
-function parse(text){
- const data={};const lines=text.replace(/^\uFEFF/,"").split(/\r?\n/);
- let current="";
- for(const line of lines){
-  const match=line.match(/^([^:\n]{2,90}):\s*$/);
-  if(match&&Object.prototype.hasOwnProperty.call(labels,match[1])){current=labels[match[1]];data[current]="";continue}
-  if(current){data[current]+=(data[current]?"\n":"")+line}
- }
- Object.keys(data).forEach(k=>data[k]=data[k].trim());
- if(!data.name)throw new Error("Unternehmensname fehlt oder das Dateiformat wird nicht erkannt.");
- return data;
+const columns=["company_name","location","sector","website","description","apprenticeships","jobs","media","workplace","technology","benefits","culture","development","contact_person","contact_email"];
+const labels={company_name:"Unternehmen",location:"Standort",sector:"Branche",website:"Website",description:"Unternehmensbeschreibung",apprenticeships:"Ausbildungsberufe und Praktika",jobs:"Offene Stellen",media:"Mögliche Einblicke",workplace:"Arbeitsumgebung",technology:"Maschinen und Technologien",benefits:"Mitarbeiterangebote",culture:"Unternehmenskultur",development:"Entwicklungsmöglichkeiten",contact_person:"Ansprechpartner",contact_email:"Geschäftliche E-Mail-Adresse"};
+function say(message,target="status"){$(target).textContent=message}
+function showDashboard(user){$("login-panel").classList.add("hidden");$("dashboard").classList.remove("hidden");$("signed-in-as").textContent="Angemeldet: "+user.email;loadRecords()}
+function showLogin(){$("dashboard").classList.add("hidden");$("login-panel").classList.remove("hidden")}
+async function loadRecords(){
+ say("Anfragen werden geladen …");
+ const {data,error}=await client.from("company_submissions").select("*").order("created_at",{ascending:false});
+ if(error){say("Laden fehlgeschlagen: "+error.message);return}
+ records=data||[];render();say(records.length+" Profilanfrage(n) geladen.");
 }
-function esc(v){return String(v||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
 function render(){
- const q=document.getElementById("search").value.trim().toLocaleLowerCase("de");
- const f=document.getElementById("filter").value;
- const counts={"Eingegangen":0,"In Prüfung":0,"Rückfrage":0,"Freigegeben":0,"Abgelehnt":0};
- records.forEach(r=>counts[r.status]=(counts[r.status]||0)+1);
- document.getElementById("count-all").textContent=records.length;
- document.getElementById("count-new").textContent=counts["Eingegangen"];
- document.getElementById("count-check").textContent=counts["In Prüfung"]+counts["Rückfrage"];
- document.getElementById("count-approved").textContent=counts["Freigegeben"];
- const host=document.getElementById("entries");host.replaceChildren();
- const shown=records.filter(r=>(!f||r.status===f)&&(!q||(r.data.name+" "+(r.data.location||"")).toLocaleLowerCase("de").includes(q)));
- if(!shown.length){host.innerHTML='<div class="empty">Keine passenden Profilanfragen vorhanden.</div>';return}
+ const counts=Object.fromEntries(statuses.map(s=>[s,0]));records.forEach(r=>counts[r.status]=(counts[r.status]||0)+1);
+ $("count-all").textContent=records.length;$("count-new").textContent=counts["Eingegangen"];
+ $("count-check").textContent=counts["In Prüfung"]+counts["Rückfrage"];$("count-approved").textContent=counts["Freigegeben"];
+ const q=$("search").value.trim().toLocaleLowerCase("de"),f=$("filter").value;
+ const host=$("entries");host.replaceChildren();
+ const shown=records.filter(r=>(!f||r.status===f)&&(!q||(r.company_name+" "+r.location).toLocaleLowerCase("de").includes(q)));
+ if(!shown.length){const p=document.createElement("p");p.className="muted";p.textContent="Keine passenden Profilanfragen vorhanden.";host.append(p);return}
  shown.forEach(r=>{
-  const el=document.createElement("article");el.className="entry";
+  const article=document.createElement("article");article.className="entry";
   const head=document.createElement("div");head.className="entry-head";
-  const title=document.createElement("div");title.innerHTML='<h3>'+esc(r.data.name)+'</h3><div class="meta">'+esc(r.data.location||"Standort nicht angegeben")+' · '+esc(r.data.sector||"Branche nicht angegeben")+'</div>';
-  const pill=document.createElement("span");pill.className="pill";pill.textContent=r.status;
-  head.append(title,pill);el.append(head);
-  const review=document.createElement("div");review.className="review";
-  const statusLabel=document.createElement("label");statusLabel.textContent="Prüfstatus";
-  const select=document.createElement("select");statuses.forEach(s=>{const o=document.createElement("option");o.value=s;o.textContent=s;select.append(o)});select.value=r.status;
-  select.addEventListener("change",()=>{r.status=select.value;r.updatedAt=new Date().toISOString();save();render()});statusLabel.append(select);
-  const noteLabel=document.createElement("label");noteLabel.textContent="Interne Notiz / Rückfrage";
-  const note=document.createElement("textarea");note.value=r.note||"";note.placeholder="Prüfpunkte, fehlende Angaben oder Rückfragen …";
-  note.addEventListener("change",()=>{r.note=note.value;r.updatedAt=new Date().toISOString();save()});noteLabel.append(note);
-  review.append(statusLabel,noteLabel);el.append(review);
-  const details=document.createElement("details");details.className="details";const summary=document.createElement("summary");summary.textContent="Eingereichte Angaben anzeigen";details.append(summary);
-  const pre=document.createElement("pre");pre.textContent=Object.entries(r.data).map(([k,v])=>k+": "+(v||"Keine Angabe")).join("\n");details.append(pre);el.append(details);
+  const title=document.createElement("div");const h=document.createElement("h3");h.textContent=r.company_name;const meta=document.createElement("div");meta.className="meta";meta.textContent=[r.location,r.sector,r.contact_email].filter(Boolean).join(" · ");title.append(h,meta);
+  const pill=document.createElement("span");pill.className="pill";pill.textContent=r.status;head.append(title,pill);article.append(head);
+  const controls=document.createElement("div");controls.className="review";
+  const statusLabel=document.createElement("label");statusLabel.textContent="Prüfstatus";const select=document.createElement("select");
+  statuses.forEach(s=>{const o=document.createElement("option");o.value=s;o.textContent=s;select.append(o)});select.value=r.status;statusLabel.append(select);
+  const noteLabel=document.createElement("label");noteLabel.textContent="Interne Notiz / Rückfrage";const note=document.createElement("textarea");note.value=r.internal_note||"";note.placeholder="Interne Prüfpunkte …";noteLabel.append(note);
+  controls.append(statusLabel,noteLabel);article.append(controls);
+  const details=document.createElement("details");const summary=document.createElement("summary");summary.textContent="Alle eingereichten Angaben anzeigen";const pre=document.createElement("pre");
+  pre.textContent=columns.map(k=>labels[k]+": "+(r[k]||"Keine Angabe")).join("\n");details.append(summary,pre);article.append(details);
   const actions=document.createElement("div");actions.className="actions";
-  const remove=document.createElement("button");remove.className="danger";remove.textContent="Eintrag lokal löschen";remove.addEventListener("click",()=>{if(confirm("Diesen Eintrag aus diesem Browser löschen?")){records=records.filter(x=>x.id!==r.id);save();render()}});actions.append(remove);el.append(actions);
-  host.append(el);
+  const save=document.createElement("button");save.className="secondary";save.textContent="Änderungen speichern";
+  save.addEventListener("click",async()=>{save.disabled=true;const {error}=await client.from("company_submissions").update({status:select.value,internal_note:note.value,updated_at:new Date().toISOString()}).eq("id",r.id);save.disabled=false;if(error){say("Speichern fehlgeschlagen: "+error.message);return}say("Änderungen gespeichert.");await loadRecords()});
+  const approve=document.createElement("button");approve.textContent="Freigeben und veröffentlichen";
+  approve.addEventListener("click",async()=>{
+   if(!confirm("Dieses Unternehmensprofil öffentlich in der Unternehmenswelt freigeben? Kontaktdaten und interne Notizen werden nicht veröffentlicht."))return;
+   approve.disabled=true;
+   const publicProfile={submission_id:r.id,name:r.company_name,location:r.location||"",category:(r.sector||"").toLocaleLowerCase("de"),category_label:r.sector||"",description:r.description||"",profile_url:"",tag:"UNTERNEHMEN",is_published:true};
+   const {error:publishError}=await client.from("company_public_profiles").upsert(publicProfile,{onConflict:"submission_id"});
+   if(publishError){approve.disabled=false;say("Veröffentlichung fehlgeschlagen: "+publishError.message);return}
+   const {error:updateError}=await client.from("company_submissions").update({status:"Freigegeben",internal_note:note.value,updated_at:new Date().toISOString()}).eq("id",r.id);
+   approve.disabled=false;
+   if(updateError){say("Profil wurde veröffentlicht, aber der Prüfstatus konnte nicht aktualisiert werden: "+updateError.message);return}
+   say("Profil wurde in der öffentlichen Datenbank freigegeben.");await loadRecords();
+  });
+  actions.append(save,approve);article.append(actions);host.append(article);
  });
 }
-document.getElementById("file-input").addEventListener("change",async e=>{
- const files=Array.from(e.target.files||[]);let added=0,failed=[];
- for(const file of files){try{const data=parse(await file.text());const key=(data.name+"|"+(data.contactEmail||"")).toLocaleLowerCase("de");
-  if(records.some(r=>r.key===key)){failed.push(file.name+": bereits importiert");continue}
-  records.unshift({id:crypto.randomUUID?crypto.randomUUID():String(Date.now())+Math.random(),key,data,status:"Eingegangen",note:"",createdAt:new Date().toISOString()});added++;
- }catch(err){failed.push(file.name+": "+err.message)}}
- save();render();document.getElementById("status").textContent=added+" Profil(e) importiert."+(failed.length?" Nicht importiert: "+failed.join(" | "):"");e.target.value="";
-});
-document.getElementById("search").addEventListener("input",render);
-document.getElementById("filter").addEventListener("change",render);
-document.getElementById("export-all").addEventListener("click",()=>{
- const blob=new Blob([JSON.stringify({exportedAt:new Date().toISOString(),records},null,2)],{type:"application/json"});
- const url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="industryai-profilpruefung-archiv.json";a.click();URL.revokeObjectURL(url);
- document.getElementById("status").textContent="Prüfarchiv wurde heruntergeladen. Die Datei enthält auch Ansprechpartner und interne Notizen.";
-});
-render();
+$("login-form").addEventListener("submit",async e=>{e.preventDefault();$("login-button").disabled=true;say("Anmeldung läuft …","login-status");
+ const {data,error}=await client.auth.signInWithPassword({email:$("login-email").value.trim(),password:$("login-password").value});
+ $("login-button").disabled=false;if(error){say("Anmeldung fehlgeschlagen. Bitte Zugangsdaten prüfen.","login-status");return}showDashboard(data.user)});
+$("logout").addEventListener("click",async()=>{await client.auth.signOut();records=[];showLogin();say("Du wurdest abgemeldet.","login-status")});
+$("refresh").addEventListener("click",loadRecords);$("search").addEventListener("input",render);$("filter").addEventListener("change",render);
+client.auth.getSession().then(({data})=>{if(data.session)showDashboard(data.session.user)});
 })();
 </script>
-</body>
-</html>
+</body></html>
