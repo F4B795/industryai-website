@@ -292,16 +292,28 @@
   }
 
   function valueScore(userValues, careerValues) {
-    const user = expandTags(userValues, VALUE_ALIASES);
-    const career = expandTags(careerValues, VALUE_ALIASES);
+    const user = unique(userValues || []);
+    const career = unique(careerValues || []);
+    const expandedCareer = expandTags(career, VALUE_ALIASES);
 
     if (!user.length || !career.length) return null;
 
-    const matched = user.filter(function (value) {
-      return career.includes(value);
+    let total = 0;
+
+    user.forEach(function (value) {
+      if (career.includes(value)) {
+        total += 100;
+        return;
+      }
+
+      const related = (VALUE_ALIASES[value] || []).some(function (alias) {
+        return expandedCareer.includes(alias);
+      });
+
+      if (related) total += 50;
     });
 
-    return clamp(Math.round(matched.length / user.length * 100), 0, 100);
+    return clamp(Math.round(total / user.length), 0, 100);
   }
 
   function makeConflictNotes(avoidances, conditions, career) {
