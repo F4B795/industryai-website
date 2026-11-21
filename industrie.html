@@ -313,6 +313,121 @@
       .job, .job-link .job { transition: none; }
     }
 
+  
+    .industry-challenge {
+      margin-top: 28px;
+      padding: 28px;
+      border: 1px solid var(--sector-border);
+      border-radius: 14px;
+      background: linear-gradient(145deg, var(--sector-soft), #0b1d2e 78%);
+    }
+
+    .challenge-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .challenge-tag {
+      display: inline-block;
+      padding: 8px 12px;
+      border: 1px solid var(--sector-border);
+      border-radius: 20px;
+      font-size: 12px;
+    }
+
+    .industry-scenario {
+      padding: 22px;
+      border: 1px solid #294960;
+      border-radius: 10px;
+      background: #091b2b;
+    }
+
+    .industry-scenario h3 {
+      margin-top: 0;
+      color: var(--sector-accent);
+    }
+
+    #industry-question {
+      color: #d8e6ee;
+      line-height: 1.7;
+    }
+
+    #industry-answers {
+      display: grid;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .industry-answer {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid #36566d;
+      border-radius: 8px;
+      background: #122b40;
+      color: #eaf4fa;
+      text-align: left;
+      font: inherit;
+      line-height: 1.55;
+      cursor: pointer;
+    }
+
+    .industry-answer:hover:not(:disabled) {
+      border-color: var(--sector-accent);
+      background: var(--sector-soft);
+    }
+
+    .industry-answer:disabled {
+      cursor: default;
+      opacity: .88;
+    }
+
+    .industry-answer.correct {
+      border-color: #39c98a;
+      background: #123a34;
+    }
+
+    .industry-answer.wrong {
+      border-color: #e27a7a;
+      background: #42252c;
+    }
+
+    #industry-feedback {
+      min-height: 55px;
+      margin-top: 18px;
+      color: var(--sector-accent);
+      line-height: 1.7;
+    }
+
+    .industry-action {
+      margin-top: 12px;
+      padding: 12px 17px;
+      border: 0;
+      border-radius: 7px;
+      background: var(--sector-accent);
+      color: #071524;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .industry-action:hover {
+      background: var(--sector-hover);
+    }
+
+    .industry-action:focus-visible,
+    .industry-answer:focus-visible {
+      outline: 2px solid #fff;
+      outline-offset: 3px;
+    }
+
+    @media(max-width:600px) {
+      .industry-challenge { padding: 18px; }
+      .industry-scenario { padding: 16px; }
+    }
+
   </style>
 </head>
 
@@ -405,12 +520,141 @@
   </div>
 </section>
 
+
+<section class="section">
+  <div class="eyebrow">PROBIERE ES AUS</div>
+  <h2 class="section-title">Deine Industrie-Challenge</h2>
+  <p class="muted">
+    Im Produktionsalltag zählen nicht nur technisches Verständnis,
+    sondern auch Arbeitssicherheit, Qualität und klare Abläufe.
+    Entscheide in vier typischen Situationen, wie du vorgehen würdest.
+  </p>
+
+  <div class="industry-challenge">
+    <div class="challenge-header">
+      <h2 id="industry-title" style="margin:0">Situation 01</h2>
+      <span class="challenge-tag" id="industry-progress">SITUATION 1 VON 4</span>
+    </div>
+
+    <div class="industry-scenario">
+      <p id="industry-question"></p>
+      <div id="industry-answers"></div>
+      <div id="industry-feedback" aria-live="polite"></div>
+      <button class="industry-action" id="industry-restart" type="button" hidden>
+        Challenge erneut starten
+      </button>
+    </div>
+
+    <p class="muted" style="font-size:12px;margin:16px 0 0">
+      Diese Übung dient der Berufsorientierung. In realen Betrieben gelten
+      immer die betrieblichen Sicherheitsanweisungen, Arbeitsfreigaben
+      und Zuständigkeiten.
+    </p>
+  </div>
+</section>
+
 <footer>
   INDUSTRYAI · Die Zukunft der Berufsorientierung
   <br><br>
   <a href="berufe-entdecken.html">Zurück zum Berufecampus</a> · <a href="datenschutz.html">Datenschutz</a>
 </footer>
 
+
+<script>
+(function() {
+  "use strict";
+
+  const questions = [{"title":"Situation 01 – Unklare Arbeitsunterlage","question":"Du erhältst einen Fertigungsauftrag, aber eine wichtige Angabe auf der Zeichnung ist für dich nicht eindeutig. Was ist der richtige nächste Schritt?","answers":["Du schätzt den fehlenden Wert und beginnst, damit der Auftrag nicht warten muss.","Du fragst die zuständige Fachkraft oder Arbeitsvorbereitung und klärst die Angabe vor Beginn.","Du übernimmst den Wert aus einem ähnlichen älteren Auftrag, ohne Rückfrage."],"correct":1,"explanation":"Unklare oder widersprüchliche Vorgaben müssen vor der Ausführung geklärt werden. Vermutungen oder ungeprüfte Übernahmen können zu fehlerhaften Bauteilen und Sicherheitsproblemen führen."},{"title":"Situation 02 – Auffälligkeit an einer Anlage","question":"Während der Arbeit bemerkst du ungewöhnliche Geräusche und starke Vibrationen an einer Maschine. Wie reagierst du?","answers":["Du arbeitest weiter und kontrollierst die Maschine erst am Schichtende.","Du greifst in den Arbeitsbereich, um die Ursache schnell zu ertasten.","Du hältst dich an die betriebliche Stopp- und Sicherheitsprozedur und informierst die zuständige Fachkraft."],"correct":2,"explanation":"Ungewöhnliche Geräusche oder Vibrationen können auf einen Fehler hinweisen. Nicht improvisieren oder in den Gefahrenbereich greifen. Die Anlage ist nach den betrieblichen Vorgaben sicher anzuhalten und die zuständige Person zu informieren."},{"title":"Situation 03 – Qualitätsabweichung","question":"Bei einer Stichprobenkontrolle stellst du fest, dass ein Bauteil möglicherweise außerhalb der geforderten Spezifikation liegt. Was ist sinnvoll?","answers":["Du kennzeichnest das Teil, hältst es nach den betrieblichen Regeln zurück und meldest die Abweichung zur Prüfung.","Du legst es zu den Gutteilen, wenn der Unterschied kaum sichtbar ist.","Du bearbeitest das Teil eigenständig nach, ohne die Freigabe oder Vorgaben zu prüfen."],"correct":0,"explanation":"Verdächtige Teile dürfen nicht unkontrolliert in den weiteren Prozess gelangen. Kennzeichnung, Trennung und Meldung ermöglichen eine nachvollziehbare Prüfung und Entscheidung über das weitere Vorgehen."},{"title":"Situation 04 – Material und Rückverfolgbarkeit","question":"Für einen Auftrag wird ein bestimmter Werkstoff benötigt. Im Lager findest du mehrere ähnlich aussehende Materialien. Wie gehst du vor?","answers":["Du nimmst das Material, das optisch am besten passt.","Du prüfst Kennzeichnung und Auftragsdaten und lässt Unklarheiten vor der Verwendung klären.","Du verwendest den Restbestand aus dem vorherigen Auftrag, ohne die Kennzeichnung zu kontrollieren."],"correct":1,"explanation":"Werkstoffe müssen anhand der vorgesehenen Kennzeichnung und Auftragsunterlagen eindeutig zugeordnet werden. Die Optik allein ist kein zuverlässiger Nachweis für die richtige Werkstoffqualität."}];
+  let currentQuestion = 0;
+  let score = 0;
+
+  const title = document.getElementById("industry-title");
+  const questionText = document.getElementById("industry-question");
+  const answers = document.getElementById("industry-answers");
+  const feedback = document.getElementById("industry-feedback");
+  const progress = document.getElementById("industry-progress");
+  const restart = document.getElementById("industry-restart");
+
+  function showQuestion() {
+    const item = questions[currentQuestion];
+    title.textContent = item.title;
+    questionText.textContent = item.question;
+    progress.textContent = "SITUATION " + (currentQuestion + 1) + " VON " + questions.length;
+    feedback.textContent = "";
+    answers.replaceChildren();
+
+    item.answers.forEach(function(answer, index) {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "industry-answer";
+      button.textContent = String.fromCharCode(65 + index) + ": " + answer;
+      button.addEventListener("click", function() {
+        checkAnswer(index);
+      });
+      answers.appendChild(button);
+    });
+  }
+
+  function checkAnswer(selected) {
+    const item = questions[currentQuestion];
+    const buttons = answers.querySelectorAll(".industry-answer");
+
+    buttons.forEach(function(button, index) {
+      button.disabled = true;
+      if (index === item.correct) button.classList.add("correct");
+      if (index === selected && selected !== item.correct) {
+        button.classList.add("wrong");
+      }
+    });
+
+    if (selected === item.correct) {
+      score++;
+      feedback.textContent = "Richtig! " + item.explanation;
+    } else {
+      feedback.textContent = "Nicht ganz. " + item.explanation;
+    }
+
+    const next = document.createElement("button");
+    next.type = "button";
+    next.className = "industry-action";
+    next.textContent = currentQuestion === questions.length - 1
+      ? "Auswertung anzeigen"
+      : "Nächste Situation";
+    next.addEventListener("click", function() {
+      currentQuestion++;
+      if (currentQuestion < questions.length) showQuestion();
+      else showResult();
+    });
+    answers.appendChild(next);
+  }
+
+  function showResult() {
+    title.textContent = "Challenge abgeschlossen";
+    questionText.textContent = "Du hast " + score + " von " + questions.length + " Situationen richtig gelöst.";
+    progress.textContent = "ERGEBNIS";
+    answers.replaceChildren();
+
+    if (score === questions.length) {
+      feedback.textContent = "Sehr gut! Du hast alle vier Situationen richtig eingeschätzt und wichtige Grundlagen aus dem Produktionsalltag erkannt.";
+    } else if (score >= 2) {
+      feedback.textContent = "Gute Grundlage: " + score + " von " + questions.length + " richtig. Lies die Erklärungen und wiederhole die Challenge, um deine Entscheidungen zu festigen.";
+    } else {
+      feedback.textContent = "Hier gibt es noch Lernpotenzial. Nutze die Erklärungen und starte anschließend einen neuen Versuch.";
+    }
+    restart.hidden = false;
+  }
+
+  function restartChallenge() {
+    currentQuestion = 0;
+    score = 0;
+    restart.hidden = true;
+    showQuestion();
+  }
+
+  restart.addEventListener("click", restartChallenge);
+  showQuestion();
+})();
+</script>
 
 </body>
 </html>
