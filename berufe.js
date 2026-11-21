@@ -635,7 +635,7 @@ window.IndustryAICareers = {
     },
     {
       id: "bauzeichner",
-      name: "Bauzeichner/in",
+      name: "Bautechnische/r Konstrukteur/in",
       category: "Technik, Industrie & Handwerk",
       training: { type: "dual", durationMonths: 36 },
       profile: { T: 2, A: 4, S: 2, K: 3, C: 3, O: 4, N: 1, B: 2, L: 3 },
