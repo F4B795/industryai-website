@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "entries": [
+    {
+      "id": "demo-mustertechnik",
+      "status": "demo",
+      "name": "Mustertechnik GmbH",
+      "category": "industrie und technik",
+      "categoryLabel": "Industrie & Technik",
+      "location": "Musterstadt",
+      "description": "Ein beispielhaftes Unternehmensprofil aus der industriellen Fertigung. Die Angaben und Angebote sind fiktiv und dienen nur zur Demonstration.",
+      "image": "images/Photorealistic_premium_corporate_website_background_photogra%20(1).png",
+      "imageAlt": "Beispielhafte industrielle Fertigung mit Mitarbeitenden",
+      "profile": "betrieb-profil.html",
+      "tag": "MUSTERPROFIL · BEISPIEL"
+    }
+  ]
+}
