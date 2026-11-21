@@ -168,13 +168,14 @@
   if(submitTimer)clearTimeout(submitTimer);
   submitTimer=setTimeout(()=>{
    document.getElementById("submit-profile").disabled=false;
-   document.querySelector("#company-profile-form #copy-status").textContent="Es kam keine Rückmeldung vom Google-Formularserver. Bitte prüfen Sie in Google Apps Script unter „Ausführungen“, ob doPost gestartet wurde.";
-  },15000);
+   document.querySelector("#company-profile-form #copy-status").textContent="Nach 45 Sekunden ist noch keine Serverbestätigung eingetroffen. Das bedeutet nicht automatisch, dass die E-Mail fehlgeschlagen ist. Bitte nicht sofort erneut absenden; prüfe zuerst den Apps-Script-Ausführungsverlauf und den Posteingang.";
+  },45000);
  });
  let submitTimer=null;
  window.addEventListener("message",event=>{
-  const frame=document.getElementById("industryai-submit-frame");
-  if(event.source!==frame.contentWindow || !event.data || event.data.type!=="industryai-form-result")return;
+  const trustedOrigin = event.origin === "https://script.google.com" ||
+    /^https:\/\/([a-z0-9-]+\.)*googleusercontent\.com$/i.test(event.origin);
+  if(!trustedOrigin || !event.data || event.data.type!=="industryai-form-result")return;
   if(submitTimer)clearTimeout(submitTimer);
   const status=document.querySelector("#company-profile-form #copy-status");
   const button=document.getElementById("submit-profile");
