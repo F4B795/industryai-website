@@ -112,6 +112,22 @@ footer{text-align:center;padding:30px;border-top:1px solid #294960;color:#91a7ba
 .tool-feedback:empty{display:none}
 .tool-geometry-form button:focus-visible,.tool-geometry-form input:focus-visible{outline:2px solid white;outline-offset:3px}
 
+
+.cutting-calc{margin:20px 0;padding:18px;background:#091b2b;border:1px solid #294960;border-radius:10px}
+.cutting-calc-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.cutting-calc .calc-field{min-width:0}
+.cutting-calc label{margin:12px 0 7px}
+.cutting-calc input{width:100%}
+.cutting-results{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:18px}
+.cutting-result{padding:14px;background:#071524;border-radius:8px}
+.cutting-result small{display:block;color:#91a7ba;margin-bottom:6px}
+.cutting-result strong{display:block;color:#42d8ed;font-size:21px;font-variant-numeric:tabular-nums}
+.cutting-calc-note{color:#91a7ba;font-size:12px;line-height:1.6;margin-top:12px}
+.calc-task-feedback{margin-top:16px;padding:16px;border-left:3px solid #42d8ed;background:#091b2b;color:#c5d5e3;line-height:1.7}
+.calc-task-feedback:empty{display:none}
+.calc-form button:focus-visible,.calc-form input:focus-visible{outline:2px solid white;outline-offset:3px}
+@media(max-width:520px){.cutting-calc-grid,.cutting-results{grid-template-columns:1fr}.cutting-result strong{font-size:19px}}
+
 </style>
 </head>
 <body>
@@ -331,8 +347,77 @@ footer{text-align:center;padding:30px;border-top:1px solid #294960;color:#91a7ba
 
 
 
+
+  <section class="panel quiz" aria-labelledby="cutting-data-title" style="margin-top:22px">
+    <h2 id="cutting-data-title">9. Schnittgeschwindigkeit, Drehzahl und Vorschub</h2>
+    <p class="quiz-intro">Drei wichtige Größen beim Drehen sind miteinander verknüpft: Schnittgeschwindigkeit, Werkstückdrehzahl und Vorschub. Mit diesem Rechner kannst du den Zusammenhang anhand vereinfachter Beispiele nachvollziehen.</p>
+    <div class="explanation">
+      **Schnittgeschwindigkeit (v<sub>c</sub>):** Geschwindigkeit, mit der sich die Werkstückoberfläche an der Schneide vorbeibewegt, angegeben in m/min.<br>
+      **Drehzahl (n):** Umdrehungen des Werkstücks pro Minute, angegeben in min⁻¹ oder U/min.<br>
+      **Vorschub (f):** Weg des Werkzeugs pro Werkstückumdrehung, beim Drehen häufig in mm/U angegeben.
+    </div>
+    <div class="cutting-calc">
+      <h3 style="margin-top:0">Drehzahl berechnen</h3>
+      <div class="cutting-calc-grid">
+        <div class="calc-field">
+          <label for="calc-vc">Schnittgeschwindigkeit v<sub>c</sub> (m/min)</label>
+          <input id="calc-vc" type="number" min="1" max="1000" step="1" value="180" inputmode="decimal">
+        </div>
+        <div class="calc-field">
+          <label for="calc-diameter">Werkstückdurchmesser D (mm)</label>
+          <input id="calc-diameter" type="number" min="1" max="1000" step="1" value="30" inputmode="decimal">
+        </div>
+      </div>
+      <div class="explanation">
+        Formel für die theoretische Drehzahl:<br>
+        <strong>n = (v<sub>c</sub> × 1000) / (π × D)</strong>
+      </div>
+      <div class="cutting-results">
+        <div class="cutting-result"><small>Berechnete Drehzahl</small><strong id="calc-rpm" aria-live="polite">1.910 U/min</strong></div>
+        <div class="cutting-result"><small>Vorschubgeschwindigkeit bei f = 0,15 mm/U</small><strong id="calc-feed-rate">286,5 mm/min</strong></div>
+      </div>
+      <p class="cutting-calc-note">Der Rechner liefert einen theoretischen Wert. Reale Drehzahlen müssen unter Berücksichtigung von Werkstoff, Werkzeug, Maschine, Spannbedingungen und zulässigen Grenzwerten festgelegt werden. Die Eingaben sind keine Schnittdatenempfehlung.</p>
+    </div>
+    <div class="cutting-calc">
+      <h3 style="margin-top:0">Vorschubgeschwindigkeit berechnen</h3>
+      <div class="cutting-calc-grid">
+        <div class="calc-field">
+          <label for="calc-feed">Vorschub f (mm/U)</label>
+          <input id="calc-feed" type="number" min="0.001" max="5" step="0.001" value="0.15" inputmode="decimal">
+        </div>
+        <div class="calc-field">
+          <label for="calc-feed-rpm">Drehzahl n (U/min)</label>
+          <input id="calc-feed-rpm" type="number" min="1" max="100000" step="1" value="1910" inputmode="decimal">
+        </div>
+      </div>
+      <div class="cutting-results">
+        <div class="cutting-result"><small>Vorschubgeschwindigkeit v<sub>f</sub></small><strong id="calc-feed-output">286,5 mm/min</strong></div>
+      </div>
+      <p class="cutting-calc-note">Formel: v<sub>f</sub> = f × n. Das Ergebnis beschreibt den theoretischen Vorschubweg pro Minute.</p>
+    </div>
+    <form id="cutting-data-exercise" class="calc-form">
+      <fieldset class="quiz-question">
+        <legend>Frage 1: Was passiert mit der theoretischen Drehzahl, wenn der Werkstückdurchmesser bei gleicher Schnittgeschwindigkeit größer wird?</legend>
+        <label class="quiz-option"><input type="radio" name="diameter-effect" value="higher" required> Die Drehzahl wird höher.</label>
+        <label class="quiz-option"><input type="radio" name="diameter-effect" value="lower"> Die Drehzahl wird niedriger.</label>
+        <label class="quiz-option"><input type="radio" name="diameter-effect" value="same"> Die Drehzahl bleibt gleich.</label>
+      </fieldset>
+      <fieldset class="quiz-question">
+        <legend>Frage 2: Wie berechnet sich die Vorschubgeschwindigkeit beim Drehen?</legend>
+        <label class="quiz-option"><input type="radio" name="feed-formula" value="add" required> Vorschub pro Umdrehung plus Drehzahl.</label>
+        <label class="quiz-option"><input type="radio" name="feed-formula" value="multiply"> Vorschub pro Umdrehung mal Drehzahl.</label>
+        <label class="quiz-option"><input type="radio" name="feed-formula" value="divide"> Drehzahl geteilt durch Vorschub pro Umdrehung.</label>
+      </fieldset>
+      <div class="quiz-actions">
+        <button type="submit">Wissen überprüfen</button>
+        <button type="button" id="cutting-data-restart" class="secondary" hidden>Übung wiederholen</button>
+      </div>
+      <div id="cutting-data-feedback" class="calc-task-feedback" role="status" aria-live="polite"></div>
+    </form>
+  </section>
+
   <section class="panel quiz" aria-labelledby="tool-geometry-title" style="margin-top:22px">
-    <h2 id="tool-geometry-title">8. Werkzeuggeometrie und Spanbildung</h2>
+    <h2 id="tool-geometry-title">9. Werkzeuggeometrie und Spanbildung</h2>
     <p class="quiz-intro">Beim Drehen beeinflusst die Geometrie des Werkzeugs, wie der Werkstoff getrennt wird und wie der Span abfließt. Lerne die grundlegenden Bereiche eines einschneidigen Drehwerkzeugs kennen.</p>
     <div class="tool-geometry">
       <svg viewBox="0 0 660 350" role="img" aria-labelledby="tool-geometry-svg-title tool-geometry-svg-desc">
@@ -398,7 +483,7 @@ footer{text-align:center;padding:30px;border-top:1px solid #294960;color:#91a7ba
   </section>
 
   <section class="panel quiz" aria-labelledby="roughness-title" style="margin-top:22px">
-    <h2 id="roughness-title">8. Oberflächenqualität und Rauheit (Ra)</h2>
+    <h2 id="roughness-title">9. Oberflächenqualität und Rauheit (Ra)</h2>
     <p class="quiz-intro">Nach dem Drehen wird nicht nur das Maß geprüft. Auch die Oberfläche kann eine wichtige Anforderung sein. Der Mittenrauwert Ra beschreibt vereinfacht die mittlere Abweichung des Rauheitsprofils von seiner Mittellinie. Ein kleinerer Ra-Wert bedeutet im Allgemeinen eine feinere Oberfläche.</p>
     <div class="explanation">
       **Ra** wird üblicherweise in Mikrometern (µm) angegeben. Der geforderte Wert hängt vom Bauteil, seiner Funktion und der technischen Zeichnung ab. Eine kleinere Zahl ist nicht automatisch für jedes Bauteil besser oder erforderlich.
@@ -449,7 +534,7 @@ footer{text-align:center;padding:30px;border-top:1px solid #294960;color:#91a7ba
   </section>
 
   <section class="panel quiz" aria-labelledby="quiz-title">
-    <h2 id="quiz-title">9. Dein CNC-Wissenstest</h2>
+    <h2 id="quiz-title">10. Dein CNC-Wissenstest</h2>
     <p class="quiz-intro">Prüfe, was du aus der Simulation mitgenommen hast. Wähle pro Frage eine Antwort und lass dir anschließend die Lösungen erklären.</p>
     <form id="cnc-quiz">
       <fieldset class="quiz-question">
@@ -864,6 +949,87 @@ footer{text-align:center;padding:30px;border-top:1px solid #294960;color:#91a7ba
     summary.textContent=score===2
       ?"Gut. Du kannst die wichtigsten Bereiche des Drehwerkzeugs zuordnen."
       :"Wiederhole die Beschreibungen von Schneide, Spanfläche und Freifläche und versuche es erneut.";
+    feedback.appendChild(summary);
+    restart.hidden=false;
+    form.querySelectorAll('input[type="radio"]').forEach(function(input){input.disabled=true;});
+    form.querySelector('button[type="submit"]').disabled=true;
+  });
+  restart.addEventListener("click",function(){
+    form.reset();
+    form.querySelectorAll('input[type="radio"]').forEach(function(input){input.disabled=false;});
+    form.querySelector('button[type="submit"]').disabled=false;
+    feedback.replaceChildren();
+    restart.hidden=true;
+  });
+})();
+</script>
+
+
+<script>
+(function(){
+  "use strict";
+  const vc=document.getElementById("calc-vc");
+  const diameter=document.getElementById("calc-diameter");
+  const rpm=document.getElementById("calc-rpm");
+  const feedRate=document.getElementById("calc-feed-rate");
+  const feed=document.getElementById("calc-feed");
+  const feedRpm=document.getElementById("calc-feed-rpm");
+  const feedOutput=document.getElementById("calc-feed-output");
+  const numberFormat=new Intl.NumberFormat("de-DE",{maximumFractionDigits:1});
+  function validPositive(input,max){
+    const value=Number(input.value);
+    return input.value.trim()!==""&&Number.isFinite(value)&&value>0&&value<=max;
+  }
+  function updateRpm(){
+    if(!validPositive(vc,1000)||!validPositive(diameter,1000)){
+      rpm.textContent="Eingabe prüfen";
+      feedRate.textContent="–";
+      return;
+    }
+    const n=(Number(vc.value)*1000)/(Math.PI*Number(diameter.value));
+    rpm.textContent=numberFormat.format(n)+" U/min";
+    feedRate.textContent=numberFormat.format(n*0.15)+" mm/min";
+  }
+  function updateFeed(){
+    if(!validPositive(feed,5)||!validPositive(feedRpm,100000)){
+      feedOutput.textContent="Eingabe prüfen";
+      return;
+    }
+    feedOutput.textContent=numberFormat.format(Number(feed.value)*Number(feedRpm.value))+" mm/min";
+  }
+  [vc,diameter].forEach(input=>input.addEventListener("input",updateRpm));
+  [feed,feedRpm].forEach(input=>input.addEventListener("input",updateFeed));
+  updateRpm();
+  updateFeed();
+
+  const form=document.getElementById("cutting-data-exercise");
+  const feedback=document.getElementById("cutting-data-feedback");
+  const restart=document.getElementById("cutting-data-restart");
+  if(!form||!feedback||!restart)return;
+  const questions=[
+    {name:"diameter-effect",answer:"lower",explanation:"Bei gleicher Schnittgeschwindigkeit sinkt die erforderliche Drehzahl, wenn der Durchmesser größer wird. Das folgt aus n = (vc × 1000) / (π × D)."},
+    {name:"feed-formula",answer:"multiply",explanation:"Die Vorschubgeschwindigkeit ergibt sich aus Vorschub pro Umdrehung mal Drehzahl: vf = f × n."}
+  ];
+  form.addEventListener("submit",function(event){
+    event.preventDefault();
+    if(!form.reportValidity())return;
+    const data=new FormData(form);
+    let score=0;
+    feedback.replaceChildren();
+    const heading=document.createElement("h3");
+    questions.forEach(function(item,index){
+      const correct=data.get(item.name)===item.answer;
+      if(correct)score++;
+      const line=document.createElement("p");
+      line.textContent="Frage "+(index+1)+": "+(correct?"Richtig. ":"Nicht richtig. ")+item.explanation;
+      feedback.appendChild(line);
+    });
+    heading.textContent="Dein Ergebnis: "+score+" von 2 richtig";
+    feedback.prepend(heading);
+    const summary=document.createElement("p");
+    summary.textContent=score===2
+      ?"Gut. Du hast die Zusammenhänge zwischen Durchmesser, Drehzahl und Vorschub verstanden."
+      :"Schau dir die Formeln noch einmal an und wiederhole die Fragen.";
     feedback.appendChild(summary);
     restart.hidden=false;
     form.querySelectorAll('input[type="radio"]').forEach(function(input){input.disabled=true;});
