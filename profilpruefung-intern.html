@@ -107,7 +107,8 @@ function renderMessages(){
     const sender=document.createElement("span");
     sender.textContent=[message.name,date.toLocaleString("de-DE")].filter(Boolean).join(" · ");
     const emailLink=document.createElement("a");
-    emailLink.href="mailto:"+encodeURIComponent(message.email)+"?subject="+encodeURIComponent("Re: "+message.subject);
+    const addressParts=message.email.split("@");
+    emailLink.href="mailto:"+encodeURIComponent(addressParts[0])+"@"+encodeURIComponent(addressParts[1])+"?subject="+encodeURIComponent("Re: "+message.subject);
     emailLink.textContent=message.email;
     emailLink.style.color="var(--accent)";
     emailLink.style.textDecoration="underline";
