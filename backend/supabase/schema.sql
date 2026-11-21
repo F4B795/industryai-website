@@ -84,6 +84,157 @@ $;
 revoke all on function private.industryai_is_admin() from public, anon;
 grant execute on function private.industryai_is_admin() to authenticated;
 
+-- HMAC-based rate-limit records. Raw IP addresses and contact emails are not stored.
+create table if not exists private.company_profile_rate_limits (
+  key_hash text primary key check (key_hash ~ '^[a-f0-9]{64}
+
+alter table public.industryai_admins enable row level security;
+alter table public.company_submissions enable row level security;
+alter table public.company_public_profiles enable row level security;
+
+-- Public intake stays closed until privacy, anti-spam and retention controls
+-- are complete. Enable later with a dedicated server-side submission flow.
+drop policy if exists "public submit company profile" on public.company_submissions;
+
+drop policy if exists "admins read submissions" on public.company_submissions;
+create policy "admins read submissions"
+on public.company_submissions for select to authenticated
+using (private.industryai_is_admin());
+
+drop policy if exists "admins update submissions" on public.company_submissions;
+create policy "admins update submissions"
+on public.company_submissions for update to authenticated
+using (public.industryai_is_admin())
+with check (public.industryai_is_admin());
+
+drop policy if exists "admins manage admin list" on public.industryai_admins;
+create policy "admins manage admin list"
+on public.industryai_admins for all to authenticated
+using (public.industryai_is_admin())
+with check (public.industryai_is_admin());
+
+drop policy if exists "public read published profiles" on public.company_public_profiles;
+create policy "public read published profiles"
+on public.company_public_profiles for select to anon, authenticated
+using (is_published = true);
+
+drop policy if exists "admins manage public profiles" on public.company_public_profiles;
+create policy "admins manage public profiles"
+on public.company_public_profiles for all to authenticated
+using (public.industryai_is_admin())
+with check (public.industryai_is_admin());
+
+grant usage on schema public to anon, authenticated;
+grant select, update on public.company_submissions to authenticated;
+grant insert, select on public.company_submissions to service_role;
+grant select on public.company_public_profiles to anon, authenticated;
+grant insert, update, delete on public.company_public_profiles to authenticated;
+grant select on public.industryai_admins to authenticated;
+grant insert, update, delete on public.industryai_admins to authenticated;
+grant execute on function public.industryai_is_admin() to authenticated;
+
+-- First admin bootstrap (run only after creating the admin user in Supabase Auth):
+-- insert into public.industryai_admins(user_id)
+-- values ('PASTE_AUTH_USER_UUID_HERE');
+),
+  window_started_at timestamptz not null default now(),
+  request_count integer not null default 1 check (request_count >= 1)
+);
+alter table private.company_profile_rate_limits enable row level security;
+revoke all on table private.company_profile_rate_limits from public, anon, authenticated, service_role;
+
+create or replace function public.consume_company_profile_rate_limit(
+  p_key_hash text,
+  p_limit integer,
+  p_window_seconds integer
+)
+returns boolean
+language plpgsql
+security definer
+set search_path = ''
+as $
+declare
+  v_now timestamptz := clock_timestamp();
+  v_allowed boolean;
+begin
+  if p_key_hash !~ '^[a-f0-9]{64}
+
+alter table public.industryai_admins enable row level security;
+alter table public.company_submissions enable row level security;
+alter table public.company_public_profiles enable row level security;
+
+-- Public intake stays closed until privacy, anti-spam and retention controls
+-- are complete. Enable later with a dedicated server-side submission flow.
+drop policy if exists "public submit company profile" on public.company_submissions;
+
+drop policy if exists "admins read submissions" on public.company_submissions;
+create policy "admins read submissions"
+on public.company_submissions for select to authenticated
+using (private.industryai_is_admin());
+
+drop policy if exists "admins update submissions" on public.company_submissions;
+create policy "admins update submissions"
+on public.company_submissions for update to authenticated
+using (public.industryai_is_admin())
+with check (public.industryai_is_admin());
+
+drop policy if exists "admins manage admin list" on public.industryai_admins;
+create policy "admins manage admin list"
+on public.industryai_admins for all to authenticated
+using (public.industryai_is_admin())
+with check (public.industryai_is_admin());
+
+drop policy if exists "public read published profiles" on public.company_public_profiles;
+create policy "public read published profiles"
+on public.company_public_profiles for select to anon, authenticated
+using (is_published = true);
+
+drop policy if exists "admins manage public profiles" on public.company_public_profiles;
+create policy "admins manage public profiles"
+on public.company_public_profiles for all to authenticated
+using (public.industryai_is_admin())
+with check (public.industryai_is_admin());
+
+grant usage on schema public to anon, authenticated;
+grant select, update on public.company_submissions to authenticated;
+grant select on public.company_public_profiles to anon, authenticated;
+grant insert, update, delete on public.company_public_profiles to authenticated;
+grant select on public.industryai_admins to authenticated;
+grant insert, update, delete on public.industryai_admins to authenticated;
+grant execute on function public.industryai_is_admin() to authenticated;
+
+-- First admin bootstrap (run only after creating the admin user in Supabase Auth):
+-- insert into public.industryai_admins(user_id)
+-- values ('PASTE_AUTH_USER_UUID_HERE');
+
+     or p_limit < 1 or p_limit > 100
+     or p_window_seconds < 60 or p_window_seconds > 86400 then
+    return false;
+  end if;
+  insert into private.company_profile_rate_limits as rl
+    (key_hash, window_started_at, request_count)
+  values (p_key_hash, v_now, 1)
+  on conflict (key_hash) do update
+  set
+    window_started_at = case
+      when rl.window_started_at <= v_now - make_interval(secs => p_window_seconds)
+      then v_now else rl.window_started_at end,
+    request_count = case
+      when rl.window_started_at <= v_now - make_interval(secs => p_window_seconds)
+      then 1 else rl.request_count + 1 end
+  returning request_count <= p_limit into v_allowed;
+  if random() < 0.01 then
+    delete from private.company_profile_rate_limits
+    where window_started_at < v_now - interval '30 days';
+  end if;
+  return coalesce(v_allowed, false);
+end;
+$;
+revoke all on function public.consume_company_profile_rate_limit(text, integer, integer)
+  from public, anon, authenticated;
+grant execute on function public.consume_company_profile_rate_limit(text, integer, integer)
+  to service_role;
+
 alter table public.industryai_admins enable row level security;
 alter table public.company_submissions enable row level security;
 alter table public.company_public_profiles enable row level security;
