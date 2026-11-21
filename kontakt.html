@@ -63,7 +63,7 @@
         <label for="contact-message">Ihre Nachricht</label>
         <textarea id="contact-message" name="message" maxlength="5000" required></textarea>
       </div>
-      <button class="contact-submit" type="submit">E-Mail-Entwurf erstellen</button>
+      <button class="contact-submit" id="create-email-draft" type="button">E-Mail-Entwurf erstellen</button>
       <p class="contact-status" id="contact-status" role="status" aria-live="polite"></p>
     </form>
   </section>
@@ -87,8 +87,7 @@
   "use strict";
   const form=document.getElementById("contact-form");
   const status=document.getElementById("contact-status");
-  form.addEventListener("submit",function(event){
-    event.preventDefault();
+  document.getElementById("create-email-draft").addEventListener("click",function(){
     if(!form.reportValidity()) return;
     const value=id=>document.getElementById(id).value.trim();
     const subject=value("contact-subject");
