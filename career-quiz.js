@@ -593,6 +593,30 @@
   }
 
   function nextQuestion() {
+    const question = questions[currentQuestion];
+    const answer = answers[question.id];
+    const hasAnswer = Array.isArray(answer)
+      ? answer.length > 0
+      : answer !== undefined;
+
+    if (!hasAnswer) {
+      let message = questionContainer.querySelector(".career-validation-message");
+      if (!message) {
+        message = document.createElement("p");
+        message.className = "career-validation-message";
+        message.setAttribute("role", "alert");
+        message.style.color = "#b42318";
+        message.style.fontWeight = "700";
+        message.style.marginTop = "14px";
+        message.textContent = "Bitte wähle eine Antwort aus, bevor du fortfährst.";
+        questionContainer.appendChild(message);
+      }
+
+      const firstInput = questionContainer.querySelector("input");
+      if (firstInput) firstInput.focus();
+      return;
+    }
+
     if (currentQuestion < questions.length - 1) {
       currentQuestion++;
       renderQuestion();
