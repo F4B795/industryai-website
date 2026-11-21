@@ -16,6 +16,18 @@
 .ia-check{padding-top:52px}
 .ia-business{padding-top:58px}
 @media(max-width:600px){.ia-subpage-intro{padding:46px 6% 38px}.ia-subpage-intro p{font-size:14px}.ia-subpage-intro .ia-subpage-meta{gap:10px 16px}}
+
+.ia-form-progress{max-width:850px;margin:0 auto 24px;padding:18px 20px;border:1px solid #25445b;border-radius:10px;background:#0b1c2c}
+.ia-form-progress-label{display:flex;justify-content:space-between;gap:12px;margin-bottom:10px;color:#c5d3df;font-size:13px}
+.ia-form-progress-track{height:8px;overflow:hidden;border-radius:99px;background:#20394e}
+.ia-form-progress-fill{display:block;width:0;height:100%;border-radius:99px;background:#42d8ed;transition:width .2s ease}
+.ia-result-meter{height:12px;margin:12px 0 22px;overflow:hidden;border-radius:99px;background:#20394e}
+.ia-result-meter-fill{display:block;height:100%;border-radius:99px;background:#42d8ed;transition:width .3s ease}
+.ia-result-next-step{margin:24px 0;padding:20px;border-left:3px solid #42d8ed;border-radius:0 8px 8px 0;background:rgba(66,216,237,.07)}
+.ia-result-next-step strong{display:block;margin-bottom:8px;color:#f2f7fb}
+.ia-result-next-step p{margin:0}
+@media(max-width:600px){.ia-form-progress{padding:15px}.ia-result-next-step{padding:16px}}
+
 </style>
 </head><body>
 <header>
@@ -47,6 +59,10 @@
   </div>
 
   <form id="recruitingForm">
+    <div class="ia-form-progress">
+      <div class="ia-form-progress-label"><span>Ihr Fortschritt</span><strong id="ia-progress-text">0 von 5 beantwortet</strong></div>
+      <div class="ia-form-progress-track" role="progressbar" aria-label="Beantwortete Fragen" aria-valuemin="0" aria-valuemax="5" aria-valuenow="0" id="ia-progress-bar"><span class="ia-form-progress-fill" id="ia-progress-fill"></span></div>
+    </div>
     <div class="ia-question">
       <span class="ia-question-number">FRAGE 01 / 05</span>
       <h3>Wie sichtbar ist Ihr Unternehmen für junge Menschen?</h3>
