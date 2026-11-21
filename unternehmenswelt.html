@@ -74,7 +74,6 @@
     <a href="kontakt.html">Kontakt</a>
     <a href="impressum.html">Impressum</a>
   </div></footer>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="js/supabase-config.js"></script>
 <script>
 (function(){
@@ -118,21 +117,27 @@
  }
  search.addEventListener("input",filter);
  sector.addEventListener("change",filter);
- const supabaseClient=window.supabase.createClient(window.INDUSTRYAI_SUPABASE_URL,window.INDUSTRYAI_SUPABASE_PUBLISHABLE_KEY);
- function loadPublishedProfiles(){
-  return supabaseClient.from("company_public_profiles")
-   .select("id,name,location,category,category_label,description,image,image_alt,profile_url,tag")
-   .eq("is_published",true)
-   .order("published_at",{ascending:false})
-   .then(({data,error})=>{
-    if(error)throw error;
-    return {entries:(data||[]).map(item=>({
-     id:item.id,status:"published",name:item.name,location:item.location,
-     category:item.category,categoryLabel:item.category_label,
-     description:item.description,image:item.image,imageAlt:item.image_alt,
-     profile:item.profile_url||"#",tag:item.tag||"UNTERNEHMEN"
-    }))};
-   });
+ async function loadPublishedProfiles(){
+  const base=window.INDUSTRYAI_SUPABASE_URL;
+  const key=window.INDUSTRYAI_SUPABASE_PUBLISHABLE_KEY;
+  if(!base||!key)throw new Error("Live-Datenquelle ist nicht konfiguriert.");
+  const params=new URLSearchParams({
+   select:"id,name,location,category,category_label,description,image,image_alt,profile_url,tag",
+   is_published:"eq.true",
+   order:"published_at.desc"
+  });
+  const response=await fetch(base+"/rest/v1/company_public_profiles?"+params.toString(),{
+   headers:{apikey:key,Authorization:"Bearer "+key},
+   cache:"no-store"
+  });
+  if(!response.ok)throw new Error("Live-Datenquelle antwortet nicht ("+response.status+").");
+  const data=await response.json();
+  return {entries:(Array.isArray(data)?data:[]).map(item=>({
+   id:item.id,status:"published",name:item.name,location:item.location,
+   category:item.category,categoryLabel:item.category_label,
+   description:item.description,image:item.image,imageAlt:item.image_alt,
+   profile:item.profile_url||"#",tag:item.tag||"UNTERNEHMEN"
+  }))};
  }
  // Lokale Musterprofile unabhängig von der Live-Datenquelle laden.
  fetch("data/unternehmen.json")
