@@ -17,7 +17,7 @@ Der Administrator `industryaisupport@gmail.com` ist eingetragen. Die Admin-Hilfs
 
 ## Edge Function: öffentliche Profilanfrage
 
-Die Edge Function `company-profile-submit` ist in Supabase deployed und aktiv (Version 2). Sie ist für den öffentlichen Browseraufruf mit `verify_jwt=false` konfiguriert; die Funktion prüft selbst:
+Das Cloudflare Turnstile-Widget `INDUSTRYAI Profilanfrage` wurde am 21.11.2026 direkt im verbundenen Cloudflare-Konto erstellt. Modus: `managed`; erlaubter Hostname: `industryai.github.io`; Region: `world`. Der öffentliche Sitekey ist in `js/supabase-config.js` eingetragen. Der private Secret Key wurde nicht in GitHub oder Browser-Code gespeichert.\n\nDie Edge Function `company-profile-submit` ist in Supabase deployed und aktiv (Version 2). Sie ist für den öffentlichen Browseraufruf mit `verify_jwt=false` konfiguriert; die Funktion prüft selbst:
 - exakten Website-Origin `https://industryai.github.io`;
 - den projektbezogenen Publishable Key im `apikey`-Header;
 - ein gültiges Cloudflare Turnstile-Token mit erwartetem Hostname und Action;
