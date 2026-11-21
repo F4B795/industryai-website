@@ -49,6 +49,21 @@ footer{text-align:center;padding:30px;border-top:1px solid #294960;color:#91a7ba
 @media(max-width:750px){.layout{grid-template-columns:1fr}header{padding:18px 5%}.panel{padding:19px}.visual{min-height:260px}}
 @media(max-width:420px){main{padding:32px 15px}.result-grid{gap:8px}.result{padding:12px}button{width:100%;margin-left:0!important}.visual{min-height:220px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+
+.quiz{margin-top:22px}
+.quiz-intro{color:#b7c8d8;line-height:1.7}
+.quiz-question{margin:22px 0;padding:18px;border:1px solid #294960;border-radius:9px;background:#091b2b}
+.quiz-question legend{padding:0 6px;color:#f2f7fc;font-weight:bold;line-height:1.5}
+.quiz-option{display:flex;align-items:flex-start;gap:10px;margin:12px 0;color:#c5d5e3;line-height:1.5;cursor:pointer}
+.quiz-option input{width:auto;margin-top:4px;accent-color:#42d8ed}
+.quiz-feedback{margin-top:18px;padding:18px;border-left:3px solid #42d8ed;background:#091b2b;color:#c5d5e3;line-height:1.7}
+.quiz-feedback:empty{display:none}
+.quiz-feedback h3{margin:0 0 10px;color:#42d8ed}
+.quiz-feedback p{margin:8px 0}
+.quiz-actions{display:flex;gap:10px;flex-wrap:wrap}
+.quiz-actions button.secondary{margin-left:0}
+.quiz button:focus-visible,.quiz-option input:focus-visible{outline:2px solid #fff;outline-offset:3px}
+@media(max-width:420px){.quiz-question{padding:14px}.quiz-actions button{width:100%}}
 </style>
 </head>
 <body>
@@ -128,6 +143,37 @@ footer{text-align:center;padding:30px;border-top:1px solid #294960;color:#91a7ba
     <h2>3. Was passiert bei der Bearbeitung?</h2>
     <p class="intro" id="learning">Wähle deine Einstellungen und starte die Simulation, um die einzelnen Schritte kennenzulernen.</p>
   </section>
+
+  <section class="panel quiz" aria-labelledby="quiz-title">
+    <h2 id="quiz-title">4. Dein CNC-Wissenstest</h2>
+    <p class="quiz-intro">Prüfe, was du aus der Simulation mitgenommen hast. Wähle pro Frage eine Antwort und lass dir anschließend die Lösungen erklären.</p>
+    <form id="cnc-quiz">
+      <fieldset class="quiz-question">
+        <legend>Frage 1: Was passiert beim Plandrehen?</legend>
+        <label class="quiz-option"><input type="radio" name="q1" value="a" required> Die Stirnfläche des Werkstücks wird bearbeitet.</label>
+        <label class="quiz-option"><input type="radio" name="q1" value="b"> Ein Gewinde wird auf die Außenseite geschnitten.</label>
+        <label class="quiz-option"><input type="radio" name="q1" value="c"> Eine Bohrung wird in das Werkstück eingebracht.</label>
+      </fieldset>
+      <fieldset class="quiz-question">
+        <legend>Frage 2: In welche Richtung bewegt sich das Werkzeug beim Längsdrehen?</legend>
+        <label class="quiz-option"><input type="radio" name="q2" value="a" required> Quer zur Werkstückachse über die Stirnfläche.</label>
+        <label class="quiz-option"><input type="radio" name="q2" value="b"> Parallel zur Werkstückachse an der Außenseite entlang.</label>
+        <label class="quiz-option"><input type="radio" name="q2" value="c"> Ausschließlich senkrecht nach unten.</label>
+      </fieldset>
+      <fieldset class="quiz-question">
+        <legend>Frage 3: Wie sind die Drehzahl- und Vorschubwerte in diesem Lernlabor zu verstehen?</legend>
+        <label class="quiz-option"><input type="radio" name="q3" value="a" required> Als allgemeingültige Einstellwerte für jede Maschine.</label>
+        <label class="quiz-option"><input type="radio" name="q3" value="b"> Als beispielhafte Demonstrationswerte, nicht als reale Bearbeitungsempfehlung.</label>
+        <label class="quiz-option"><input type="radio" name="q3" value="c"> Als Werte, die unabhängig vom Werkstoff immer gleich bleiben müssen.</label>
+      </fieldset>
+      <div class="quiz-actions">
+        <button type="submit">Wissen überprüfen</button>
+        <button type="button" id="quiz-restart" class="secondary" hidden>Test wiederholen</button>
+      </div>
+      <div id="quiz-feedback" class="quiz-feedback" role="status" aria-live="polite"></div>
+    </form>
+  </section>
+
 </main>
 <footer>INDUSTRYAI · Die Zukunft der Berufsorientierung</footer>
 <script>
@@ -238,5 +284,59 @@ footer{text-align:center;padding:30px;border-top:1px solid #294960;color:#91a7ba
   updateValues();
 })();
 </script>
+
+<script>
+(function(){
+  "use strict";
+  const form=document.getElementById("cnc-quiz");
+  const feedback=document.getElementById("quiz-feedback");
+  const restart=document.getElementById("quiz-restart");
+  if(!form||!feedback||!restart)return;
+
+  const questions=[
+    {name:"q1",answer:"a",explanation:"Beim Plandrehen wird die Stirnfläche des rotierenden Werkstücks bearbeitet, damit sie plan und eben wird."},
+    {name:"q2",answer:"b",explanation:"Beim Längsdrehen bewegt sich der Drehmeißel parallel zur Werkstückachse an der Außenseite entlang. Dadurch kann der Außendurchmesser reduziert werden."},
+    {name:"q3",answer:"b",explanation:"Die Werte dienen hier nur der Veranschaulichung. Reale Schnittdaten müssen passend zu Werkstoff, Werkzeug, Geometrie, Maschine und Herstellerangaben festgelegt werden."}
+  ];
+
+  form.addEventListener("submit",function(event){
+    event.preventDefault();
+    if(!form.reportValidity())return;
+    const data=new FormData(form);
+    let score=0;
+    const details=questions.map(function(question,index){
+      const correct=data.get(question.name)===question.answer;
+      if(correct)score++;
+      return {number:index+1,correct:correct,explanation:question.explanation};
+    });
+    feedback.replaceChildren();
+    const heading=document.createElement("h3");
+    heading.textContent="Dein Ergebnis: "+score+" von "+questions.length+" richtig";
+    feedback.appendChild(heading);
+    details.forEach(function(item){
+      const paragraph=document.createElement("p");
+      paragraph.textContent="Frage "+item.number+": "+(item.correct?"Richtig. ":"Noch nicht richtig. ")+item.explanation;
+      feedback.appendChild(paragraph);
+    });
+    const summary=document.createElement("p");
+    summary.textContent=score===questions.length
+      ?"Alle Fragen richtig beantwortet. Du hast die Grundlagen aus dieser Simulation verstanden."
+      :"Schau dir die Erklärungen an und wiederhole den Test, wenn du möchtest.";
+    feedback.appendChild(summary);
+    restart.hidden=false;
+    form.querySelectorAll('input[type="radio"]').forEach(function(input){input.disabled=true;});
+    form.querySelector('button[type="submit"]').disabled=true;
+  });
+
+  restart.addEventListener("click",function(){
+    form.reset();
+    form.querySelectorAll('input[type="radio"]').forEach(function(input){input.disabled=false;});
+    form.querySelector('button[type="submit"]').disabled=false;
+    feedback.replaceChildren();
+    restart.hidden=true;
+  });
+})();
+</script>
+
 </body>
 </html>
