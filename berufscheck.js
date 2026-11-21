@@ -214,10 +214,31 @@
 
     if (!user.length || user.includes("offen")) return null;
 
+    const locationAliases = {
+      "Draußen": ["im Freien"],
+      "Gesundheitswesen": [
+        "Krankenhaus",
+        "Pflegeeinrichtung",
+        "ambulante Pflege",
+        "Arztpraxis",
+        "Klinik",
+        "Gesundheitszentrum",
+        "Tierarztpraxis",
+        "Tierklinik"
+      ],
+      "Bäckerei": ["Küche", "Gastronomie"],
+      "Konditorei": ["Küche", "Gastronomie"],
+      "Restaurant": ["Gastronomie"],
+      "Café": ["Gastronomie", "Verkaufsfläche"]
+    };
+
     const matches = user.filter(function (location) {
+      const searchTerms = [location].concat(locationAliases[location] || []);
       return career.some(function (careerLocation) {
-        return careerLocation.toLowerCase().includes(location.toLowerCase()) ||
-          location.toLowerCase().includes(careerLocation.toLowerCase());
+        return searchTerms.some(function (term) {
+          return careerLocation.toLowerCase().includes(term.toLowerCase()) ||
+            term.toLowerCase().includes(careerLocation.toLowerCase());
+        });
       });
     });
 
