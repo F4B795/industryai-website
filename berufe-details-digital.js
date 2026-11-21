@@ -201,6 +201,75 @@
         "Weiterentwicklung in Marketing, Konzeption oder Projektleitung"
       ]
     }
+,
+    "fachinformatiker-daten-prozessanalyse": {
+      intro: "Fachinformatiker/innen der Fachrichtung Daten- und Prozessanalyse untersuchen Arbeits- und Geschäftsprozesse aus informationstechnischer Sicht. Sie werten Daten aus, erkennen Optimierungsmöglichkeiten und entwickeln Lösungen, um Abläufe zu digitalisieren und zu automatisieren.",
+      prerequisites: [
+        "Interesse an Daten, IT und wirtschaftlichen Abläufen",
+        "Analytisches und logisches Denken",
+        "Sorgfältiger Umgang mit Zahlen und Informationen",
+        "Grundverständnis für Mathematik und Informatik",
+        "Strukturiertes Arbeiten und Ausdauer bei der Fehlersuche",
+        "Verantwortungsbewusstsein für Datenschutz und IT-Sicherheit"
+      ],
+      learning: [
+        "Arbeits- und Geschäftsprozesse analysieren",
+        "Daten erfassen, aufbereiten und auswerten",
+        "Datenqualität und Datenverfügbarkeit verbessern",
+        "Digitale Prozesse konzipieren und optimieren",
+        "Automatisierungsmöglichkeiten erkennen und umsetzen",
+        "IT-Sicherheits- und Datenschutzmaßnahmen berücksichtigen",
+        "Ergebnisse dokumentieren und verständlich präsentieren"
+      ],
+      furtherTraining: [
+        "Spezialisierung auf Datenanalyse und Business Intelligence",
+        "Weiterbildung in Prozessmanagement und Prozessautomatisierung",
+        "Spezialisierung auf Datenbanken und IT-Sicherheit",
+        "IT-Projektleitung mit entsprechender Berufserfahrung",
+        "Studium in Wirtschaftsinformatik oder Data Science bei entsprechender Qualifikation"
+      ],
+      careerPaths: [
+        "Mitarbeit in Daten- und Prozessanalyse",
+        "Unterstützung bei Digitalisierung und Prozessoptimierung",
+        "Tätigkeit im Business Intelligence Umfeld",
+        "Spezialisierung auf Datenqualität oder Automatisierung",
+        "Weiterentwicklung in IT-Projektkoordination"
+      ]
+    },
+    "fachinformatiker-digitale-vernetzung": {
+      intro: "Fachinformatiker/innen der Fachrichtung Digitale Vernetzung verbinden IT-Systeme mit Maschinen, Anlagen und weiteren technischen Komponenten. Sie analysieren bestehende Netzwerke, richten den Datenaustausch ein und sorgen für einen zuverlässigen und sicheren Betrieb vernetzter Systeme.",
+      prerequisites: [
+        "Interesse an Netzwerken, IT und technischen Anlagen",
+        "Technisches Verständnis und logisches Denken",
+        "Sorgfalt bei Installation und Konfiguration",
+        "Grundverständnis für Mathematik und Informatik",
+        "Ausdauer bei systematischer Fehlersuche",
+        "Verantwortungsbewusstsein für IT-Sicherheit"
+      ],
+      learning: [
+        "Vernetzte Systeme und technische Schnittstellen analysieren",
+        "Netzwerkkomponenten und Betriebssysteme installieren und konfigurieren",
+        "Datenaustausch zwischen Maschinen und IT-Systemen einrichten",
+        "Vernetzte Systeme testen und in Betrieb nehmen",
+        "Systeme überwachen und ihre Verfügbarkeit sicherstellen",
+        "Sicherheits- und Datensicherungssysteme berücksichtigen",
+        "Störungen analysieren, beheben und dokumentieren"
+      ],
+      furtherTraining: [
+        "Spezialisierung auf industrielle Netzwerke und Industrial Ethernet",
+        "Weiterbildung in IT-Sicherheit und Systemadministration",
+        "Spezialisierung auf IoT und cyber-physische Systeme",
+        "Techniker/in Informatik mit entsprechender Voraussetzung",
+        "Studium in Informatik oder Technischer Informatik bei entsprechender Qualifikation"
+      ],
+      careerPaths: [
+        "Tätigkeit in IT- und Netzwerkabteilungen",
+        "Betreuung vernetzter Produktions- und Betriebssysteme",
+        "Spezialisierung auf industrielle Kommunikation und IoT",
+        "Weiterentwicklung in IT-Sicherheit und Systembetrieb",
+        "Koordination von Vernetzungs- und Digitalisierungsprojekten"
+      ]
+    }
   });
 
   window.IndustryAICareerDetails.version = "1.2.0";
