@@ -89,6 +89,78 @@
       { stage: "Individuell fördern", detail: "Entwicklungsprozesse wahrnehmen, passende Impulse geben und bei Konflikten oder Unterstützungsbedarf pädagogisch handeln." },
       { stage: "Austausch und Reflexion", detail: "Beobachtungen dokumentieren, mit Team und Bezugspersonen im passenden Rahmen kommunizieren und Angebote reflektieren." }
     ]
+    "fachinformatiker-anwendungsentwicklung": [
+      { stage: "Anforderungen verstehen", detail: "Mit Auftraggebern oder dem Team klären, welches Problem die Anwendung lösen soll und welche Funktionen benötigt werden." },
+      { stage: "Lösung planen", detail: "Aufgaben in kleinere Schritte aufteilen, Daten und Schnittstellen berücksichtigen und eine geeignete technische Umsetzung abstimmen." },
+      { stage: "Programmieren und testen", detail: "Code schreiben, vorhandene Komponenten nutzen und einzelne Funktionen mit geeigneten Tests überprüfen." },
+      { stage: "Fehler beheben und dokumentieren", detail: "Fehler reproduzieren, Ursachen eingrenzen, Änderungen über Versionsverwaltung nachvollziehbar festhalten und Ergebnisse im Team besprechen." }
+    ],
+    "fachinformatiker-systemintegration": [
+      { stage: "Anfragen und Systeme prüfen", detail: "Supportmeldungen sichten, Auswirkungen einschätzen und relevante Informationen zu Geräten, Benutzern und Netzwerkumgebung sammeln." },
+      { stage: "IT-Komponenten einrichten", detail: "Arbeitsplätze, Benutzerkonten, Serverdienste oder Netzwerkkomponenten nach betrieblichen Vorgaben konfigurieren." },
+      { stage: "Störungen analysieren", detail: "Verbindungen, Protokolle und Systemmeldungen prüfen, Fehler systematisch eingrenzen und geeignete Lösungen umsetzen." },
+      { stage: "Betrieb dokumentieren", detail: "Änderungen und Lösungen dokumentieren, Anwender informieren und offene Aufgaben an zuständige Stellen übergeben." }
+    ],
+    "mediengestalter": [
+      { stage: "Briefing und Ziel klären", detail: "Auftrag, Zielgruppe, Format, Einsatzkanäle und technische Anforderungen mit dem Team oder Auftraggeber abstimmen." },
+      { stage: "Konzept und Entwurf", detail: "Ideen entwickeln, Layouts und Gestaltungselemente erstellen und Typografie, Farben sowie Bildsprache aufeinander abstimmen." },
+      { stage: "Medien umsetzen", detail: "Grafiken, Bildmaterial und Inhalte mit geeigneter Software bearbeiten und für Digital- oder Printmedien technisch aufbereiten." },
+      { stage: "Korrektur und Ausgabe", detail: "Entwürfe prüfen, Feedback einarbeiten, Ausgabeformate kontrollieren und finale Daten für Veröffentlichung oder Produktion bereitstellen." }
+    ],
+    "bauzeichner": [
+      { stage: "Planungsunterlagen sichten", detail: "Aufgabenstellung, vorhandene Pläne und technische Vorgaben prüfen und offene Fragen mit dem Planungsteam abstimmen." },
+      { stage: "Zeichnung oder Modell erstellen", detail: "Bauteile, Grundrisse oder technische Details mit CAD- beziehungsweise BIM-Software nach Vorgaben ausarbeiten." },
+      { stage: "Maße und Schnittstellen prüfen", detail: "Planstände, Maßangaben und konstruktive Zusammenhänge kontrollieren und Rückmeldungen der Fachplaner einarbeiten." },
+      { stage: "Pläne ausgeben und verwalten", detail: "Zeichnungen und Modellstände strukturiert dokumentieren, Planunterlagen für Abstimmungen oder die weitere Planung bereitstellen." }
+    ],
+    "gestalter-visuelles-marketing": [
+      { stage: "Fläche und Zielgruppe analysieren", detail: "Verkaufsfläche, Produkte, Markenauftritt und Zielgruppe betrachten und den Gestaltungsauftrag konkretisieren." },
+      { stage: "Gestaltungskonzept entwickeln", detail: "Farben, Materialien, Beleuchtung und Präsentationsformen auswählen und einen umsetzbaren Aufbau planen." },
+      { stage: "Präsentation aufbauen", detail: "Dekorationen und Präsentationselemente vorbereiten, Flächen gestalten und Produkte nach dem Konzept arrangieren." },
+      { stage: "Wirkung kontrollieren", detail: "Gestaltung auf Ordnung, Sichtbarkeit und Vorgaben prüfen und bei Bedarf Anpassungen mit dem Team abstimmen." }
+    ],
+    "fachinformatiker-daten-prozessanalyse": [
+      { stage: "Prozess verstehen", detail: "Mit Fachabteilungen klären, wie ein Geschäftsprozess abläuft, welche Daten entstehen und wo Probleme oder Medienbrüche auftreten." },
+      { stage: "Daten aufbereiten", detail: "Relevante Datenquellen identifizieren, Datenqualität prüfen und Informationen für die Auswertung strukturiert vorbereiten." },
+      { stage: "Muster und Potenziale erkennen", detail: "Daten auswerten, Abläufe vergleichen und Ansatzpunkte für Digitalisierung oder Prozessoptimierung herausarbeiten." },
+      { stage: "Ergebnisse vermitteln", detail: "Erkenntnisse visualisieren und dokumentieren sowie mögliche Verbesserungen mit den beteiligten Fachbereichen abstimmen." }
+    ],
+    "fachinformatiker-digitale-vernetzung": [
+      { stage: "Vernetzte Umgebung aufnehmen", detail: "Maschinen, IT-Systeme, Netzwerkkomponenten und vorhandene Schnittstellen erfassen und die Anforderungen an den Datenaustausch klären." },
+      { stage: "Verbindung konfigurieren", detail: "Netzwerkkomponenten und Schnittstellen nach freigegebenem Konzept einrichten und die Kommunikation zwischen Systemen vorbereiten." },
+      { stage: "Kommunikation testen", detail: "Datenübertragung, Verfügbarkeit und Systemreaktionen kontrollieren und Fehler schrittweise eingrenzen." },
+      { stage: "Sicherheit und Betrieb dokumentieren", detail: "Konfigurationen, Testergebnisse und Auffälligkeiten dokumentieren und notwendige Sicherheits- oder Betriebsmaßnahmen mit dem Team abstimmen." }
+    ],
+    "koch": [
+      { stage: "Küche vorbereiten", detail: "Speiseplan und Reservierungen prüfen, Zutaten bereitstellen und den Arbeitsplatz nach dem Mise-en-place-Prinzip organisieren." },
+      { stage: "Vorbereiten und produzieren", detail: "Lebensmittel waschen, schneiden und vorbereiten sowie Grundprodukte, Beilagen und Komponenten nach Rezeptur herstellen." },
+      { stage: "Service begleiten", detail: "Bestellungen koordinieren, Speisen à la minute fertigstellen und Ausgabe sowie Qualität mit dem Küchenteam abstimmen." },
+      { stage: "Nachbereitung", detail: "Lebensmittel fachgerecht lagern, Arbeitsflächen und Geräte reinigen, Bestände prüfen und den nächsten Arbeitseinsatz vorbereiten." }
+    ],
+    "baecker": [
+      { stage: "Teige und Zutaten vorbereiten", detail: "Produktionsplan und Rezepturen prüfen, Rohstoffe abwiegen und Teige mit den vorgesehenen Verfahren herstellen." },
+      { stage: "Teig aufarbeiten", detail: "Teige teilen, wirken und formen sowie Teigruhe und Gärzeiten entsprechend dem Produktablauf berücksichtigen." },
+      { stage: "Backen und kontrollieren", detail: "Backöfen einstellen, Backprozesse überwachen und Farbe, Kruste sowie Qualität der Backwaren prüfen." },
+      { stage: "Produktion nachbereiten", detail: "Backwaren für Verkauf oder Weiterverarbeitung bereitstellen, Geräte und Arbeitsbereiche reinigen und Rohstoffe kontrollieren." }
+    ],
+    "konditor": [
+      { stage: "Auftrag und Rezeptur planen", detail: "Bestellungen und benötigte Mengen prüfen, Rezepturen auswählen und Zutaten sowie Arbeitsgeräte bereitstellen." },
+      { stage: "Massen und Füllungen herstellen", detail: "Teige, Cremes, Füllungen oder Schokoladenkomponenten fachgerecht zubereiten und Verarbeitungsschritte kontrollieren." },
+      { stage: "Produkte zusammensetzen und gestalten", detail: "Torten, Desserts oder Pralinen herstellen, garnieren und nach gestalterischen sowie handwerklichen Vorgaben ausarbeiten." },
+      { stage: "Qualität und Lagerung", detail: "Aussehen und Beschaffenheit prüfen, Produkte sachgerecht lagern und Arbeitsgeräte sowie Flächen hygienisch reinigen." }
+    ],
+    "fachverkaeufer-lebensmittelhandwerk": [
+      { stage: "Verkaufsbereich vorbereiten", detail: "Theke und Verkaufsfläche kontrollieren, Waren ansprechend präsentieren und Kennzeichnungen sowie Hygienevorgaben beachten." },
+      { stage: "Kunden beraten", detail: "Kundenwünsche aufnehmen, Produkte und Zutaten erläutern und bei Fragen zu Allergenen verlässlich auf die verfügbaren Informationen zurückgreifen." },
+      { stage: "Waren verkaufen und pflegen", detail: "Produkte fachgerecht verpacken, Bestellungen bearbeiten und Warenbestände sowie Frische im Blick behalten." },
+      { stage: "Abschluss und Nachbestellung", detail: "Verkaufsbereich reinigen, Bestände dokumentieren und benötigte Waren nach betrieblichen Abläufen nachbestellen." }
+    ],
+    "fachmann-restaurants-veranstaltungsgastronomie": [
+      { stage: "Service vorbereiten", detail: "Tisch- und Raumplanung, Reservierungen sowie Veranstaltungsablauf prüfen und benötigte Materialien bereitstellen." },
+      { stage: "Gäste empfangen und beraten", detail: "Gäste begrüßen, über Speisen und Getränke informieren und Wünsche oder besondere Anforderungen an das Team weitergeben." },
+      { stage: "Service koordinieren", detail: "Bestellungen aufnehmen, Speisen und Getränke servieren und bei Veranstaltungen mit Küche und weiteren Bereichen zusammenarbeiten." },
+      { stage: "Abrechnung und Nachbereitung", detail: "Rechnungen erstellen, Feedback aufnehmen, Räume und Arbeitsmittel nachbereiten und den nächsten Service vorbereiten." }
+    ],
   };
 
   Object.keys(workdays).forEach(function (id) {
